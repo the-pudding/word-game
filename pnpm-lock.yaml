@@ -16,6 +16,7 @@ specifiers:
   rollup-plugin-svg: ^2.0.0
   style-dictionary: ^3.1.1
   svelte: ^3.46.4
+  svelte-keyboard: ^0.4.0
   svelte-preprocess: ^4.10.3
   vite-plugin-svgstring: ^1.0.0
 
@@ -35,6 +36,7 @@ devDependencies:
   rollup-plugin-svg: 2.0.0
   style-dictionary: 3.7.0
   svelte: 3.46.4
+  svelte-keyboard: 0.4.0
   svelte-preprocess: 4.10.4_postcss@8.4.8+svelte@3.46.4
   vite-plugin-svgstring: 1.0.0
 
@@ -1264,6 +1266,10 @@ packages:
       svelte: '>=3.19.0'
     dependencies:
       svelte: 3.46.4
+    dev: true
+
+  /svelte-keyboard/0.4.0:
+    resolution: {integrity: sha512-r3aNBgwX3d5BjZQi+ZPq5UufkC3DsCpupBNgj31oMzK9T8yMGX43hb04LyCwN03NDJ42TIULH26VlCW6jsgjiw==}
     dev: true
 
   /svelte-preprocess/4.10.4_postcss@8.4.8+svelte@3.46.4:
