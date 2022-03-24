@@ -1,9 +1,7 @@
 <script>
-  export let guesses = [];
-
-  $: console.log(guesses);
+  import { guesses } from "$stores/misc.js";
 </script>
 
-{#each guesses as guess}
-  <p>{guess}</p>
+{#each $guesses as guess}
+  <p>{JSON.stringify(guess)}</p>
 {/each}
