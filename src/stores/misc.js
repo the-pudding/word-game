@@ -15,4 +15,13 @@ export const gameState = derived([round, active], ([$round, $active], set) => {
 export const roundScore = writable(0);
 export const gameScore = writable(0);
 
+
 export const guesses = writable([]);
+export const grannyGuesses = writable([]);
+
+export const wordsPlayed = derived([guesses, grannyGuesses], ([$guesses, $grannyGuesses], set) => {
+	const a = $guesses.filter(d => d.first).map(d => d.text);
+	const b = $grannyGuesses.filter(d => d.first).map(d => d.text);
+	const joined = [...a, ...b];
+	set(joined);
+});
