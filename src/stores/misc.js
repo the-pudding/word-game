@@ -1,7 +1,13 @@
 import { writable, derived } from "svelte/store";
-// your score, opponent score
+import { sum } from "d3";
 
 const ROUNDS = 3;
+
+const getScore = (data) => {
+	const firsts = data.filter((d) => d.first);
+	const total = sum(firsts, (d) => d.points);
+	return total;
+};
 
 export const active = writable(false);
 export const round = writable(-1);
@@ -12,16 +18,19 @@ export const gameState = derived([round, active], ([$round, $active], set) => {
 	else set("mid");
 });
 
-export const roundScore = writable(0);
-export const gameScore = writable(0);
+export const guesses = writable({ user: [], opponent: [] });
 
+export const roundScore = derived(guesses, ($guesses, set) => {
+	const user = getScore($guesses.user);
+	const opponent = getScore($guesses.opponent);
+	set({ user, opponent });
+});
 
-export const guesses = writable([]);
-export const grannyGuesses = writable([]);
+export const gameScore = writable({ user: 0, opponent: 0 });
 
-export const wordsPlayed = derived([guesses, grannyGuesses], ([$guesses, $grannyGuesses], set) => {
-	const a = $guesses.filter(d => d.first).map(d => d.text);
-	const b = $grannyGuesses.filter(d => d.first).map(d => d.text);
+export const wordsPlayed = derived(guesses, ($guesses, set) => {
+	const a = $guesses.user.filter(d => d.first).map(d => d.text);
+	const b = $guesses.opponent.filter(d => d.first).map(d => d.text);
 	const joined = [...a, ...b];
 	set(joined);
 });

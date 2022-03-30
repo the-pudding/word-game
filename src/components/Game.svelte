@@ -1,11 +1,11 @@
 <script>
-  import GrannyBot from "$components/GrannyBot.svelte";
+  import OpponentBot from "$components/OpponentBot.svelte";
   import Board from "$components/Board.svelte";
   import Input from "$components/Input.svelte";
   import Clock from "$components/Clock.svelte";
   import Modal from "$components/Modal.svelte";
-  import Score from "$components/Score.svelte";
-  import { gameState, active, guesses, wordsPlayed } from "$stores/misc.js";
+  import RoundScore from "$lib/components/RoundScore.svelte";
+  import { gameState, active, guesses, wordsPlayed, roundScore, gameScore } from "$stores/misc.js";
   import { elapsed } from "$stores/timer.js";
   import testData from "$data/test.csv";
 
@@ -27,17 +27,26 @@
     const points = valid ? getPoints({ text, timestamp }) : undefined;
     const first = valid ? getFirst(text) : undefined;
     const guess = { text, valid, points, timestamp, first };
-    $guesses = [...$guesses, guess];
+    $guesses.user = [...$guesses.user, guess];
   };
 
-  const update = () => {
-    $guesses = [];
+  const resetGuesses = () => {
+    $guesses.user = [];
+    $guesses.opponent = [];
   };
 
-  $: update($active);
+  const updateScore = () => {
+    if ($roundScore.user === $roundScore.opponent) return;
+    const userWon = $roundScore.user > $roundScore.opponent;
+    if (userWon) $gameScore.user += 1;
+    else $gameScore.opponent += 1;
+  };
+
+  $: if ($active && $gameState === "mid") resetGuesses();
+  $: if (!$active && $gameState === "mid") updateScore();
 </script>
 
-<GrannyBot />
+<OpponentBot />
 
 {#if $gameState === "pre"}
   <Modal buttonText="Begin">
@@ -52,7 +61,7 @@
 
   <Input on:submit={onSubmit} />
   <Clock />
-  <Score />
+  <RoundScore />
 
   {#if !$active}
     <Modal buttonText="Next round">

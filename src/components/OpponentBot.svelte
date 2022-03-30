@@ -1,7 +1,7 @@
 <script>
   import grannyData from "$data/granny.csv";
   import { elapsed } from "$stores/timer.js";
-  import { grannyGuesses, wordsPlayed } from "$stores/misc.js";
+  import { guesses, wordsPlayed } from "$stores/misc.js";
 
   const data = grannyData.map((d) => ({
     ...d,
@@ -20,7 +20,7 @@
     if (newGuess) {
       const guess = { ...data.shift() };
       guess.first = getFirst(guess.text);
-      $grannyGuesses = [...$grannyGuesses, guess];
+      $guesses.opponent = [...$guesses.opponent, guess];
     }
   };
 </script>
