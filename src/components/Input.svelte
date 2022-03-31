@@ -17,7 +17,6 @@
   $: touchscreen = false;
 </script>
 
-<p>{value}</p>
 {#if touchscreen}
   <Keyboard on:keydown={onKeydown} layout="wordle" />
 {:else}
