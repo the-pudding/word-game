@@ -1,0 +1,44 @@
+<script>
+  import { onMount } from "svelte";
+  import Keyboard from "svelte-keyboard";
+  import { createEventDispatcher } from "svelte";
+  const dispatch = createEventDispatcher();
+
+  let inputEl;
+  let value = "";
+
+  const onKeydown = (e) => {
+    value = `${value}${e.detail}`;
+  };
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+    if (value) dispatch("submit", value);
+    value = "";
+  };
+
+  $: touchscreen = false;
+
+  onMount(() => {
+    inputEl.focus();
+  });
+</script>
+
+<div>
+  {#if touchscreen}
+    <Keyboard on:keydown={onKeydown} layout="wordle" />
+  {:else}
+    <form on:submit={onSubmit}>
+      <input bind:value bind:this={inputEl} />
+      <button type="submit">Submit</button>
+    </form>
+  {/if}
+</div>
+
+<style>
+  input,
+  button {
+    font-size: 2em;
+    padding: 0.5em;
+  }
+</style>

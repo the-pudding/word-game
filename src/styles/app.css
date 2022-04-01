@@ -25,10 +25,14 @@
 	--color-placeholder: var(--color-gray-500);
   --color-link: var(--color-purple);
   --color-focus: var(--color-red);
-  --color-form-bg: var(--color-gray-300);
+  --color-form-bg: var(--color-white);
 	--color-form-fg: var(--color-gray-900);
 	--color-border: var(--color-gray-300);
 	--color-selection: var(--color-gray-300);
   --color-highlight: var(--color-yellow);
 	
+}
+
+button {
+	border: 2px solid black;
 }

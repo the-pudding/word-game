@@ -1,9 +1,10 @@
 <script>
+  import { onMount } from "svelte";
   import { timer, elapsed } from "$stores/timer.js";
   import { active } from "$stores/misc.js";
 
   const MS = 1000;
-  const target = 5 * MS;
+  const target = 6 * MS;
 
   $: update($active);
   $: secondsLeft = Math.floor((target - $elapsed) / MS);
@@ -11,19 +12,24 @@
 
   const update = (isActive) => {
     if (isActive) {
-      timer.reset();
       timer.start();
     } else {
       timer.stop();
+      timer.reset();
     }
   };
 </script>
 
-<p>{secondsLeft} seconds left</p>
+<p>{secondsLeft}</p>
 
 <style>
   p {
+    position: absolute;
+    top: 0;
+    left: 0;
     font-size: 4em;
-    padding: 1rem;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
   }
 </style>

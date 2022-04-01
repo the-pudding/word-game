@@ -18,3 +18,10 @@
 </script>
 
 <p>{timer}</p>
+
+<style>
+  p {
+    text-align: center;
+    font-size: 3em;
+  }
+</style>

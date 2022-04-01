@@ -1,10 +1,10 @@
 <script>
-  import Guesses from "$components/Guesses.svelte";
-  import Input from "$components/Input.svelte";
-  import Clock from "$components/Clock.svelte";
-  import Clue from "$components/Clue.svelte";
-  import RoundScore from "$lib/components/RoundScore.svelte";
-  import Invalid from "$components/Invalid.svelte";
+  import Guesses from "$components/Play.Guesses.svelte";
+  import Input from "$components/Play.Input.svelte";
+  import Clock from "$components/Play.Clock.svelte";
+  import Clue from "$components/Play.Clue.svelte";
+  import Score from "$components/Play.Score.svelte";
+  import Invalid from "$components/Play.Invalid.svelte";
   import { guesses, wordsPlayed } from "$stores/misc.js";
   import { elapsed } from "$stores/timer.js";
   import testData from "$data/test.csv";
@@ -30,11 +30,33 @@
   };
 </script>
 
-<Clue />
-<Guesses />
+<div>
+  <Clue />
 
-<Invalid />
+  <Clock />
+  <Score />
 
-<Input on:submit={onSubmit} />
-<Clock />
-<RoundScore />
+  <div class="words">
+    <Guesses />
+    <Invalid />
+    <Input on:submit={onSubmit} />
+  </div>
+</div>
+
+<style>
+  div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+  }
+  .words {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    flex-direction: column;
+  }
+</style>

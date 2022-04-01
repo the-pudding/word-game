@@ -1,15 +1,19 @@
 <script>
-  import { active, round, gameState } from "$stores/misc.js";
+  import { active, round, roundScore, gameScore, gameState } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
+  import Score from "$components/Modal.Score.svelte";
 
   const buttonOptions = {
     pre: "Begin game",
     mid: "Next round"
   };
 
-  const titleOptions = {
-    pre: "Can you beat grandma at words?",
-    mid: "Round over!",
+  $: userWon = $gameScore.user > $gameScore.opponent;
+  $: opponentWon = $gameScore.user < $gameScore.opponent;
+
+  $: titleOptions = {
+    pre: "Can you beat your opponent at a word game? Best of 5 rounds.",
+    mid: userWon ? "You won the round!" : opponentWon ? "You lost the round." : "Tie round.",
     post: "Game over!"
   };
 
@@ -29,15 +33,28 @@
   $: buttonText = buttonOptions[$gameState];
 </script>
 
-<!-- recap round info -->
 <h2>{titleText}</h2>
+
+<Score />
 
 <!-- button to start round -->
 {#if buttonText}
-  <button on:click={onBegin}>{buttonText}</button>
+  <p><button on:click={onBegin}>{buttonText}</button></p>
 {/if}
 
 <!-- countdown timer -->
 {#if showCountdown}
   <Countdown on:end={startRound} />
 {/if}
+
+<style>
+  h2 {
+    font-size: 3em;
+    text-align: center;
+  }
+
+  p {
+    text-align: center;
+    font-size: 2em;
+  }
+</style>

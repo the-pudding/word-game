@@ -2,7 +2,6 @@
   import OpponentBot from "$components/OpponentBot.svelte";
   import Play from "$components/Play.svelte";
   import Modal from "$components/Modal.svelte";
-  import RoundScore from "$lib/components/RoundScore.svelte";
   import { gameState, active, guesses, roundScore, gameScore } from "$stores/misc.js";
 
   const resetGuesses = () => {
@@ -18,7 +17,7 @@
   };
 
   $: if ($active && $gameState === "mid") resetGuesses();
-  $: if (!$active && $gameState === "mid") updateScore();
+  $: if (!$active && $gameState !== "pre") updateScore();
   $: playVisible = $gameState === "mid" && $active;
   $: modalVisible = !$active || ["pre", "post"].includes($gameState);
 </script>
@@ -26,28 +25,30 @@
 <!-- renderless -->
 <OpponentBot />
 
-<section id="play" class:visible={playVisible}>
-  <Play />
-</section>
+{#if playVisible}
+  <section id="play">
+    <Play />
+  </section>
+{/if}
 
-<section id="modal" class:visible={modalVisible}>
-  <Modal />
-</section>
+{#if modalVisible}
+  <section id="modal">
+    <Modal />
+  </section>
+{/if}
 
 <style>
   section {
-    display: none;
+    height: 75vh;
+    max-width: 60rem;
+    margin: 0 auto;
+    padding: 1rem;
   }
-
-  section.visible {
-    display: block;
-  }
-
   #play {
     background: lightgoldenrodyellow;
   }
 
   #modal {
-    background: lightpink;
+    background: lightsteelblue;
   }
 </style>
