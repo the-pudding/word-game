@@ -1,45 +1,43 @@
 <script>
-  import { tweened } from "svelte/motion";
-  import { active, round } from "$stores/misc.js";
+  import { active, round, gameState } from "$stores/misc.js";
+  import Countdown from "$components/Modal.Countdown.svelte";
 
-  export let buttonText = "";
+  const buttonOptions = {
+    pre: "Begin game",
+    mid: "Next round"
+  };
 
-  const start = 3;
-  const end = -1;
-  const duration = start * 1000;
-  const countdown = tweened(start);
+  const titleOptions = {
+    pre: "Can you beat grandma at words?",
+    mid: "Round over!",
+    post: "Game over!"
+  };
 
-  let timerBegan = false;
-
-  $: if ($countdown <= end) startRound();
-  $: timer = $countdown < 0 ? "Begin!" : Math.floor($countdown) + 1;
-  $: visible = $countdown < start && timerBegan;
+  let showCountdown = false;
 
   const onBegin = () => {
-    timerBegan = true;
-    countdown.set(start, { duration: 0 });
-    countdown.set(end, { duration });
+    showCountdown = true;
   };
+
   const startRound = () => {
     $active = true;
     $round += 1;
-    timerBegan = false;
+    showCountdown = false;
   };
+
+  $: titleText = titleOptions[$gameState];
+  $: buttonText = buttonOptions[$gameState];
 </script>
 
-<slot />
+<!-- recap round info -->
+<h2>{titleText}</h2>
 
-{#if buttonText} <button on:click={onBegin}>{buttonText}</button> {/if}
-<p class:visible>{timer}</p>
+<!-- button to start round -->
+{#if buttonText}
+  <button on:click={onBegin}>{buttonText}</button>
+{/if}
 
-<style>
-  p {
-    display: none;
-    font-size: 4em;
-    padding: 2em;
-  }
-
-  .visible {
-    display: block;
-  }
-</style>
+<!-- countdown timer -->
+{#if showCountdown}
+  <Countdown on:end={startRound} />
+{/if}
