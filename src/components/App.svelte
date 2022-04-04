@@ -3,4 +3,5 @@
   import Game from "$components/Game.svelte";
 </script>
 
+<WIP />
 <Game />

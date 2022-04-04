@@ -27,6 +27,7 @@
     const first = valid ? getFirst(text) : undefined;
     const guess = { text, valid, points, timestamp, first };
     $guesses.user = [...$guesses.user, guess];
+    window.testdata = JSON.stringify($guesses.user);
   };
 </script>
 

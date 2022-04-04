@@ -2,6 +2,7 @@
   import { active, round, roundScore, gameScore, gameState } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Score from "$components/Modal.Score.svelte";
+  import Rules from "$components/Modal.Rules.svelte";
 
   const buttonOptions = {
     pre: "Begin game",
@@ -12,7 +13,7 @@
   $: opponentWon = $gameScore.user < $gameScore.opponent;
 
   $: titleOptions = {
-    pre: "Can you beat your opponent at a word game? Best of 5 rounds.",
+    pre: "Let's Play a Word Game",
     mid: userWon ? "You won the round!" : opponentWon ? "You lost the round." : "Tie round.",
     post: "Game over!"
   };
@@ -35,6 +36,7 @@
 
 <h2>{titleText}</h2>
 
+<Rules />
 <Score />
 
 <!-- button to start round -->
