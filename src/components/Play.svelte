@@ -34,6 +34,7 @@
   };
 
   const getFirst = (text) => !$wordsPlayed.includes(text);
+  const getDuplicate = (text) => $guesses.user.filter((d) => d.text === text).length > 0;
 
   const onSubmit = ({ detail }) => {
     const text = detail;
@@ -41,7 +42,8 @@
     const timestamp = $elapsed;
     const points = valid ? getPoints({ text, timestamp }) : undefined;
     const first = valid ? getFirst(text) : undefined;
-    const guess = { text, valid, points, timestamp, first, round: $round };
+    const duplicate = valid ? getDuplicate(text) : undefined;
+    const guess = { text, valid, points, timestamp, first, duplicate, round: $round };
     $guesses.user = [...$guesses.user, guess];
   };
 </script>

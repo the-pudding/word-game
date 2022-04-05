@@ -1,7 +1,7 @@
 <script>
   import { guesses } from "$stores/misc.js";
 
-  $: validGuesses = $guesses.user.filter((d) => d.valid);
+  $: validGuesses = $guesses.user.filter((d) => d.valid && !d.duplicate);
 </script>
 
 <ul>

@@ -1,5 +1,5 @@
 <script>
-  import { guesses, wordsPlayed } from "$stores/misc.js";
+  import { guesses } from "$stores/misc.js";
 
   const duration = 2000;
   let timeout;
@@ -7,30 +7,43 @@
   let prev;
   let visible;
   let notFirst;
+  let duplicate;
 
   $: recent = $guesses.user[$guesses.user.length - 1];
-  $: if (recent && prev !== recent.text) update();
+  $: if (recent) update();
   $: if (!$guesses.user.length) prev = undefined;
+
+  const resetTimeout = () => {
+    timeout = setTimeout(() => {
+      recent = undefined;
+      visible = false;
+      notFirst = false;
+    }, duration);
+  };
 
   const update = () => {
     prev = recent.text;
     clearTimeout(timeout);
 
+    // TODO refactor
     if (!recent.valid) {
       visible = true;
-      timeout = setTimeout(() => {
-        recent = undefined;
-        visible = false;
-        notFirst = false;
-      }, duration);
+      notFirst = false;
+      duplicate = false;
+
+      resetTimeout();
+    } else if (recent.duplicate) {
+      visible = true;
+      notFirst = false;
+      duplicate = true;
+
+      resetTimeout();
     } else if (!recent.first) {
       visible = true;
       notFirst = true;
-      timeout = setTimeout(() => {
-        recent = undefined;
-        visible = false;
-        notFirst = false;
-      }, duration);
+      duplicate = false;
+
+      resetTimeout();
     } else visible = false;
   };
 </script>
@@ -39,7 +52,11 @@
   {#if visible}
     <p>
       {recent.text}
-      {#if notFirst}was used by opponent.{:else}is invalid{/if}
+      {#if notFirst}
+        was used by the opponent.
+      {:else if duplicate}
+        is a duplicate.
+      {:else}is invalid{/if}
     </p>
   {/if}
 </div>
