@@ -1,13 +1,5 @@
 <script>
-  import {
-    active,
-    round,
-    roundScore,
-    gameScore,
-    gameState,
-    guesses,
-    history
-  } from "$stores/misc.js";
+  import { active, round, roundScore, gameState } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Score from "$components/Modal.Score.svelte";
   import Rules from "$components/Modal.Rules.svelte";
@@ -41,14 +33,12 @@
 
   $: titleText = titleOptions[$gameState];
   $: buttonText = buttonOptions[$gameState];
-  $: output = JSON.stringify($history);
 </script>
 
 <h2>{titleText}</h2>
 
 <Rules />
 <Score />
-
 <Feedback />
 
 <!-- button to start round -->
