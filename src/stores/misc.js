@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store";
 import { sum } from "d3";
 
-export const ROUNDS = 5;
+export const ROUNDS = 2;
 
 const getScore = (data) => {
 	const firsts = data.filter((d) => d.first);
@@ -19,6 +19,7 @@ export const gameState = derived([round, active], ([$round, $active], set) => {
 });
 
 export const guesses = writable({ user: [], opponent: [] });
+export const history = writable([]);
 
 export const roundScore = derived(guesses, ($guesses, set) => {
 	const user = getScore($guesses.user);

@@ -1,8 +1,8 @@
 <script>
   import { gameState, roundScore, gameScore, round, ROUNDS } from "$stores/misc.js";
 
-  $: userWon = $gameScore.user > $gameScore.opponent;
-  $: opponentWon = $gameScore.opponent < $gameScore.user;
+  $: userWonGame = $gameScore.user > $gameScore.opponent;
+  $: opponentWonGame = $gameScore.opponent < $gameScore.user;
 </script>
 
 <div>
@@ -16,9 +16,9 @@
     <h3>Game score</h3>
     <h3>{$gameScore.user}-{$gameScore.opponent}</h3>
 
-    {#if userWon}
+    {#if userWonGame}
       <p>You win!</p>
-    {:else if opponentWon}
+    {:else if opponentWonGame}
       <p>You lose!</p>
     {:else}
       <p>Tie!</p>

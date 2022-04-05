@@ -17,7 +17,7 @@
           </li>
           <li>No points awarded if your opponent has already entered it.</li>
           <li>Whoever gets more points at the end of the round wins the round.</li>
-          <li>Less commonly used words yield more points.</li>
+          <!-- <li>Less commonly used words yield more points.</li> -->
         </ul>
       </li>
     </ul>

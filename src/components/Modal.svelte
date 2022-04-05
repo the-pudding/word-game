@@ -1,21 +1,21 @@
 <script>
-  import { active, round, roundScore, gameScore, gameState } from "$stores/misc.js";
+  import {
+    active,
+    round,
+    roundScore,
+    gameScore,
+    gameState,
+    guesses,
+    history
+  } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Score from "$components/Modal.Score.svelte";
   import Rules from "$components/Modal.Rules.svelte";
+  import Feedback from "$components/Modal.Feedback.svelte";
 
   const buttonOptions = {
     pre: "Begin game",
     mid: "Next round"
-  };
-
-  $: userWon = $gameScore.user > $gameScore.opponent;
-  $: opponentWon = $gameScore.user < $gameScore.opponent;
-
-  $: titleOptions = {
-    pre: "Let's Play a Word Game",
-    mid: userWon ? "You won the round!" : opponentWon ? "You lost the round." : "Tie round.",
-    post: "Game over!"
   };
 
   let showCountdown = false;
@@ -30,14 +30,26 @@
     showCountdown = false;
   };
 
+  $: userWon = $roundScore.user > $roundScore.opponent;
+  $: opponentWon = $roundScore.user < $roundScore.opponent;
+
+  $: titleOptions = {
+    pre: "Let's Play a Word Game",
+    mid: userWon ? "You won the round!" : opponentWon ? "You lost the round." : "Tie round.",
+    post: "Game over!"
+  };
+
   $: titleText = titleOptions[$gameState];
   $: buttonText = buttonOptions[$gameState];
+  $: output = JSON.stringify($history);
 </script>
 
 <h2>{titleText}</h2>
 
 <Rules />
 <Score />
+
+<Feedback />
 
 <!-- button to start round -->
 {#if buttonText}
