@@ -6,17 +6,22 @@
 </script>
 
 {#if $gameState === "post"}
-  <a
-    href="https://docs.google.com/forms/d/e/1FAIpQLSfz7b8wUo0Cqsy4TKkqjyFzPDA9gGu2uHGnS9tl5zLsEUWglw/viewform?usp=sf_link"
-    target="_blank">Click here</a
-  >
-  to give us feedback!
+  <p>
+    Use the copy button below, then <a href="https://forms.gle/P8npksT5XLE6tFWT8" target="_blank"
+      >click here</a
+    > to give us feedback!
+  </p>
 
   <textarea style="width: 100%;">{output}</textarea>
   <button use:copy={output}> Copy to clipboard </button>
 {/if}
 
 <style>
+  p {
+    margin-top: 2rem;
+    text-align: center;
+  }
+
   textarea {
     margin: 1em 0;
   }
