@@ -13,13 +13,13 @@
   $: check($elapsed);
 
   // TODO reuse
-  const getFirst = (text) => !$wordsPlayed.includes(text);
+  const isValid = (text) => !$wordsPlayed.includes(text);
 
   const check = () => {
     const newGuess = data.find((d) => $elapsed >= d.timestamp);
     if (newGuess) {
       const guess = { ...data.shift() };
-      guess.first = getFirst(guess.text);
+      guess.valid = isValid(guess.text);
       $guesses.opponent = [...$guesses.opponent, guess];
     }
   };

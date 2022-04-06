@@ -19,13 +19,40 @@
     "contain the letter <strong>X</strong>",
     "are adjectives that start with <strong>T</strong>",
     "have 5 letters and start with <strong>M</strong>",
-    "rhyme with <strong>RED</strong>"
+    "rhyme with <strong>RED</strong><small>(words must end with the same sound)</small>"
   ];
+
   $: currentClue = clues[$round];
   $: roundData = allData[$round];
 
   $: validWords = roundData.map((d) => d.word);
-  const isValid = (text) => validWords.includes(text);
+  const isWordlist = (text) => !validWords.includes(text);
+  const isTaken = (text) => !$wordsPlayed.includes(text);
+  const isDuplicate = (text) => $guesses.user.filter((d) => d.text === text).length > 0;
+  const isNotAlpha = (text) => new RegExp(/([^a-z])/, "g").test(text);
+
+  const validate = (text) => {
+    let valid = true;
+    let reason;
+    if (text.length < 4) {
+      valid = false;
+      reason = 1;
+    } else if (isNotAlpha(text)) {
+      valid = false;
+      reason = 2;
+    } else if (isWordlist(text)) {
+      valid = false;
+      reason = 3;
+    } else if (isDuplicate(text)) {
+      valid = false;
+      reason = 4;
+    } else if (!isTaken(text)) {
+      valid = false;
+      reason = 0;
+    }
+
+    return { valid, reason };
+  };
 
   const getPoints = ({ text, timestamp }) => {
     return 1;
@@ -33,17 +60,12 @@
     // return +points;
   };
 
-  const getFirst = (text) => !$wordsPlayed.includes(text);
-  const getDuplicate = (text) => $guesses.user.filter((d) => d.text === text).length > 0;
-
   const onSubmit = ({ detail }) => {
     const text = detail;
-    const valid = isValid(text);
+    const { valid, reason } = validate(text);
     const timestamp = $elapsed;
     const points = valid ? getPoints({ text, timestamp }) : undefined;
-    const first = valid ? getFirst(text) : undefined;
-    const duplicate = valid ? getDuplicate(text) : undefined;
-    const guess = { text, valid, points, timestamp, first, duplicate, round: $round };
+    const guess = { text, points, timestamp, round: $round, valid, reason };
     $guesses.user = [...$guesses.user, guess];
   };
 </script>

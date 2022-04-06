@@ -1,29 +1,26 @@
 <script>
   import { guesses } from "$stores/misc.js";
+  const takenCode = 0;
 
-  $: validGuesses = $guesses.user.filter((d) => d.valid && !d.duplicate);
+  $: validGuesses = $guesses.user.filter((d) => d.reason === undefined || d.reason === takenCode);
 </script>
 
 <ul>
-  {#each validGuesses as { first, text }}
-    <li class:first>{text}</li>
+  {#each validGuesses as { reason, text }}
+    <li class:invalid={reason === takenCode}>{text}</li>
   {/each}
 </ul>
 
 <style>
-  ul {
-    /* background: blue;
-    flex-grow: 1; */
-  }
-
   li {
-    color: var(--color-gray-500);
+    color: var(--color-green);
+    font-weight: bold;
     list-style-type: none;
     text-align: center;
   }
 
-  .first {
-    color: var(--color-green);
-    font-weight: bold;
+  .invalid {
+    color: var(--color-gray-500);
+    font-weight: normal;
   }
 </style>

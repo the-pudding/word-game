@@ -19,7 +19,11 @@
   .clue {
     font-size: 3em;
     max-width: 60%;
-    line-height: 1.2em;
+    line-height: 1.2;
     margin: 0 auto;
+  }
+  :global(.clue small) {
+    font-size: 0.4em;
+    display: block;
   }
 </style>

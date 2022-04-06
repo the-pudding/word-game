@@ -4,8 +4,8 @@ import { sum } from "d3";
 export const ROUNDS = 5;
 
 const getScore = (data) => {
-  const firsts = data.filter((d) => d.first);
-  const total = sum(firsts, (d) => d.points);
+  const valid = data.filter((d) => d.valid);
+  const total = sum(valid, (d) => d.points);
   return total;
 };
 
@@ -30,8 +30,8 @@ export const roundScore = derived(guesses, ($guesses, set) => {
 export const gameScore = writable({ user: 0, opponent: 0 });
 
 export const wordsPlayed = derived(guesses, ($guesses, set) => {
-  const a = $guesses.user.filter((d) => d.first).map((d) => d.text);
-  const b = $guesses.opponent.filter((d) => d.first).map((d) => d.text);
+  const a = $guesses.user.filter((d) => d.valid).map((d) => d.text);
+  const b = $guesses.opponent.filter((d) => d.valid).map((d) => d.text);
   const joined = [...a, ...b];
   set(joined);
 });

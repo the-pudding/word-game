@@ -3,47 +3,28 @@
 
   const duration = 2000;
   let timeout;
-  let recent;
-  let prev;
-  let visible;
-  let notFirst;
-  let duplicate;
+  let visible = false;
+  let prevGuessCount = 0;
+
+  const reasons = [
+    "was played by opponent",
+    "is too short",
+    "contains non-letters",
+    "is not in the word list",
+    "was already entered"
+  ];
 
   $: recent = $guesses.user[$guesses.user.length - 1];
-  $: if (recent) update();
-  $: if (!$guesses.user.length) prev = undefined;
-
-  const resetTimeout = () => {
-    timeout = setTimeout(() => {
-      recent = undefined;
-      visible = false;
-      notFirst = false;
-    }, duration);
-  };
+  $: if (recent && $guesses.user.length !== prevGuessCount) update();
+  $: if (!$guesses.user.length) prevGuessCount = 0;
 
   const update = () => {
-    prev = recent.text;
+    prevGuessCount = $guesses.user.length;
     clearTimeout(timeout);
 
-    // TODO refactor
     if (!recent.valid) {
       visible = true;
-      notFirst = false;
-      duplicate = false;
-
-      resetTimeout();
-    } else if (recent.duplicate) {
-      visible = true;
-      notFirst = false;
-      duplicate = true;
-
-      resetTimeout();
-    } else if (!recent.first) {
-      visible = true;
-      notFirst = true;
-      duplicate = false;
-
-      resetTimeout();
+      timeout = setTimeout(() => (visible = false), duration);
     } else visible = false;
   };
 </script>
@@ -51,12 +32,8 @@
 <div>
   {#if visible}
     <p>
-      {recent.text}
-      {#if notFirst}
-        was used by the opponent.
-      {:else if duplicate}
-        is a duplicate.
-      {:else}is invalid{/if}
+      <strong>{recent.text}</strong>
+      {reasons[recent.reason]}
     </p>
   {/if}
 </div>

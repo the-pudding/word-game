@@ -24,9 +24,10 @@
 
     <h3>Rules</h3>
     <ul>
+      <li>Only nouns, adjectives, and verbs</li>
       <li>4+ letter words</li>
       <li>No proper nouns</li>
-      <li>Only nouns, adjectives, and verbs</li>
+      <li>No hyphenated words</li>
     </ul>
   </div>
 {/if}

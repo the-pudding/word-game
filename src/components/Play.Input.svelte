@@ -13,7 +13,8 @@
 
   const onSubmit = (e) => {
     e.preventDefault();
-    if (value) dispatch("submit", value);
+    const clean = value.trim().toLowerCase();
+    if (clean) dispatch("submit", clean);
     value = "";
   };
 
@@ -29,7 +30,7 @@
     <Keyboard on:keydown={onKeydown} layout="wordle" />
   {:else}
     <form on:submit={onSubmit}>
-      <input bind:value bind:this={inputEl} />
+      <input maxlength="15" bind:value bind:this={inputEl} />
       <button type="submit">Submit</button>
     </form>
   {/if}
