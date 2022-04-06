@@ -1,11 +1,11 @@
 <script>
-  import grannyData from "$data/granny.csv";
+  import opponentData from "$data/opponent.csv";
   import { elapsed } from "$stores/timer.js";
-  import { guesses, wordsPlayed } from "$stores/misc.js";
+  import { round, guesses, wordsPlayed } from "$stores/misc.js";
 
-  const data = grannyData.map((d) => ({
+  const data = opponentData.map((d) => ({
     ...d,
-    valid: true,
+    round: +d.round,
     timestamp: +d.timestamp,
     points: +d.points
   }));
@@ -16,7 +16,7 @@
   const isValid = (text) => !$wordsPlayed.includes(text);
 
   const check = () => {
-    const newGuess = data.find((d) => $elapsed >= d.timestamp);
+    const newGuess = data.find((d) => d.round === $round && $elapsed >= d.timestamp);
     if (newGuess) {
       const guess = { ...data.shift() };
       guess.valid = isValid(guess.text);
