@@ -20,7 +20,7 @@
     if (newGuess) {
       const guess = { ...data.shift() };
       guess.valid = isValid(guess.text);
-      $guesses.opponent = [...$guesses.opponent, guess];
+      $guesses.opponent[$round] = [...$guesses.opponent[$round], guess];
     }
   };
 </script>

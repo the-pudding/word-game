@@ -1,8 +1,8 @@
 <script>
-  import { gameState, history } from "$stores/misc.js";
+  import { gameState, guesses } from "$stores/misc.js";
   import { copy } from "svelte-copy";
 
-  $: output = JSON.stringify($history);
+  $: output = JSON.stringify($guesses.user);
 </script>
 
 {#if $gameState === "post"}

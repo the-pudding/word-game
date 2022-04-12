@@ -2,27 +2,8 @@
   import OpponentBot from "$components/OpponentBot.svelte";
   import Play from "$components/Play.svelte";
   import Modal from "$components/Modal.svelte";
-  import { gameState, active, guesses, roundScore, gameScore, history } from "$stores/misc.js";
+  import { gameState, active } from "$stores/misc.js";
 
-  const resetGuesses = () => {
-    $guesses.user = [];
-    $guesses.opponent = [];
-  };
-
-  const updateHistory = () => {
-    $history = [...$history, ...$guesses.user];
-  };
-
-  const updateScore = () => {
-    updateHistory();
-    if ($roundScore.user === $roundScore.opponent) return;
-    const userWon = $roundScore.user > $roundScore.opponent;
-    if (userWon) $gameScore.user += 1;
-    else $gameScore.opponent += 1;
-  };
-
-  $: if (!$active && $gameState !== "pre") updateScore();
-  $: if ($active && $gameState === "mid") resetGuesses();
   $: playVisible = $gameState === "mid" && $active;
   $: modalVisible = !$active || ["pre", "post"].includes($gameState);
 </script>

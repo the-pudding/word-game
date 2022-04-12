@@ -1,10 +1,14 @@
 <script>
-  import { roundScore } from "$stores/misc.js";
+  import { score } from "$stores/misc.js";
+  import { sum } from "d3";
+
+  $: userScore = sum($score.user);
+  $: opponentScore = sum($score.opponent);
 </script>
 
 <div>
-  <p>You: {$roundScore.user}</p>
-  <p>Them: {$roundScore.opponent}</p>
+  <p>You: {userScore}</p>
+  <p>Them: {opponentScore}</p>
 </div>
 
 <style>

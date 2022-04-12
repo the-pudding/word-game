@@ -1,8 +1,10 @@
 <script>
-  import { guesses } from "$stores/misc.js";
+  import { guesses, round } from "$stores/misc.js";
   const takenCode = 0;
 
-  $: validGuesses = $guesses.user.filter((d) => d.reason === undefined || d.reason === takenCode);
+  $: validGuesses = $guesses.user[$round].filter(
+    (d) => d.reason === undefined || d.reason === takenCode
+  );
 </script>
 
 <ul>

@@ -5,7 +5,7 @@
   import Clue from "$components/Play.Clue.svelte";
   import Score from "$components/Play.Score.svelte";
   import Invalid from "$components/Play.Invalid.svelte";
-  import { guesses, wordsPlayed, round } from "$stores/misc.js";
+  import { guesses, wordsPlayed, round, score } from "$stores/misc.js";
   import { elapsed } from "$stores/timer.js";
   import testData1 from "$data/testdata-same.csv";
   import testData2 from "$data/testdata-x.csv";
@@ -28,7 +28,7 @@
   $: validWords = roundData.map((d) => d.word);
   const isWordlist = (text) => !validWords.includes(text);
   const isTaken = (text) => !$wordsPlayed.includes(text);
-  const isDuplicate = (text) => $guesses.user.filter((d) => d.text === text).length > 0;
+  const isDuplicate = (text) => $guesses.user[$round].filter((d) => d.text === text).length > 0;
   const isNotAlpha = (text) => new RegExp(/([^a-z])/, "g").test(text);
 
   const validate = (text) => {
@@ -66,7 +66,7 @@
     const timestamp = $elapsed;
     const points = valid ? getPoints({ text, timestamp }) : undefined;
     const guess = { text, points, timestamp, round: $round, valid, reason };
-    $guesses.user = [...$guesses.user, guess];
+    $guesses.user[$round] = [...$guesses.user[$round], guess];
   };
 </script>
 

@@ -1,5 +1,5 @@
 <script>
-  import { active, round, roundScore, gameState } from "$stores/misc.js";
+  import { active, round, score, gameState } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Score from "$components/Modal.Score.svelte";
   import Rules from "$components/Modal.Rules.svelte";
@@ -22,12 +22,13 @@
     showCountdown = false;
   };
 
-  $: userWon = $roundScore.user > $roundScore.opponent;
-  $: opponentWon = $roundScore.user < $roundScore.opponent;
+  // TODO
+  // $: userWon = $roundScore.user > $roundScore.opponent;
+  // $: opponentWon = $roundScore.user < $roundScore.opponent;
 
   $: titleOptions = {
     pre: "Let's Play a Word Game",
-    mid: userWon ? "You won the round!" : opponentWon ? "You lost the round." : "Tie round.",
+    mid: true ? "You won the round!" : true ? "You lost the round." : "Tie round.",
     post: "Game over!"
   };
 

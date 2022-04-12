@@ -1,24 +1,22 @@
 <script>
-  import { gameState, roundScore, gameScore, round, ROUNDS } from "$stores/misc.js";
+  import { gameState, score, round, ROUNDS } from "$stores/misc.js";
+  import { sum } from "d3";
 
-  $: userWonGame = $gameScore.user > $gameScore.opponent;
-  $: opponentWonGame = $gameScore.opponent < $gameScore.user;
+  $: userScore = sum($score.user);
+  $: opponentScore = sum($score.opponent);
 </script>
 
 <div>
-  {#if $gameState === "mid"}
+  {#if $gameState === "mid" || $gameState === "post"}
     <p>Round {$round + 1} / {ROUNDS}</p>
-    <p>You: {$roundScore.user}</p>
-    <p>Them: {$roundScore.opponent}</p>
-    <h3>Game score</h3>
-    <h3>{$gameScore.user}-{$gameScore.opponent}</h3>
-  {:else if $gameState === "post"}
-    <h3>Game score</h3>
-    <h3>{$gameScore.user}-{$gameScore.opponent}</h3>
+    <p>You: {userScore}</p>
+    <p>Them: {opponentScore}</p>
+  {/if}
 
-    {#if userWonGame}
+  {#if $gameState === "post"}
+    {#if userScore > opponentScore}
       <p>You win!</p>
-    {:else if opponentWonGame}
+    {:else if opponentScore > userScore}
       <p>You lose!</p>
     {:else}
       <p>Tie!</p>

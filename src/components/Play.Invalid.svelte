@@ -1,5 +1,5 @@
 <script>
-  import { guesses } from "$stores/misc.js";
+  import { guesses, round } from "$stores/misc.js";
 
   const duration = 2000;
   let timeout;
@@ -14,12 +14,12 @@
     "was already entered"
   ];
 
-  $: recent = $guesses.user[$guesses.user.length - 1];
-  $: if (recent && $guesses.user.length !== prevGuessCount) update();
-  $: if (!$guesses.user.length) prevGuessCount = 0;
+  $: recent = $guesses.user[$round][$guesses.user[$round].length - 1];
+  $: if (recent && $guesses.user[$round].length !== prevGuessCount) update();
+  $: if (!$guesses.user[$round].length) prevGuessCount = 0;
 
   const update = () => {
-    prevGuessCount = $guesses.user.length;
+    prevGuessCount = $guesses.user[$round].length;
     clearTimeout(timeout);
 
     if (!recent.valid) {
