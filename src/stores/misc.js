@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store";
 import { sum } from "d3";
 
-export const ROUNDS = 5;
+export const ROUNDS = 4;
 
 const getScore = (data) => {
   const valid = data.filter((d) => d.valid);
