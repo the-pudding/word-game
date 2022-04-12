@@ -4,6 +4,7 @@
 
 {#if $gameState === "pre"}
   <div>
+    <p><em>Note: this is a desktop-only early prototype</em></p>
     <h3>How to Play</h3>
     <ul>
       <li><strong>Goal:</strong> win more rounds than your opponent</li>
