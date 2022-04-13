@@ -12,14 +12,17 @@
 
   $: check($elapsed);
 
-  // TODO reuse
-  const isValid = (text) => !$wordsPlayed.includes(text);
+  const validate = (text) => {
+    const valid = !$wordsPlayed.includes(text);
+    const reason = valid ? undefined : 0;
+    return { valid, reason };
+  };
 
   const check = () => {
-    const newGuess = data.find((d) => d.round === $round && $elapsed >= d.timestamp);
-    if (newGuess) {
-      const guess = { ...data.shift() };
-      guess.valid = isValid(guess.text);
+    const guessIndex = data.findIndex((d) => d.round === $round && $elapsed >= d.timestamp);
+    if (guessIndex > -1) {
+      const [newGuess] = data.splice(guessIndex, 1);
+      const guess = { ...newGuess, ...validate(newGuess.text) };
       $guesses.opponent[$round] = [...$guesses.opponent[$round], guess];
     }
   };

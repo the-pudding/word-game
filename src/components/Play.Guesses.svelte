@@ -1,28 +1,22 @@
 <script>
+  import List from "$components/Play.Guesses.List.svelte";
   import { guesses, round } from "$stores/misc.js";
   const takenCode = 0;
+  const displayFilter = (d) => d.reason === undefined || d.reason === takenCode;
 
-  $: validGuesses = $guesses.user[$round].filter(
-    (d) => d.reason === undefined || d.reason === takenCode
-  );
+  $: userGuesses = $guesses.user[$round].filter(displayFilter);
+  $: opponentGuesses = $guesses.opponent[$round].filter(displayFilter);
 </script>
 
-<ul>
-  {#each validGuesses as { reason, text }}
-    <li class:invalid={reason === takenCode}>{text}</li>
-  {/each}
-</ul>
+<div>
+  <List guesses={userGuesses} />
+  <List guesses={opponentGuesses} opponent={true} />
+</div>
 
 <style>
-  li {
-    color: var(--color-green);
-    font-weight: bold;
-    list-style-type: none;
-    text-align: center;
-  }
-
-  .invalid {
-    color: var(--color-gray-500);
-    font-weight: normal;
+  div {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
   }
 </style>
