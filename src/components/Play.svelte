@@ -67,6 +67,8 @@
     const points = valid ? getPoints({ text, timestamp }) : undefined;
     const guess = { text, points, timestamp, round: $round, valid, reason };
     $guesses.user[$round] = [...$guesses.user[$round], guess];
+    const match = $guesses.opponent[$round].find((d) => d.text === text);
+    if (match) match.guessedByUser = true;
   };
 </script>
 

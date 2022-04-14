@@ -2,18 +2,21 @@
   export let guesses;
   export let opponent = false;
 
-  const redact = (text, valid) =>
-    opponent && valid
+  const redact = ({ valid, text, guessedByUser }) => {
+    return opponent && valid && !guessedByUser
       ? text
           .split("")
-          .map(() => "█")
+          .map(() => "▉")
           .join("")
       : text;
+  };
 </script>
 
 <ul class:opponent>
-  {#each guesses as { valid, text }}
-    <li class:invalid={!valid}>{redact(text, valid)}</li>
+  {#each guesses as { valid, text, guessedByUser }}
+    <li class:invalid={!valid}>
+      {redact({ valid, text, guessedByUser })}
+    </li>
   {/each}
 </ul>
 
@@ -36,13 +39,5 @@
   li.invalid {
     color: var(--color-gray-500);
     font-weight: normal;
-  }
-
-  .opponent li {
-    background: var(--color-green);
-  }
-
-  .opponent li.invalid {
-    background: none;
   }
 </style>
