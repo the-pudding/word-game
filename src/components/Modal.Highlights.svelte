@@ -15,7 +15,7 @@
 
 <p>There were <strong>{count}</strong> possible words that satisfied the clue.</p>
 {#if grandmaWords.length}
-  <p>Here are the words that grandma figured out that you didn't:</p>
+  <p>Here are the words that grandma got that you didn't:</p>
   <table>
     <thead>
       <th>Word</th>
@@ -30,7 +30,7 @@
 {/if}
 
 <p>
-  Here are some of the easy words that neither of you got: {@html spanWords}.
+  Here are some common words that neither of you got: {@html spanWords}.
 </p>
 
 <style>
