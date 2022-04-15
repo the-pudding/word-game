@@ -2,7 +2,7 @@
   import { guesses } from "$stores/misc.js";
   import { copy } from "svelte-copy";
 
-  $: output = JSON.stringify($guesses.user);
+  $: output = JSON.stringify([].concat(...$guesses.user));
 </script>
 
 <p>
