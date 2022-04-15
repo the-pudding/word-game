@@ -5,25 +5,25 @@
   import Clue from "$components/Play.Clue.svelte";
   import Score from "$components/Play.Score.svelte";
   import Invalid from "$components/Play.Invalid.svelte";
-  import { guesses, wordsPlayed, round } from "$stores/misc.js";
+  import { guesses, wordsPlayed, round, possibleAnswers } from "$stores/misc.js";
   import { elapsed } from "$stores/timer.js";
-  import testData1 from "$data/testdata-same.csv";
-  import testData2 from "$data/testdata-x.csv";
-  import testData3 from "$data/testdata-t.csv";
-  import testData4 from "$data/testdata-m.csv";
-  import testData5 from "$data/testdata-red.csv";
+  import testData1 from "$data/testdata-7.csv";
+  import testData2 from "$data/testdata-b.csv";
+  import testData3 from "$data/testdata-th.csv";
+  import testData4 from "$data/testdata-same.csv";
 
-  const allData = [testData1, testData2, testData3, testData4, testData5];
+  const allData = [testData1, testData2, testData3, testData4];
+
   const clues = [
-    "start and end with the same letter",
-    "contain the letter <strong>X</strong>",
-    "are adjectives that start with <strong>T</strong>",
-    "have 5 letters and start with <strong>M</strong>",
-    "rhyme with <strong>RED</strong><small>(words must end with the same sound)</small>"
+    "have 7 letters",
+    "are nouns that start with <strong>B</strong>",
+    "that contain <strong>TH</strong>",
+    "that start and end with the same letter"
   ];
 
   $: currentClue = clues[$round];
   $: roundData = allData[$round];
+  $: $possibleAnswers = roundData;
 
   $: validWords = roundData.map((d) => d.word);
   const isWordlist = (text) => !validWords.includes(text);
@@ -55,9 +55,8 @@
   };
 
   const getPoints = ({ text, timestamp }) => {
-    return 1;
-    // const { points } = roundData.find((d) => d.word === text);
-    // return +points;
+    const { points } = roundData.find((d) => d.word === text);
+    return +points;
   };
 
   const onSubmit = ({ detail }) => {
@@ -72,26 +71,26 @@
   };
 </script>
 
-<div>
+<div class="play">
   <Clue clue={currentClue} />
-
   <Clock />
-  <Score />
 
-  <div class="words">
+  <div class="board">
     <Guesses />
+    <Score />
     <Invalid />
     <Input on:submit={onSubmit} />
   </div>
 </div>
 
 <style>
-  div {
+  .play {
     position: relative;
     width: 100%;
     height: 100%;
   }
-  .words {
+
+  .board {
     position: absolute;
     bottom: 0;
     left: 0;

@@ -1,7 +1,7 @@
 <script>
   import { active, round, roundScore, gameState, totalScore } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
-  import Score from "$components/Modal.Score.svelte";
+  import Recap from "$components/Modal.Recap.svelte";
   import Rules from "$components/Modal.Rules.svelte";
   import Feedback from "$components/Modal.Feedback.svelte";
 
@@ -24,11 +24,11 @@
 
   // TODO
   $: userLead = $totalScore.user > $totalScore.opponent;
-  $: opponentLead = $totalScore.user < $totalScore.opponent;
+  $: tied = $totalScore.user === $totalScore.opponent;
 
   $: titleOptions = {
-    pre: "Let's Play a Word Game",
-    mid: userLead ? "You are in the lead!" : opponentLead ? "You are losing." : "It's all tied up!",
+    pre: "We had a real grandma play this game yesterday. Can you beat her head-to-head?",
+    mid: tied ? "It's all tied up!" : `${userLead ? "You are" : "Grandma is"} in the lead!`,
     post: "Game over!"
   };
 
@@ -38,9 +38,15 @@
 
 <h2>{titleText}</h2>
 
-<Rules />
-<Score />
-<Feedback />
+{#if $gameState === "pre"}
+  <Rules />
+{/if}
+{#if $gameState !== "pre"}
+  <Recap />
+{/if}
+{#if $gameState === "post"}
+  <Feedback />
+{/if}
 
 <!-- button to start round -->
 {#if buttonText}
@@ -54,8 +60,10 @@
 
 <style>
   h2 {
-    font-size: 3em;
+    font-size: 2em;
     text-align: center;
+    max-width: 23em;
+    margin: 1rem auto;
   }
 
   p {

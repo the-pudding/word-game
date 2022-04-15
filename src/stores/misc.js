@@ -22,6 +22,8 @@ export const gameState = derived([round, active], ([$round, $active], set) => {
 
 export const guesses = writable({ user: createEmptyRounds(), opponent: createEmptyRounds() });
 
+export const possibleAnswers = writable([]);
+
 export const roundScore = derived(guesses, ($guesses, set) => {
 	const user = $guesses.user.map(sumRound);
 	const opponent = $guesses.opponent.map(sumRound);

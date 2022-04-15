@@ -1,22 +1,12 @@
 <script>
+  import Item from "$components/Play.Guesses.Item.svelte";
   export let guesses;
   export let opponent = false;
-
-  const redact = ({ valid, text, guessedByUser }) => {
-    return opponent && valid && !guessedByUser
-      ? text
-          .split("")
-          .map(() => "▉")
-          .join("")
-      : text;
-  };
 </script>
 
-<ul class:opponent>
-  {#each guesses as { valid, text, guessedByUser }}
-    <li class:invalid={!valid}>
-      {redact({ valid, text, guessedByUser })}
-    </li>
+<ul>
+  {#each guesses as { valid, text, guessedByUser, points } (text)}
+    <Item {opponent} {valid} {text} {guessedByUser} {points} />
   {/each}
 </ul>
 
@@ -26,18 +16,6 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-end;
-  }
-
-  li {
-    color: var(--color-green);
-    font-weight: bold;
-    list-style-type: none;
-    text-align: center;
-    display: inline-block;
-  }
-
-  li.invalid {
-    color: var(--color-gray-500);
-    font-weight: normal;
+    align-items: center;
   }
 </style>

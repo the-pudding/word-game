@@ -7,17 +7,16 @@
   const start = 3;
   const end = -1;
   const duration = start * 1000;
-  const countdown = tweened(start);
+  const countdown = tweened(start, { duration });
 
-  $: if ($countdown <= end) dispatch("end");
-  $: timer = $countdown < 0 ? "Begin!" : Math.floor($countdown) + 1;
+  $: display = $countdown < 0 ? "Begin!" : Math.floor($countdown) + 1;
 
-  onMount(() => {
-    countdown.set(end, { duration });
+  countdown.set(end).then(() => {
+    dispatch("end");
   });
 </script>
 
-<p>{timer}</p>
+<p>{display}</p>
 
 <style>
   p {

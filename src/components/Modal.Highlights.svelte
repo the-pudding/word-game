@@ -1,0 +1,41 @@
+<script>
+  import { format, shuffle } from "d3";
+  import { possibleAnswers, guesses, round, wordsPlayed } from "$stores/misc.js";
+
+  $: count = format(",")($possibleAnswers.length);
+  $: grandmaWords = $guesses.opponent[$round].filter((d) => d.valid && !d.guessedByUser);
+  $: easyWords = $possibleAnswers
+    .filter((d) => +d.points === 1)
+    .filter((d) => !$wordsPlayed.includes((d) => d.text));
+  $: spanWords = shuffle(easyWords)
+    .slice(0, 5)
+    .map((d) => `<span>${d.word}</span>`)
+    .join(", ");
+</script>
+
+<p>There were <strong>{count}</strong> possible words that satisfied the clue.</p>
+{#if grandmaWords.length}
+  <p>Here are the words that grandma figured out that you didn't:</p>
+  <table>
+    <thead>
+      <th>Word</th>
+      <th>Points</th>
+    </thead>
+    <tbody
+      >{#each grandmaWords as { text, points }}
+        <tr><td>{text}</td> <td>{points}</td></tr>
+      {/each}
+    </tbody>
+  </table>
+{/if}
+
+<p>
+  Here are some of the easy words that neither of you got: {@html spanWords}.
+</p>
+
+<style>
+  table {
+    width: 20em;
+    margin: 0 auto;
+  }
+</style>
