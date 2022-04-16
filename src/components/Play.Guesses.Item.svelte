@@ -30,7 +30,9 @@
   {renderText}
 
   {#if showPoints}
-    <span out:fade>+{points}</span>
+    {#if !opponent || !guessedByUser}
+      <span out:fade>{points ? `+${points}` : "BLOCKED!"}</span>
+    {/if}
   {/if}
 </li>
 
