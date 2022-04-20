@@ -5,7 +5,7 @@
   export let opponent;
   export let valid;
   export let text;
-  export let guessedByUser;
+  export let guessedByUserLate;
   export let points;
 
   const timer = tweened(0, { duration: 1000 });
@@ -16,7 +16,7 @@
   });
 
   $: renderText =
-    opponent && valid && !guessedByUser
+    opponent && valid && !guessedByUserLate
       ? text
           .split("")
           .map(() => "▉")
@@ -30,8 +30,8 @@
   {renderText}
 
   {#if showPoints}
-    {#if !opponent || !guessedByUser}
-      <span out:fade>{points ? `+${points}` : "BLOCKED!"}</span>
+    {#if !opponent || !guessedByUserLate}
+      <span out:fade>{`+${!valid || !points ? 0 : points}`}</span>
     {/if}
   {/if}
 </li>

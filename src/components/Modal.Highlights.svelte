@@ -3,7 +3,7 @@
   import { possibleAnswers, guesses, round, wordsPlayed } from "$stores/misc.js";
 
   $: count = format(",")($possibleAnswers.length);
-  $: grandmaWords = $guesses.opponent[$round].filter((d) => d.valid && !d.guessedByUser);
+  $: grandmaWords = $guesses.opponent[$round].filter((d) => d.valid && !d.guessedByUserLate);
   $: easyWords = $possibleAnswers
     .filter((d) => +d.points === 1)
     .filter((d) => !$wordsPlayed.includes((d) => d.text));
