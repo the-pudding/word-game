@@ -7,28 +7,45 @@
   import Invalid from "$components/Play.Invalid.svelte";
   import { guesses, wordsPlayed, round, possibleAnswers } from "$stores/misc.js";
   import { elapsed } from "$stores/timer.js";
-  import testData1 from "$data/testdata-7.csv";
-  import testData2 from "$data/testdata-b.csv";
+  import testData1 from "$data/testdata-b.csv";
+  import testData2 from "$data/testdata-7.csv";
   import testData3 from "$data/testdata-th.csv";
   import testData4 from "$data/testdata-same.csv";
 
   const allData = [testData1, testData2, testData3, testData4];
 
   const clues = [
-    "have 7 letters",
     "are nouns that start with <strong>B</strong>",
+    "have 7 letters",
     "that contain <strong>TH</strong>",
     "that start and end with the same letter"
   ];
 
   $: currentClue = clues[$round];
-  $: roundData = allData[$round];
+  $: roundData = allData[$round].map((d) => ({ ...d, lemmas: d.lemmas.split("|") }));
   $: $possibleAnswers = roundData;
 
   $: validWords = roundData.map((d) => d.word);
+
+  const getLemmas = (text) => {
+    const { lemmas } = roundData.find((d) => d.word === text);
+    return lemmas;
+  };
+
   const isWordlist = (text) => !validWords.includes(text);
-  const isTaken = (text) => $wordsPlayed.includes(text);
-  const isDuplicate = (text) => $guesses.user[$round].filter((d) => d.text === text).length > 0;
+
+  const isTaken = (text) => {
+    const lemmas = getLemmas(text);
+    const existing = lemmas.filter((d) => $wordsPlayed.find((e) => d === e));
+    return !!existing.length;
+  };
+
+  const isDuplicate = (text) => {
+    const lemmas = getLemmas(text);
+    const existing = lemmas.filter((d) => $guesses.user[$round].find((e) => e.lemmas.includes(d)));
+    return !!existing.length;
+  };
+
   const isNotAlpha = (text) => new RegExp(/([^a-z])/, "g").test(text);
 
   const validate = (text) => {
@@ -64,7 +81,8 @@
     const { valid, reason } = validate(text);
     const timestamp = $elapsed;
     const points = valid ? getPoints({ text, timestamp }) : undefined;
-    const guess = { text, points, timestamp, round: $round, valid, reason };
+    const lemmas = valid ? getLemmas(text) : undefined;
+    const guess = { text, lemmas, points, timestamp, round: $round, valid, reason };
     $guesses.user[$round] = [...$guesses.user[$round], guess];
     const match = $guesses.opponent[$round].find((d) => d.text === text);
     if (match) match.guessedByUserLate = true;

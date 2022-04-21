@@ -12,8 +12,13 @@
 
   $: check($elapsed);
 
-  const validate = (text) => {
-    const valid = !$wordsPlayed.includes(text);
+  const isTaken = ({ text, lemmas }) => {
+    const existing = lemmas.split("|").filter((d) => $wordsPlayed.find((e) => d === e));
+    return !!existing.length;
+  };
+
+  const validate = ({ text, lemmas }) => {
+    const valid = isTaken({ text, lemmas });
     const reason = valid ? undefined : 0;
     return { valid, reason };
   };
@@ -22,7 +27,7 @@
     const guessIndex = data.findIndex((d) => d.round === $round && $elapsed >= d.timestamp);
     if (guessIndex > -1) {
       const [newGuess] = data.splice(guessIndex, 1);
-      const guess = { ...newGuess, ...validate(newGuess.text) };
+      const guess = { ...newGuess, ...validate(newGuess) };
       $guesses.opponent[$round] = [...$guesses.opponent[$round], guess];
     }
   };
