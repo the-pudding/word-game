@@ -5,18 +5,18 @@
   export let opponent;
   export let valid;
   export let text;
-  export let guessedByUserLate;
+  export let revealOpponent;
   export let points;
 
   const timer = tweened(0, { duration: 1000 });
 
-  let showPoints = true;
+  let timerVisible = true;
   timer.set(1).then(() => {
-    showPoints = false;
+    timerVisible = false;
   });
 
   $: renderText =
-    opponent && valid && !guessedByUserLate
+    opponent && valid && !revealOpponent
       ? text
           .split("")
           .map(() => "▉")
@@ -24,15 +24,15 @@
       : text;
 
   $: invalid = !valid;
+  $: displayPoints = invalid || !points ? "" : `+${points}`;
+  $: visible = timerVisible && (!opponent || !revealOpponent);
 </script>
 
 <li class:invalid>
   {renderText}
 
-  {#if showPoints}
-    {#if !opponent || !guessedByUserLate}
-      <span out:fade>{`+${!valid || !points ? 0 : points}`}</span>
-    {/if}
+  {#if visible}
+    <span out:fade>{displayPoints}</span>
   {/if}
 </li>
 

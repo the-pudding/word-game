@@ -5,7 +5,8 @@
   import Clue from "$components/Play.Clue.svelte";
   import Score from "$components/Play.Score.svelte";
   import Invalid from "$components/Play.Invalid.svelte";
-  import { guesses, wordsPlayed, round, possibleAnswers } from "$stores/misc.js";
+  import { guesses, lemmasPlayed, round, possibleAnswers } from "$stores/misc.js";
+  import lemmaExists from "$utils/lemmaExists.js";
   import { elapsed } from "$stores/timer.js";
   import testData1 from "$data/testdata-b.csv";
   import testData2 from "$data/testdata-7.csv";
@@ -22,33 +23,31 @@
   ];
 
   $: currentClue = clues[$round];
-  $: roundData = allData[$round].map((d) => ({ ...d, lemmas: d.lemmas.split("|") }));
+  $: roundData = allData[$round];
   $: $possibleAnswers = roundData;
 
   $: validWords = roundData.map((d) => d.word);
 
-  const getLemmas = (text) => {
+  const lookupLemmas = (text) => {
     const { lemmas } = roundData.find((d) => d.word === text);
     return lemmas;
   };
 
   const isWordlist = (text) => !validWords.includes(text);
 
-  const isTaken = (text) => {
-    const lemmas = getLemmas(text);
-    const existing = lemmas.filter((d) => $wordsPlayed.find((e) => d === e));
-    return !!existing.length;
+  const isTaken = ({ text, lemmas }) => {
+    const corpus = $lemmasPlayed.map((d) => d.text);
+    return lemmaExists({ lemmas, corpus });
   };
 
-  const isDuplicate = (text) => {
-    const lemmas = getLemmas(text);
-    const existing = lemmas.filter((d) => $guesses.user[$round].find((e) => e.lemmas.includes(d)));
-    return !!existing.length;
+  const isDuplicate = ({ text, lemmas }) => {
+    const corpus = $guesses.user[$round].map((d) => d.lemmas);
+    return lemmaExists({ lemmas, corpus });
   };
 
   const isNotAlpha = (text) => new RegExp(/([^a-z])/, "g").test(text);
 
-  const validate = (text) => {
+  const validate = ({ text, lemmas }) => {
     let valid = true;
     let reason;
     if (text.length < 4) {
@@ -60,10 +59,10 @@
     } else if (isWordlist(text)) {
       valid = false;
       reason = 3;
-    } else if (isDuplicate(text)) {
+    } else if (isDuplicate({ text, lemmas })) {
       valid = false;
       reason = 4;
-    } else if (isTaken(text)) {
+    } else if (isTaken({ text, lemmas })) {
       valid = false;
       reason = 0;
     }
@@ -76,16 +75,25 @@
     return +points;
   };
 
+  const checkRevealOpponent = (lemmas) => {
+    // TODO
+    const corpus = $lemmasPlayed.filter((d) => d.opponent).map((d) => d.text);
+
+    $guesses.opponent[$round].forEach((guess) => {
+      const exists = lemmaExists({ lemmas, corpus });
+      if (exists) guess.revealOpponent = true;
+    });
+  };
+
   const onSubmit = ({ detail }) => {
     const text = detail;
-    const { valid, reason } = validate(text);
+    const lemmas = lookupLemmas(text);
+    const { valid, reason } = validate({ text, lemmas });
     const timestamp = $elapsed;
     const points = valid ? getPoints({ text, timestamp }) : undefined;
-    const lemmas = valid ? getLemmas(text) : undefined;
     const guess = { text, lemmas, points, timestamp, round: $round, valid, reason };
     $guesses.user[$round] = [...$guesses.user[$round], guess];
-    const match = $guesses.opponent[$round].find((d) => d.text === text);
-    if (match) match.guessedByUserLate = true;
+    // checkRevealOpponent(lemmas);
   };
 </script>
 

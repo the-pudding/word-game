@@ -1,13 +1,13 @@
 <script>
   import { format, shuffle } from "d3";
-  import { possibleAnswers, guesses, round, wordsPlayed } from "$stores/misc.js";
+  import { possibleAnswers, guesses, round, lemmasPlayed } from "$stores/misc.js";
 
   $: count = format(",")($possibleAnswers.length);
   $: grandmaWords = $guesses.opponent[$round].filter((d) => d.valid && !d.guessedByUserLate);
-  $: easyWords = $possibleAnswers
+  $: commonWords = $possibleAnswers
     .filter((d) => +d.points === 1)
-    .filter((d) => !$wordsPlayed.includes((d) => d.text));
-  $: spanWords = shuffle(easyWords)
+    .filter((d) => !$lemmasPlayed.includes((d) => d.text));
+  $: spanWords = shuffle(commonWords)
     .slice(0, 5)
     .map((d) => `<span>${d.word}</span>`)
     .join(", ");
