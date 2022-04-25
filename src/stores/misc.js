@@ -37,17 +37,17 @@ export const totalScore = derived(roundScore, ($roundScore, set) => {
 });
 
 const flatten = (arr) => [].concat(...arr);
-const getFlattenedLemmas = ({ data, opponent }) => {
+const getFlattenedLemmas = ({ data, user }) => {
 	const raw = data.filter((d) => d.valid).map((d) => d.lemmas.split("|"))
-	const flat = flatten(raw).map(text => ({ text, opponent }));
+	const flat = flatten(raw).map(text => ({ text, user }));
 	return flat;
 };
 
 export const lemmasPlayed = derived([guesses, round], ([$guesses, $round], set) => {
 	if ($round < 0) return;
 
-	const a = getFlattenedLemmas({ data: $guesses.user[$round], opponent: false });
-	const b = getFlattenedLemmas({ data: $guesses.opponent[$round], opponent: true });
+	const a = getFlattenedLemmas({ data: $guesses.user[$round], user: true });
+	const b = getFlattenedLemmas({ data: $guesses.opponent[$round], user: false });
 	const joined = [...a, ...b];
 	set(joined);
 });

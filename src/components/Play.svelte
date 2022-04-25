@@ -76,16 +76,16 @@
   };
 
   const checkRevealOpponent = (lemmas) => {
-    // TODO
-    const corpus = $lemmasPlayed.filter((d) => d.opponent).map((d) => d.text);
+    const corpus = $lemmasPlayed.filter((d) => d.user).map((d) => d.text);
 
     $guesses.opponent[$round].forEach((guess) => {
       const exists = lemmaExists({ lemmas, corpus });
+      console.log(guess.text, lemmas, corpus);
       if (exists) guess.revealOpponent = true;
     });
   };
 
-  const onSubmit = ({ detail }) => {
+  const onSubmit = async ({ detail }) => {
     const text = detail;
     const lemmas = lookupLemmas(text);
     const { valid, reason } = validate({ text, lemmas });
@@ -93,7 +93,7 @@
     const points = valid ? getPoints({ text, timestamp }) : undefined;
     const guess = { text, lemmas, points, timestamp, round: $round, valid, reason };
     $guesses.user[$round] = [...$guesses.user[$round], guess];
-    // checkRevealOpponent(lemmas);
+    checkRevealOpponent(lemmas);
   };
 </script>
 
