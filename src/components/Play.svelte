@@ -29,14 +29,14 @@
   $: validWords = roundData.map((d) => d.word);
 
   const lookupLemmas = (text) => {
-    const { lemmas } = roundData.find((d) => d.word === text);
-    return lemmas;
+    const match = roundData.find((d) => d.word === text);
+    return match ? match.lemmas : "";
   };
 
   const isWordlist = (text) => !validWords.includes(text);
 
   const isTaken = ({ text, lemmas }) => {
-    const corpus = $lemmasPlayed.map((d) => d.text);
+    const corpus = $lemmasPlayed;
     return lemmaExists({ lemmas, corpus });
   };
 
@@ -76,11 +76,9 @@
   };
 
   const checkRevealOpponent = (lemmas) => {
-    const corpus = $lemmasPlayed.filter((d) => d.user).map((d) => d.text);
-
     $guesses.opponent[$round].forEach((guess) => {
+      const corpus = guess.lemmas.split("|");
       const exists = lemmaExists({ lemmas, corpus });
-      console.log(guess.text, lemmas, corpus);
       if (exists) guess.revealOpponent = true;
     });
   };

@@ -14,7 +14,7 @@
   $: check($elapsed);
 
   const isTaken = (lemmas) => {
-    const corpus = $lemmasPlayed.map((d) => d.text);
+    const corpus = $lemmasPlayed;
     return lemmaExists({ lemmas, corpus });
   };
 
@@ -29,7 +29,6 @@
     if (guessIndex > -1) {
       const [newGuess] = data.splice(guessIndex, 1);
       const guess = { ...newGuess, ...validate(newGuess) };
-      console.log(guess);
       $guesses.opponent[$round] = [...$guesses.opponent[$round], guess];
     }
   };

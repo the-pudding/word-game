@@ -7,7 +7,7 @@
   let prevGuessCount = 0;
 
   const reasons = [
-    "was played by opponent",
+    "(or a varation of that word) was played by opponent",
     "is too short",
     "contains non-letters",
     "is not in the word list",

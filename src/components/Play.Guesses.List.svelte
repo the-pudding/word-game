@@ -5,8 +5,8 @@
 </script>
 
 <ul>
-  {#each guesses as { valid, text, guessedByUserLate, points } (text)}
-    <Item {opponent} {valid} {text} {guessedByUserLate} {points} />
+  {#each guesses as { valid, text, revealOpponent, points } (text)}
+    <Item {opponent} {valid} {text} {revealOpponent} {points} />
   {/each}
 </ul>
 
