@@ -5,7 +5,8 @@
 <p>One person a day gets the chance to play against the world in a game of words.</p>
 
 <p>
-  Today that person is Michelle from Oakland, CA. She <em>really</em> likes boba. Can you beat her?
+  Today that person is <strong>Michelle from Oakland, CA</strong>. She <em>really</em> likes boba. Can
+  you beat her?
 </p>
 
 <p>
