@@ -1,13 +1,13 @@
 <script>
   import { guesses, round } from "$stores/misc.js";
 
-  const duration = 2000;
+  const duration = 2500;
   let timeout;
   let visible = false;
   let prevGuessCount = 0;
 
   const reasons = [
-    "(or a varation of that word) was played by opponent",
+    "(or a variation) was played by opponent",
     "is too short",
     "contains non-letters",
     "is not in the word list",
