@@ -4,4 +4,4 @@
 
 <p>Round {$round + 1} / {ROUNDS}</p>
 <p>You: {$totalScore.user}</p>
-<p>Grandma: {$totalScore.opponent}</p>
+<p>Michelle: {$totalScore.opponent}</p>

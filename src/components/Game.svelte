@@ -25,16 +25,20 @@
 
 <style>
   section {
-    height: 75vh;
-    max-width: 60rem;
     margin: 0 auto;
-    padding: 1rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    padding: 4rem 1rem 1rem 1rem;
   }
+
   #play {
-    background: lightgoldenrodyellow;
+    /* background: lightgoldenrodyellow; */
   }
 
   #modal {
-    background: lightsteelblue;
+    /* background: lightsteelblue; */
   }
 </style>

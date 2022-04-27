@@ -17,11 +17,17 @@
   }
 
   .clue {
-    font-size: 3em;
+    font-size: 1.5em;
     max-width: 60%;
     line-height: 1.2;
     margin: 0 auto;
   }
+  @media (min-width: 768px) {
+    .clue {
+      font-size: 3em;
+    }
+  }
+
   :global(.clue small) {
     font-size: 0.4em;
     display: block;

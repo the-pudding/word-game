@@ -1,4 +1,4 @@
-<script>
+<!-- <script>
   import wordmark from "$svg/wordmark.svg";
 </script>
 
@@ -27,4 +27,4 @@
   :global(.wordmark svg path) {
     fill: currentColor;
   }
-</style>
+</style> -->

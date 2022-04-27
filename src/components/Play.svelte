@@ -8,12 +8,12 @@
   import { guesses, lemmasPlayed, round, possibleAnswers } from "$stores/misc.js";
   import lemmaExists from "$utils/lemmaExists.js";
   import { elapsed } from "$stores/timer.js";
-  import testData1 from "$data/testdata-b.csv";
-  import testData2 from "$data/testdata-7.csv";
-  import testData3 from "$data/testdata-th.csv";
-  import testData4 from "$data/testdata-same.csv";
+  import testData1 from "$data/testdata-f.csv";
+  // import testData2 from "$data/testdata-7.csv";
+  // import testData3 from "$data/testdata-th.csv";
+  // import testData4 from "$data/testdata-same.csv";
 
-  const allData = [testData1, testData2, testData3, testData4];
+  const allData = [testData1];
 
   const clues = ["are nouns that start with <strong>F</strong>"];
   // 	 "have 7 letters",
@@ -113,13 +113,12 @@
   }
 
   .board {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    width: 100%;
     display: flex;
     align-items: center;
     justify-content: flex-end;
     flex-direction: column;
+    min-height: 430px;
+    max-width: 40rem;
+    margin: 0 auto;
   }
 </style>

@@ -2,7 +2,7 @@
   import { active, round, roundScore, gameState, totalScore } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Recap from "$components/Modal.Recap.svelte";
-  import Rules from "$components/Modal.Rules.svelte";
+  import Pregame from "$components/Modal.Pregame.svelte";
   import Feedback from "$components/Modal.Feedback.svelte";
 
   const buttonOptions = {
@@ -27,8 +27,8 @@
   $: tied = $totalScore.user === $totalScore.opponent;
 
   $: titleOptions = {
-    pre: "We had a real grandma play this game yesterday. Can you beat her head-to-head?",
-    mid: tied ? "It's all tied up!" : `${userLead ? "You are" : "Grandma is"} in the lead!`,
+    pre: "Title TK Word Game",
+    mid: tied ? "It's all tied up!" : `${userLead ? "You are" : "Michelle is"} in the lead!`,
     post: "Game over!"
   };
 
@@ -39,7 +39,7 @@
 <h2>{titleText}</h2>
 
 {#if $gameState === "pre"}
-  <Rules />
+  <Pregame />
 {/if}
 {#if $gameState !== "pre"}
   <Recap />

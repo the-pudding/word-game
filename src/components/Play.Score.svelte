@@ -8,7 +8,7 @@
     <span class="score">{$totalScore.user}</span>
   </p>
   <p>
-    <span class="name">Grandma</span>
+    <span class="name">Michelle</span>
     <span class="score">{$totalScore.opponent}</span>
   </p>
 </div>

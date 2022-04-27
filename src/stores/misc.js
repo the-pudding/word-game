@@ -50,3 +50,5 @@ export const lemmasPlayed = derived([guesses, round], ([$guesses, $round], set) 
 	const joined = [...a, ...b];
 	set(joined);
 });
+
+export const overlay = writable(null);

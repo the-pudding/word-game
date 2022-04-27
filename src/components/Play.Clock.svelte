@@ -4,7 +4,7 @@
   import { active } from "$stores/misc.js";
 
   const MS = 1000;
-  const target = 60 * MS;
+  const target = 600 * MS;
 
   $: update($active);
   $: secondsLeft = Math.floor((target - $elapsed) / MS);
@@ -24,12 +24,18 @@
 
 <style>
   p {
-    position: absolute;
-    top: 0;
-    left: 0;
-    font-size: 4em;
-    margin: 0;
-    padding: 0;
-    line-height: 1;
+    font-size: 2em;
+    text-align: center;
+  }
+  @media (min-width: 768px) {
+    p {
+      position: absolute;
+      top: 0;
+      left: 0;
+      font-size: 4em;
+      margin: 0;
+      padding: 0;
+      line-height: 1;
+    }
   }
 </style>

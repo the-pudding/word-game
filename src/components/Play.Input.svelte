@@ -7,33 +7,38 @@
   let inputEl;
   let value = "";
 
-  const onKeydown = (e) => {
-    value = `${value}${e.detail}`;
-  };
-
-  const onSubmit = (e) => {
-    e.preventDefault();
-    const clean = value.trim().toLowerCase();
-    if (clean) dispatch("submit", clean);
+  const submit = () => {
+    if (value) dispatch("submit", value);
     value = "";
   };
 
-  $: touchscreen = false;
+  const onKeydown = (e) => {
+    if (e.detail === "Enter") submit();
+    else if (e.detail === "Backspace") value = value.substring(0, value.length - 1);
+    else value = `${value}${e.detail}`;
+  };
+
+  const onInput = (e) => {
+    e.preventDefault();
+    value = value.trim().toLowerCase();
+    submit();
+  };
 
   onMount(() => {
     inputEl.focus();
   });
 </script>
 
-<div>
-  {#if touchscreen}
-    <Keyboard on:keydown={onKeydown} layout="wordle" />
-  {:else}
-    <form on:submit={onSubmit}>
-      <input maxlength="15" bind:value bind:this={inputEl} />
-      <button type="submit">Submit</button>
-    </form>
-  {/if}
+<div class="keyboard">
+  <p>{value}</p>
+  <Keyboard on:keydown={onKeydown} layout="wordle" />
+</div>
+
+<div class="no-keyboard">
+  <form on:submit={onInput}>
+    <input maxlength="15" bind:value bind:this={inputEl} />
+    <button type="submit">Submit</button>
+  </form>
 </div>
 
 <style>
@@ -41,5 +46,22 @@
   button {
     font-size: 2em;
     padding: 0.5em;
+  }
+
+  .no-keyboard {
+    display: none;
+  }
+
+  .keyboard {
+    display: block;
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .no-keyboard {
+      display: block;
+    }
+    .keyboard {
+      display: none;
+    }
   }
 </style>
