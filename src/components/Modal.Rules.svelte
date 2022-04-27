@@ -30,6 +30,7 @@
     <li>4+ letter words</li>
     <li>No proper nouns</li>
     <li>No hyphenated words</li>
+    <li>No variations (e.g. plurals) of a played word</li>
   </ul>
 </div>
 
