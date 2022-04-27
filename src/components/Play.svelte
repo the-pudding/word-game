@@ -15,12 +15,10 @@
 
   const allData = [testData1, testData2, testData3, testData4];
 
-  const clues = [
-    "are nouns that start with <strong>B</strong>",
-    "have 7 letters",
-    "that contain <strong>TH</strong>",
-    "that start and end with the same letter"
-  ];
+  const clues = ["are nouns that start with <strong>F</strong>"];
+  // 	 "have 7 letters",
+  //   "that contain <strong>TH</strong>",
+  //   "that start and end with the same letter"
 
   $: currentClue = clues[$round];
   $: roundData = allData[$round];
