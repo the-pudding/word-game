@@ -23,7 +23,6 @@
     showCountdown = false;
   };
 
-  // TODO
   $: buttonText = buttonOptions[$gameState];
 </script>
 

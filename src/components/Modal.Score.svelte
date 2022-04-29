@@ -3,7 +3,7 @@
 </script>
 
 <p>Round {$round + 1} of {ROUNDS}</p>
-<p>You: {$totalScore.user}</p>
+<p>{$wod ? "Your score" : "You"}: {$totalScore.user}</p>
 
 {#if !$wod}
   <p>Michelle: {$totalScore.opponent}</p>

@@ -1,5 +1,5 @@
 <script>
-  import { gameState, totalScore, round } from "$stores/misc.js";
+  import { gameState, totalScore, round, wod } from "$stores/misc.js";
   import Score from "$components/Modal.Score.svelte";
   import Highlights from "$components/Modal.Highlights.svelte";
 
@@ -44,12 +44,14 @@
 </script>
 
 <div>
-  <h2>{title}</h2>
+  {#if !$wod}
+    <h2>{title}</h2>
+  {/if}
 
   <Score />
   <Highlights />
 
-  {#if $gameState === "post"}
+  {#if $gameState === "post" && !$wod}
     {#if userLead}
       <p>You win!</p>
     {:else if opponentLead}

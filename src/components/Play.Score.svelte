@@ -7,19 +7,19 @@
     <span class="name">You</span>
     <span class="score">{$totalScore.user}</span>
   </p>
-  <p>
-    {#if !$wod}
+  {#if !$wod}
+    <p>
       <span class="name">Michelle</span>
       <span class="score">{$totalScore.opponent}</span>
-    {/if}
-  </p>
+    </p>
+  {/if}
 </div>
 
 <style>
   div {
     margin: 1rem 0;
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     width: 100%;
   }
 
