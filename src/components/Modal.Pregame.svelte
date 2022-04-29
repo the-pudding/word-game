@@ -2,6 +2,8 @@
   import { overlay } from "$stores/misc.js";
 </script>
 
+<h2>Title TK Word Game</h2>
+
 <p>One person a day gets the chance to play against the world in a game of words.</p>
 
 <p>
@@ -21,18 +23,11 @@
   >
 </p>
 
-<!-- <a hre -->
 <style>
-  div {
-    max-width: 40em;
-    margin: 0 auto;
-  }
-
-  h3 {
-    margin-bottom: 0;
-  }
-
-  ul {
-    margin-left: 1em;
+  h2 {
+    font-size: 2em;
+    text-align: center;
+    max-width: 23em;
+    margin: 1rem auto;
   }
 </style>

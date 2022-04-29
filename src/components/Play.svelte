@@ -13,9 +13,14 @@
   // import testData3 from "$data/testdata-th.csv";
   // import testData4 from "$data/testdata-same.csv";
 
-  const allData = [testData1];
+  const allData = [testData1, testData1, testData1, testData1];
 
-  const clues = ["are nouns that start with <strong>F</strong>"];
+  const clues = [
+    "are nouns that start with <strong>F</strong>",
+    "are nouns that start with <strong>F</strong>",
+    "are nouns that start with <strong>F</strong>",
+    "are nouns that start with <strong>F</strong>"
+  ];
   // 	 "have 7 letters",
   //   "that contain <strong>TH</strong>",
   //   "that start and end with the same letter"

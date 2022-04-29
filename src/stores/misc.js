@@ -1,7 +1,7 @@
 import { writable, derived } from "svelte/store";
 import { sum, range } from "d3";
 
-export const ROUNDS = 1;
+export const ROUNDS = 4;
 
 const createEmptyRounds = () => range(ROUNDS).map(() => []);
 
