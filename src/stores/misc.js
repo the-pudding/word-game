@@ -51,4 +51,7 @@ export const lemmasPlayed = derived([guesses, round], ([$guesses, $round], set) 
 	set(joined);
 });
 
-export const overlay = writable(null);
+export const overlay = writable(undefined);
+
+export const wod = writable(undefined);
+export const wodId = writable(undefined);

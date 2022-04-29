@@ -1,6 +1,6 @@
 <script>
   import List from "$components/Play.Guesses.List.svelte";
-  import { guesses, round } from "$stores/misc.js";
+  import { guesses, round, wod } from "$stores/misc.js";
   const takenCode = 0;
   const displayFilter = (d) => d.reason === undefined || d.reason === takenCode;
 
@@ -10,7 +10,9 @@
 
 <div>
   <List guesses={userGuesses} />
-  <List guesses={opponentGuesses} opponent={true} />
+  {#if !$wod}
+    <List guesses={opponentGuesses} opponent={true} />
+  {/if}
 </div>
 
 <style>

@@ -1,8 +1,9 @@
 <script>
-  import { active, round, roundScore, gameState, totalScore } from "$stores/misc.js";
+  import { active, round, roundScore, gameState, totalScore, wod } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Recap from "$components/Modal.Recap.svelte";
   import Pregame from "$components/Modal.Pregame.svelte";
+  import PregameWOD from "$components/Modal.PregameWOD.svelte";
   import Feedback from "$components/Modal.Feedback.svelte";
 
   const buttonOptions = {
@@ -27,7 +28,11 @@
 </script>
 
 {#if $gameState === "pre"}
-  <Pregame />
+  {#if $wod}
+    <PregameWOD />
+  {:else}
+    <Pregame />
+  {/if}
 {/if}
 {#if $gameState !== "pre"}
   <Recap />

@@ -2,7 +2,7 @@
   import { overlay } from "$stores/misc.js";
 
   const close = () => {
-    $overlay = null;
+    $overlay = undefined;
   };
 </script>
 

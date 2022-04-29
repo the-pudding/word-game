@@ -1,7 +1,10 @@
 <script>
-  import { totalScore, round, ROUNDS } from "$stores/misc.js";
+  import { ROUNDS, totalScore, round, wod } from "$stores/misc.js";
 </script>
 
-<p>Round {$round + 1} / {ROUNDS}</p>
+<p>Round {$round + 1} of {ROUNDS}</p>
 <p>You: {$totalScore.user}</p>
-<p>Michelle: {$totalScore.opponent}</p>
+
+{#if !$wod}
+  <p>Michelle: {$totalScore.opponent}</p>
+{/if}

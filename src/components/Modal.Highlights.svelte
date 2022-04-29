@@ -1,6 +1,6 @@
 <script>
   import { format, shuffle } from "d3";
-  import { possibleAnswers, guesses, round, lemmasPlayed } from "$stores/misc.js";
+  import { possibleAnswers, guesses, round, lemmasPlayed, wod } from "$stores/misc.js";
 
   $: count = format(",")($possibleAnswers.length);
   $: opponentWords = $guesses.opponent[$round].filter((d) => d.valid && !d.guessedByUserLate);
@@ -11,6 +11,7 @@
     .slice(0, 5)
     .map((d) => `<span>${d.word}</span>`)
     .join(", ");
+  $: commonText = $wod ? "you didn't get" : "neither of you got";
 </script>
 
 <p>There were <strong>{count}</strong> possible words that satisfied the clue.</p>
@@ -30,7 +31,7 @@
 {/if}
 
 <p>
-  Here are some common words that neither of you got: {@html spanWords}.
+  Here are some common words that {commonText}: {@html spanWords}.
 </p>
 
 <style>

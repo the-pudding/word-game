@@ -1,5 +1,5 @@
 <script>
-  import { totalScore } from "$stores/misc.js";
+  import { totalScore, wod } from "$stores/misc.js";
 </script>
 
 <div>
@@ -8,8 +8,10 @@
     <span class="score">{$totalScore.user}</span>
   </p>
   <p>
-    <span class="name">Michelle</span>
-    <span class="score">{$totalScore.opponent}</span>
+    {#if !$wod}
+      <span class="name">Michelle</span>
+      <span class="score">{$totalScore.opponent}</span>
+    {/if}
   </p>
 </div>
 
