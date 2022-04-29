@@ -10,7 +10,7 @@
   <div>
     <h3>How to Play</h3>
     <ul>
-      <li><strong>Goal:</strong> score more points than The Opponent Of The Day (TOOTD).</li>
+      <li><strong>Goal:</strong> score more points than the Word Opponent of the Day (WOD).</li>
       <li><strong>Duration:</strong> Four one-minute rounds.</li>
       <li>
         <strong>Gameplay:</strong> Enter as many words as possible that satisfy a clue.
@@ -20,8 +20,8 @@
             . Answers: <em>apple</em>, <em>awesome</em>, <em>activate</em>, etc.
           </li>
           <li>
-            <strong>Blocking!</strong> Whoever gets a word first gets points. If TOOTD entered the word
-            before you, you get no points. If you enter a word before TOOTD, she gets no points.
+            <strong>Blocking!</strong> Whoever gets a word first gets points. If the WOD entered the
+            word before you, you get no points. If you enter a word before the WOD, she gets no points.
           </li>
           <li>
             <strong>The more obscure the better!</strong> You get more points for less commonly used

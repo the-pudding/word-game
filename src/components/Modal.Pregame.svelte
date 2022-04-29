@@ -9,7 +9,7 @@
 </p>
 
 <p>
-  Do you want to be the <strong>Opponent Of The Day?</strong> Sign up here to be in the running.
+  Do you want to be the <strong>Word Opponent of the Day?</strong> Sign up here to be in the running.
 </p>
 <button>BIG SIGNUP BUTTON</button>
 <p>
