@@ -16,14 +16,14 @@
 
 <p>There were <strong>{count}</strong> possible words that satisfied the clue.</p>
 {#if opponentWords.length}
-  <p>Here are the words that Michelle got that you didn't:</p>
+  <p>Here are some words that Michelle got that you didn't:</p>
   <table>
     <thead>
       <th>Word</th>
       <th>Points</th>
     </thead>
     <tbody
-      >{#each opponentWords as { text, points }}
+      >{#each opponentWords.slice(0, 7) as { text, points }}
         <tr><td>{text}</td> <td>{points}</td></tr>
       {/each}
     </tbody>
