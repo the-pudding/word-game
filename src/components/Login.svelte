@@ -1,0 +1,64 @@
+<script>
+  import { wodId } from "$stores/misc.js";
+  import { signin } from "$utils/supabase.js";
+
+  export let authorized;
+
+  let email;
+  let password;
+  let error;
+
+  const onSubmit = async () => {
+    try {
+      authorized = await signin({ email, password });
+    } catch (err) {
+      error = "invalid login";
+    }
+  };
+</script>
+
+<section>
+  {#if $wodId}
+    <form on:submit|preventDefault={onSubmit}>
+      <div>
+        <label for="email">email</label>
+        <input bind:value={email} id="email" placeholder="email" />
+      </div>
+      <div>
+        <label for="password">password</label>
+        <input bind:value={password} id="password" placeholder="password" type="password" />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+
+    {#if error}
+      <p class="error">{error}</p>
+    {/if}
+  {:else}
+    <p>No game id in URL, please contact admins</p>
+  {/if}
+</section>
+
+<style>
+  section {
+    padding: 1rem;
+  }
+
+  div {
+    margin-bottom: 1rem;
+  }
+
+  label,
+  input {
+    display: block;
+  }
+
+  input {
+    padding: 0.5rem;
+  }
+
+  .error {
+    padding: 1rem;
+    background: pink;
+  }
+</style>

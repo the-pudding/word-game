@@ -3,6 +3,7 @@
   import { page } from "$app/stores";
   import Meta from "$components/Meta.svelte";
   import App from "$components/App.svelte";
+  import Login from "$components/Login.svelte";
   import { wod, wodId } from "$stores/misc.js";
   if (browser) console.log("svelte-starter version", __VERSION__);
 
@@ -11,9 +12,15 @@
     const [_, id] = $page.url.search.split("id=");
     $wodId = id;
   }
+
+  let authorized;
 </script>
 
 <Meta />
 {#if browser}
-  <App />
+  {#if authorized}
+    <App />
+  {:else}
+    <Login bind:authorized />
+  {/if}
 {/if}
