@@ -92,6 +92,7 @@ export const update = async ({ table, column, value, id }) => {
 }
 
 export const upsert = async ({ table, data }) => {
+	// TODO didn't work
 	const response = await supabase.from(table).upsert(data);
 	if (response.error) {
 		console.log(response.error);
