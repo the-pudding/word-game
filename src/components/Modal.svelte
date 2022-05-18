@@ -1,10 +1,11 @@
 <script>
-  import { active, round, roundScore, gameState, totalScore, wod } from "$stores/misc.js";
+  import { active, round, roundScore, gameState, totalScore, wod, wodId } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Recap from "$components/Modal.Recap.svelte";
   import Pregame from "$components/Modal.Pregame.svelte";
   import PregameWOD from "$components/Modal.PregameWOD.svelte";
   import Feedback from "$components/Modal.Feedback.svelte";
+  import { update } from "$utils/supabase.js";
 
   const buttonOptions = {
     pre: "Begin game",
@@ -12,8 +13,10 @@
   };
 
   let showCountdown = false;
+  let wodReady;
 
   const onBegin = () => {
+    if ($wod) update({ table: "games", column: "wod_started", value: true, id: $wodId });
     showCountdown = true;
   };
 
@@ -28,7 +31,7 @@
 
 {#if $gameState === "pre"}
   {#if $wod}
-    <PregameWOD />
+    <PregameWOD bind:wodReady />
   {:else}
     <Pregame />
   {/if}
@@ -42,7 +45,9 @@
 
 <!-- button to start round -->
 {#if buttonText}
-  <p><button on:click={onBegin}>{buttonText}</button></p>
+  {#if !$wod || ($wod && wodReady)}
+    <p><button on:click={onBegin}>{buttonText}</button></p>
+  {/if}
 {/if}
 
 <!-- countdown timer -->

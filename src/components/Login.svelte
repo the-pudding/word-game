@@ -1,6 +1,6 @@
 <script>
   import { wodId } from "$stores/misc.js";
-  import { signin } from "$utils/supabase.js";
+  import { signIn, getWodStarted } from "$utils/supabase.js";
 
   export let authorized;
 
@@ -10,7 +10,11 @@
 
   const onSubmit = async () => {
     try {
-      authorized = await signin({ email, password });
+      const loggedIn = await signIn({ email, password });
+      const hasStarted = await getWodStarted($wodId);
+      authorized = loggedIn && !hasStarted;
+      // TODO real contact info
+      if (hasStarted) error = "You already started playing, please contact admins.";
     } catch (err) {
       error = "invalid login";
     }
@@ -35,6 +39,7 @@
       <p class="error">{error}</p>
     {/if}
   {:else}
+    <!-- TODO real contact info -->
     <p>No game id in URL, please contact admins</p>
   {/if}
 </section>

@@ -1,24 +1,62 @@
 <script>
-  import { overlay } from "$stores/misc.js";
+  import { onMount } from "svelte";
+  import { overlay, wodId } from "$stores/misc.js";
+  import { getQuestions, upsert } from "$utils/supabase.js";
+
+  export let wodReady;
+
+  let questions = [];
+  let error;
+
+  const onSubmit = async () => {
+    try {
+      const data = questions.map((d) => ({ game_id: $wodId, question_id: d.id, answer: d.answer }));
+      await upsert({ table: "wod_info", data });
+      wodReady = true;
+    } catch (err) {
+      // TODO visual message
+      console.log(err);
+    }
+  };
+
+  onMount(async () => {
+    try {
+      questions = await getQuestions($wodId);
+    } catch (err) {
+      error = true;
+    }
+  });
 </script>
 
 <h2>Welcome, WOD!</h2>
 <p>Let's play a word game!</p>
 
-<p>Tell us about yourself:</p>
-<form>
-  <input placeholder="email" />
-  <input placeholder="name" />
-  <label>Emoji when you are sad?</label>
-  <input placeholder="emoji here" />
-</form>
-<p>
-  <button
-    on:click={() => {
-      $overlay = "rules";
-    }}>How to Play</button
-  >
-</p>
+{#if !wodReady}
+  <p>Tell us about yourself:</p>
+
+  {#if error}
+    <p>Error</p>
+  {:else}
+    <form on:submit|preventDefault={onSubmit}>
+      {#each questions as { id, question, category }, i}
+        {@const required = category === "standard"}
+        <div>
+          <label for="question-{id}">{question}</label>
+          <input {required} bind:value={questions[i].answer} id="question-{id}" placeholder="" />
+        </div>
+      {/each}
+      <button type="submit">Submit</button>
+    </form>
+  {/if}
+{:else}
+  <p>
+    <button
+      on:click={() => {
+        $overlay = "rules";
+      }}>How to Play</button
+    >
+  </p>
+{/if}
 
 <style>
   h2 {
