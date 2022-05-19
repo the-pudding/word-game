@@ -16,7 +16,8 @@
       // TODO real contact info
       if (hasStarted) error = "You already started playing, please contact admins.";
     } catch (err) {
-      error = "invalid login";
+      console.log(err);
+      error = err;
     }
   };
 </script>

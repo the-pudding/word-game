@@ -14,7 +14,7 @@ const getQuestionText = async (questionIds) => {
 
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error getting question text");
+		throw new Error("getQuestionText failed");
 	}
 	else if (response.data) return response.data;
 };
@@ -27,17 +27,17 @@ export const signIn = async ({ email, password }) => {
 	});
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error signing into supabase");
+		throw new Error("signIn failed");
 	}
 	else if (response.user) return true;
-	else throw new Error("error signing into supabase");
+	else throw new Error("no user found");
 };
 
 export const signOut = async () => {
 	const response = await supabase.auth.signOut();
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error signing out of supabase");
+		throw new Error("signOut failed");
 	}
 	else return true;
 };
@@ -50,8 +50,8 @@ export const getQuestions = async (gameId) => {
 
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error getting from supabase");
-	} else if (response.data) {
+		throw new Error("getQuestions failed");
+	} else if (response.data.length) {
 		try {
 			const questionIds = response.data[0].question_ids.split("|").map(d => +d);
 			const questions = await getQuestionText(questionIds);
@@ -60,7 +60,7 @@ export const getQuestions = async (gameId) => {
 			return err;
 		}
 	}
-	throw new Error("silent error getting questions from supabase");
+	throw new Error("no questions matching that game id");
 }
 
 export const getWodStarted = async (gameId) => {
@@ -71,10 +71,10 @@ export const getWodStarted = async (gameId) => {
 
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error getting game from supabase");
+		throw new Error("getWodStarted failed");
 	}
-	else if (response.data) return response.data[0].wod_started;
-	else throw new Error("error getting game from supabase");
+	else if (response.data.length) return response.data[0].wod_started;
+	else throw new Error("no games matching this id");
 };
 
 export const update = async ({ table, column, value, id }) => {
@@ -85,18 +85,28 @@ export const update = async ({ table, column, value, id }) => {
 
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error updating game row in supabase");
+		throw new Error("update failed");
 	}
 	else if (response.data) return response.data;
 	return undefined;
 }
+
+export const insert = async ({ table, data }) => {
+	const response = await supabase.from(table).insert(data);
+	if (response.error) {
+		console.log(response.error);
+		throw new Error("insert failed");
+	}
+	else if (response.data) return response.data;
+	return undefined;
+};
 
 export const upsert = async ({ table, data }) => {
 	// TODO didn't work
 	const response = await supabase.from(table).upsert(data);
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("error inserting into supabase");
+		throw new Error("upsert failed");
 	}
 	else if (response.data) return response.data;
 	return undefined;

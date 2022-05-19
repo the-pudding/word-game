@@ -1,32 +1,38 @@
 <script>
+  import { onMount } from "svelte";
   import Guesses from "$components/Play.Guesses.svelte";
   import Input from "$components/Play.Input.svelte";
   import Clock from "$components/Play.Clock.svelte";
   import Clue from "$components/Play.Clue.svelte";
   import Score from "$components/Play.Score.svelte";
   import Invalid from "$components/Play.Invalid.svelte";
-  import { guesses, lemmasPlayed, round, possibleAnswers } from "$stores/misc.js";
+  import { guesses, lemmasPlayed, round, possibleAnswers, wodId } from "$stores/misc.js";
   import lemmaExists from "$utils/lemmaExists.js";
+
   import { elapsed } from "$stores/timer.js";
-  import testData1 from "$data/testdata-f.csv";
+
+  // import testData1 from "$data/testdata-f.csv";
   // import testData2 from "$data/testdata-7.csv";
   // import testData3 from "$data/testdata-th.csv";
   // import testData4 from "$data/testdata-same.csv";
 
-  const allData = [testData1, testData1, testData1, testData1];
+  // const answers = [testData1, testData1, testData1, testData1];
 
-  const clues = [
-    "are nouns that start with <strong>F</strong>",
-    "are nouns that start with <strong>F</strong>",
-    "are nouns that start with <strong>F</strong>",
-    "are nouns that start with <strong>F</strong>"
-  ];
+  // const clues = [
+  //   "are nouns that start with <strong>F</strong>",
+  //   "are nouns that start with <strong>F</strong>",
+  //   "are nouns that start with <strong>F</strong>",
+  //   "are nouns that start with <strong>F</strong>"
+  // ];
   // 	 "have 7 letters",
   //   "that contain <strong>TH</strong>",
   //   "that start and end with the same letter"
 
+  export let clues;
+  export let answers;
+
   $: currentClue = clues[$round];
-  $: roundData = allData[$round];
+  $: roundData = answers[$round];
   $: $possibleAnswers = roundData;
 
   $: validWords = roundData.map((d) => d.word);

@@ -4,7 +4,7 @@
   import { active } from "$stores/misc.js";
 
   const MS = 1000;
-  const target = 60 * MS;
+  const target = 10 * MS;
 
   $: update($active);
   $: secondsLeft = Math.floor((target - $elapsed) / MS);

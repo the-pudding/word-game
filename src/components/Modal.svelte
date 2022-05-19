@@ -4,16 +4,19 @@
   import Recap from "$components/Modal.Recap.svelte";
   import Pregame from "$components/Modal.Pregame.svelte";
   import PregameWOD from "$components/Modal.PregameWOD.svelte";
+  import PostgameWOD from "$components/Modal.PostgameWOD.svelte";
   import Feedback from "$components/Modal.Feedback.svelte";
   import { update } from "$utils/supabase.js";
+
+  export let loaded;
+
+  let showCountdown = false;
+  let wodReady;
 
   const buttonOptions = {
     pre: "Begin game",
     mid: "Next round"
   };
-
-  let showCountdown = false;
-  let wodReady;
 
   const onBegin = () => {
     if ($wod) update({ table: "games", column: "wod_started", value: true, id: $wodId });
@@ -40,13 +43,24 @@
   <Recap />
 {/if}
 {#if $gameState === "post"}
-  <Feedback />
+  {#if $wod}
+    <PostgameWOD />
+  {:else}
+    <!-- <Postgame /> -->
+    <Feedback />
+  {/if}
 {/if}
 
 <!-- button to start round -->
 {#if buttonText}
   {#if !$wod || ($wod && wodReady)}
-    <p><button on:click={onBegin}>{buttonText}</button></p>
+    <p>
+      {#if loaded}
+        <button on:click={onBegin}>{buttonText}</button>
+      {:else}
+        <span>loading...</span>
+      {/if}
+    </p>
   {/if}
 {/if}
 
