@@ -16,15 +16,16 @@
         .filter((d) => d.valid)
         .map((d) => ({
           game_id: $wodId,
+          round: d.round,
           text: d.text,
           timestamp: d.timestamp,
           points: d.points,
           lemmas: d.lemmas
         }));
-      const response = await insert({ table: "wod_answers", data });
+      const response = await insert({ table: "wordgame_wod-answers", data });
       if (response.length) {
         success = true;
-        await update({ table: "games", column: "wod_finished", value: true, id: $wodId });
+        await update({ table: "wordgame_games", column: "wod_finished", value: true, id: $wodId });
       } else {
         success = false;
       }

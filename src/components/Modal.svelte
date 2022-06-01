@@ -19,7 +19,7 @@
   };
 
   const onBegin = () => {
-    if ($wod) update({ table: "games", column: "wod_started", value: true, id: $wodId });
+    if ($wod) update({ table: "wordgame_games", column: "wod_started", value: true, id: $wodId });
     showCountdown = true;
   };
 
@@ -30,6 +30,8 @@
   };
 
   $: buttonText = buttonOptions[$gameState];
+  $: hideButton = $wod && $gameState === "pre" && !wodReady;
+  $: showButton = buttonText && (!$wod || !hideButton);
 </script>
 
 {#if $gameState === "pre"}
@@ -52,16 +54,14 @@
 {/if}
 
 <!-- button to start round -->
-{#if buttonText}
-  {#if !$wod || ($wod && wodReady)}
-    <p>
-      {#if loaded}
-        <button on:click={onBegin}>{buttonText}</button>
-      {:else}
-        <span>loading...</span>
-      {/if}
-    </p>
-  {/if}
+{#if showButton}
+  <p>
+    {#if loaded}
+      <button on:click={onBegin}>{buttonText}</button>
+    {:else}
+      <span>loading...</span>
+    {/if}
+  </p>
 {/if}
 
 <!-- countdown timer -->

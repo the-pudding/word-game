@@ -9,10 +9,12 @@
   let error;
 
   const onSubmit = async () => {
+    console.log("submit");
     try {
       const data = questions.map((d) => ({ game_id: $wodId, question_id: d.id, answer: d.answer }));
-      await upsert({ table: "wod_info", data });
+      await upsert({ table: "wordgame_wod-info", data });
       wodReady = true;
+      console.log({ wodReady });
     } catch (err) {
       // TODO visual message
       console.log(err);
@@ -20,12 +22,15 @@
   };
 
   onMount(async () => {
+    console.log("mount");
     try {
       questions = await getQuestions($wodId);
     } catch (err) {
       error = true;
     }
   });
+
+  $: console.log({ wodReady });
 </script>
 
 <h2>Welcome, WOD!</h2>

@@ -19,7 +19,7 @@
     // todaysgame.csv - game id
     // TODO dynamic choose from csv or wodId
     // const id = $wodId;
-    const id = "1ad8fe95-2087-483a-be9a-bb815fe699ea";
+    const id = "51038086-481e-4379-a69d-10a994dbb6c6";
     const clueData = await loadClues(id);
     clues = clueData.map((d) => d.clue);
     answers = await loadAnswers(clueData.map((d) => d.clueId));

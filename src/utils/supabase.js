@@ -8,7 +8,7 @@ const supabase = createClient(supabaseUrl, supabaseAnonKey);
 // private
 const getQuestionText = async (questionIds) => {
 	const response = await supabase
-		.from("wod_questions")
+		.from("wordgame_wod-questions")
 		.select("question,id,category")
 		.in("id", questionIds)
 
@@ -44,7 +44,7 @@ export const signOut = async () => {
 
 export const getQuestions = async (gameId) => {
 	const response = await supabase
-		.from("games")
+		.from("wordgame_games")
 		.select("question_ids")
 		.eq("id", gameId);
 
@@ -65,7 +65,7 @@ export const getQuestions = async (gameId) => {
 
 export const getWodStarted = async (gameId) => {
 	const response = await supabase
-		.from("games")
+		.from("wordgame_games")
 		.select("wod_started")
 		.eq("id", gameId);
 
