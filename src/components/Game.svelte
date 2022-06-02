@@ -6,6 +6,7 @@
   import { gameState, active, wod, wodId } from "$stores/misc.js";
   import loadClues from "$utils/loadClues.js";
   import loadAnswers from "$utils/loadAnswers.js";
+  import loadCsv from "$utils/loadCsv.js";
 
   $: playVisible = $gameState === "mid" && $active;
   $: modalVisible = !$active || ["pre", "post"].includes($gameState);
@@ -14,16 +15,29 @@
   let answers;
   let loaded;
 
+  const getId = async () => {
+    console.log($wod);
+    if ($wod) return $wodId;
+
+    const timestamp = Date.now();
+    const url = `https://pudding.cool/projects/word-game-data/games.csv?version=${timestamp}`;
+    const raw = await loadCsv(url);
+    const data = raw.map((d) => ({
+      ...d,
+      live: d.live === "true"
+    }));
+    console.log(data);
+    const { id } = data.find((d) => d.live);
+    return id;
+  };
+
   onMount(async () => {
-    // choose game id
-    // todaysgame.csv - game id
-    // TODO dynamic choose from csv or wodId
-    // const id = $wodId;
-    const id = "51038086-481e-4379-a69d-10a994dbb6c6";
+    // TODO handle errors of no clues
+    const id = await getId();
+    console.log(id);
     const clueData = await loadClues(id);
     clues = clueData.map((d) => d.clue);
     answers = await loadAnswers(clueData.map((d) => d.clueId));
-    console.log({ answers });
     loaded = true;
   });
 </script>
