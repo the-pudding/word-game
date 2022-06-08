@@ -1,15 +1,15 @@
 <script>
-  import opponentData from "$data/opponent.csv";
+  import { onMount } from "svelte";
   import { elapsed } from "$stores/timer.js";
-  import { round, guesses, lemmasPlayed } from "$stores/misc.js";
+  import { gameId, round, guesses, lemmasPlayed } from "$stores/misc.js";
   import lemmaExists from "$utils/lemmaExists.js";
+  import loadWodAnswers from "$utils/loadWodAnswers.js";
 
-  const data = opponentData.map((d) => ({
-    ...d,
-    round: +d.round,
-    timestamp: +d.timestamp,
-    points: +d.points
-  }));
+  let data = [];
+
+  const loadData = async () => {
+    data = await loadWodAnswers($gameId);
+  };
 
   $: check($elapsed);
 
@@ -32,4 +32,8 @@
       $guesses.opponent[$round] = [...$guesses.opponent[$round], guess];
     }
   };
+
+  onMount(async () => {
+    data = await loadWodAnswers($gameId);
+  });
 </script>

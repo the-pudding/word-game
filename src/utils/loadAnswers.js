@@ -3,7 +3,7 @@ import loadCSV from '$utils/loadCsv.js';
 export default async function loadAnswers(clueIds) {
 	const output = [];
 	for (let id of clueIds) {
-		const url = `https://pudding.cool/projects/word-game-data/clue-answers/${id}.csv`;
+		const url = `https://pudding.cool/projects/word-game-data/clue-answers/${id}.csv?version=${Date.now()}`;
 		const raw = await loadCSV(url);
 		const data = raw.map(d => ({
 			...d,
