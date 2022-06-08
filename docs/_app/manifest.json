@@ -1,6 +1,6 @@
 {
   ".svelte-kit/runtime/client/start.js": {
-    "file": "start-bd990fd0.js",
+    "file": "start-7fdeaf4c.js",
     "src": ".svelte-kit/runtime/client/start.js",
     "isEntry": true,
     "imports": [
@@ -36,24 +36,24 @@
     ]
   },
   "src/routes/index.svelte": {
-    "file": "pages/index.svelte-b9c3f088.js",
+    "file": "pages/index.svelte-a15d6902.js",
     "src": "src/routes/index.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-5fe9b45c.js",
-      "_App-51f3f66d.js",
+      "_App-1ebecc0d.js",
       "_index-0e2bbb5e.js"
     ]
   },
   "src/routes/wod.svelte": {
-    "file": "pages/wod.svelte-547e0a88.js",
+    "file": "pages/wod.svelte-193ceb57.js",
     "src": "src/routes/wod.svelte",
     "isEntry": true,
     "isDynamicEntry": true,
     "imports": [
       "_index-5fe9b45c.js",
-      "_App-51f3f66d.js",
+      "_App-1ebecc0d.js",
       "_index-0e2bbb5e.js"
     ],
     "css": [
@@ -69,8 +69,8 @@
       "_index-5fe9b45c.js"
     ]
   },
-  "_App-51f3f66d.js": {
-    "file": "chunks/App-51f3f66d.js",
+  "_App-1ebecc0d.js": {
+    "file": "chunks/App-1ebecc0d.js",
     "imports": [
       "_index-5fe9b45c.js",
       "_index-0e2bbb5e.js"
