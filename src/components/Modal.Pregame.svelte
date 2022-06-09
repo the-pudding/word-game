@@ -1,13 +1,28 @@
 <script>
-  import { overlay } from "$stores/misc.js";
+  import { onMount } from "svelte";
+  import { overlay, gameId } from "$stores/misc.js";
+  import loadWodInfo from "$utils/loadWodInfo.js";
+
+  let name;
+  let location;
+
+  const load = async () => {
+    const data = await loadWodInfo($gameId);
+    const nameQ = "what is your name?";
+    const locationQ = "where do you live?";
+
+    name = data.find((d) => d.question === nameQ).answer;
+    location = data.find((d) => d.question === locationQ).answer;
+  };
+
+  $: if ($gameId) load();
 </script>
 
 <h2>Welcome to the Word Game</h2>
 <p>One person a day gets the chance to play against the world in a game of words.</p>
 
-<p>
-  Today that person is <strong>Michelle from Oakland, CA</strong>. She <em>really</em> likes boba. Can
-  you beat her?
+<p class="custom" class:visible={$gameId}>
+  Today that person is <strong>{name} from {location}</strong>. Can you beat them?
 </p>
 
 <p>
@@ -29,5 +44,13 @@
     text-align: center;
     max-width: 23em;
     margin: 1rem auto;
+  }
+
+  .custom {
+    visibility: hidden;
+  }
+
+  .visible {
+    visibility: visible;
   }
 </style>
