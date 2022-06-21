@@ -16,27 +16,28 @@
 	--z-overlay: 1000;
 
 	/* presets (used in reset.css) */
-	--border-radius: 2px;
+	--border-radius: 3px;
 	--font-body: var(--sans);
 	--font-form: var(--sans);
-	--color-bg: var(--color-white);
-	--color-fg: var(--color-gray-900);
-	--color-primary: var(--color-black);
-  --color-link: var(--color-black);
+	--color-bg: var(--color-tan);
+	--color-fg: var(--color-gray-1000);
+	--color-user: var(--color-yellow);
+	--color-wod: var(--color-blue);
+  --color-link: var(--color-red);
   --color-focus: var(--color-red);
-  --color-mark: var(--color-yellow);
+  --color-mark: var(--color-red);
 	--color-selection: var(--color-gray-300);
 	--color-border: var(--color-gray-300);
-	--color-button-bg: var(--color-gray-300);
-	--color-button-fg: var(--color-gray-900);
-	--color-button-hover: var(--color-gray-400);
-	--color-input-bg: var(--color-gray-50);
-	--color-input-fg: var(--color-gray-900);
+	--color-button-bg: var(--color-gray-1000);
+	--color-button-fg: var(--color-white);
+	--color-button-hover: var(--color-gray-800);
+	--color-input-bg: var(--color-gray-100);
+	--color-input-fg: var(--color-gray-1000);
 	--color-placeholder: var(--color-gray-500);
 }
 
 /* dark theme */
-@media screen and (prefers-color-scheme:dark) {
+/* @media screen and (prefers-color-scheme:dark) {
 	:root {
 		--color-bg: var(--color-gray-900);
 		--color-fg: var(--color-gray-100);
@@ -54,7 +55,7 @@
 		--color-placeholder: var(--color-gray-400);
 		--color-text-outline: var(--color-bg);
 	}
-}
+} */
 
 h1 {
 	font-size: var(--48px, 48px);
