@@ -1,5 +1,8 @@
 <script>
   import { overlay } from "$stores/misc.js";
+  import { getContext } from "svelte";
+
+  const { byline, source } = getContext("copy");
 
   const close = () => {
     $overlay = undefined;
@@ -10,12 +13,10 @@
   <div>
     <h3>About</h3>
     <p>
-      Created by <a href="https://pudding.cool/author/russell-goldenberg" target="_blank"
-        >Russell Goldenberg</a
-      >
-      and <a href="https://pudding.cool/author/michelle-mcghee" target="_blank">Michelle McGhee</a>.
-      Designed with
-      <a href="https://pudding.cool/author/shannon-lin" target="_blank">Shannon Lin</a>.
+      {@html byline}
+    </p>
+    <p>
+      {@html source}
     </p>
     <p><button on:click={close}>CLOSE</button></p>
   </div>
