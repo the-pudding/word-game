@@ -18,9 +18,9 @@
     ]
   };
 
-  $: userLead = $totalScore.user > $totalScore.opponent;
-  $: opponentLead = $totalScore.user < $totalScore.opponent;
-  $: tied = $totalScore.user === $totalScore.opponent;
+  $: userLead = $totalScore.user > $totalScore.wod;
+  $: wodLead = $totalScore.user < $totalScore.wod;
+  $: tied = $totalScore.user === $totalScore.wod;
 
   const getPostTitle = () => {
     const a = tied ? "Tie!" : userLead ? "You win!" : "You lose!";
@@ -54,7 +54,7 @@
   {#if $gameState === "post" && !$wod}
     {#if userLead}
       <p>You win!</p>
-    {:else if opponentLead}
+    {:else if wodLead}
       <p>You lose!</p>
     {:else}
       <p>Tie!</p>

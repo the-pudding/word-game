@@ -29,7 +29,7 @@
     if (guessIndex > -1) {
       const [newGuess] = data.splice(guessIndex, 1);
       const guess = { ...newGuess, ...validate(newGuess) };
-      $guesses.opponent[$round] = [...$guesses.opponent[$round], guess];
+      $guesses.wod[$round] = [...$guesses.wod[$round], guess];
     }
   };
 

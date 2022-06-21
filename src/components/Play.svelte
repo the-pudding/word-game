@@ -84,11 +84,11 @@
     return +points;
   };
 
-  const checkRevealOpponent = (lemmas) => {
-    $guesses.opponent[$round].forEach((guess) => {
+  const checkRevealWod = (lemmas) => {
+    $guesses.wod[$round].forEach((guess) => {
       const corpus = guess.lemmas.split("|");
       const exists = lemmaExists({ lemmas, corpus });
-      if (exists) guess.revealOpponent = true;
+      if (exists) guess.revealWod = true;
     });
   };
 
@@ -100,7 +100,7 @@
     const points = valid ? getPoints({ text, timestamp }) : undefined;
     const guess = { text, lemmas, points, timestamp, round: $round, valid, reason };
     $guesses.user[$round] = [...$guesses.user[$round], guess];
-    checkRevealOpponent(lemmas);
+    checkRevealWod(lemmas);
   };
 </script>
 

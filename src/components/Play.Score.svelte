@@ -10,7 +10,7 @@
   {#if !$wod}
     <p>
       <span class="name">Michelle</span>
-      <span class="score">{$totalScore.opponent}</span>
+      <span class="score">{$totalScore.wod}</span>
     </p>
   {/if}
 </div>

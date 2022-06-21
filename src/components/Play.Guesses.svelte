@@ -5,13 +5,13 @@
   const displayFilter = (d) => d.reason === undefined || d.reason === takenCode;
 
   $: userGuesses = $guesses.user[$round].filter(displayFilter);
-  $: opponentGuesses = $guesses.opponent[$round].filter(displayFilter);
+  $: wodGuesses = $guesses.wod[$round].filter(displayFilter);
 </script>
 
 <div>
   <List guesses={userGuesses} />
   {#if !$wod}
-    <List guesses={opponentGuesses} opponent={true} />
+    <List guesses={wodGuesses} wod={true} />
   {/if}
 </div>
 

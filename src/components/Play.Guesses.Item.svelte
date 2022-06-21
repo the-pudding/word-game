@@ -2,10 +2,10 @@
   import { tweened } from "svelte/motion";
   import { fade } from "svelte/transition";
 
-  export let opponent;
+  export let wod;
   export let valid;
   export let text;
-  export let revealOpponent;
+  export let revealWod;
   export let points;
 
   const timer = tweened(0, { duration: 1000 });
@@ -16,7 +16,7 @@
   });
 
   $: renderText =
-    opponent && valid && !revealOpponent
+    wod && valid && !revealWod
       ? text
           .split("")
           .map(() => "▉")
@@ -25,7 +25,7 @@
 
   $: invalid = !valid;
   $: displayPoints = invalid || !points ? "" : `+${points}`;
-  $: visible = timerVisible && (!opponent || !revealOpponent);
+  $: visible = timerVisible && (!wod || !revealWod);
 </script>
 
 <li class:invalid>

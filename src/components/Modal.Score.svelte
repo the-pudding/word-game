@@ -6,5 +6,5 @@
 <p>{$wod ? "Your score" : "You"}: {$totalScore.user}</p>
 
 {#if !$wod}
-  <p>Michelle: {$totalScore.opponent}</p>
+  <p>Michelle: {$totalScore.wod}</p>
 {/if}

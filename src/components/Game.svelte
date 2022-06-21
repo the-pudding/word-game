@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import OpponentBot from "$components/OpponentBot.svelte";
+  import WodBot from "$components/WodBot.svelte";
   import Play from "$components/Play.svelte";
   import Modal from "$components/Modal.svelte";
   import { gameId, gameState, active, wod, wodId } from "$stores/misc.js";
@@ -37,7 +37,7 @@
 </script>
 
 {#if $gameId}
-  <OpponentBot />
+  <WodBot />
 {/if}
 
 {#if playVisible}
@@ -61,13 +61,5 @@
     width: 100%;
     height: 100vh;
     padding: 4rem 1rem 1rem 1rem;
-  }
-
-  #play {
-    /* background: lightgoldenrodyellow; */
-  }
-
-  #modal {
-    /* background: lightsteelblue; */
   }
 </style>

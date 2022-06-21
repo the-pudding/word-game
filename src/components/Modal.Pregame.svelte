@@ -18,7 +18,7 @@
   $: if ($gameId) load();
 </script>
 
-<h2>Welcome to the Word Game</h2>
+<h2>Welcome to <strong>Not Wordle!</strong></h2>
 <p>One person a day gets the chance to play against the world in a game of words.</p>
 
 <p class="custom" class:visible={$gameId}>

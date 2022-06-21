@@ -54,9 +54,7 @@ If you are hosting the project on a subdirectory, set it in `package.json`.
 For example, if you are deploying to `https://domain.com/2021/01/test`:
 
 ```json
-"subdirectory": {
-  "path": "/2021/01/test"
-}
+"subdirectory": "/2021/01/test"
 ```
 
 ## Style
@@ -66,6 +64,10 @@ There are a few stylesheets included by default in `src/styles`. Refer to them i
 For variable parity in both CSS and JS, modify files in the `properties` folder using the [Style Dictionary](https://amzn.github.io/style-dictionary/) API.
 
 Run `npm run style` to regenerate the style dictionary.
+
+#### Some css utility classes in reset.css
+* `.sr-only`: makes content invisible available for screen reader
+* `.text-outline`: adds a psuedo stroke to text element
 
 ### Fonts ⚠️
 SvelteKit still hasn't resolved an issue with fonts with subdirectory-hosted projects. The simplest solution right now is to point to an absolute hosted font. If you need it to be local/relative to the project, ask Russell.
@@ -93,7 +95,7 @@ import Example from "$components/Example.svelte";
 ```
 
 * `Footer.svelte`: Pudding recirculation and social links.
-* `Header.svelte`: Pudding logo.
+* `Header.svelte`: Pudding masthead.
 
 ### Helper Components
 
@@ -104,15 +106,24 @@ Located in `src/lib/components/helpers`.
 import Example from "$components/helpers/Example.svelte";
 ```
 
-* `ButtonSet.svelte`: Accessible button group inputs
-* `Icon.svelte`: Simple integration with Feather Icons
-* `Range.svelte`: Customizable range slider
-* `Scrolly.svelte`: Scrollytelling
-* `SortTable.svelte`: Sortable semantic table with customizable props
-* `Slider.svelte (and Slider.Slide.svelte)`: A slider widget, especially useful for swipe/slide stories
-* `Tap.svelte`: Edge-of-screen tapping library, designed to integrate with slider
-* `Toggle.svelte`: Accessible toggle inputs
-* `WIP.svelte`: A sticky banner saying this project is a WIP
+* `ButtonSet.svelte`: Accessible button group inputs.
+* `Icon.svelte`: Simple integration with Feather Icons.
+* `Range.svelte`: Customizable range slider.
+* `Scrolly.svelte`: Scrollytelling.
+* `SortTable.svelte`: Sortable semantic table with customizable props.
+* `Slider.svelte (and Slider.Slide.svelte)`: A slider widget, especially useful for swipe/slide stories.
+* `Tap.svelte`: Edge-of-screen tapping library, designed to integrate with slider.
+* `Toggle.svelte`: Accessible toggle inputs.
+* `WIP.svelte`: A sticky banner saying this project is a WIP.
+
+### Chart Components
+
+Starter templates for various chart types to be used with [LayerCake](https://layercake.graphics/). Located in `src/lib/components/charts`.
+
+```js
+// Usage
+import Example from "$components/charts/Example.svelte";
+```
 
 ### Actions
 
@@ -125,6 +136,7 @@ import example from "$actions/action.js";
 
 * `focusTrap.js`: Enable a keyboard focus trap for modals and menus.
 * `inView.js`: detect when an element enters or exits the viewport.
+* `canTab.js`: enable/disable tabbing on child elements.
 
 ### Stores
 
@@ -138,7 +150,7 @@ import { example } from "$stores/misc.js";
 
 * `mq`: returns an object of media queries booleans if they are enabled or not. You can modify them in the js file.
 * `viewport`: returns an object `{ width, height }` of the viewport dimensions. It is debounced for performance.
-* `scrollY`: returns an number window vertical scroll position. It is throttled using rAF for performance.
+* `scrollY`: returns a number of window vertical scroll position. It is throttled using rAF for performance.
 * `timer`: returns an object { timer, elapsed }. `timer` has 5 methods (start, stop, toggle, set, reset) and `elapsed` is a store that is the number of ms.
 
 ### Utils
@@ -147,7 +159,7 @@ Located in `src/lib/utils/`.
 
 ```js
 // Usage
-import name from "$utils/name.js";
+import example from "$utils/example.js";
 ```
 
 * `checkOverlap.js`: Label overlapping detection. Loops through selection of nodes and adds a class to the ones that are overlapping. Once one is hidden it ignores it.
@@ -157,6 +169,7 @@ import name from "$utils/name.js";
 * `localStorage.js`: Read and write to local storage.
 * `mapToArray.js`: Convenience function to convert a map to an array.
 * `move.js`: transform translate function shorthand.
+* `previous.js`: keep track of the previous value of a store.
 * `transformSvg.js`: Custom transition lets you apply an svg transform property with the in/out svelte transition. Parameters (with defaults):
 * `translate.js`: Convenience function for transform translate css.
 * `urlParams.js`: Get and set url parameters.
@@ -165,3 +178,7 @@ import name from "$utils/name.js";
 
 * Any @html tags, e.g., `{@html user}` must be the child of a dom element so they can be properly hydrated.
 * Putting asset paths in CSS doesn't work without some hacks for subdirectory hosted projects
+
+## Tips
+
+If you are working with data from a spreadsheet (that lives as a csv file in `src/data`), you can keep the sheet as-is and preserve the working sheet, then use `routes/index.js` do you clean/parse just what you need to use in the browser optimize the front-end payload. 

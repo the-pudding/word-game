@@ -3,7 +3,7 @@
   import { possibleAnswers, guesses, round, lemmasPlayed, wod } from "$stores/misc.js";
 
   $: count = format(",")($possibleAnswers.length);
-  $: opponentWords = $guesses.opponent[$round].filter((d) => d.valid && !d.guessedByUserLate);
+  $: wodWords = $guesses.wod[$round].filter((d) => d.valid && !d.guessedByUserLate);
   $: commonWords = $possibleAnswers
     .filter((d) => +d.points === 1)
     .filter((d) => !$lemmasPlayed.includes((d) => d.text));
@@ -15,7 +15,7 @@
 </script>
 
 <p>There were <strong>{count}</strong> possible words that satisfied the clue.</p>
-{#if opponentWords.length}
+{#if wodWords.length}
   <p>Here are some words that Michelle got that you didn't:</p>
   <table>
     <thead>
@@ -23,7 +23,7 @@
       <th>Points</th>
     </thead>
     <tbody
-      >{#each opponentWords.slice(0, 7) as { text, points }}
+      >{#each wodWords.slice(0, 7) as { text, points }}
         <tr><td>{text}</td> <td>{points}</td></tr>
       {/each}
     </tbody>

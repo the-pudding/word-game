@@ -9,6 +9,14 @@
 <section on:click={close} class:visible={$overlay === "about"}>
   <div>
     <h3>About</h3>
+    <p>
+      Created by <a href="https://pudding.cool/author/russell-goldenberg" target="_blank"
+        >Russell Goldenberg</a
+      >
+      and <a href="https://pudding.cool/author/michelle-mcghee" target="_blank">Michelle McGhee</a>.
+      Designed with
+      <a href="https://pudding.cool/author/shannon-lin" target="_blank">Shannon Lin</a>.
+    </p>
     <p><button on:click={close}>CLOSE</button></p>
   </div>
 </section>

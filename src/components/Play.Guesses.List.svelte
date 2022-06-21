@@ -1,12 +1,12 @@
 <script>
   import Item from "$components/Play.Guesses.Item.svelte";
   export let guesses;
-  export let opponent = false;
+  export let wod = false;
 </script>
 
 <ul>
-  {#each guesses as { valid, text, revealOpponent, points } (text)}
-    <Item {opponent} {valid} {text} {revealOpponent} {points} />
+  {#each guesses as { valid, text, revealWod, points } (text)}
+    <Item {wod} {valid} {text} {revealWod} {points} />
   {/each}
 </ul>
 
