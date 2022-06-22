@@ -77,11 +77,11 @@ export const getWodStarted = async (gameId) => {
 	else throw new Error("no games matching this id");
 };
 
-export const update = async ({ table, column, value, id }) => {
+export const update = async ({ table, column, value, gameId }) => {
 	const response = await supabase
 		.from(table)
 		.update({ [column]: value })
-		.eq("id", id);
+		.eq("game_id", gameId);
 
 	if (response.error) {
 		console.log(response.error);

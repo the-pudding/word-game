@@ -19,7 +19,8 @@
   };
 
   const onBegin = () => {
-    if ($wod) update({ table: "wordgame_games", column: "wod_started", value: true, id: $wodId });
+    if ($wod)
+      update({ table: "wordgame_games", column: "wod_started", value: true, gameId: $wodId });
     showCountdown = true;
   };
 

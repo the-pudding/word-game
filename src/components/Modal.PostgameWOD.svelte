@@ -25,7 +25,12 @@
       const response = await insert({ table: "wordgame_wod-answers", data });
       if (response.length) {
         success = true;
-        await update({ table: "wordgame_games", column: "wod_finished", value: true, id: $wodId });
+        await update({
+          table: "wordgame_games",
+          column: "wod_finished",
+          value: true,
+          gameId: $wodId
+        });
       } else {
         success = false;
       }
