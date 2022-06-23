@@ -46,7 +46,7 @@ export const getQuestions = async (gameId) => {
 	const response = await supabase
 		.from("wordgame_games")
 		.select("question_ids")
-		.eq("id", gameId);
+		.eq("game_id", gameId);
 
 	if (response.error) {
 		console.log(response.error);
@@ -67,7 +67,7 @@ export const getWodStarted = async (gameId) => {
 	const response = await supabase
 		.from("wordgame_games")
 		.select("wod_started")
-		.eq("id", gameId);
+		.eq("game_id", gameId);
 
 	if (response.error) {
 		console.log(response.error);
