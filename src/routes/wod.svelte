@@ -1,4 +1,5 @@
 <script>
+  import { setContext } from "svelte";
   import { browser } from "$app/env";
   import { page } from "$app/stores";
   import Meta from "$components/Meta.svelte";
@@ -6,8 +7,13 @@
   import Login from "$components/Login.svelte";
   import { wod, wodId } from "$stores/misc.js";
   import { signOut } from "$utils/supabase.js";
+  import version from "$utils/version.js";
+  import copy from "$data/copy.json";
 
-  if (browser) console.log("svelte-starter version", __VERSION__);
+  version();
+
+  const { title, description, url, keywords } = copy;
+  setContext("copy", copy);
 
   if (browser) {
     $wod = $page.url.pathname.includes("wod");
@@ -22,6 +28,7 @@
   {#if authorized}
     <App />
   {:else}
+    <p>qbcfso</p>
     <Login bind:authorized />
   {/if}
 {/if}

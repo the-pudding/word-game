@@ -92,21 +92,11 @@ export const update = async ({ table, column, value, gameId }) => {
 }
 
 export const insert = async ({ table, data }) => {
+	console.log(table, data);
 	const response = await supabase.from(table).insert(data);
 	if (response.error) {
 		console.log(response.error);
 		throw new Error("insert failed");
-	}
-	else if (response.data) return response.data;
-	return undefined;
-};
-
-export const upsert = async ({ table, data }) => {
-	// TODO didn't work
-	const response = await supabase.from(table).upsert(data);
-	if (response.error) {
-		console.log(response.error);
-		throw new Error("upsert failed");
 	}
 	else if (response.data) return response.data;
 	return undefined;
