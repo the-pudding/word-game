@@ -21,20 +21,20 @@ export const gameState = derived([round, active], ([$round, $active], set) => {
 	else set("mid");
 });
 
-export const guesses = writable({ user: createEmptyRounds(), opponent: createEmptyRounds() });
+export const guesses = writable({ user: createEmptyRounds(), wod: createEmptyRounds() });
 
 export const possibleAnswers = writable([]);
 
 export const roundScore = derived(guesses, ($guesses, set) => {
 	const user = $guesses.user.map(sumRound);
-	const opponent = $guesses.opponent.map(sumRound);
-	set({ user, opponent });
+	const wod = $guesses.wod.map(sumRound);
+	set({ user, wod });
 });
 
 export const totalScore = derived(roundScore, ($roundScore, set) => {
 	const user = sum($roundScore.user);
-	const opponent = sum($roundScore.opponent);
-	set({ user, opponent });
+	const wod = sum($roundScore.wod);
+	set({ user, wod });
 });
 
 const flatten = (arr) => [].concat(...arr);
@@ -47,7 +47,7 @@ export const lemmasPlayed = derived([guesses, round], ([$guesses, $round], set) 
 	if ($round < 0) return;
 
 	const a = getFlattenedLemmas($guesses.user[$round]);
-	const b = getFlattenedLemmas($guesses.opponent[$round]);
+	const b = getFlattenedLemmas($guesses.wod[$round]);
 	const joined = [...a, ...b];
 	set(joined);
 });
