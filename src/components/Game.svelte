@@ -36,7 +36,7 @@
   });
 </script>
 
-{#if $gameId && !$wod}
+{#if $gameId}
   <WodBot />
 {/if}
 

@@ -1,15 +1,11 @@
 <script>
   import { onMount } from "svelte";
   import { elapsed } from "$stores/timer.js";
-  import { gameId, round, guesses, lemmasPlayed } from "$stores/misc.js";
+  import { wod, gameId, round, guesses, lemmasPlayed } from "$stores/misc.js";
   import lemmaExists from "$utils/lemmaExists.js";
   import loadWodAnswers from "$utils/loadWodAnswers.js";
 
   let data = [];
-
-  const loadData = async () => {
-    data = await loadWodAnswers($gameId);
-  };
 
   $: check($elapsed);
 
@@ -34,6 +30,7 @@
   };
 
   onMount(async () => {
+    if ($wod) return;
     data = await loadWodAnswers($gameId);
   });
 </script>

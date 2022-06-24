@@ -1,7 +1,7 @@
 <script>
   import { onMount } from "svelte";
   import { overlay, wodId } from "$stores/misc.js";
-  import { getQuestions, insert } from "$utils/supabase.js";
+  import { getGameColumn, getQuestions, insert, update } from "$utils/supabase.js";
 
   export let wodReady;
 
@@ -12,6 +12,7 @@
     try {
       const data = questions.map((d) => ({ game_id: $wodId, question_id: d.id, answer: d.answer }));
       await insert({ table: "wordgame_wod-info", data });
+      await update({ table: "wordgame_games", column: "wod_info", value: true, gameId: $wodId });
       wodReady = true;
     } catch (err) {
       // TODO visual message
@@ -21,7 +22,9 @@
 
   onMount(async () => {
     try {
-      questions = await getQuestions($wodId);
+      const hasInfo = await getGameColumn({ gameId: $wodId, column: "wod_info" });
+      wodReady = hasInfo;
+      if (!hasInfo) questions = await getQuestions($wodId);
     } catch (err) {
       error = true;
     }

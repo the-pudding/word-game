@@ -1,20 +1,21 @@
 <script>
   import { wodId } from "$stores/misc.js";
-  import { signIn, getWodStarted } from "$utils/supabase.js";
+  import { signIn, getGameColumn } from "$utils/supabase.js";
 
   export let authorized;
 
-  let email;
-  let password;
+  let email = "russellgoldenberg@gmail.com";
+  let password = "qbcfso";
   let error;
 
   const onSubmit = async () => {
     try {
       const loggedIn = await signIn({ email, password });
-      const hasStarted = await getWodStarted($wodId);
+      const hasStarted = await getGameColumn({ gameId: $wodId, column: "wod_started" });
       authorized = loggedIn && !hasStarted;
       // TODO real contact info
-      if (hasStarted) error = "You already started playing, please contact admins.";
+      if (hasStarted)
+        error = "You already started playing, please contact the admin: russell@pudding.cool.";
     } catch (err) {
       console.log(err);
       error = err;
@@ -40,8 +41,7 @@
       <p class="error">{error}</p>
     {/if}
   {:else}
-    <!-- TODO real contact info -->
-    <p>No game id in URL, please contact admins</p>
+    <p>No game id in URL, please contact the admin: russell@pudding.cool.</p>
   {/if}
 </section>
 

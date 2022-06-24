@@ -28,7 +28,6 @@
   {#if authorized}
     <App />
   {:else}
-    <p>qbcfso</p>
     <Login bind:authorized />
   {/if}
 {/if}

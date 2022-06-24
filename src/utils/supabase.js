@@ -63,17 +63,17 @@ export const getQuestions = async (gameId) => {
 	throw new Error("no questions matching that game id");
 }
 
-export const getWodStarted = async (gameId) => {
+export const getGameColumn = async ({ gameId, column }) => {
 	const response = await supabase
 		.from("wordgame_games")
-		.select("wod_started")
+		.select(column)
 		.eq("game_id", gameId);
 
 	if (response.error) {
 		console.log(response.error);
-		throw new Error("getWodStarted failed");
+		throw new Error("getGameColumn failed");
 	}
-	else if (response.data.length) return response.data[0].wod_started;
+	else if (response.data.length) return response.data[0][column];
 	else throw new Error("no games matching this id");
 };
 
