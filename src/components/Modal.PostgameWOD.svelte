@@ -23,7 +23,7 @@
           lemmas: d.lemmas
         }));
       const response = await insert({ table: "wordgame_wod-answers", data });
-      if (response.length) {
+      if (response) {
         success = true;
         await update({
           table: "wordgame_games",

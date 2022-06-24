@@ -98,6 +98,5 @@ export const insert = async ({ table, data }) => {
 		console.log(response.error);
 		throw new Error("insert failed");
 	}
-	else if (response.data) return response.data;
-	return undefined;
+	return true;
 };
