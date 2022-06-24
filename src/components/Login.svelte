@@ -14,8 +14,7 @@
       const hasStarted = await getGameColumn({ gameId: $wodId, column: "wod_started" });
       authorized = loggedIn && !hasStarted;
       // TODO real contact info
-      if (hasStarted)
-        error = "You already started playing, please contact the admin: russell@pudding.cool.";
+      if (hasStarted) error = "You already started playing";
     } catch (err) {
       console.log(err);
       error = err;
@@ -38,10 +37,10 @@
     </form>
 
     {#if error}
-      <p class="error">{error}</p>
+      <p class="error">{error}. please contact the admin: russell@pudding.cool.</p>
     {/if}
   {:else}
-    <p>No game id in URL, please contact the admin: russell@pudding.cool.</p>
+    <p>no game id in URL, please contact the admin: russell@pudding.cool.</p>
   {/if}
 </section>
 
