@@ -25,6 +25,12 @@
   Today that person is <strong>{name} from {location}</strong>. Can you beat them?
 </p>
 
+<p class="nogame" class:visible={!$gameId}>
+  <!-- TODO -->
+  There is no active game right now. Check back later or <a href="#">subscribe</a> to the newsletter
+  to get notified.
+</p>
+
 <p>
   Do you want to be the <strong>Word Opponent of the Day?</strong> Sign up here to be in the running.
 </p>

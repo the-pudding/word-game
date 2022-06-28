@@ -1,5 +1,5 @@
 <script>
-  import { active, round, roundScore, gameState, totalScore, wod, wodId } from "$stores/misc.js";
+  import { active, round, roundScore, gameState, totalScore, wod, gameId } from "$stores/misc.js";
   import Countdown from "$components/Modal.Countdown.svelte";
   import Recap from "$components/Modal.Recap.svelte";
   import Pregame from "$components/Modal.Pregame.svelte";
@@ -20,7 +20,7 @@
 
   const onBegin = () => {
     if ($wod)
-      update({ table: "wordgame_games", column: "wod_started", value: true, gameId: $wodId });
+      update({ table: "wordgame_games", column: "wod_started", value: true, gameId: $gameId });
     showCountdown = true;
   };
 
@@ -42,6 +42,7 @@
     <Pregame />
   {/if}
 {/if}
+
 {#if $gameState !== "pre"}
   <Recap />
 {/if}

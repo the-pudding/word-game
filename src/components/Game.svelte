@@ -22,16 +22,19 @@
     const url = `https://pudding.cool/projects/word-game-data/games.json?version=${timestamp}`;
     const { updated, games } = await loadJson(url);
     console.log("updated:", updated);
-    const { id } = games.find((d) => d.live);
-    return id;
+    const match = games.find((d) => d.live);
+    if (match) return match.id;
+    return undefined;
   };
 
   onMount(async () => {
     // TODO handle errors of no clues
     $gameId = await getId();
-    const clueData = await loadClues($gameId);
-    clues = clueData.map((d) => d.clue);
-    answers = await loadAnswers(clueData.map((d) => d.clueId));
+    if ($gameId) {
+      const clueData = await loadClues($gameId);
+      clues = clueData.map((d) => d.clue);
+      answers = await loadAnswers(clueData.map((d) => d.clueId));
+    }
     loaded = true;
   });
 </script>
