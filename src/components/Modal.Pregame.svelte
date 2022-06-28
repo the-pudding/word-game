@@ -26,15 +26,16 @@
 </p>
 
 <p class="nogame" class:visible={!$gameId}>
-  <!-- TODO -->
+  <!-- TODO link -->
   There is no active game right now. Check back later or <a href="#">subscribe</a> to the newsletter
   to get notified.
 </p>
 
 <p>
-  Do you want to be the <strong>Word Opponent of the Day?</strong> Sign up here to be in the running.
+  Do you want to be the <strong>Word Opponent of the Day?</strong> Sign up below to be in the running.
 </p>
-<button>BIG SIGNUP BUTTON</button>
+<!-- TODO link -->
+<a role="button" href="#">BIG SIGNUP BUTTON</a>
 
 <p>
   <button

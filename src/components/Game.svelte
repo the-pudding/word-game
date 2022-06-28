@@ -28,7 +28,6 @@
   };
 
   onMount(async () => {
-    // TODO handle errors of no clues
     $gameId = await getId();
     if ($gameId) {
       const clueData = await loadClues($gameId);
