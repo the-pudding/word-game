@@ -27,7 +27,7 @@
         success = true;
         await update({
           table: "wordgame_games",
-          column: "wod_finished",
+          column: "wod_played",
           value: true,
           gameId: $wodId
         });

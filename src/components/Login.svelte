@@ -4,8 +4,8 @@
 
   export let authorized;
 
-  let email = "russellgoldenberg@gmail.com";
-  let password = "qbcfso";
+  let email = "";
+  let password = "";
   let error;
 
   const onSubmit = async () => {

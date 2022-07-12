@@ -18,9 +18,14 @@
     mid: "Next round"
   };
 
-  const onBegin = () => {
-    if ($wod)
-      update({ table: "wordgame_games", column: "wod_started", value: true, gameId: $gameId });
+  const onBegin = async () => {
+    if ($wod && $gameState === "pre")
+      await update({
+        table: "wordgame_games",
+        column: "wod_started",
+        value: true,
+        gameId: $gameId
+      });
     showCountdown = true;
   };
 
