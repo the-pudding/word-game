@@ -9,5 +9,14 @@ export default async function loadAnswers(id) {
 		timestamp: +d.timestamp,
 		points: +d.points,
 	}));
+	const extra = ["abolitionary", "accreditable", "adscititious", "adventitious", "alliterative", "altitudinous", "ambitionless", "anorthositic", "antiliterary", "antiliterate", "antimilitary", "antimosquito", "antipolitics", "antirachitic"];
+	extra.forEach((e, i) => data.push({
+		round: 0,
+		text: e,
+		lemmas: e,
+		timestamp: i * 1000,
+		points: 1
+	}));
+	console.log(data);
 	return data;
 };

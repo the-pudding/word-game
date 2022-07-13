@@ -1,12 +1,15 @@
 <script>
   import { tweened } from "svelte/motion";
-  import { fade } from "svelte/transition";
+  import { fly } from "svelte/transition";
+  import { quartIn } from "svelte/easing";
 
   export let wod;
   export let valid;
   export let text;
   export let revealWod;
   export let points;
+  export let liHeight;
+  export let startOffset;
 
   const timer = tweened(0, { duration: 1000 });
 
@@ -24,16 +27,15 @@
       : text;
 
   $: invalid = !valid;
-  $: displayPoints = invalid || !points ? "" : `+${points}`;
-  $: visible = timerVisible && (!wod || !revealWod);
+  $: height = points * liHeight;
 </script>
 
-<li class:invalid>
+<li
+  in:fly={{ y: startOffset, duration: 1000, easing: quartIn }}
+  class:invalid
+  style={`--height: ${height}px`}
+>
   {renderText}
-
-  {#if visible}
-    <span out:fade>{displayPoints}</span>
-  {/if}
 </li>
 
 <style>
@@ -44,6 +46,9 @@
     text-align: center;
     display: inline-flex;
     position: relative;
+    height: var(--height);
+    line-height: var(--height);
+    border: 1px solid black;
   }
 
   li.invalid {

@@ -109,10 +109,10 @@
   <Clock />
 
   <div class="board">
+    <Input on:submit={onSubmit} />
     <Guesses />
     <Score />
     <Invalid />
-    <Input on:submit={onSubmit} />
   </div>
 </div>
 

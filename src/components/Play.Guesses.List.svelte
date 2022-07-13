@@ -2,11 +2,14 @@
   import Item from "$components/Play.Guesses.Item.svelte";
   export let guesses;
   export let wod = false;
+  export let liHeight;
+  export let startOffset;
 </script>
 
-<ul>
+<ul class:wod>
   {#each guesses as { valid, text, revealWod, points } (text)}
-    <Item {wod} {valid} {text} {revealWod} {points} />
+    <!-- TODO pass height to item -->
+    <Item {wod} {valid} {text} {revealWod} {points} {liHeight} {startOffset} />
   {/each}
 </ul>
 
@@ -14,8 +17,14 @@
   ul {
     width: calc(50% - 1rem);
     display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: center;
+    flex-direction: column-reverse;
+    justify-content: flex-start;
+    align-items: flex-start;
+    transition: transform 0.5s ease-out;
+    transform: translate(0, var(--offsetY));
+  }
+
+  .wod {
+    align-items: flex-end;
   }
 </style>
