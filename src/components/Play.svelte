@@ -121,13 +121,13 @@
 
 <div class="play">
 	<Clue clue={currentClue} />
-	<Clock />
 
 	<div class="board">
 		<Input on:submit={onSubmit} />
 		<Guesses />
 		<Score />
 		<Invalid />
+		<Clock />
 	</div>
 </div>
 

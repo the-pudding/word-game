@@ -7,7 +7,7 @@
 	const target = 60 * MS;
 
 	$: update($active);
-	$: secondsLeft = Math.floor((target - $elapsed) / MS);
+	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
 	$: if (secondsLeft <= 0) $active = false;
 
 	const update = (isActive) => {
@@ -20,9 +20,19 @@
 	};
 </script>
 
-<p>{secondsLeft}</p>
+<div class:decreasing={$elapsed > 0} style={`--duration: ${target}ms`} />
 
 <style>
+	div {
+		background: orangered;
+		width: 100%;
+		height: 30px;
+		transition: width var(--duration) linear;
+		align-self: flex-start;
+	}
+	div.decreasing {
+		width: 0%;
+	}
 	p {
 		font-size: 2em;
 		text-align: center;
