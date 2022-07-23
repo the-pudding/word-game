@@ -21,7 +21,10 @@ export const gameState = derived([round, active], ([$round, $active], set) => {
 	else set("mid");
 });
 
-export const guesses = writable({ user: createEmptyRounds(), wod: createEmptyRounds() });
+export const guesses = writable({
+	user: createEmptyRounds(),
+	wod: createEmptyRounds()
+});
 
 export const possibleAnswers = writable([]);
 
@@ -39,20 +42,24 @@ export const totalScore = derived(roundScore, ($roundScore, set) => {
 
 const flatten = (arr) => [].concat(...arr);
 const getFlattenedLemmas = (data) => {
-	const raw = data.filter((d) => d.valid).map((d) => d.lemmas.split("|"))
+	const raw = data.filter((d) => d.valid).map((d) => d.lemmas.split("|"));
 	return flatten(raw);
 };
 
-export const lemmasPlayed = derived([guesses, round], ([$guesses, $round], set) => {
-	if ($round < 0) return;
+export const lemmasPlayed = derived(
+	[guesses, round],
+	([$guesses, $round], set) => {
+		if ($round < 0) return;
 
-	const a = getFlattenedLemmas($guesses.user[$round]);
-	const b = getFlattenedLemmas($guesses.wod[$round]);
-	const joined = [...a, ...b];
-	set(joined);
-});
+		const a = getFlattenedLemmas($guesses.user[$round]);
+		const b = getFlattenedLemmas($guesses.wod[$round]);
+		const joined = [...a, ...b];
+		set(joined);
+	}
+);
 
 export const overlay = writable(undefined);
 
 export const wod = writable(undefined);
 export const wodId = writable(undefined);
+export const wodInfo = writable(undefined);
