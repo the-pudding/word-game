@@ -1,10 +1,9 @@
 <script>
-	import { onMount } from "svelte";
+	import Keyboard from "svelte-keyboard";
 	import { createEventDispatcher } from "svelte";
 	const dispatch = createEventDispatcher();
 
-	let inputEl;
-	let value = "";
+	export let value = "";
 
 	const submit = () => {
 		if (value) dispatch("submit", value);
@@ -23,31 +22,26 @@
 		value = value.trim().toLowerCase();
 		submit();
 	};
-
-	onMount(() => {
-		inputEl.focus();
-	});
 </script>
 
-<div id="play-input">
-	<form on:submit={onInput}>
-		<input maxlength="15" bind:value bind:this={inputEl} />
-		<button type="submit">&rarr;</button>
-	</form>
+<div id="play-keyboard">
+	<Keyboard
+		on:keydown={onKeydown}
+		layout="wordle"
+		--height="42px"
+		--margin="4px"
+		--min-width="28px"
+	/>
 </div>
 
 <style>
-	form {
-		width: 100%;
-		display: flex;
-	}
-	input {
-		flex: 1;
+	div {
+		display: block;
 	}
 
 	@media (hover: hover) and (pointer: fine) {
 		div {
-			display: block;
+			display: none;
 		}
 	}
 </style>

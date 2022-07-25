@@ -4,9 +4,7 @@
 	import { quartIn } from "svelte/easing";
 
 	export let wod;
-	export let valid;
 	export let text;
-	export let revealWod;
 	export let points;
 	export let liHeight;
 	export let startOffset;
@@ -18,24 +16,15 @@
 		timerVisible = false;
 	});
 
-	$: renderText =
-		wod && valid && !revealWod
-			? text
-					.split("")
-					.map(() => "▉")
-					.join("")
-			: text;
-
-	$: invalid = !valid;
 	$: height = points * liHeight;
 </script>
 
 <li
 	in:fly={{ y: startOffset, duration: 1000, easing: quartIn }}
-	class:invalid
+	class:wod
 	style={`--height: ${height}px`}
 >
-	{renderText}
+	{text}
 </li>
 
 <style>
@@ -51,9 +40,8 @@
 		border: 1px solid black;
 	}
 
-	li.invalid {
-		color: var(--color-gray-500);
-		font-weight: normal;
+	li.wod {
+		color: blue;
 	}
 
 	span {

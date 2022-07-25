@@ -20,7 +20,7 @@ specifiers:
   style-dictionary: ^3.7.1
   svelte: ^3.49.0
   svelte-copy: ^1.2.4
-  svelte-keyboard: ^0.5.0
+  svelte-keyboard: ^0.5.1
   svelte-preprocess: ^4.10.7
   vite: ^3.0.2
   vite-plugin-svgstring: ^1.0.0
@@ -45,7 +45,7 @@ devDependencies:
   style-dictionary: 3.7.1
   svelte: 3.49.0
   svelte-copy: 1.2.4
-  svelte-keyboard: 0.5.0
+  svelte-keyboard: 0.5.1
   svelte-preprocess: 4.10.7_nxvsp6sjiltnatqa6jdm4mr6zu
   vite: 3.0.2
   vite-plugin-svgstring: 1.0.0
@@ -1535,8 +1535,8 @@ packages:
       svelte: 3.49.0
     dev: true
 
-  /svelte-keyboard/0.5.0:
-    resolution: {integrity: sha512-HnimE+n+Hsohh6IEUfxXh9foW77uZqS7u02wL7OxGl+j2zmGI3lbcIvC98wdAVxL5IpfiAQ+InooMZMiGPAoCg==}
+  /svelte-keyboard/0.5.1:
+    resolution: {integrity: sha512-RejNxP9Bkjrz2E7sbJR8OGoPO1a8sLnm5c8APMI3AvQzx273jWpfMlRS6qXl0L+uJmLJWwVdOmxLYLcSzETuPw==}
     dev: true
 
   /svelte-preprocess/4.10.7_nxvsp6sjiltnatqa6jdm4mr6zu:

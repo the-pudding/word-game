@@ -85,8 +85,4 @@
 {/if}
 
 <style>
-	p {
-		text-align: center;
-		font-size: 2em;
-	}
 </style>

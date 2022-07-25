@@ -25,6 +25,5 @@
 <style>
 	nav {
 		position: relative;
-		z-index: var(--z-overlay);
 	}
 </style>

@@ -54,7 +54,7 @@
 		font-size: 2em;
 		text-align: center;
 		max-width: 23em;
-		margin: 1rem auto;
+		margin: 0 auto;
 	}
 
 	.custom {

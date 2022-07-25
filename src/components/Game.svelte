@@ -53,15 +53,3 @@
 		<Modal {loaded} />
 	</section>
 {/if}
-
-<style>
-	section {
-		margin: 0 auto;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100vh;
-		padding: 4rem 1rem 1rem 1rem;
-	}
-</style>

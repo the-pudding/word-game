@@ -15,7 +15,7 @@
 
 <style>
 	ul {
-		width: calc(50% - 1rem);
+		width: calc(50%);
 		display: flex;
 		flex-direction: column-reverse;
 		justify-content: flex-start;

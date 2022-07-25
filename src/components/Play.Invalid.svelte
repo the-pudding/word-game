@@ -29,7 +29,7 @@
 	};
 </script>
 
-<div>
+<div id="play-invalid">
 	{#if visible}
 		<p>
 			<strong>{recent.text}</strong>
@@ -40,12 +40,12 @@
 
 <style>
 	div {
-		height: 2em;
-		width: 100%;
-		margin-bottom: 1rem;
+		width: 50%;
+		position: relative;
 	}
 
 	p {
-		text-align: center;
+		position: absolute;
+		margin: 0;
 	}
 </style>

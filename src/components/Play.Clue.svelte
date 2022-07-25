@@ -4,39 +4,31 @@
 	$: chunks = clue.split("|");
 </script>
 
-<div>
-	<p class="instructions">Type as many words as you can that...</p>
-	<p class="clue">
+<div id="play-clue">
+	<ul>
 		{#each chunks as chunk, i}
-			{@const suffix = i < chunks.length - 1 ? " +" : ""}
-			<p>{chunk}{suffix}</p>
+			<!-- {@const suffix = i < chunks.length - 1 ? " +" : ""} -->
+			<li>{chunk}</li>
 		{/each}
-	</p>
+	</ul>
 </div>
 
 <style>
 	div {
-		text-align: center;
+		padding: 8px;
+		background: green;
+	}
+	ul {
+		display: flex;
+		justify-content: center;
 	}
 
-	p {
+	li {
 		margin: 0;
-	}
-
-	.clue {
-		font-size: 1.5em;
-		max-width: 60%;
-		line-height: 1.2;
-		margin: 0 auto;
-	}
-	@media (min-width: 768px) {
-		.clue {
-			font-size: 3em;
-		}
-	}
-
-	:global(.clue small) {
-		font-size: 0.4em;
-		display: block;
+		list-style-type: none;
+		margin-right: 8px;
+		background: var(--color-white);
+		padding: 4px;
+		line-height: 1;
 	}
 </style>

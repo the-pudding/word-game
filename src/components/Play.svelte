@@ -1,6 +1,7 @@
 <script>
 	import Guesses from "$components/Play.Guesses.svelte";
 	import Input from "$components/Play.Input.svelte";
+	import InputKeyboard from "$components/Play.InputKeyboard.svelte";
 	import Clock from "$components/Play.Clock.svelte";
 	import Clue from "$components/Play.Clue.svelte";
 	import Score from "$components/Play.Score.svelte";
@@ -119,31 +120,23 @@
 	};
 </script>
 
-<div class="play">
+<div>
+	<!-- <Score /> -->
 	<Clue clue={currentClue} />
-
-	<div class="board">
-		<Input on:submit={onSubmit} />
-		<Guesses />
-		<Score />
-		<Invalid />
-		<Clock />
-	</div>
+	<Input on:submit={onSubmit} />
+	<Invalid />
+	<Guesses />
+	<Clock />
+	<InputKeyboard on:submit={onSubmit} />
 </div>
 
 <style>
-	.play {
+	div {
 		position: relative;
 		width: 100%;
 		height: 100%;
-	}
-
-	.board {
 		display: flex;
-		align-items: center;
-		justify-content: flex-end;
 		flex-direction: column;
-		min-height: 430px;
 		max-width: 40rem;
 		margin: 0 auto;
 	}

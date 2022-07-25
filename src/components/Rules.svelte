@@ -51,14 +51,8 @@
 <style>
 	section {
 		display: none;
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		background: white;
-		padding: 4rem 1rem;
 		z-index: var(--z-overlay);
+		background: var(--color-bg);
 	}
 
 	div {
