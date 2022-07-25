@@ -14,6 +14,7 @@
 	header {
 		background-color: var(--color-fg);
 		position: relative;
+		margin: 4px;
 	}
 
 	/* .wordmark {

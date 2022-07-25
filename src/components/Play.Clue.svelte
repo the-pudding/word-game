@@ -16,7 +16,8 @@
 <style>
 	div {
 		padding: 8px;
-		background: green;
+		background: var(--color-white);
+		border: 1px solid var(--color-fg);
 	}
 	ul {
 		display: flex;
@@ -30,5 +31,6 @@
 		background: var(--color-white);
 		padding: 4px;
 		line-height: 1;
+		border: 1px solid var(--color-fg);
 	}
 </style>

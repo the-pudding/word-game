@@ -31,6 +31,8 @@
 		--height="42px"
 		--margin="4px"
 		--min-width="28px"
+		--background="var(--color-white)"
+		--color="var(--color-fg)"
 	/>
 </div>
 

@@ -37,12 +37,37 @@
 </div>
 
 <style>
+	div {
+		margin: 4px 0 0 0;
+	}
+
 	form {
 		width: 100%;
-		display: flex;
+		display: block;
+		position: relative;
+		/* display: flex; */
 	}
+
 	input {
+		background-color: var(--color-white);
+		outline: 2px solid transparent;
+		border: 1px solid var(--color-fg);
 		flex: 1;
+		width: 100%;
+		border-radius: 0;
+		font-size: var(--24px);
+	}
+
+	input:focus {
+		outline: 2px solid var(--color-focus);
+	}
+
+	button {
+		position: absolute;
+		top: 50%;
+		right: 8px;
+		transform: translate(0, -50%);
+		padding: 4px;
 	}
 
 	@media (hover: hover) and (pointer: fine) {

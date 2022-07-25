@@ -25,5 +25,6 @@
 <style>
 	nav {
 		position: relative;
+		opacity: 0;
 	}
 </style>

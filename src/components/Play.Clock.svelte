@@ -23,31 +23,44 @@
 </script>
 
 <div id="play-clock">
-	<div class="progress" style:width />
+	<div class="margin">
+		<div class="progress" style:width />
+	</div>
 	<p><strong>{secondsLeft}</strong></p>
 </div>
 
 <style>
-	div {
+	div#play-clock {
 		position: relative;
 		width: 100%;
+		margin: 4px 0;
+		height: 2rem;
+		border: 1px solid var(--color-fg);
+		background-color: var(--color-white);
+	}
+
+	.margin {
+		position: relative;
+		width: calc(100% - 8px);
+		height: 100%;
 	}
 
 	.progress {
 		position: absolute;
-		top: 0;
-		left: 0;
-		background: var(--color-red-100);
+		top: 4px;
+		left: 4px;
 		width: 100%;
-		height: 2rem;
+		background: var(--color-red-100);
+		height: calc(100% - 8px);
 	}
 
 	p {
-		position: relative;
-		line-height: 2rem;
+		position: absolute;
+		top: 2px;
+		left: 8px;
 		margin: 0;
-		padding: 0 8px;
-		font-size: var(--20px);
+		font-size: var(--18px);
 		color: var(--color-red-700);
+		opacity: 0;
 	}
 </style>
