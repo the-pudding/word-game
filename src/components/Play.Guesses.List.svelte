@@ -22,6 +22,7 @@
 		align-items: flex-start;
 		transition: transform 0.5s ease-out;
 		transform: translate(0, var(--offsetY));
+		padding: 0;
 	}
 
 	.wod {

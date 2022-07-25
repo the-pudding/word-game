@@ -46,6 +46,5 @@
 
 	p {
 		position: absolute;
-		margin: 0;
 	}
 </style>

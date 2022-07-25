@@ -26,7 +26,7 @@
   --color-link: var(--color-tan-1000);
   --color-focus: var(--color-red-100);
   --color-mark: var(--color-red-100);
-	--color-selection: var(--color-tan-300);
+	--color-selection: var(--color-yellow-100);
 	--color-border: var(--color-tan-300);
 	--color-button-bg: var(--color-tan-1000);
 	--color-button-fg: var(--color-white);
@@ -34,6 +34,15 @@
 	--color-input-bg: var(--color-tan-100);
 	--color-input-fg: var(--color-tan-1000);
 	--color-placeholder: var(--color-tan-500);
+
+	--color-user-bg: var(--color-yellow-100);
+	--color-user-fg: var(--color-yellow-700);
+	--color-user-border: var(--color-yellow-400);
+
+	--color-wod-bg: var(--color-blue-100);
+	--color-wod-fg: var(--color-blue-900);
+	--color-wod-border: var(--color-blue-500);
+	
 }
 
 /* dark theme */
@@ -73,34 +82,46 @@ main {
 
 h1 {
 	font-size: var(--48px, 48px);
+	margin: 0;
 }
 
 h2 {
 	font-size: var(--36px, 36px);
+	margin: 0;
 }
 
 h3 {
 	font-size: var(--28px, 28px);
+	margin: 0;
 }
 
 h4 {
 	font-size: var(--24px, 24px);
+	margin: 0;
 }
 
 h5 {
 	font-size: var(--22px, 22px);
+	margin: 0;
 }
 
 h6 {
 	font-size: var(--20px, 20px);
+	margin: 0;
+}
+
+p {
+	margin: 0;
 }
 
 section {
 	position: absolute;
 	top: 0;
-	left: 0;
+	left: 50%;
 	width: 100%;
 	height: 100%;
+	max-width: 40rem;
+	transform: translate(-50%, 0);
 }
 
 button, a[role="button"] {

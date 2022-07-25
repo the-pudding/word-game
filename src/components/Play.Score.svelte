@@ -24,7 +24,6 @@
 	}
 
 	p {
-		margin: 0;
 		padding: 0;
 		line-height: 1;
 		font-size: 1.5em;

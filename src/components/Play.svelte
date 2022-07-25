@@ -17,27 +17,8 @@
 
 	import { elapsed } from "$stores/timer.js";
 
-	// import testData1 from "$data/testdata-f.csv";
-	// import testData2 from "$data/testdata-7.csv";
-	// import testData3 from "$data/testdata-th.csv";
-	// import testData4 from "$data/testdata-same.csv";
-
-	// const answers = [testData1, testData1, testData1, testData1];
-
-	// const clues = [
-	//   "are nouns that start with <strong>F</strong>",
-	//   "are nouns that start with <strong>F</strong>",
-	//   "are nouns that start with <strong>F</strong>",
-	//   "are nouns that start with <strong>F</strong>"
-	// ];
-	// 	 "have 7 letters",
-	//   "that contain <strong>TH</strong>",
-	//   "that start and end with the same letter"
-
 	export let clues;
 	export let answers;
-
-	$: console.log(clues);
 
 	$: currentClue = clues[$round];
 	$: roundData = answers[$round];
@@ -135,9 +116,9 @@
 		position: relative;
 		width: 100%;
 		height: 100%;
+		max-height: 800px;
 		display: flex;
 		flex-direction: column;
-		max-width: 40rem;
 		margin: 0 auto;
 	}
 </style>

@@ -22,7 +22,7 @@
 	let wodReady;
 
 	const buttonOptions = {
-		pre: "Begin game",
+		pre: "play",
 		mid: "Next round"
 	};
 
@@ -85,4 +85,7 @@
 {/if}
 
 <style>
+	button {
+		font-size: var(--48px);
+	}
 </style>

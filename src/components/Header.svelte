@@ -1,9 +1,11 @@
 <script>
+	import copy from "$data/copy.json";
 	import Menu from "$components/Menu.svelte";
 	import wordmark from "$svg/wordmark.svg";
 </script>
 
 <header>
+	<h1>{copy.title}</h1>
 	<Menu />
 	<!-- <div class="wordmark">
 		<a href="https://pudding.cool" aria-label="The Pudding">{@html wordmark}</a>
@@ -15,6 +17,13 @@
 		background-color: var(--color-fg);
 		position: relative;
 		margin: 4px;
+		padding: 4px;
+	}
+
+	h1 {
+		color: var(--color-white);
+		font-size: var(--18px);
+		text-align: center;
 	}
 
 	/* .wordmark {

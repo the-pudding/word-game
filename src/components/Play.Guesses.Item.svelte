@@ -24,32 +24,41 @@
 	class:wod
 	style={`--height: ${height}px`}
 >
-	{text}
+	<span>{text}</span>
 </li>
 
 <style>
 	li {
-		color: var(--color-green);
 		font-weight: bold;
 		list-style-type: none;
 		text-align: center;
 		display: inline-flex;
 		position: relative;
 		height: var(--height);
-		line-height: var(--height);
-		border: 1px solid black;
+		line-height: 1;
+		padding: 0 4px;
+		font-size: var(--16px);
+		color: var(--color-user-fg);
+		background-color: var(--color-user-bg);
+		border: 2px solid var(--color-user-border);
+		transform: translateY(-2px);
+		margin-bottom: -2px;
+		align-items: center;
 	}
 
 	li.wod {
-		color: blue;
+		color: var(--color-wod-bg);
+		background-color: var(--color-wod-bg);
+		border: 2px solid var(--color-wod-border);
 	}
 
 	span {
-		position: absolute;
-		display: block;
-		top: 0;
-		right: 0;
-		padding-left: 0.5rem;
-		transform: translate(100%, 0);
+		display: inline-block;
+	}
+
+	@media screen and (min-width: 40rem) {
+		li {
+			font-size: var(--20px);
+		}
 	}
 </style>

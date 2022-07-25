@@ -58,7 +58,6 @@
 		position: absolute;
 		top: 2px;
 		left: 8px;
-		margin: 0;
 		font-size: var(--18px);
 		color: var(--color-red-700);
 		opacity: 0;

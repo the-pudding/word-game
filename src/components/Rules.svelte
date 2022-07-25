@@ -55,11 +55,6 @@
 		background: var(--color-bg);
 	}
 
-	div {
-		max-width: 40rem;
-		margin: 0 auto;
-	}
-
 	.visible {
 		display: block;
 	}

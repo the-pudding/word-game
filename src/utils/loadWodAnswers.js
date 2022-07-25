@@ -17,6 +17,5 @@ export default async function loadAnswers(id) {
 		timestamp: i * 1000,
 		points: 1
 	}));
-	console.log(data);
 	return data;
 };

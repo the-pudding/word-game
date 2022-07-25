@@ -1,7 +1,10 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount, getContext } from "svelte";
 	import { overlay, gameId, wodInfo } from "$stores/misc.js";
 	import loadWodInfo from "$utils/loadWodInfo.js";
+	import Chunk from "$components/Chunk.svelte";
+
+	const { title, description } = getContext("copy");
 
 	const load = async () => {
 		const data = await loadWodInfo($gameId);
@@ -15,53 +18,83 @@
 	};
 
 	$: if ($gameId) load();
+	$: customText =
+		$gameId && $wodInfo
+			? `today that person is ${$wodInfo?.name} from ${$wodInfo?.location}. can you beat them?`
+			: "there is no active game right now. check back later or sign up below to get notified.";
 </script>
 
-<h2>Welcome to <strong>Not Wordle!</strong></h2>
-<p>
-	One person a day gets the chance to play against the world in a game of words.
-</p>
+<h2>
+	<small>
+		<Chunk
+			text="welcome to"
+			max="5"
+			--background="var(--color-user-bg)"
+			--color="var(--color-user-fg)"
+			--border="1px solid var(--color-user-border)"
+		/>
+	</small>
+	<Chunk
+		text={title}
+		max="1"
+		--background="var(--color-user-bg)"
+		--color="var(--color-user-fg)"
+		--border="1px solid var(--color-user-border)"
+	/>
+</h2>
 
-<p class="custom" class:visible={$gameId && $wodInfo}>
-	Today that person is <strong
-		>{$wodInfo?.name} from {$wodInfo?.location}</strong
-	>. Can you beat them?
-</p>
+<div class="details">
+	<p class="description">
+		<Chunk
+			text={description}
+			max="15"
+			--background="transparent"
+			--color="var(--color-tan-900)"
+			--border="1px solid var(--color-tan-500)"
+		/>
+	</p>
 
-<p class="nogame" class:visible={!$gameId}>
-	<!-- TODO link -->
-	There is no active game right now. Check back later or
-	<a href="#">subscribe</a> to the newsletter to get notified.
-</p>
+	<p class="custom">
+		<Chunk
+			text={customText}
+			max="15"
+			--background="var(--color-wod-bg)"
+			--color="var(--color-wod-fg)"
+			--border="1px solid var(--color-wod-border)"
+		/>
+	</p>
+</div>
 
-<p>
-	Do you want to be the <strong>Word Opponent of the Day?</strong> Sign up below
-	to be in the running.
-</p>
-<!-- TODO link -->
-<a role="button" href="#">BIG SIGNUP BUTTON</a>
-
-<p>
-	<button
-		on:click={() => {
-			$overlay = "rules";
-		}}>How to Play</button
-	>
-</p>
+<div class="cta">
+	<div class="rules">
+		<button
+			on:click={() => {
+				$overlay = "rules";
+			}}>rules</button
+		>
+	</div>
+	<div class="signup">
+		<p class="next">Want to be the next opponent?</p>
+		<!-- TODO link -->
+		<a role="button" href="#">sign up</a>
+	</div>
+</div>
 
 <style>
 	h2 {
-		font-size: 2em;
-		text-align: center;
-		max-width: 23em;
 		margin: 0 auto;
+		font-weight: bold;
 	}
 
-	.custom {
-		visibility: hidden;
+	small {
+		font-size: 0.5em;
 	}
 
-	.visible {
-		visibility: visible;
+	.details {
+		display: flex;
+	}
+
+	.details p {
+		width: 50%;
 	}
 </style>

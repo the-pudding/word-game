@@ -9,8 +9,7 @@
 		.replace(regex, "$&\n")
 		.split("\n")
 		.map((d) => d.trim())
-		.filter((d) => d)
-		.map((d, i) => `${i > 0 && space ? "&nbsp;" : ""}${d}`);
+		.filter((d) => d);
 </script>
 
 {#each chunks as chunk}
@@ -20,5 +19,9 @@
 <style>
 	.chunk {
 		display: inline-block;
+		color: var(--color, black);
+		background: var(--background, white);
+		border: var(--border, 1px solid black);
+		padding: 0 var(--padding, 4px);
 	}
 </style>
