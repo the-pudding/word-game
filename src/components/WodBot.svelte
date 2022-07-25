@@ -1,36 +1,38 @@
 <script>
-  import { onMount } from "svelte";
-  import { elapsed } from "$stores/timer.js";
-  import { wod, gameId, round, guesses, lemmasPlayed } from "$stores/misc.js";
-  import lemmaExists from "$utils/lemmaExists.js";
-  import loadWodAnswers from "$utils/loadWodAnswers.js";
+	import { onMount } from "svelte";
+	import { elapsed } from "$stores/timer.js";
+	import { wod, gameId, round, guesses, lemmasPlayed } from "$stores/misc.js";
+	import lemmaExists from "$utils/lemmaExists.js";
+	import loadWodAnswers from "$utils/loadWodAnswers.js";
 
-  let data = [];
+	let data = [];
 
-  $: check($elapsed);
+	$: check($elapsed);
 
-  const isTaken = (lemmas) => {
-    const corpus = $lemmasPlayed;
-    return lemmaExists({ lemmas, corpus });
-  };
+	const isTaken = (lemmas) => {
+		const corpus = $lemmasPlayed;
+		return lemmaExists({ lemmas, corpus });
+	};
 
-  const validate = ({ lemmas }) => {
-    const valid = !isTaken(lemmas);
-    const reason = valid ? undefined : 0;
-    return { valid, reason };
-  };
+	const validate = ({ lemmas }) => {
+		const valid = !isTaken(lemmas);
+		const reason = valid ? undefined : 0;
+		return { valid, reason };
+	};
 
-  const check = () => {
-    const guessIndex = data.findIndex((d) => d.round === $round && $elapsed >= d.timestamp);
-    if (guessIndex > -1) {
-      const [newGuess] = data.splice(guessIndex, 1);
-      const guess = { ...newGuess, ...validate(newGuess) };
-      $guesses.wod[$round] = [...$guesses.wod[$round], guess];
-    }
-  };
+	const check = () => {
+		const guessIndex = data.findIndex(
+			(d) => d.round === $round && $elapsed >= d.timestamp
+		);
+		if (guessIndex > -1) {
+			const [newGuess] = data.splice(guessIndex, 1);
+			const guess = { ...newGuess, ...validate(newGuess) };
+			$guesses.wod[$round] = [...$guesses.wod[$round], guess];
+		}
+	};
 
-  onMount(async () => {
-    if ($wod) return;
-    data = await loadWodAnswers($gameId);
-  });
+	onMount(async () => {
+		if ($wod) return;
+		data = await loadWodAnswers($gameId);
+	});
 </script>

@@ -1,49 +1,49 @@
 <script>
-  import { onMount } from "svelte";
-  import { insert, update } from "$utils/supabase.js";
-  import { guesses, wodId } from "$stores/misc.js";
+	import { onMount } from "svelte";
+	import { insert, update } from "$utils/supabase.js";
+	import { guesses, wodId } from "$stores/misc.js";
 
-  let success;
+	let success;
 
-  $: message = success
-    ? "Game successfully submitted!"
-    : "There was an error submitting your game. Please contact the admin: russell@pudding.cool.";
+	$: message = success
+		? "Game successfully submitted!"
+		: "There was an error submitting your game. Please contact the admin: russell@pudding.cool.";
 
-  onMount(async () => {
-    try {
-      const flat = [].concat(...$guesses.user);
-      const data = flat
-        .filter((d) => d.valid)
-        .map((d) => ({
-          game_id: $wodId,
-          round: d.round,
-          text: d.text,
-          timestamp: d.timestamp,
-          points: d.points,
-          lemmas: d.lemmas
-        }));
-      const response = await insert({ table: "wordgame_wod-answers", data });
-      if (response) {
-        success = true;
-        await update({
-          table: "wordgame_games",
-          column: "wod_played",
-          value: true,
-          gameId: $wodId
-        });
-      } else {
-        success = false;
-      }
-    } catch (err) {
-      success = false;
-    }
-  });
+	onMount(async () => {
+		try {
+			const flat = [].concat(...$guesses.user);
+			const data = flat
+				.filter((d) => d.valid)
+				.map((d) => ({
+					game_id: $wodId,
+					round: d.round,
+					text: d.text,
+					timestamp: d.timestamp,
+					points: d.points,
+					lemmas: d.lemmas
+				}));
+			const response = await insert({ table: "wordgame_wod-answers", data });
+			if (response) {
+				success = true;
+				await update({
+					table: "wordgame_games",
+					column: "wod_played",
+					value: true,
+					gameId: $wodId
+				});
+			} else {
+				success = false;
+			}
+		} catch (err) {
+			success = false;
+		}
+	});
 </script>
 
 <h2>Thanks for playing!</h2>
 
 {#if success === undefined}
-  <p>Submitting responses...</p>
+	<p>Submitting responses...</p>
 {:else}
-  <p>{message}</p>
+	<p>{message}</p>
 {/if}
