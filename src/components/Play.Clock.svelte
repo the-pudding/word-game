@@ -4,11 +4,12 @@
 	import { active } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 6000 * MS;
+	const target = 60 * MS;
 
 	$: update($active);
 	$: inverse = target - $elapsed;
 	$: width = `${(inverse / target) * 100}%`;
+	// $: width = "100%";
 	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
 	$: if (secondsLeft <= 0) $active = false;
 
@@ -24,9 +25,9 @@
 
 <div id="play-clock">
 	<div class="margin">
-		<div class="progress" style:width />
+		<span class="progress" style:width />
 	</div>
-	<p><strong>{secondsLeft}</strong></p>
+	<!-- <p><strong>{secondsLeft}</strong></p> -->
 </div>
 
 <style>
@@ -34,6 +35,7 @@
 		position: relative;
 		width: 100%;
 		margin: 4px 0;
+		padding: 4px;
 		height: 2rem;
 		border: 1px solid var(--color-fg);
 		background-color: var(--color-white);
@@ -41,25 +43,25 @@
 
 	.margin {
 		position: relative;
-		width: calc(100% - 8px);
+		display: flex;
+		justify-content: flex-end;
+		width: 100%;
 		height: 100%;
 	}
 
 	.progress {
-		position: absolute;
-		top: 4px;
-		left: 4px;
+		display: block;
 		width: 100%;
+		height: 100%;
 		background: var(--color-red-100);
-		height: calc(100% - 8px);
 	}
 
-	p {
+	/* p {
 		position: absolute;
 		top: 2px;
 		left: 8px;
 		font-size: var(--18px);
 		color: var(--color-red-700);
 		opacity: 0;
-	}
+	} */
 </style>
