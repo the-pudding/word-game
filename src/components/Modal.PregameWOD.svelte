@@ -1,5 +1,5 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount, getContext, createEventDispatcher } from "svelte";
 	import { overlay, wodId } from "$stores/misc.js";
 	import {
 		getGameColumn,
@@ -9,6 +9,10 @@
 	} from "$utils/supabase.js";
 
 	export let wodReady;
+	export let loaded;
+	export let hideButton;
+
+	const dispatch = createEventDispatcher();
 
 	let questions = [];
 	let error;
@@ -73,14 +77,20 @@
 			<button type="submit">Submit</button>
 		</form>
 	{/if}
-{:else}
-	<p>
-		<button
-			on:click={() => {
-				$overlay = "rules";
-			}}>How to Play</button
-		>
-	</p>
+{:else if loaded && !hideButton}
+	<div class="cta">
+		<div class="rules">
+			<button
+				on:click={() => {
+					$overlay = "rules";
+				}}>How to Play</button
+			>
+		</div>
+
+		<div class="play">
+			<button on:click={() => dispatch("play")}>play</button>
+		</div>
+	</div>
 {/if}
 
 <style>

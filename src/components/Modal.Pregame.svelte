@@ -1,10 +1,14 @@
 <script>
-	import { onMount, getContext } from "svelte";
+	import { onMount, getContext, createEventDispatcher } from "svelte";
 	import { overlay, gameId, wodInfo } from "$stores/misc.js";
 	import loadWodInfo from "$utils/loadWodInfo.js";
 	import Chunk from "$components/Chunk.svelte";
 
+	export let loaded;
+
 	const { title, description } = getContext("copy");
+
+	const dispatch = createEventDispatcher();
 
 	const load = async () => {
 		const data = await loadWodInfo($gameId);
@@ -42,11 +46,21 @@
 	</p>
 
 	<p class="custom">
-		<Chunk text={customText} max="15" space={false} className="combo-wod" />
+		{#if loaded}
+			<Chunk text={customText} max="15" space={false} className="combo-wod" />
+		{/if}
 	</p>
 </div>
 
 <div class="cta">
+	<div class="play">
+		{#if loaded}
+			<button on:click={() => dispatch("play")}>play</button>
+		{:else}
+			<span>loading...</span>
+		{/if}
+	</div>
+
 	<div class="rules">
 		<button
 			on:click={() => {
@@ -77,5 +91,9 @@
 
 	.details p {
 		width: 50%;
+	}
+
+	.play button {
+		font-size: var(--48px);
 	}
 </style>

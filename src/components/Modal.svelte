@@ -21,12 +21,7 @@
 	let showCountdown = false;
 	let wodReady;
 
-	const buttonOptions = {
-		pre: "play",
-		mid: "Next round"
-	};
-
-	const onBegin = async () => {
+	const onPlay = async () => {
 		if ($wod && $gameState === "pre")
 			await update({
 				table: "wordgame_games",
@@ -43,16 +38,15 @@
 		showCountdown = false;
 	};
 
-	$: buttonText = buttonOptions[$gameState];
 	$: hideButton = $wod && $gameState === "pre" && !wodReady;
-	$: showButton = buttonText && (!$wod || !hideButton);
+	$: console.log($gameState);
 </script>
 
 {#if $gameState === "pre"}
 	{#if $wod}
-		<PregameWOD bind:wodReady />
+		<PregameWOD bind:wodReady {loaded} {hideButton} />
 	{:else}
-		<Pregame />
+		<Pregame {loaded} on:play={onPlay} />
 	{/if}
 {/if}
 
@@ -69,13 +63,9 @@
 {/if}
 
 <!-- button to start round -->
-{#if showButton}
+{#if $gameState !== "pre"}
 	<p>
-		{#if loaded}
-			<button on:click={onBegin}>{buttonText}</button>
-		{:else}
-			<span>loading...</span>
-		{/if}
+		<button on:click={onPlay}>Next Round</button>
 	</p>
 {/if}
 
@@ -83,9 +73,3 @@
 {#if showCountdown}
 	<Countdown on:end={startRound} />
 {/if}
-
-<style>
-	button {
-		font-size: var(--48px);
-	}
-</style>
