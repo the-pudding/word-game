@@ -17,11 +17,13 @@
 	});
 
 	$: height = points * liHeight;
+	$: className = wod ? "combo-wod" : "combo-user";
 </script>
 
 <li
 	in:fly={{ y: startOffset, duration: 1000, easing: quartIn }}
 	class:wod
+	class={className}
 	style={`--height: ${height}px`}
 >
 	<span>{text}</span>
@@ -38,8 +40,6 @@
 		line-height: 1;
 		padding: 0 4px;
 		font-size: var(--16px);
-		color: var(--color-user-fg);
-		background-color: var(--color-user-bg);
 		border: 2px solid var(--color-user-border);
 		transform: translateY(-2px);
 		margin-bottom: -2px;
@@ -47,8 +47,6 @@
 	}
 
 	li.wod {
-		color: var(--color-wod-bg);
-		background-color: var(--color-wod-bg);
 		border: 2px solid var(--color-wod-border);
 	}
 

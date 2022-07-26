@@ -26,21 +26,9 @@
 
 <h2>
 	<small>
-		<Chunk
-			text="welcome to"
-			max="5"
-			--background="var(--color-user-bg)"
-			--color="var(--color-user-fg)"
-			--border="1px solid var(--color-user-border)"
-		/>
+		<Chunk text="welcome to" max="5" space={false} className="combo-user" />
 	</small>
-	<Chunk
-		text={title}
-		max="1"
-		--background="var(--color-user-bg)"
-		--color="var(--color-user-fg)"
-		--border="1px solid var(--color-user-border)"
-	/>
+	<Chunk text={title} max="1" space={false} className="combo-user" />
 </h2>
 
 <div class="details">
@@ -48,20 +36,13 @@
 		<Chunk
 			text={description}
 			max="15"
-			--background="transparent"
-			--color="var(--color-tan-900)"
-			--border="1px solid var(--color-tan-500)"
+			space={false}
+			className="combo-default"
 		/>
 	</p>
 
 	<p class="custom">
-		<Chunk
-			text={customText}
-			max="15"
-			--background="var(--color-wod-bg)"
-			--color="var(--color-wod-fg)"
-			--border="1px solid var(--color-wod-border)"
-		/>
+		<Chunk text={customText} max="15" space={false} className="combo-wod" />
 	</p>
 </div>
 

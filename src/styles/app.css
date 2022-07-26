@@ -35,6 +35,10 @@
 	--color-input-fg: var(--color-tan-1000);
 	--color-placeholder: var(--color-tan-500);
 
+	--color-default-bg: var(--color-tan-100);
+	--color-default-fg: var(--color-tan-900);
+	--color-default-border: var(--color-yellow-500);
+
 	--color-user-bg: var(--color-yellow-100);
 	--color-user-fg: var(--color-yellow-700);
 	--color-user-border: var(--color-yellow-400);
@@ -131,3 +135,29 @@ button, a[role="button"] {
 	text-transform: uppercase;
 }
 
+.combo-default {
+	background-color: var(--color-default-bg);
+	color: var(--color-default-fg);
+}
+
+.combo-user {
+	background-color: var(--color-user-bg);
+	color: var(--color-user-fg);
+}
+
+.combo-wod {
+	background-color: var(--color-wod-bg);
+	color: var(--color-wod-fg);
+}
+
+.chunk.combo-default {
+	border: 1px solid var(--color-default-border);
+}
+
+.chunk.combo-user {
+	border: 1px solid var(--color-user-border);
+}
+
+.chunk.combo-wod {
+	border: 1px solid var(--color-wod-border);
+}
