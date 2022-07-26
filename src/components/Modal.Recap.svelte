@@ -1,7 +1,7 @@
 <script>
 	import { gameState, totalScore, round, wod, wodInfo } from "$stores/misc.js";
-	import Score from "$components/Modal.Score.svelte";
 	import Highlights from "$components/Modal.Highlights.svelte";
+	import Chunk from "$components/Chunk.svelte";
 
 	const wodReactions = {
 		ahead: [
@@ -51,10 +51,9 @@
 
 <div>
 	{#if !$wod}
-		<h2>{title}</h2>
+		<h2><Chunk text={title} max="15" className="combo-user" /></h2>
 	{/if}
 
-	<Score />
 	<Highlights />
 
 	{#if $gameState === "post" && !$wod}

@@ -30,24 +30,19 @@
 
 <h2>
 	<small>
-		<Chunk text="welcome to" max="5" space={false} className="combo-user" />
+		<Chunk text="welcome to" max="5" className="combo-user" />
 	</small>
-	<Chunk text={title} max="1" space={false} className="combo-user" />
+	<Chunk text={title} max="1" className="combo-user" />
 </h2>
 
 <div class="details">
 	<p class="description">
-		<Chunk
-			text={description}
-			max="15"
-			space={false}
-			className="combo-default"
-		/>
+		<Chunk text={description} max="15" className="combo-default" />
 	</p>
 
 	<p class="custom">
 		{#if loaded}
-			<Chunk text={customText} max="15" space={false} className="combo-wod" />
+			<Chunk text={customText} max="15" className="combo-wod" />
 		{/if}
 	</p>
 </div>

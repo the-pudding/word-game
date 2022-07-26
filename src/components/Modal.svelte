@@ -39,7 +39,6 @@
 	};
 
 	$: hideButton = $wod && $gameState === "pre" && !wodReady;
-	$: console.log($gameState);
 </script>
 
 {#if $gameState === "pre"}

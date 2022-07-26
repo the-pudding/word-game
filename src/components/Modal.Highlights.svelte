@@ -8,46 +8,52 @@
 		wod,
 		wodInfo
 	} from "$stores/misc.js";
+	import Chunk from "$components/Chunk.svelte";
 
 	$: count = format(",")($possibleAnswers.length);
-	$: wodWords = $guesses.wod[$round].filter(
-		(d) => d.valid && !d.guessedByUserLate
-	);
+	$: wodWords = $guesses.wod[$round]
+		.filter((d) => d.valid && !d.guessedByUserLate)
+		.slice(0, 5)
+		.map((d) => d.text)
+		.join(" ");
 	$: commonWords = $possibleAnswers
 		.filter((d) => +d.points === 1)
-		.filter((d) => !$lemmasPlayed.includes((d) => d.text));
-	$: spanWords = shuffle(commonWords)
+		.filter((d) => !$lemmasPlayed.includes((d) => d.text))
 		.slice(0, 5)
-		.map((d) => `<span>${d.word}</span>`)
-		.join(", ");
+		.map((d) => d.word)
+		.join(" ");
+
 	$: commonText = $wod ? "you didn't get" : "neither of you got";
 </script>
 
 <p>
-	There were <strong>{count}</strong> possible words that satisfied the clue.
+	<Chunk
+		text="In round {$round +
+			1} there were <em>{count}</em> possible words that satisfied the clue."
+		className="combo-default"
+	/>
 </p>
 {#if wodWords.length}
-	<p>Here are some words that {$wodInfo.name} got that you didn't:</p>
-	<table>
-		<thead>
-			<th>Word</th>
-			<th>Points</th>
-		</thead>
-		<tbody
-			>{#each wodWords.slice(0, 7) as { text, points }}
-				<tr><td>{text}</td> <td>{points}</td></tr>
-			{/each}
-		</tbody>
-	</table>
+	<p>
+		<Chunk
+			text="some words that {$wodInfo.name} got that you didn't"
+			max="15"
+			className="combo-wod"
+		/>
+	</p>
+	<p><Chunk text={wodWords} max="1" className="combo-default" /></p>
 {/if}
 
 <p>
-	Here are some common words that {commonText}: {@html spanWords}.
+	<Chunk
+		text="Some common words that {commonText}"
+		max="15"
+		className="combo-wod"
+	/>
+</p>
+<p>
+	<Chunk text={commonWords} max="1" className="combo-default" />
 </p>
 
 <style>
-	table {
-		width: 20em;
-		margin: 0 auto;
-	}
 </style>
