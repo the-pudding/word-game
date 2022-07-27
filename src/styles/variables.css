@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 22 Jul 2022 19:45:55 GMT
+ * Generated on Wed, 27 Jul 2022 17:45:20 GMT
  */
 
 :root {
@@ -13,17 +13,6 @@
   --category-gray: #BBBBBB;
   --color-black: #000000;
   --color-white: #ffffff;
-  --color-gray-50: #f7f7f7;
-  --color-gray-100: #efefef;
-  --color-gray-200: #dfdfdf;
-  --color-gray-300: #cacaca;
-  --color-gray-400: #a8a8a8;
-  --color-gray-500: #878787;
-  --color-gray-600: #6d6d6d;
-  --color-gray-700: #4e4e4e;
-  --color-gray-800: #373737;
-  --color-gray-900: #262626;
-  --color-gray-1000: #191919;
   --color-tan: #f3eee5;
   --color-tan-dark: #9e9991;
   --color-tan-darker: #504c45;
@@ -83,6 +72,7 @@
   --56px: 3.5rem;
   --64px: 4rem;
   --80px: 5rem;
+  --88px: 5.5rem;
   --96px: 6rem;
   --112px: 7rem;
   --128px: 8rem;

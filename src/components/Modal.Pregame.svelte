@@ -28,56 +28,67 @@
 			: "there is no active game right now. check back later or sign up below to get notified.";
 </script>
 
-<h2>
-	<small>
-		<Chunk text="welcome to" max="5" className="combo-user" />
-	</small>
-	<Chunk text={title} max="1" className="combo-user" />
-</h2>
+<div class="wrapper">
+	<h2>
+		<small>
+			<Chunk text="welcome to" max="5" className="combo-user" />
+		</small>
+		<Chunk text={title} max="1" className="combo-user" />
+	</h2>
 
-<div class="details">
-	<p class="description">
-		<Chunk text={description} max="15" className="combo-default" />
-	</p>
+	<div class="details">
+		<p class="description">
+			<Chunk text={description} max="15" className="combo-default" />
+		</p>
 
-	<p class="custom">
-		{#if loaded}
-			<Chunk text={customText} max="15" className="combo-wod" />
-		{/if}
-	</p>
-</div>
-
-<div class="cta">
-	<div class="play">
-		{#if loaded}
-			<button on:click={() => dispatch("play")}>play</button>
-		{:else}
-			<span>loading...</span>
-		{/if}
+		<p class="custom">
+			{#if loaded}
+				<Chunk text={customText} max="15" className="combo-wod" />
+			{/if}
+		</p>
 	</div>
 
-	<div class="rules">
-		<button
-			on:click={() => {
-				$overlay = "rules";
-			}}>rules</button
-		>
-	</div>
-	<div class="signup">
-		<p class="next">Want to be the next opponent?</p>
-		<!-- TODO link -->
-		<a role="button" href="#">sign up</a>
+	<div class="cta">
+		<div class="play">
+			{#if loaded}
+				<button on:click={() => dispatch("play")}>play</button>
+			{:else}
+				<span>loading...</span>
+			{/if}
+		</div>
+
+		<div class="other">
+			<div class="rules">
+				<button
+					on:click={() => {
+						$overlay = "rules";
+					}}>rules</button
+				>
+			</div>
+			<div class="signup">
+				<p>want to be the next stranger?</p>
+				<!-- TODO link -->
+				<a role="button" href="#">sign up</a>
+			</div>
+		</div>
 	</div>
 </div>
 
 <style>
+	.wrapper {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
+	}
+
 	h2 {
 		margin: 0 auto;
-		font-weight: bold;
+		font-weight: var(--bold);
 	}
 
 	small {
 		font-size: 0.5em;
+		display: block;
 	}
 
 	.details {
@@ -86,9 +97,47 @@
 
 	.details p {
 		width: 50%;
+		padding: 16px 8px;
+	}
+
+	.cta {
+		border-top: 1px solid var(--color-fg);
+		display: flex;
+		/* flex-direction: column; */
+		justify-content: space-between;
+		padding-top: 8px;
+	}
+
+	.play {
+		/* text-align: center; */
 	}
 
 	.play button {
-		font-size: var(--48px);
+		font-size: var(--88px);
+		/* width: 100%; */
+	}
+
+	.other {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		justify-content: space-between;
+	}
+
+	.other button,
+	[role="button"] {
+		font-size: var(--14px);
+	}
+
+	.signup {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+	}
+
+	.signup p {
+		font-size: var(--14px);
+		text-align: right;
+		margin: 4px 0;
 	}
 </style>

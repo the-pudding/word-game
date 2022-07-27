@@ -74,7 +74,7 @@
 		left: 8px;
 		padding: 8px;
 		font-size: var(--24px);
-		font-weight: bold;
+		font-weight: var(--bold);
 		line-height: 1;
 	}
 
@@ -90,7 +90,7 @@
 		border: none;
 		position: relative;
 		line-height: 1;
-		font-weight: bold;
+		font-weight: var(--bold);
 		user-select: none;
 		color: var(--color-user-fg);
 	}

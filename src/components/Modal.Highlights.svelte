@@ -31,6 +31,7 @@
 		text="In round {$round +
 			1} there were <em>{count}</em> possible words that satisfied the clue."
 		className="combo-default"
+		max="15"
 	/>
 </p>
 {#if wodWords.length}

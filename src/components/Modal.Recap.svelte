@@ -57,13 +57,11 @@
 	<Highlights />
 
 	{#if $gameState === "post" && !$wod}
-		{#if userLead}
-			<p>You win!</p>
-		{:else if wodLead}
-			<p>You lose!</p>
-		{:else}
-			<p>Tie!</p>
-		{/if}
+		<Chunk
+			text="TODO what else to say after the game?"
+			max="15"
+			className="combo-user"
+		/>
 	{/if}
 </div>
 

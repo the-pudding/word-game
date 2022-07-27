@@ -48,6 +48,9 @@
 		"80px": {
 			"value": "5rem"
 		},
+		"88px": {
+			"value": "5.5rem"
+		},
 		"96px": {
 			"value": "6rem"
 		},

@@ -55,17 +55,13 @@
 {#if $gameState === "post"}
 	{#if $wod}
 		<PostgameWOD />
-	{:else}
-		<!-- <Postgame /> -->
-		<Feedback />
 	{/if}
 {/if}
 
-<!-- button to start round -->
-{#if $gameState !== "pre"}
-	<p>
+{#if $gameState === "mid"}
+	<div>
 		<button on:click={onPlay}>Next Round</button>
-	</p>
+	</div>
 {/if}
 
 <!-- countdown timer -->

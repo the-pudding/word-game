@@ -36,8 +36,8 @@
 	--color-placeholder: var(--color-tan-500);
 
 	--color-default-bg: var(--color-tan-100);
-	--color-default-fg: var(--color-tan-900);
-	--color-default-border: var(--color-yellow-500);
+	--color-default-fg: var(--color-tan-700);
+	--color-default-border: var(--color-tan-400);
 
 	--color-user-bg: var(--color-yellow-100);
 	--color-user-fg: var(--color-yellow-700);
@@ -47,6 +47,7 @@
 	--color-wod-fg: var(--color-blue-900);
 	--color-wod-border: var(--color-blue-500);
 	
+	--bold: 800;
 }
 
 /* dark theme */
@@ -74,6 +75,7 @@ body {
 	width: 100vw;
 	height: 100vh;
 	overflow: auto;
+	font-weight: 600;
 }
 
 main {
@@ -116,6 +118,7 @@ h6 {
 
 p {
 	margin: 0;
+	line-height: 1;
 }
 
 section {
@@ -131,9 +134,15 @@ section {
 button, a[role="button"] {
 	border: 2px solid var(--color-white);
 	box-shadow: 0 0 0 2px var(--color-button-bg);
-	font-weight: bold;
+	font-weight: var(--bold);
 	text-transform: uppercase;
 }
+
+
+strong {
+	font-weight: var(--bold);
+}
+
 
 .combo-default {
 	background-color: var(--color-default-bg);
@@ -151,13 +160,13 @@ button, a[role="button"] {
 }
 
 .chunk.combo-default {
-	border: 1px solid var(--color-default-border);
+	border: 2px solid var(--color-default-border);
 }
 
 .chunk.combo-user {
-	border: 1px solid var(--color-user-border);
+	border: 2px solid var(--color-user-border);
 }
 
 .chunk.combo-wod {
-	border: 1px solid var(--color-wod-border);
+	border: 2px solid var(--color-wod-border);
 }
