@@ -31,7 +31,8 @@
 		--height="42px"
 		--margin="4px"
 		--min-width="28px"
-		--background="var(--color-white)"
+		--background="var(--color-tan-300)"
+		--active-background="var(--color-tan-400)"
 		--color="var(--color-fg)"
 	/>
 </div>

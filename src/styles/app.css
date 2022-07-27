@@ -46,6 +46,9 @@
 	--color-wod-bg: var(--color-blue-100);
 	--color-wod-fg: var(--color-blue-900);
 	--color-wod-border: var(--color-blue-500);
+
+	--color-mark-bg: var(--color-red-100);
+	--color-mark-fg: var(--color-red-700);
 	
 	--bold: 800;
 }
@@ -157,6 +160,11 @@ strong {
 .combo-wod {
 	background-color: var(--color-wod-bg);
 	color: var(--color-wod-fg);
+}
+
+.combo-mark {
+	background-color: var(--color-mark-bg);
+	color: var(--color-mark-fg);
 }
 
 .chunk.combo-default {

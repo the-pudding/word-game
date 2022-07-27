@@ -6,6 +6,8 @@
 
 	export let loaded;
 
+	const loadingText = "loading today's game...";
+
 	const { title, description } = getContext("copy");
 
 	const dispatch = createEventDispatcher();
@@ -24,7 +26,7 @@
 	$: if ($gameId) load();
 	$: customText =
 		$gameId && $wodInfo
-			? `today that person is ${$wodInfo?.name} from ${$wodInfo?.location}. can you beat them?`
+			? `today that person is ${$wodInfo?.name} from ${$wodInfo?.location}. they love boba tea. can you beat them?`
 			: "there is no active game right now. check back later or sign up below to get notified.";
 </script>
 
@@ -42,19 +44,17 @@
 		</p>
 
 		<p class="custom">
-			{#if loaded}
-				<Chunk text={customText} max="15" className="combo-wod" />
-			{/if}
+			<Chunk
+				text={loaded ? customText : loadingText}
+				max="15"
+				className="combo-wod"
+			/>
 		</p>
 	</div>
 
 	<div class="cta">
 		<div class="play">
-			{#if loaded}
-				<button on:click={() => dispatch("play")}>play</button>
-			{:else}
-				<span>loading...</span>
-			{/if}
+			<button on:click={() => dispatch("play")} disabled={!loaded}>play</button>
 		</div>
 
 		<div class="other">

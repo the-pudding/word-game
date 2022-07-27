@@ -1,6 +1,7 @@
 <script>
 	import List from "$components/Play.Guesses.List.svelte";
-	import { guesses, round, wod, totalScore } from "$stores/misc.js";
+	import Score from "$components/Play.Guesses.Score.svelte";
+	import { guesses, round, wod, wodInfo, totalScore } from "$stores/misc.js";
 	import mq from "$stores/mq.js";
 	const takenCode = 0;
 	const displayFilter = (d) => d.reason === undefined || d.reason === takenCode;
@@ -22,9 +23,11 @@
 </script>
 
 <div id="play-guesses" bind:clientHeight={containerHeight}>
+	<Score name="you" points={0} />
 	<List guesses={userGuesses} --offsetY={offsetY} {liHeight} {startOffset} />
 	{#if !$wod}
 		<List guesses={wodGuesses} --offsetY={offsetY} wod={true} {liHeight} />
+		<Score name={$wodInfo.name} points={0} />
 	{/if}
 </div>
 
@@ -32,7 +35,6 @@
 	div {
 		display: flex;
 		justify-content: center;
-		width: 100%;
 		overflow: hidden;
 		flex: 1;
 	}

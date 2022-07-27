@@ -31,7 +31,6 @@
 
 <style>
 	li {
-		font-weight: var(--bold);
 		list-style-type: none;
 		text-align: center;
 		display: inline-flex;

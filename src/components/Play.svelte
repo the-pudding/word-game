@@ -4,7 +4,6 @@
 	import InputKeyboard from "$components/Play.InputKeyboard.svelte";
 	import Clock from "$components/Play.Clock.svelte";
 	import Clue from "$components/Play.Clue.svelte";
-	import Score from "$components/Play.Score.svelte";
 	import Invalid from "$components/Play.Invalid.svelte";
 	import {
 		guesses,
@@ -102,7 +101,6 @@
 </script>
 
 <div>
-	<!-- <Score /> -->
 	<Clue clue={currentClue} />
 	<Input on:submit={onSubmit} />
 	<Invalid />
