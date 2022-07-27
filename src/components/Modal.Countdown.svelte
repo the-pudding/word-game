@@ -4,7 +4,7 @@
 
 	const dispatch = createEventDispatcher();
 
-	const start = 3;
+	const start = 3000;
 	const end = -1;
 	const duration = start * 1000;
 	const countdown = tweened(start, { duration });

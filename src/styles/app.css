@@ -130,7 +130,7 @@ section {
 
 button, a[role="button"] {
 	border: 2px solid var(--color-white);
-	outline: 2px solid var(--color-button-bg);
+	box-shadow: 0 0 0 2px var(--color-button-bg);
 	font-weight: bold;
 	text-transform: uppercase;
 }
