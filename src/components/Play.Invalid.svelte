@@ -42,6 +42,7 @@
 	div {
 		width: 50%;
 		position: relative;
+		padding-top: 8px;
 	}
 
 	p {

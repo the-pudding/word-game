@@ -19,11 +19,7 @@
 	export let clues;
 	export let answers;
 
-	$: currentClue = clues[$round];
-	$: roundData = answers[$round];
-	$: $possibleAnswers = roundData;
-
-	$: validWords = roundData.map((d) => d.word);
+	let keyboardValue = "";
 
 	const lookupLemmas = (text) => {
 		const match = roundData.find((d) => d.word === text);
@@ -98,15 +94,21 @@
 		$guesses.user[$round] = [...$guesses.user[$round], guess];
 		checkRevealWod(lemmas);
 	};
+
+	$: currentClue = clues[$round];
+	$: roundData = answers[$round];
+	$: $possibleAnswers = roundData;
+
+	$: validWords = roundData.map((d) => d.word);
 </script>
 
 <div>
 	<Clue clue={currentClue} />
-	<Input on:submit={onSubmit} />
+	<Input on:submit={onSubmit} value={keyboardValue} />
 	<Invalid />
 	<Guesses />
 	<Clock />
-	<InputKeyboard on:submit={onSubmit} />
+	<InputKeyboard on:submit={onSubmit} bind:value={keyboardValue} />
 </div>
 
 <style>

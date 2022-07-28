@@ -3,8 +3,8 @@
 	import { createEventDispatcher } from "svelte";
 	const dispatch = createEventDispatcher();
 
+	export let value = "";
 	let inputEl;
-	let value = "";
 
 	const submit = () => {
 		if (value) dispatch("submit", value);

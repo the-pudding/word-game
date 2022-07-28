@@ -19,7 +19,7 @@
 		(containerHeight - thresholdHeight + Math.min(0, distPastThreshold) * -1) *
 		-1;
 	$: offsetY = `${Math.max(0, distPastThreshold)}px`;
-	$: liHeight = $mq["40rem"] ? 28 : 20;
+	$: liHeight = $mq["40rem"] ? 32 : 24;
 </script>
 
 <div id="play-guesses" bind:clientHeight={containerHeight}>
