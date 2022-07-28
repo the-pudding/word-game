@@ -21,7 +21,7 @@
 	}
 
 	h1 {
-		color: var(--color-white);
+		color: var(--color-bg-binary);
 		font-size: var(--18px);
 		text-align: center;
 	}

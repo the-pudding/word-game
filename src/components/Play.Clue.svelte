@@ -16,7 +16,7 @@
 <style>
 	div {
 		padding: 8px;
-		background: var(--color-white);
+		background: var(--color-bg-binary);
 		border: 1px solid var(--color-fg);
 	}
 	ul {
@@ -29,7 +29,7 @@
 		margin: 0;
 		list-style-type: none;
 		margin-right: 8px;
-		background: var(--color-white);
+		background: var(--color-bg-binary);
 		padding: 4px;
 		line-height: 1;
 		border: 1px solid var(--color-fg);

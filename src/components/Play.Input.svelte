@@ -59,7 +59,7 @@
 	}
 
 	.box {
-		background-color: var(--color-white);
+		background-color: var(--color-bg-binary);
 		width: 100%;
 		border: 1px solid var(--color-fg);
 		padding: 8px;

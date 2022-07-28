@@ -25,7 +25,7 @@
 
 <div id="play-clock">
 	<div class="margin">
-		<span class="progress" style:width />
+		<span class="progress combo-mark" style:width />
 	</div>
 	<!-- <p><strong>{secondsLeft}</strong></p> -->
 </div>
@@ -38,7 +38,7 @@
 		padding: 4px;
 		height: 2rem;
 		border: 1px solid var(--color-fg);
-		background-color: var(--color-white);
+		background-color: var(--color-bg-binary);
 	}
 
 	.margin {
@@ -53,7 +53,6 @@
 		display: block;
 		width: 100%;
 		height: 100%;
-		background: var(--color-red-100);
 	}
 
 	/* p {
@@ -61,7 +60,6 @@
 		top: 2px;
 		left: 8px;
 		font-size: var(--18px);
-		color: var(--color-red-700);
 		opacity: 0;
 	} */
 </style>

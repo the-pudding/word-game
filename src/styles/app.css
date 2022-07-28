@@ -20,7 +20,11 @@
 	--font-body: var(--sans);
 	--font-form: var(--sans);
 	--color-bg: var(--color-tan-100);
+	--color-bg-2: var(--color-tan-300);
+	--color-bg-3: var(--color-tan-400);
 	--color-fg: var(--color-tan-1000);
+	--color-bg-binary: var(--color-white);
+	--color-fg-binary: var(--color-black);
 	--color-user: var(--color-yellow-100);
 	--color-wod: var(--color-blue-100);
   --color-link: var(--color-tan-1000);
