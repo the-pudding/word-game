@@ -1,7 +1,7 @@
 <script>
 	import { gameState, totalScore, round, wod, wodInfo } from "$stores/misc.js";
 	import Highlights from "$components/Modal.Highlights.svelte";
-	import Chunk from "$components/Chunk.svelte";
+	import Chunk from "$components/helpers/Chunk.svelte";
 
 	const wodReactions = {
 		ahead: [

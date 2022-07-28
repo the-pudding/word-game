@@ -8,7 +8,7 @@
 		wod,
 		wodInfo
 	} from "$stores/misc.js";
-	import Chunk from "$components/Chunk.svelte";
+	import Chunk from "$components/helpers/Chunk.svelte";
 
 	$: count = format(",")($possibleAnswers.length);
 	$: wodWords = $guesses.wod[$round]

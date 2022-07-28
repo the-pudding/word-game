@@ -8,7 +8,7 @@
 		wod,
 		gameId
 	} from "$stores/misc.js";
-	import Countdown from "$components/Modal.Countdown.svelte";
+	import Countdown from "$components/helpers/Countdown.svelte";
 	import Recap from "$components/Modal.Recap.svelte";
 	import Pregame from "$components/Modal.Pregame.svelte";
 	import PregameWOD from "$components/Modal.PregameWOD.svelte";
@@ -33,6 +33,7 @@
 	};
 
 	const startRound = () => {
+		console.log("begin");
 		$active = true;
 		$round += 1;
 		showCountdown = false;
@@ -45,7 +46,7 @@
 	{#if $wod}
 		<PregameWOD bind:wodReady {loaded} {hideButton} />
 	{:else}
-		<Pregame {loaded} on:play={onPlay} />
+		<Pregame {loaded} {showCountdown} on:play={onPlay} on:start={startRound} />
 	{/if}
 {/if}
 
@@ -60,11 +61,12 @@
 
 {#if $gameState === "mid"}
 	<div>
-		<button on:click={onPlay}>Next Round</button>
+		<button on:click={onPlay}>
+			{#if showCountdown}
+				<Countdown text="Begin!" on:end={startRound} />
+			{:else}
+				next round
+			{/if}
+		</button>
 	</div>
-{/if}
-
-<!-- countdown timer -->
-{#if showCountdown}
-	<Countdown on:end={startRound} />
 {/if}
