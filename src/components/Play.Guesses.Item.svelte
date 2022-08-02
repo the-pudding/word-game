@@ -39,10 +39,15 @@
 		line-height: 1;
 		padding: 0 4px;
 		font-size: var(--16px);
-		border: 2px solid var(--color-user-border);
+		/* outline: 2px solid var(--color-user-border); */
 		transform: translateY(-2px);
-		margin-bottom: -2px;
+		margin-top: -2px;
+		/* border: 2px solid var(--color-user-border); */
+		/* outline: 2px solid var(--color-user-border); */
+		box-shadow: 0 0 0 2px var(--color-user-border);
+		border-bottom: none;
 		align-items: center;
+		flex-shrink: 0;
 	}
 
 	li.wod {
