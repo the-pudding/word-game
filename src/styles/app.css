@@ -54,6 +54,8 @@
 	--color-mark-bg: var(--color-red-100);
 	--color-mark-fg: var(--color-red-700);
 	
+	--color-bg-light-text: var(--color-tan-600);
+
 	--bold: 800;
 }
 

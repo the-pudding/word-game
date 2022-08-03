@@ -6,23 +6,39 @@
 	const takenCode = 0;
 	const displayFilter = (d) => d.reason === undefined;
 	const threshold = 0.75;
+	const borderH = 2;
 
 	let containerHeight = 0;
 
 	$: liHeight = $mq["40rem"] ? 32 : 24;
+
 	$: userGuesses = [].concat(...$guesses.user).filter(displayFilter);
 	$: wodGuesses = [].concat(...$guesses.wod).filter(displayFilter);
-	$: ulHeight = $totalScore.user * liHeight; // total stack height
+
+	$: borderOffset = userGuesses.length * borderH;
+	$: borderOffsetWod = wodGuesses.length * borderH;
+
+	$: ulHeight = $totalScore.user * liHeight - borderOffset; // total stack height
+	$: ulHeightWod = $totalScore.wod * liHeight - borderOffsetWod; // total stack height
+	$: ulHeightDiff = ulHeightWod - ulHeight;
+
 	$: thresholdHeight = containerHeight * threshold;
+
 	$: distAboveThreshold = ulHeight - thresholdHeight; // how far from our threshold we are (pos or neg)
 	$: distAboveThresholdClamped = Math.max(0, distAboveThreshold);
+
 	$: offsetY = `${distAboveThresholdClamped}px`;
-	$: console.log({ ulHeight, thresholdHeight, distAboveThresholdClamped });
-	$: userScoreY = distAboveThresholdClamped > 0 ? thresholdHeight : ulHeight;
-	// for animation: where word drops in from
+
 	$: startOffset =
 		(containerHeight - thresholdHeight + Math.min(0, distAboveThreshold) * -1) *
 		-1;
+
+	$: userScoreY = distAboveThresholdClamped > 0 ? thresholdHeight : ulHeight;
+	$: wodScoreY = Math.min(
+		containerHeight,
+		Math.max(0, ulHeightDiff + userScoreY)
+	);
+	$: above = wodScoreY === containerHeight;
 </script>
 
 <div id="play-guesses" bind:clientHeight={containerHeight}>
@@ -30,7 +46,12 @@
 	<List guesses={userGuesses} --offsetY={offsetY} {liHeight} {startOffset} />
 	{#if !$wod}
 		<List guesses={wodGuesses} --offsetY={offsetY} wod={true} {liHeight} />
-		<Score name={$wodInfo.name} points={$totalScore.wod} />
+		<Score
+			name={$wodInfo.name}
+			points={$totalScore.wod}
+			y={wodScoreY}
+			{above}
+		/>
 	{/if}
 </div>
 

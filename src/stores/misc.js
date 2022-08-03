@@ -1,4 +1,4 @@
-import { writable, derived } from "svelte/store";
+import { readable, writable, derived } from "svelte/store";
 import { sum, range } from "d3";
 
 export const ROUNDS = 4;
@@ -14,6 +14,7 @@ const sumRound = (roundGuesses) =>
 export const gameId = writable();
 export const active = writable(false);
 export const round = writable(-1);
+export const wordDuration = readable(1000);
 
 export const gameState = derived([round, active], ([$round, $active], set) => {
 	if ($round >= ROUNDS - 1 && !$active) set("post");

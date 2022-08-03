@@ -2,6 +2,7 @@
 	import { tweened } from "svelte/motion";
 	import { fly } from "svelte/transition";
 	import { quartIn } from "svelte/easing";
+	import { wordDuration } from "$stores/misc.js";
 
 	export let wod;
 	export let text;
@@ -9,7 +10,7 @@
 	export let liHeight;
 	export let startOffset;
 
-	const timer = tweened(0, { duration: 1000 });
+	const timer = tweened(0, { duration: $wordDuration });
 
 	let timerVisible = true;
 	timer.set(1).then(() => {
@@ -21,7 +22,11 @@
 </script>
 
 <li
-	in:fly={{ y: startOffset, duration: 1000, easing: quartIn }}
+	in:fly={{
+		y: startOffset,
+		duration: $wordDuration * (wod ? 0.5 : 1),
+		easing: quartIn
+	}}
 	class:wod
 	class={className}
 	style={`--height: ${height}px`}
@@ -37,15 +42,10 @@
 		position: relative;
 		height: var(--height);
 		line-height: 1;
-		padding: 0 4px;
+		padding: 0 6px;
 		font-size: var(--16px);
-		/* outline: 2px solid var(--color-user-border); */
-		transform: translateY(-2px);
 		margin-top: -2px;
-		/* border: 2px solid var(--color-user-border); */
-		/* outline: 2px solid var(--color-user-border); */
-		box-shadow: 0 0 0 2px var(--color-user-border);
-		border-bottom: none;
+		border: 2px solid var(--color-user-border);
 		align-items: center;
 		flex-shrink: 0;
 	}
@@ -61,6 +61,7 @@
 	@media screen and (min-width: 40rem) {
 		li {
 			font-size: var(--20px);
+			padding: 0 8px;
 		}
 	}
 </style>

@@ -8,7 +8,6 @@
 
 <ul class:wod>
 	{#each guesses as { valid, text, revealWod, points } (text)}
-		<!-- TODO pass height to item -->
 		<Item {wod} {valid} {text} {revealWod} {points} {liHeight} {startOffset} />
 	{/each}
 </ul>
