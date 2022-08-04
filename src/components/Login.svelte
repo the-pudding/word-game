@@ -8,6 +8,8 @@
 	let password = "";
 	let error;
 
+	const contact = "please contact words.against.strangers@pudding.cool";
+
 	const onSubmit = async () => {
 		try {
 			const loggedIn = await signIn({ email, password });
@@ -16,8 +18,7 @@
 				column: "wod_started"
 			});
 			authorized = loggedIn && !hasStarted;
-			// TODO real contact info
-			if (hasStarted) error = "You already started playing";
+			if (hasStarted) error = "you already started playing";
 		} catch (err) {
 			console.log(err);
 			error = err;
@@ -46,11 +47,13 @@
 
 		{#if error}
 			<p class="error">
-				{error}. please contact the admin: russell@pudding.cool.
+				{error}. {contact}
 			</p>
 		{/if}
 	{:else}
-		<p>no game id in URL, please contact the admin: russell@pudding.cool.</p>
+		<p>
+			no game id in URL, {contact}
+		</p>
 	{/if}
 </section>
 
