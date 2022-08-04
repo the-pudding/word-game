@@ -40,8 +40,6 @@ video {
 }
 
 input, textarea {
-	-webkit-appearance: none;
-	appearance: none;
   background-color: var(--color-input-bg, whitesmoke);
   color: var(--color-input-fg, black);
   border-radius: var(--border-radius, 0);

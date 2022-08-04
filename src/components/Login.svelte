@@ -4,8 +4,8 @@
 
 	export let authorized;
 
-	let email = "";
-	let password = "";
+	let email = "michelle@pudding.cool";
+	let password = "vkh7w0";
 	let error;
 
 	const contact = "please contact words.against.strangers@pudding.cool";

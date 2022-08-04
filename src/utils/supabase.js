@@ -5,20 +5,6 @@ const supabaseAnonKey = import.meta.env.VITE_SUPABASE_ANON_KEY;
 
 const supabase = createClient(supabaseUrl, supabaseAnonKey);
 
-// private
-const getQuestionText = async (questionIds) => {
-	const response = await supabase
-		.from("wordgame_wod-questions")
-		.select("question,id,category")
-		.in("id", questionIds)
-
-	if (response.error) {
-		console.log(response.error);
-		throw new Error("getQuestionText failed");
-	}
-	else if (response.data) return response.data;
-};
-
 // public
 export const signIn = async ({ email, password }) => {
 	const response = await supabase.auth.signIn({
@@ -44,21 +30,13 @@ export const signOut = async () => {
 
 export const getQuestions = async (gameId) => {
 	const response = await supabase
-		.from("wordgame_games")
-		.select("question_ids")
-		.eq("game_id", gameId);
+		.from("wordgame_wod-questions");
 
 	if (response.error) {
 		console.log(response.error);
 		throw new Error("getQuestions failed");
 	} else if (response.data.length) {
-		try {
-			const questionIds = response.data[0].question_ids.split("|").map(d => +d);
-			const questions = await getQuestionText(questionIds);
-			return questions;
-		} catch (err) {
-			return err;
-		}
+		return response.data;
 	}
 	throw new Error("no questions matching that game id");
 }
