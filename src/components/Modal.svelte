@@ -1,14 +1,12 @@
 <script>
 	import {
 		active,
+		inModal,
 		round,
-		roundScore,
 		gameState,
-		totalScore,
 		wod,
 		gameId
 	} from "$stores/misc.js";
-	import Countdown from "$components/helpers/Countdown.svelte";
 	import Recap from "$components/Modal.Recap.svelte";
 	import Pregame from "$components/Modal.Pregame.svelte";
 	import PregameWOD from "$components/Modal.PregameWOD.svelte";
@@ -18,25 +16,20 @@
 
 	export let loaded;
 
-	let showCountdown = false;
 	let wodReady;
 
 	const onPlay = async () => {
-		if ($wod && $gameState === "pre")
+		if ($wod && $gameState === "pre") {
 			await update({
 				table: "wordgame_games",
 				column: "wod_started",
 				value: true,
 				gameId: $gameId
 			});
-		showCountdown = true;
-	};
-
-	const startRound = () => {
-		console.log("begin");
-		$active = true;
+		} else if ($gameState === "mid") {
+			$inModal = false;
+		}
 		$round += 1;
-		showCountdown = false;
 	};
 
 	$: hideButton = $wod && $gameState === "pre" && !wodReady;
@@ -46,7 +39,7 @@
 	{#if $wod}
 		<PregameWOD bind:wodReady {loaded} {hideButton} />
 	{:else}
-		<Pregame {loaded} {showCountdown} on:play={onPlay} on:start={startRound} />
+		<Pregame {loaded} on:play={onPlay} />
 	{/if}
 {/if}
 
@@ -61,12 +54,12 @@
 
 {#if $gameState === "mid"}
 	<div>
-		<button on:click={onPlay}>
-			{#if showCountdown}
-				<Countdown text="Begin!" on:end={startRound} />
-			{:else}
-				next round
-			{/if}
-		</button>
+		<button on:click={onPlay}> next round </button>
 	</div>
 {/if}
+
+<style>
+	button {
+		min-width: 8em;
+	}
+</style>

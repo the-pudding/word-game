@@ -12,15 +12,19 @@ const sumRound = (roundGuesses) =>
 	);
 
 export const gameId = writable();
+export const inModal = writable(false);
 export const active = writable(false);
 export const round = writable(-1);
 export const wordDuration = readable(1000);
 
-export const gameState = derived([round, active], ([$round, $active], set) => {
-	if ($round >= ROUNDS - 1 && !$active) set("post");
-	else if (!$active && $round === -1) set("pre");
-	else set("mid");
-});
+export const gameState = derived(
+	[round, inModal],
+	([$round, $inModal], set) => {
+		if ($round >= ROUNDS - 1 && $inModal) set("post");
+		else if ($round === -1) set("pre");
+		else set("mid");
+	}
+);
 
 export const guesses = writable({
 	user: createEmptyRounds(),

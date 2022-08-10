@@ -5,12 +5,13 @@
 	import Clock from "$components/Play.Clock.svelte";
 	import Clue from "$components/Play.Clue.svelte";
 	import Invalid from "$components/Play.Invalid.svelte";
+	import Countdown from "$components/helpers/Countdown.svelte";
 	import {
 		guesses,
 		lemmasPlayed,
 		round,
 		possibleAnswers,
-		wodId
+		active
 	} from "$stores/misc.js";
 	import lemmaExists from "$utils/lemmaExists.js";
 
@@ -100,11 +101,20 @@
 	$: $possibleAnswers = roundData;
 
 	$: validWords = roundData.map((d) => d.word);
+
+	let showCountdown = true;
+	const startRound = () => {
+		$active = true;
+		showCountdown = false;
+	};
 </script>
 
 <div>
 	<Clue clue={currentClue} />
 	<Input on:submit={onSubmit} value={keyboardValue} />
+	{#if showCountdown}
+		<Countdown text="Begin!" on:end={startRound} />
+	{/if}
 	<Invalid />
 	<Guesses />
 	<Clock />

@@ -2,11 +2,9 @@
 	import { onMount, getContext, createEventDispatcher } from "svelte";
 	import { overlay, gameId, wodInfo } from "$stores/misc.js";
 	import loadWodInfo from "$utils/loadWodInfo.js";
-	import Countdown from "$components/helpers/Countdown.svelte";
 	import Chunk from "$components/helpers/Chunk.svelte";
 
 	export let loaded;
-	export let showCountdown;
 
 	const loadingText = "loading today's game...";
 
@@ -57,11 +55,7 @@
 	<div class="cta">
 		<div class="play">
 			<button on:click={() => dispatch("play")} disabled={!loaded}>
-				{#if showCountdown}
-					<Countdown text="go!" on:end={() => dispatch("start")} />
-				{:else}
-					play
-				{/if}
+				play
 			</button>
 		</div>
 

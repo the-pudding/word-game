@@ -3,13 +3,13 @@
 	import WodBot from "$components/WodBot.svelte";
 	import Play from "$components/Play.svelte";
 	import Modal from "$components/Modal.svelte";
-	import { gameId, gameState, active, wod, wodId } from "$stores/misc.js";
+	import { gameId, gameState, inModal, wod, wodId } from "$stores/misc.js";
 	import loadClues from "$utils/loadClues.js";
 	import loadAnswers from "$utils/loadAnswers.js";
 	import loadJson from "$utils/loadJson.js";
 
-	$: playVisible = $gameState === "mid" && $active;
-	$: modalVisible = !$active || ["pre", "post"].includes($gameState);
+	$: playVisible = $gameState === "mid" && !$inModal;
+	$: modalVisible = $inModal || ["pre", "post"].includes($gameState);
 
 	let clues;
 	let answers;

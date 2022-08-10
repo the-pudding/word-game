@@ -1,17 +1,20 @@
 <script>
 	import { onMount } from "svelte";
 	import { timer, elapsed } from "$stores/timer.js";
-	import { active } from "$stores/misc.js";
+	import { active, inModal } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 6000 * MS;
+	const target = 6 * MS;
 
 	$: update($active);
 	$: inverse = target - $elapsed;
 	$: width = `${(inverse / target) * 100}%`;
 	// $: width = "100%";
 	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
-	$: if (secondsLeft <= 0) $active = false;
+	$: if (secondsLeft <= 0) {
+		$active = false;
+		$inModal = true;
+	}
 
 	const update = (isActive) => {
 		if (isActive) {
