@@ -4,7 +4,7 @@
 	import { active, inModal } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 6 * MS;
+	const target = 15 * MS;
 
 	$: update($active);
 	$: inverse = target - $elapsed;
@@ -17,9 +17,8 @@
 	}
 
 	const update = (isActive) => {
-		if (isActive) {
-			timer.start();
-		} else {
+		if (isActive) timer.start();
+		else {
 			timer.stop();
 			timer.reset();
 		}

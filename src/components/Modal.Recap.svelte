@@ -11,9 +11,9 @@
 			"Nice try. Follow me on Twitter @mich_mcghee."
 		],
 		behind: [
-			`Live look at ${$wodInfo.name}: 😭.`,
-			`${$wodInfo.name} says this is almost as bad as a day without boba.`,
-			`${$wodInfo.name} will try to channel her inner Jessie O'Connor this next round.`,
+			`Live look at ${$wodInfo?.name}: 😭.`,
+			`${$wodInfo?.name} says this is almost as bad as a day without boba.`,
+			`${$wodInfo?.name} will try to channel her inner Jessie O'Connor this next round.`,
 			"Ugh. Rematch?"
 		]
 	};
@@ -29,7 +29,7 @@
 				? wodReactions.behind[$round]
 				: wodReactions.ahead[$round];
 
-		return `${a} A message from ${$wodInfo.name}: ${b}`;
+		return `${a} A message from ${$wodInfo?.name}: ${b}`;
 	};
 
 	const getMidTitle = () => {

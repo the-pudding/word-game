@@ -1,12 +1,5 @@
 <script>
-	import {
-		active,
-		inModal,
-		round,
-		gameState,
-		wod,
-		gameId
-	} from "$stores/misc.js";
+	import { inModal, round, gameState, wod, gameId } from "$stores/misc.js";
 	import Recap from "$components/Modal.Recap.svelte";
 	import Pregame from "$components/Modal.Pregame.svelte";
 	import PregameWOD from "$components/Modal.PregameWOD.svelte";
@@ -26,9 +19,7 @@
 				value: true,
 				gameId: $gameId
 			});
-		} else if ($gameState === "mid") {
-			$inModal = false;
-		}
+		} else if ($gameState === "mid") $inModal = false;
 		$round += 1;
 	};
 
@@ -37,7 +28,7 @@
 
 {#if $gameState === "pre"}
 	{#if $wod}
-		<PregameWOD bind:wodReady {loaded} {hideButton} />
+		<PregameWOD bind:wodReady {loaded} {hideButton} on:play={onPlay} />
 	{:else}
 		<Pregame {loaded} on:play={onPlay} />
 	{/if}
