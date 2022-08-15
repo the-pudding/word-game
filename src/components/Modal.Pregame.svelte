@@ -13,20 +13,16 @@
 	const dispatch = createEventDispatcher();
 
 	const load = async () => {
-		const data = await loadWodInfo($gameId);
-
-		const nameQ = "what is your name?";
-		const locationQ = "where do you live?";
-
-		const name = data.find((d) => d.question === nameQ).answer;
-		const location = data.find((d) => d.question === locationQ).answer;
-		$wodInfo = { name, location };
+		const [data] = await loadWodInfo($gameId);
+		$wodInfo = data;
 	};
+
+	$: pronounObject = $wodInfo?.pronoun.split("/")[1];
 
 	$: if ($gameId) load();
 	$: customText =
 		$gameId && $wodInfo
-			? `today that person is ${$wodInfo?.name} from ${$wodInfo?.location}. they love boba tea. can you beat them?`
+			? `today that person is ${$wodInfo?.name} from ${$wodInfo?.location}. ${$wodInfo?.bio}. can you beat ${pronounObject}?`
 			: "there is no active game right now. check back later or sign up below to get notified.";
 </script>
 
