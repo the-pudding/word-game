@@ -42,8 +42,8 @@
 	.name {
 		position: absolute;
 		top: 50%;
-		transform-origin: 50% 50%;
-		transform: rotate(-90deg) translate(0, 0%);
+		transform-origin: 0 50%;
+		transform: rotate(-90deg) translate(-50%, calc(100% - 4px));
 		text-align: center;
 		text-transform: uppercase;
 		font-size: var(--18px);
@@ -52,7 +52,7 @@
 	}
 
 	.wod .name {
-		transform: rotate(90deg) translate(0, -50%);
+		transform: rotate(90deg) translate(-50%, calc(-100% + 4px));
 	}
 
 	.pill {
@@ -73,6 +73,7 @@
 		justify-content: center;
 		align-items: center;
 		transition: bottom 500ms var(--delay) ease-in-out;
+		z-index: 1;
 	}
 
 	.pill.below {

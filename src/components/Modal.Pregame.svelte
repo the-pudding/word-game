@@ -6,6 +6,8 @@
 
 	export let loaded;
 
+	const noGameText =
+		"there is no active game right now. check back later or sign up below to get notified.";
 	const loadingText = "loading today's game...";
 
 	const { title, description } = getContext("copy");
@@ -17,34 +19,39 @@
 		$wodInfo = data;
 	};
 
-	$: pronounObject = $wodInfo?.pronoun.split("/")[1];
+	$: pronounObject = $wodInfo ? $wodInfo.pronoun.split("/")[1] : undefined;
+	$: prompt = `can you beat ${pronounObject}?`;
 
 	$: if ($gameId) load();
-	$: customText =
-		$gameId && $wodInfo
-			? `today that person is ${$wodInfo?.name} from ${$wodInfo?.location}. ${$wodInfo?.bio}. can you beat ${pronounObject}?`
-			: "there is no active game right now. check back later or sign up below to get notified.";
 </script>
 
 <div class="wrapper">
 	<h2>
 		<small>
-			<Chunk text="welcome to" max="5" className="combo-user" />
+			<Chunk text="welcome to" max="10" className="combo-user" />
 		</small>
 		<Chunk text={title} max="1" className="combo-user" />
 	</h2>
 
 	<div class="details">
 		<p class="description">
-			<Chunk text={description} max="15" className="combo-default" />
+			<Chunk text={description} max="12" className="combo-default" />
 		</p>
 
 		<p class="custom">
-			<Chunk
-				text={loaded ? customText : loadingText}
-				max="15"
-				className="combo-wod"
-			/>
+			{#if loaded}
+				<Chunk text="today that" className="combo-wod a" />
+				<Chunk text="person is" className="combo-wod b" />
+				<Chunk text={$wodInfo?.name} className="combo-wod c" />
+				<Chunk text="from" className="combo-wod d" />
+				<Chunk text="{$wodInfo?.location}." className="combo-wod e" />
+				<Chunk text="{$wodInfo?.bio}." max="12" className="combo-wod f" />
+				<Chunk text={prompt} max="10" className="combo-wod g" />
+			{:else if !$gameId}
+				<Chunk text={noGameText} max="12" className="combo-wod h" />
+			{:else}
+				<Chunk text={loadingText} max="12" className="combo-wod i" />
+			{/if}
 		</p>
 	</div>
 

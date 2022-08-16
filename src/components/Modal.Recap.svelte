@@ -3,47 +3,28 @@
 	import Highlights from "$components/Modal.Highlights.svelte";
 	import Chunk from "$components/helpers/Chunk.svelte";
 
-	const wodReactions = {
-		ahead: [
-			"Live look at her: 🤪.",
-			"She says this is almost as good as a day with boba.",
-			"She's really channeling her inner Jessie O'Connor.",
-			"Nice try. Follow me on Twitter @mich_mcghee."
-		],
-		behind: [
-			`Live look at ${$wodInfo?.name}: 😭.`,
-			`${$wodInfo?.name} says this is almost as bad as a day without boba.`,
-			`${$wodInfo?.name} will try to channel her inner Jessie O'Connor this next round.`,
-			"Ugh. Rematch?"
-		]
-	};
-
 	$: userLead = $totalScore.user > $totalScore.wod;
 	$: wodLead = $totalScore.user < $totalScore.wod;
 	$: tied = $totalScore.user === $totalScore.wod;
 
 	const getPostTitle = () => {
-		const a = tied ? "Tie!" : userLead ? "You win!" : "You lose!";
-		const b =
-			userLead || tied
-				? wodReactions.behind[$round]
-				: wodReactions.ahead[$round];
+		const title = tied
+			? `You tied ${$wodInfo?.name}!`
+			: userLead
+			? `You beat ${$wodInfo?.name}!`
+			: `${$wodInfo?.name} wins!`;
 
-		return `${a} A message from ${$wodInfo?.name}: ${b}`;
+		return `${title}`;
 	};
 
 	const getMidTitle = () => {
-		const a = tied
-			? "It's all tied up."
+		const title = tied
+			? `You and ${$wodInfo?.name} are tied!`
 			: userLead
-			? "You're in the lead!"
-			: `${$wodInfo.name}'s in the lead.`;
-		const b =
-			userLead || tied
-				? wodReactions.behind[$round]
-				: wodReactions.ahead[$round];
+			? `You are leading ${$wodInfo?.name}.`
+			: `${$wodInfo?.name} is in the lead.`;
 
-		return `${a} ${b}`;
+		return title;
 	};
 
 	$: title = $gameState === "post" ? getPostTitle() : getMidTitle();
@@ -54,15 +35,11 @@
 		<h2><Chunk text={title} max="15" className="combo-user" /></h2>
 	{/if}
 
-	<Highlights />
-
-	{#if $gameState === "post" && !$wod}
-		<Chunk
-			text="TODO what else to say after the game?"
-			max="15"
-			className="combo-user"
-		/>
+	{#if $gameState === "post" && !$wod && wodLead}
+		<Chunk text={$wodInfo?.plug} max="15" className="combo-user" />
 	{/if}
+
+	<Highlights />
 </div>
 
 <style>

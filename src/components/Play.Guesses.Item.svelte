@@ -58,6 +58,10 @@
 		display: inline-block;
 	}
 
+	.wod span {
+		visibility: hidden;
+	}
+
 	@media screen and (min-width: 40rem) {
 		li {
 			font-size: var(--20px);

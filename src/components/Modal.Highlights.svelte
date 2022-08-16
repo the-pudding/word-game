@@ -28,7 +28,7 @@
 
 <p>
 	<Chunk
-		text="In round {$round +
+		text="in round {$round +
 			1} there were <em>{count}</em> possible words that satisfied the clue."
 		className="combo-default"
 		max="15"
@@ -47,7 +47,7 @@
 
 <p>
 	<Chunk
-		text="Some common words that {commonText}"
+		text="some common words that {commonText}"
 		max="15"
 		className="combo-wod"
 	/>

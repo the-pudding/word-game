@@ -9,13 +9,5 @@ export default async function loadAnswers(id) {
 		timestamp: +d.timestamp,
 		points: +d.points,
 	}));
-	const extra = ["abolitionary", "accreditable", "adscititious", "adventitious",];
-	extra.forEach((e, i) => data.push({
-		round: 0,
-		text: e,
-		lemmas: e,
-		timestamp: i * 3000,
-		points: 3
-	}));
 	return data;
 };

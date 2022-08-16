@@ -15,4 +15,16 @@
 	countdown.set(end).then(() => dispatch("end"));
 </script>
 
-<span class="countdown">{display}</span>
+<p class="countdown">{display}</p>
+
+<style>
+	.countdown {
+		font-size: var(--64px);
+		position: absolute;
+		top: 33%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		color: var(--color-bg-light-text);
+		line-height: 1;
+	}
+</style>

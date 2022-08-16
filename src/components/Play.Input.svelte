@@ -1,6 +1,7 @@
 <script>
-	import { onMount } from "svelte";
+	import { onMount, tick } from "svelte";
 	import { createEventDispatcher } from "svelte";
+	import { active } from "$stores/misc.js";
 	const dispatch = createEventDispatcher();
 
 	export let value = "";
@@ -24,10 +25,14 @@
 		submit();
 	};
 
-	$: width = `${value.length * 20}}px`;
-	onMount(() => {
+	const focus = async () => {
+		await tick();
 		inputEl.focus();
-	});
+	};
+
+	$: width = `${value.length * 20}}px`;
+	$: disabled = !$active;
+	$: if ($active) focus();
 </script>
 
 <div id="play-input">
@@ -40,6 +45,7 @@
 				spellcheck="false"
 				maxlength="15"
 				placeholder="enter word"
+				{disabled}
 			/>
 			<button type="submit">&rarr;</button>
 		</div>
