@@ -23,6 +23,7 @@
 <style>
 	.chunk {
 		display: inline-block;
+		position: relative;
 		padding: 0 4px;
 	}
 </style>

@@ -3,12 +3,11 @@
 	import { overlay, gameId, wodInfo } from "$stores/misc.js";
 	import loadWodInfo from "$utils/loadWodInfo.js";
 	import Chunk from "$components/helpers/Chunk.svelte";
+	import Title from "$components/Chunk.Title.svelte";
+	import Description from "$components/Chunk.Description.svelte";
+	import Bio from "$components/Chunk.Bio.svelte";
 
 	export let loaded;
-
-	const noGameText =
-		"there is no active game right now. check back later or sign up below to get notified.";
-	const loadingText = "loading today's game...";
 
 	const { title, description } = getContext("copy");
 
@@ -19,40 +18,16 @@
 		$wodInfo = data;
 	};
 
-	$: pronounObject = $wodInfo ? $wodInfo.pronoun.split("/")[1] : undefined;
-	$: prompt = `can you beat ${pronounObject}?`;
-
 	$: if ($gameId) load();
 </script>
 
 <div class="wrapper">
-	<h2>
-		<small>
-			<Chunk text="welcome to" max="10" className="combo-user" />
-		</small>
-		<Chunk text={title} max="1" className="combo-user" />
-	</h2>
+	<Title {title} />
 
 	<div class="details">
-		<p class="description">
-			<Chunk text={description} max="12" className="combo-default" />
-		</p>
+		<Description {description} />
 
-		<p class="custom">
-			{#if loaded}
-				<Chunk text="today that" className="combo-wod a" />
-				<Chunk text="person is" className="combo-wod b" />
-				<Chunk text={$wodInfo?.name} className="combo-wod c" />
-				<Chunk text="from" className="combo-wod d" />
-				<Chunk text="{$wodInfo?.location}." className="combo-wod e" />
-				<Chunk text="{$wodInfo?.bio}." max="12" className="combo-wod f" />
-				<Chunk text={prompt} max="10" className="combo-wod g" />
-			{:else if !$gameId}
-				<Chunk text={noGameText} max="12" className="combo-wod h" />
-			{:else}
-				<Chunk text={loadingText} max="12" className="combo-wod i" />
-			{/if}
-		</p>
+		<Bio {loaded} />
 	</div>
 
 	<div class="cta">
@@ -86,23 +61,9 @@
 		height: 100%;
 	}
 
-	h2 {
-		margin: 0 auto;
-		font-weight: var(--bold);
-	}
-
-	small {
-		font-size: 0.5em;
-		display: block;
-	}
-
 	.details {
 		display: flex;
-	}
-
-	.details p {
-		width: 50%;
-		padding: 16px 8px;
+		justify-content: space-evenly;
 	}
 
 	.cta {
