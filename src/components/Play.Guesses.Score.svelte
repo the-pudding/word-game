@@ -8,7 +8,7 @@
 	const gutterWidth = 36;
 
 	$: wod = name !== "you";
-	$: below = wod ? y < gutterWidth : y <= 0;
+	$: below = wod ? y <= gutterWidth && points > 1 : y <= 0;
 	$: bottom = `${wod && below ? 0 : y}px`;
 	$: triple = points > 99;
 </script>

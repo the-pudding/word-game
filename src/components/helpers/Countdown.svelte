@@ -1,6 +1,7 @@
 <script>
+	import { onMount } from "svelte";
 	import { tweened } from "svelte/motion";
-	import { onMount, createEventDispatcher } from "svelte";
+	import { createEventDispatcher } from "svelte";
 
 	export let start = 3;
 	export let text = "";
@@ -12,7 +13,9 @@
 
 	$: display = $countdown < 0 ? text : Math.floor($countdown) + 1;
 
-	countdown.set(end).then(() => dispatch("end"));
+	onMount(() => {
+		countdown.set(end).then(() => dispatch("end"));
+	});
 </script>
 
 <p class="countdown">{display}</p>

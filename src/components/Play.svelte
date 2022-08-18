@@ -20,6 +20,7 @@
 	export let clues;
 	export let answers;
 
+	let showCountdown = false;
 	let keyboardValue = "";
 
 	const lookupLemmas = (text) => {
@@ -102,7 +103,8 @@
 
 	$: validWords = roundData.map((d) => d.word);
 
-	let showCountdown = true;
+	$: $round, (showCountdown = true);
+
 	const startRound = () => {
 		$active = true;
 		showCountdown = false;
@@ -113,7 +115,7 @@
 	<Clue clue={currentClue} />
 	<Input on:submit={onSubmit} value={keyboardValue} />
 	{#if showCountdown}
-		<Countdown text="Begin!" on:end={startRound} />
+		<Countdown text="begin!" on:end={startRound} />
 	{/if}
 	<Invalid />
 	<Guesses />
