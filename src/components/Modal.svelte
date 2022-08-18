@@ -1,7 +1,7 @@
 <script>
 	import { inModal, round, gameState, wod, gameId } from "$stores/misc.js";
 	import Recap from "$components/Modal.Recap.svelte";
-	import Pregame from "$lib/components/Modal.Pregame.svelte";
+	import Pregame from "$components/Modal.Pregame.svelte";
 	import PregameWOD from "$components/Modal.PregameWOD.svelte";
 	import PostgameWOD from "$components/Modal.PostgameWOD.svelte";
 	import Feedback from "$components/Modal.Feedback.svelte";

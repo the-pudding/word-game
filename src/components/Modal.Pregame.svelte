@@ -5,7 +5,7 @@
 	import Chunk from "$components/helpers/Chunk.svelte";
 	import Title from "$components/Chunk.Title.svelte";
 	import Description from "$components/Chunk.Description.svelte";
-	import Bio from "$components/Chunk.Bio.svelte";
+	import Info from "$components/Chunk.Info.svelte";
 
 	export let loaded;
 
@@ -27,7 +27,7 @@
 	<div class="details">
 		<Description {description} />
 
-		<Bio {loaded} />
+		<Info {loaded} />
 	</div>
 
 	<div class="cta">
