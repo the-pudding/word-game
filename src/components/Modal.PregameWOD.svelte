@@ -17,13 +17,15 @@
 	const defaultQuestions = [
 		{
 			id: "name",
+			limit: 12,
 			text: "What is your name?",
 			detail: "e.g., Jane Doe or J. Doe or Jane"
 		},
 		{
 			id: "location",
+			limit: 12,
 			text: "Where are playing from?",
-			detail: "e.g., Boston, MA or Boston or USA"
+			detail: ""
 		},
 		{
 			id: "pronoun",
@@ -31,6 +33,7 @@
 		},
 		{
 			id: "plug",
+			limit: 48,
 			text: "What would you like to plug (about yourself, something, etc) at the end of the game?",
 			detail:
 				"'Follow me on Twitter @wordsagainststrangers' or 'Have a great day!'"
@@ -102,7 +105,7 @@
 		<p>Error</p>
 	{:else}
 		<form on:submit|preventDefault={onSubmit}>
-			{#each defaultQuestions as { id, text, detail, type }, i}
+			{#each defaultQuestions as { id, text, detail, type, limit }, i}
 				<div>
 					<label for="question-{id}">{text}</label>
 					<p>{detail}</p>
@@ -139,6 +142,7 @@
 							bind:value={defaultQuestions[i].answer}
 							id="question-{id}"
 							placeholder={id}
+							maxlength={limit}
 						/>
 					{/if}
 				</div>
@@ -154,6 +158,7 @@
 					required={true}
 					bind:value={randomAnswer}
 					id="question-bio"
+					maxlength="100"
 					placeholder="..."
 				/>
 			</div>
