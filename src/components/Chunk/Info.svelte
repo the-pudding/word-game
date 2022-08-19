@@ -21,7 +21,7 @@
 			<Chunk max="12" text="{$wodInfo?.location}." className="combo-wod e" />
 
 			<span class="bio">
-				<Chunk text={$wodInfo?.bio} max="12" className="combo-wod f" />
+				<Chunk text="{$wodInfo?.bio}." max="12" className="combo-wod f" />
 			</span>
 
 			<Chunk text="can you" className="combo-wod g" />
@@ -170,5 +170,23 @@
 	:global(#chunk-info .no-game .chunk:nth-of-type(5)) {
 		transform: translate(-20%, -6px) rotate(8deg);
 		z-index: 1;
+	}
+
+	:global(#chunk-info .g) {
+		display: none;
+	}
+
+	:global(#chunk-info .h) {
+		display: none;
+	}
+
+	@media only screen and (min-height: 600px) {
+		:global(#chunk-info .g) {
+			display: inline-block;
+		}
+
+		:global(#chunk-info .h) {
+			display: inline-block;
+		}
 	}
 </style>
