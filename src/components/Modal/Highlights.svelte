@@ -16,20 +16,28 @@
 
 	const MAX_WORDS = 3;
 
+	const lemmasNotInPlayed = ({ word, lemmas }) => {
+		const match = !!lemmas.split("|").find((d) => $lemmasPlayed.includes(d));
+		return !match;
+	};
+
 	$: count = format(",")($possibleAnswers.length);
 	$: wodWords = $guesses.wod[$round]
 		.filter((d) => d.valid && !d.guessedByUserLate)
 		.slice(0, MAX_WORDS)
 		.map((d) => d.text)
 		.join(" ");
-	$: commonWords = $possibleAnswers
-		.filter((d) => +d.points === 1)
-		.filter((d) => !$lemmasPlayed.includes(d.word))
+
+	$: allCommonWords = shuffle(
+		$possibleAnswers.filter((d) => +d.points === 1).filter(lemmasNotInPlayed)
+	);
+
+	$: commonWords = allCommonWords
 		.slice(0, MAX_WORDS)
 		.map((d) => d.word)
 		.join(" ");
 
-	$: commonText = $wod ? "you didn't get" : "nobody got";
+	$: commonText = $wod ? "you didn't get:" : "nobody got:";
 </script>
 
 <Possible
