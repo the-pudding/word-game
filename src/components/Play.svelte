@@ -100,11 +100,7 @@
 	$: currentClue = clues[$round];
 	$: roundData = answers[$round];
 	$: $possibleAnswers = roundData;
-
-	$: console.log($lemmasPlayed);
-
 	$: validWords = roundData.map((d) => d.word);
-
 	$: $round, (showCountdown = true);
 
 	const startRound = () => {

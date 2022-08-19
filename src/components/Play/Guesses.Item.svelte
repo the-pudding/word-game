@@ -1,5 +1,4 @@
 <script>
-	import { onMount } from "svelte";
 	import { tweened } from "svelte/motion";
 	import { fly } from "svelte/transition";
 	import { quartIn } from "svelte/easing";
@@ -20,9 +19,6 @@
 
 	$: height = points * liHeight;
 	$: className = wod ? "combo-wod" : "combo-user";
-	onMount(() => {
-		console.log(text);
-	});
 </script>
 
 <li
