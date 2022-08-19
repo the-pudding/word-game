@@ -45,16 +45,7 @@
 </div>
 
 <style>
-	h2 {
-		font-size: 2em;
-		text-align: center;
-		max-width: 23em;
-		margin: 1rem auto;
-	}
 	div {
 		text-align: center;
-	}
-	h3 {
-		font-size: 2em;
 	}
 </style>
