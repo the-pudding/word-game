@@ -39,8 +39,8 @@
 	--color-input-fg: var(--color-tan-1000);
 	--color-placeholder: var(--color-tan-500);
 
-	--color-default-bg: var(--color-tan-100);
-	--color-default-fg: var(--color-tan-700);
+	--color-default-bg: var(--color-tan-200);
+	--color-default-fg: var(--color-tan-800);
 	--color-default-border: var(--color-tan-400);
 
 	--color-user-bg: var(--color-yellow-100);

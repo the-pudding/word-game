@@ -1,21 +1,18 @@
 <script>
 	import Chunk from "$components/helpers/Chunk.svelte";
-	export let title;
+	export let text;
 </script>
 
-<div id="chunk-title">
-	<h2>
-		<Chunk text="welcome to" max="10" className="combo-user" />
-		<Chunk text={title} max="1" className="combo-user" />
-	</h2>
-</div>
+<h2 id="chunk-title">
+	<Chunk text="welcome to" max="10" className="combo-user" />
+	<Chunk {text} max="1" className="combo-user" />
+</h2>
 
 <style>
 	h2 {
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-
 		margin: 16px auto;
 	}
 

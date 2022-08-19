@@ -1,10 +1,10 @@
 <script>
 	import Chunk from "$components/helpers/Chunk.svelte";
-	export let description;
+	export let text;
 </script>
 
 <p id="chunk-description">
-	<Chunk text={description} max="13" className="combo-default" />
+	<Chunk {text} max="13" className="combo-default" />
 </p>
 
 <style>

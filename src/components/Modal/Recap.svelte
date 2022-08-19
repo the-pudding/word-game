@@ -1,7 +1,8 @@
 <script>
 	import { gameState, totalScore, round, wod, wodInfo } from "$stores/misc.js";
-	import Highlights from "$components/Modal.Highlights.svelte";
-	import Chunk from "$components/helpers/Chunk.svelte";
+	import Highlights from "$components/Modal/Highlights.svelte";
+	import Title from "$components/Chunk/RecapTitle.svelte";
+	import Plug from "$components/Chunk/RecapPlug.svelte";
 
 	$: userLead = $totalScore.user > $totalScore.wod;
 	$: wodLead = $totalScore.user < $totalScore.wod;
@@ -9,20 +10,20 @@
 
 	const getPostTitle = () => {
 		const title = tied
-			? `You tied ${$wodInfo?.name}!`
+			? [`You and ${$wodInfo?.name}`, "tied!"]
 			: userLead
-			? `You beat ${$wodInfo?.name}!`
-			: `${$wodInfo?.name} wins!`;
+			? ["You beat", `${$wodInfo?.name}!`]
+			: [`${$wodInfo?.name}`, "beat you!"];
 
 		return `${title}`;
 	};
 
 	const getMidTitle = () => {
 		const title = tied
-			? `You and ${$wodInfo?.name} are tied!`
+			? [`you and ${$wodInfo?.name}`, "are tied"]
 			: userLead
-			? `You are leading ${$wodInfo?.name}.`
-			: `${$wodInfo?.name} is in the lead.`;
+			? ["you are ahead", `of ${$wodInfo?.name}`]
+			: [`${$wodInfo?.name} is`, "in the lead"];
 
 		return title;
 	};
@@ -32,11 +33,11 @@
 
 <div>
 	{#if !$wod}
-		<h2><Chunk text={title} max="15" className="combo-user" /></h2>
+		<Title lines={title} />
 	{/if}
 
-	{#if $gameState === "post" && !$wod && wodLead}
-		<Chunk text={$wodInfo?.plug} max="15" className="combo-user" />
+	{#if $gameState === "post" && !$wod && wodLead && $wodInfo.plug}
+		<Plug text={$wodInfo.plug} />
 	{/if}
 
 	<Highlights />

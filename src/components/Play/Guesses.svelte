@@ -1,6 +1,6 @@
 <script>
-	import List from "$components/Play.Guesses.List.svelte";
-	import Score from "$components/Play.Guesses.Score.svelte";
+	import List from "$components/Play/Guesses.List.svelte";
+	import Score from "$components/Play/Guesses.Score.svelte";
 	import { guesses, round, wod, wodInfo, totalScore } from "$stores/misc.js";
 	import mq from "$stores/mq.js";
 	const takenCode = 0;

@@ -1,10 +1,10 @@
 <script>
 	import { inModal, round, gameState, wod, gameId } from "$stores/misc.js";
-	import Recap from "$components/Modal.Recap.svelte";
-	import Pregame from "$components/Modal.Pregame.svelte";
-	import PregameWOD from "$components/Modal.PregameWOD.svelte";
-	import PostgameWOD from "$components/Modal.PostgameWOD.svelte";
-	import Feedback from "$components/Modal.Feedback.svelte";
+	import Recap from "$components/Modal/Recap.svelte";
+	import Pregame from "$components/Modal/Pregame.svelte";
+	import PregameWOD from "$components/Modal/PregameWOD.svelte";
+	import PostgameWOD from "$components/Modal/PostgameWOD.svelte";
+	import Feedback from "$components/Modal/Feedback.svelte";
 	import { update } from "$utils/supabase.js";
 
 	export let loaded;
@@ -44,13 +44,19 @@
 {/if}
 
 {#if $gameState === "mid"}
-	<div>
+	<div class="mid">
 		<button on:click={onPlay}> next round </button>
 	</div>
 {/if}
 
 <style>
+	.mid {
+		margin-top: 16px;
+		text-align: center;
+	}
+
 	button {
-		min-width: 8em;
+		font-size: var(--36px);
+		width: 7.5em;
 	}
 </style>

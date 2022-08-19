@@ -2,10 +2,9 @@
 	import { onMount, getContext, createEventDispatcher } from "svelte";
 	import { overlay, gameId, wodInfo } from "$stores/misc.js";
 	import loadWodInfo from "$utils/loadWodInfo.js";
-	import Chunk from "$components/helpers/Chunk.svelte";
-	import Title from "$components/Chunk.Title.svelte";
-	import Description from "$components/Chunk.Description.svelte";
-	import Info from "$components/Chunk.Info.svelte";
+	import Title from "$components/Chunk/Title.svelte";
+	import Description from "$components/Chunk/Description.svelte";
+	import Info from "$components/Chunk/Info.svelte";
 
 	export let loaded;
 
@@ -22,10 +21,10 @@
 </script>
 
 <div class="wrapper">
-	<Title {title} />
+	<Title text={title} />
 
 	<div class="details">
-		<Description {description} />
+		<Description text={description} />
 		<Info {loaded} />
 	</div>
 
@@ -67,6 +66,7 @@
 		display: flex;
 		justify-content: space-evenly;
 		margin-bottom: 16px;
+		min-height: 240px;
 	}
 
 	.cta {
