@@ -17,7 +17,6 @@
 		align-items: center;
 
 		margin: 16px auto;
-		font-weight: var(--bold);
 	}
 
 	/* welcome to */
@@ -29,18 +28,21 @@
 
 	/* words */
 	:global(#chunk-title .chunk:nth-of-type(2)) {
+		font-weight: var(--bold);
 		transform: translate(-20%, -20%) rotate(0deg);
 		z-index: 3;
 	}
 
 	/* against */
 	:global(#chunk-title .chunk:nth-of-type(3)) {
+		font-weight: var(--bold);
 		transform: translate(35%, -25%) rotate(3deg);
 		z-index: 2;
 	}
 
 	/* strangers */
 	:global(#chunk-title .chunk:nth-of-type(4)) {
+		font-weight: var(--bold);
 		transform: translate(10%, -35%) rotate(1deg);
 		z-index: 1;
 	}

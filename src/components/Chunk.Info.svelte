@@ -68,13 +68,17 @@
 	:global(#chunk-info .c) {
 		font-size: 1.5em;
 		font-weight: var(--bold);
-		margin-top: 4px;
-		transform: rotate(-5deg);
+		margin-top: 6px;
+		transform: rotate(4deg);
 		z-index: 19;
+		background-color: var(--color-mark-bg);
+		color: var(--color-mark-fg-dark);
+		border-color: var(--color-mark-border);
 	}
 
 	/* from */
 	:global(#chunk-info .d) {
+		margin-top: 6px;
 		z-index: 18;
 	}
 

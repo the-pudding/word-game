@@ -26,7 +26,6 @@
 
 	<div class="details">
 		<Description {description} />
-
 		<Info {loaded} />
 	</div>
 
@@ -47,8 +46,11 @@
 			</div>
 			<div class="signup">
 				<p>want to be the next stranger?</p>
-				<!-- TODO link -->
-				<a role="button" href="#">sign up</a>
+				<a
+					role="button"
+					href="https://www.getrevue.co/profile/wordsagainststrangers/"
+					target="_blank">sign up</a
+				>
 			</div>
 		</div>
 	</div>
@@ -64,14 +66,14 @@
 	.details {
 		display: flex;
 		justify-content: space-evenly;
+		margin-bottom: 16px;
 	}
 
 	.cta {
 		border-top: 1px solid var(--color-fg);
 		display: flex;
-		/* flex-direction: column; */
 		justify-content: space-between;
-		padding-top: 8px;
+		padding: 16px 2px;
 	}
 
 	.play button {
@@ -100,6 +102,6 @@
 	.signup p {
 		font-size: var(--14px);
 		text-align: right;
-		margin: 4px 0;
+		margin: 8px 0;
 	}
 </style>
