@@ -1,11 +1,12 @@
 <script>
 	import Chunk from "$components/helpers/Chunk.svelte";
 	export let lines;
+	export let winner;
 </script>
 
 <h3 id="chunk-recap-title">
 	{#each lines as text}
-		<Chunk {text} max="20" className="combo-user" />
+		<Chunk {text} max="20" className="combo-{winner}" />
 	{/each}
 </h3>
 

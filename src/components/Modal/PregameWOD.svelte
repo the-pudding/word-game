@@ -95,11 +95,16 @@
 	});
 </script>
 
-<h2>Welcome, WOD!</h2>
-<p>Let's play a word game!</p>
+<h2>welcome, stranger!</h2>
+<p>let's play a word game.</p>
 
 {#if !wodReady}
-	<p>Tell us about yourself:</p>
+	<p>
+		tell us about yourself. <strong
+			>note: anything you submit below may appear for the rest of the internet
+			to see. we may lightly edit answers for brevity.</strong
+		>
+	</p>
 
 	{#if error}
 		<p>Error</p>

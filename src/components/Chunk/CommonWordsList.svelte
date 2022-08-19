@@ -4,10 +4,16 @@
 </script>
 
 <p id="chunk-common-words-list">
-	<Chunk {text} max="1" className="combo-default" />
+	<Chunk {text} max="1" className="combo-wod" />
 </p>
 
 <style>
+	p {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+
 	:global(#chunk-common-words-list .chunk:nth-of-type(1)) {
 		transform: translate(0, 0) rotate(0deg);
 		z-index: 5;

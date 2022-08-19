@@ -51,6 +51,10 @@
 	--color-wod-fg: var(--color-blue-900);
 	--color-wod-border: var(--color-blue-500);
 
+	--color-wod-bg-light: var(--color-blue-50);
+	--color-wod-fg-light: var(--color-blue-700);
+	--color-wod-border-light: var(--color-blue-200);
+
 	--color-mark-bg: var(--color-red-100);
 	--color-mark-fg: var(--color-red-700);
 	--color-mark-fg-dark: var(--color-red-900);
@@ -168,6 +172,11 @@ strong {
 	color: var(--color-wod-fg);
 }
 
+.combo-wod-light {
+	background-color: var(--color-wod-bg-light);
+	color: var(--color-wod-fg-light);
+}
+
 .combo-mark {
 	background-color: var(--color-mark-bg);
 	color: var(--color-mark-fg);
@@ -183,4 +192,8 @@ strong {
 
 .chunk.combo-wod {
 	border: 2px solid var(--color-wod-border);
+}
+
+.chunk.combo-wod-light {
+	border: 2px solid var(--color-wod-border-light);
 }

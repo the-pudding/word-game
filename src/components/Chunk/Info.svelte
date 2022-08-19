@@ -14,26 +14,30 @@
 <p id="chunk-info">
 	{#if loaded}
 		{#if $gameId}
-			<Chunk text="today that" className="combo-wod a" />
-			<Chunk text="person is" className="combo-wod b" />
+			<Chunk text="today that" className="combo-wod-light a" />
+			<Chunk text="person is" className="combo-wod-light b" />
 			<Chunk max="12" text={$wodInfo?.name} className="combo-wod c big" />
-			<Chunk text="from" className="combo-wod d" />
-			<Chunk max="12" text="{$wodInfo?.location}." className="combo-wod e" />
+			<Chunk text="from" className="combo-wod-light d" />
+			<Chunk
+				max="12"
+				text="{$wodInfo?.location}."
+				className="combo-wod-light e"
+			/>
 
 			<span class="bio">
-				<Chunk text="{$wodInfo?.bio}." max="12" className="combo-wod f" />
+				<Chunk text="{$wodInfo?.bio}." max="12" className="combo-wod-light f" />
 			</span>
 
-			<Chunk text="can you" className="combo-wod g" />
-			<Chunk text={`beat ${pronounObject}?`} className="combo-wod h" />
+			<Chunk text="can you" className="combo-wod-light g" />
+			<Chunk text={`beat ${pronounObject}?`} className="combo-wod-light h" />
 		{:else}
 			<span class="no-game">
-				<Chunk text={noGameText} max="12" className="combo-wod" />
+				<Chunk text={noGameText} max="12" className="combo-wod-light" />
 			</span>
 		{/if}
 	{:else}
 		<span class="loading">
-			<Chunk text={loadingText} max="12" className="combo-wod" />
+			<Chunk text={loadingText} max="12" className="combo-wod-light" />
 		</span>
 	{/if}
 </p>
@@ -71,9 +75,7 @@
 		margin-top: 6px;
 		transform: rotate(4deg);
 		z-index: 19;
-		background-color: var(--color-mark-bg);
-		color: var(--color-mark-fg-dark);
-		border-color: var(--color-mark-border);
+		/* animation: hinge 1s 2s alternate-reverse infinite; */
 	}
 
 	/* from */
@@ -173,13 +175,22 @@
 	}
 
 	:global(#chunk-info .g) {
-		display: none;
+		display: inline-block;
 	}
 
 	:global(#chunk-info .h) {
-		display: none;
+		display: inline-block;
 	}
 
+	@keyframes hinge {
+		0% {
+			transform: rotate(4deg);
+		}
+
+		100% {
+			transform: rotate(-2deg);
+		}
+	}
 	@media only screen and (min-height: 600px) {
 		:global(#chunk-info .g) {
 			display: inline-block;

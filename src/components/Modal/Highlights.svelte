@@ -14,16 +14,18 @@
 	import CommonWordsInfo from "$components/Chunk/CommonWordsInfo.svelte";
 	import CommonWordsList from "$components/Chunk/CommonWordsList.svelte";
 
+	const MAX_WORDS = 3;
+
 	$: count = format(",")($possibleAnswers.length);
 	$: wodWords = $guesses.wod[$round]
 		.filter((d) => d.valid && !d.guessedByUserLate)
-		.slice(0, 5)
+		.slice(0, MAX_WORDS)
 		.map((d) => d.text)
 		.join(" ");
 	$: commonWords = $possibleAnswers
 		.filter((d) => +d.points === 1)
-		.filter((d) => !$lemmasPlayed.includes((d) => d.text))
-		.slice(0, 5)
+		.filter((d) => !$lemmasPlayed.includes(d.word))
+		.slice(0, MAX_WORDS)
 		.map((d) => d.word)
 		.join(" ");
 
@@ -52,14 +54,14 @@
 
 <style>
 	.words-wrapper {
-		width: 300px;
+		/* width: 300px; */
 		margin: 16px auto;
 		display: flex;
 		justify-content: space-evenly;
 	}
 
 	.words {
-		width: 50%;
+		width: 150px;
 		padding: 0 16px;
 	}
 </style>

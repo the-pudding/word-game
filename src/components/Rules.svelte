@@ -8,41 +8,40 @@
 
 <section on:click={close} class:visible={$overlay === "rules"}>
 	<div>
-		<h3>How to Play</h3>
+		<h3><span class="chunk combo-wod">how to play</span></h3>
 		<ul>
 			<li>
-				<strong>Goal:</strong> score more points than the Word Opponent of the Day
-				(WOD).
+				<strong>goal:</strong> score more points than the stranger.
 			</li>
-			<li><strong>Duration:</strong> Four one-minute rounds.</li>
+			<li><strong>duration:</strong> four one-minute rounds.</li>
 			<li>
-				<strong>Gameplay:</strong> Enter as many words as possible that satisfy
+				<strong>gameplay:</strong> enter as many words as possible that satisfy
 				a clue.
 				<ul>
 					<li>
-						<strong>Sample clue</strong>:
-						<em>words that start with <strong>A</strong></em>
-						. Answers: <em>apple</em>, <em>awesome</em>, <em>activate</em>, etc.
+						<strong>sample clue</strong>:
+						<em class="clue">starts with <strong>A</strong></em>
+						answers: <em>apple</em>, <em>awesome</em>, <em>activate</em>, etc.
 					</li>
 					<li>
-						<strong>Blocking!</strong> Whoever gets a word first gets points. If
-						the WOD entered the word before you, you get no points. If you enter
-						a word before the WOD, she gets no points.
+						<strong>blocking:</strong> whoever gets a word first gets points. If
+						the stranger enters the word before you, you get no points, and vice
+						versa.
 					</li>
 					<li>
-						<strong>The more obscure the better!</strong> You get more points for
-						less commonly used words.
+						<strong>obscure = more points:</strong> you get more points for less
+						commonly used words.
 					</li>
 				</ul>
 			</li>
 		</ul>
 
-		<h3>Rules</h3>
+		<h3><span class="chunk combo-wod">rules</span></h3>
 		<ul>
 			<li>4+ letter words</li>
-			<li>No proper nouns</li>
-			<li>No hyphenated words</li>
-			<li>No variations (e.g. plurals) of a played word</li>
+			<li>no proper nouns</li>
+			<li>no hyphenated words</li>
+			<li>no variations (e.g. plurals) of a played word</li>
 		</ul>
 		<p><button on:click={close}>CLOSE</button></p>
 	</div>
@@ -57,5 +56,31 @@
 
 	.visible {
 		display: block;
+	}
+
+	h3 {
+		margin-top: 32px;
+	}
+
+	h3 span {
+		padding: 0 8px;
+	}
+
+	.clue {
+		background-color: var(--color-white);
+		border: 2px solid currentColor;
+		padding: 0 8px;
+	}
+
+	li {
+		line-height: 1.6;
+	}
+
+	p {
+		margin-top: 32px;
+	}
+
+	button {
+		font-size: var(--36px);
 	}
 </style>

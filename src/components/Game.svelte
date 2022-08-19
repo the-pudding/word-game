@@ -41,6 +41,7 @@
 			const clueData = await loadClues($gameId);
 			clues = clueData.map((d) => d.clue);
 			answers = await loadAnswers(clueData.map((d) => d.clueId));
+			console.log(answers);
 		}
 		loaded = true;
 	});

@@ -8,7 +8,8 @@
 	const gutterWidth = 36;
 
 	$: wod = name !== "you";
-	$: below = wod ? y <= gutterWidth && points > 1 : y <= 0;
+	$: below = wod ? y <= gutterWidth : y <= 0;
+	$: hasArrowBelow = wod && below && points > 1;
 	$: bottom = `${wod && below ? 0 : y}px`;
 	$: triple = points > 99;
 </script>
@@ -24,6 +25,7 @@
 		class:triple
 		class:above
 		class:below
+		class:hasArrowBelow
 	>
 		<span class="points">{points}</span>
 	</div>
@@ -94,7 +96,7 @@
 		transform: translate(0, 170%);
 	}
 
-	.wod .pill.below {
+	.wod .pill.hasArrowBelow {
 		transform: translate(0, -75%);
 	}
 
@@ -110,7 +112,7 @@
 		color: var(--color-mark-bg);
 	}
 
-	.wod .pill.below:after {
+	.wod .pill.hasArrowBelow:after {
 		display: block;
 		content: "▾";
 		font-size: 2rem;

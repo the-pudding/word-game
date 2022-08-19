@@ -5,7 +5,7 @@
 
 <p id="chunk-common-words-info">
 	{#each lines as text}
-		<Chunk {text} max="15" className="combo-wod" />
+		<Chunk {text} max="15" className="combo-default" />
 	{/each}
 </p>
 

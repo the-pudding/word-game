@@ -7,6 +7,7 @@
 	$: userLead = $totalScore.user > $totalScore.wod;
 	$: wodLead = $totalScore.user < $totalScore.wod;
 	$: tied = $totalScore.user === $totalScore.wod;
+	$: winner = wodLead ? "wod" : "user";
 
 	const getPostTitle = () => {
 		const title = tied
@@ -15,7 +16,7 @@
 			? ["You beat", `${$wodInfo?.name}!`]
 			: [`${$wodInfo?.name}`, "beat you!"];
 
-		return `${title}`;
+		return title;
 	};
 
 	const getMidTitle = () => {
@@ -33,11 +34,11 @@
 
 <div>
 	{#if !$wod}
-		<Title lines={title} />
+		<Title lines={title} {winner} />
 	{/if}
 
-	{#if $gameState === "post" && !$wod && wodLead && $wodInfo.plug}
-		<Plug text={$wodInfo.plug} />
+	{#if $gameState === "post" && !$wod && winner === "wod" && $wodInfo.plug}
+		<Plug text="this is a 48 character sentence that will show." {winner} />
 	{/if}
 
 	<Highlights />
