@@ -19,7 +19,7 @@
 			<Chunk max="12" text={$wodInfo?.name} className="combo-wod c big" />
 			<Chunk text="from" className="combo-wod-light d" />
 			<Chunk
-				max="12"
+				max="13"
 				text="{$wodInfo?.location}."
 				className="combo-wod-light e"
 			/>
@@ -175,11 +175,11 @@
 	}
 
 	:global(#chunk-info .g) {
-		display: inline-block;
+		display: none;
 	}
 
 	:global(#chunk-info .h) {
-		display: inline-block;
+		display: none;
 	}
 
 	@keyframes hinge {

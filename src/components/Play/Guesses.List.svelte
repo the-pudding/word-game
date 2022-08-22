@@ -1,4 +1,5 @@
 <script>
+	import { inModal } from "$stores/misc.js";
 	import Item from "$components/Play/Guesses.Item.svelte";
 	export let guesses;
 	export let wod = false;
@@ -6,7 +7,7 @@
 	export let startOffset;
 </script>
 
-<ul class:wod>
+<ul class:wod class:in-modal={$inModal}>
 	{#each guesses as { valid, text, revealWod, points } (text)}
 		<Item {wod} {valid} {text} {revealWod} {points} {liHeight} {startOffset} />
 	{/each}
@@ -22,6 +23,10 @@
 		transition: transform 0.5s ease-out;
 		transform: translate(0, var(--offsetY));
 		padding: 0;
+	}
+
+	.in-modal {
+		opacity: 0.2;
 	}
 
 	.wod {

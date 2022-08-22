@@ -51,7 +51,7 @@
 {/if}
 
 {#if readyToPlay}
-	<section id="play" class:visible={playVisible}>
+	<section id="play">
 		<Play {clues} {answers} />
 	</section>
 {/if}
@@ -61,10 +61,10 @@
 </section>
 
 <style>
-	section {
+	#modal {
 		visibility: hidden;
 	}
-	.visible {
+	#modal.visible {
 		visibility: visible;
 	}
 </style>

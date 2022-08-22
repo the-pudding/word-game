@@ -3,7 +3,7 @@
 	import { active, inModal } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 60 * MS;
+	const target = 6 * MS;
 
 	$: update($active);
 	$: inverse = target - $elapsed;
@@ -15,15 +15,16 @@
 	}
 
 	const update = (isActive) => {
-		if (isActive) timer.start();
-		else {
-			timer.stop();
+		if (isActive) {
 			timer.reset();
+			timer.start();
+		} else {
+			timer.stop();
 		}
 	};
 </script>
 
-<div id="play-clock">
+<div id="play-clock" class:in-modal={$inModal}>
 	<div class="margin">
 		<span class="progress combo-mark" style:width />
 	</div>
@@ -31,7 +32,7 @@
 </div>
 
 <style>
-	div#play-clock {
+	#play-clock {
 		position: relative;
 		width: 100%;
 		margin: 4px 0;
@@ -39,6 +40,10 @@
 		height: 2rem;
 		border: 1px solid var(--color-fg);
 		background-color: var(--color-bg-binary);
+	}
+
+	#play-clock.in-modal {
+		opacity: 0.1;
 	}
 
 	.margin {
@@ -54,12 +59,4 @@
 		width: 100%;
 		height: 100%;
 	}
-
-	/* p {
-		position: absolute;
-		top: 2px;
-		left: 8px;
-		font-size: var(--18px);
-		opacity: 0;
-	} */
 </style>

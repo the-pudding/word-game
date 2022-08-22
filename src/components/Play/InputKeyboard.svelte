@@ -1,4 +1,5 @@
 <script>
+	import { inModal } from "$stores/misc.js";
 	import Keyboard from "svelte-keyboard";
 	import { createEventDispatcher } from "svelte";
 	const dispatch = createEventDispatcher();
@@ -24,7 +25,7 @@
 	};
 </script>
 
-<div id="play-keyboard">
+<div id="play-keyboard" class:in-modal={$inModal}>
 	<Keyboard
 		on:keydown={onKeydown}
 		layout="wordle"
@@ -40,6 +41,10 @@
 <style>
 	div {
 		display: block;
+	}
+
+	.in-modal {
+		opacity: 0.1;
 	}
 
 	@media (hover: hover) and (pointer: fine) {

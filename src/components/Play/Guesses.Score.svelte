@@ -1,5 +1,5 @@
 <script>
-	import { wordDuration } from "$stores/misc.js";
+	import { inModal, wordDuration } from "$stores/misc.js";
 	export let points;
 	export let name;
 	export let y = 0;
@@ -18,6 +18,7 @@
 	class="wrapper"
 	class:wod
 	style="--delay: {$wordDuration}ms; --gutter-width: {gutterWidth}px;"
+	class:in-modal={$inModal}
 >
 	<div
 		class="pill combo-mark"
@@ -47,7 +48,7 @@
 		transform-origin: 0 50%;
 		transform: rotate(-90deg) translate(-50%, calc(100% - 4px));
 		text-align: center;
-		text-transform: uppercase;
+		/* text-transform: uppercase; */
 		font-size: var(--18px);
 		font-weight: var(--bold);
 		color: var(--color-bg-light-text);
@@ -128,5 +129,13 @@
 		vertical-align: middle;
 		display: inline-block;
 		line-height: 1;
+	}
+
+	.in-modal .pill {
+		opacity: 0.5;
+	}
+
+	.in-modal .name {
+		opacity: 0.5;
 	}
 </style>

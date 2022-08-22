@@ -1,10 +1,11 @@
 <script>
 	import { onMount, tick } from "svelte";
 	import { createEventDispatcher } from "svelte";
-	import { active } from "$stores/misc.js";
+	import { active, inModal } from "$stores/misc.js";
 	const dispatch = createEventDispatcher();
 
 	export let value = "";
+	export const reset = () => (value = "");
 	let inputEl;
 
 	const submit = () => {
@@ -35,7 +36,7 @@
 	$: if ($active) focus();
 </script>
 
-<div id="play-input">
+<div id="play-input" class:in-modal={$inModal}>
 	<form on:submit={onInput}>
 		<div class="box">
 			<div class="bg" aria-hidden="true">{value}</div>
@@ -56,6 +57,9 @@
 	#play-input {
 		margin: 4px 0 0 0;
 		user-select: none;
+	}
+	#play-input.in-modal {
+		opacity: 0.1;
 	}
 
 	form {
