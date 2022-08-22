@@ -52,7 +52,7 @@
 
 	const onSubmit = async () => {
 		try {
-			const row = { gameId: $wodId };
+			const row = { game_id: $wodId };
 			const allQuestions = [
 				...defaultQuestions,
 				{ id: "bio", answer: formattedRandomAnswer }
@@ -164,7 +164,7 @@
 					bind:value={randomAnswer}
 					id="question-bio"
 					maxlength="100"
-					placeholder="..."
+					placeholder="answer here"
 				/>
 			</div>
 
