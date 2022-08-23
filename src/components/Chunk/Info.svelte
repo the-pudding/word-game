@@ -9,6 +9,9 @@
 	const loadingText = "loading today's game...";
 
 	$: pronounObject = $wodInfo ? $wodInfo.pronoun.split("/")[1] : undefined;
+	$: noLocation = !$wodInfo?.location;
+	$: noBio = !$wodInfo?.bio;
+	$: bumpBio = noBio && noLocation ? "bump" : "";
 </script>
 
 <p id="chunk-info">
@@ -17,18 +20,26 @@
 			<Chunk text="today that" className="combo-wod-light a" />
 			<Chunk text="person is" className="combo-wod-light b" />
 			<Chunk max="12" text={$wodInfo?.name} className="combo-wod c big" />
-			<Chunk text="from" className="combo-wod-light d" />
-			<Chunk
-				max="13"
-				text="{$wodInfo?.location}."
-				className="combo-wod-light e"
-			/>
+			{#if $wodInfo?.location}
+				<Chunk text={"from"} className="combo-wod-light d" />
+				<Chunk
+					max="13"
+					text="{$wodInfo?.location}."
+					className="combo-wod-light e"
+				/>
+			{/if}
 
-			<span class="bio">
-				<Chunk text="{$wodInfo?.bio}." max="12" className="combo-wod-light f" />
-			</span>
+			{#if $wodInfo?.bio}
+				<span class="bio" class:bump={noLocation}>
+					<Chunk
+						text="{$wodInfo?.bio}{$wodInfo?.bio ? '.' : ''}"
+						max="12"
+						className="combo-wod-light f"
+					/>
+				</span>
+			{/if}
 
-			<Chunk text="can you" className="combo-wod-light g" />
+			<Chunk text="can you" className="combo-wod-light g {bumpBio}" />
 			<Chunk text={`beat ${pronounObject}?`} className="combo-wod-light h" />
 		{:else}
 			<span class="no-game">
@@ -92,7 +103,10 @@
 	}
 
 	/* {bio} */
-	/* todo target each .f and compound translate y */
+	.bio.bump {
+		margin-top: 12px;
+	}
+
 	:global(#chunk-info .f:nth-of-type(1)) {
 		transform: translate(10%, -2px);
 		z-index: 16;
@@ -127,6 +141,10 @@
 	:global(#chunk-info .g) {
 		margin-top: 4px;
 		z-index: 10;
+	}
+
+	:global(#chunk-info .g.bump) {
+		margin-top: 12px;
 	}
 
 	/* beat {pronoun} */

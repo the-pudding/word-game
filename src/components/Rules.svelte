@@ -78,6 +78,7 @@
 
 	p {
 		margin-top: 32px;
+		line-height: 1.4;
 	}
 
 	button {
