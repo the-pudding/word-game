@@ -1,7 +1,7 @@
 import loadCSV from '$utils/loadCsv.js';
 
 export default async function loadAnswers(id) {
-	const url = `https://pudding.cool/projects/word-game-data/wod-answers/${id}.csv?version=${Date.now()}`;
+	const url = `https://pudding.cool/games/words-against-strangers-data/wod-answers/${id}.csv?version=${Date.now()}`;
 	const raw = await loadCSV(url);
 	const data = raw.map(d => ({
 		...d,

@@ -23,7 +23,7 @@
 		if ($wod) return $wodId;
 
 		const timestamp = Date.now();
-		const url = `https://pudding.cool/projects/word-game-data/games.json?version=${timestamp}`;
+		const url = `https://pudding.cool/games/words-against-strangers-data/games.json?version=${timestamp}`;
 		const { updated, games } = await loadJson(url);
 		console.log("updated:", updated);
 		const match = games.find((d) => d.live);
