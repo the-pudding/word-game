@@ -44,12 +44,22 @@
 				>
 			</div>
 			<div class="signup">
-				<p>want to be the next stranger?</p>
-				<a
-					role="button"
-					href="https://www.getrevue.co/profile/wordsagainststrangers/"
-					target="_blank">sign up</a
-				>
+				<span class="alt">
+					<p>
+						be the next stranger: <a
+							href="https://www.getrevue.co/profile/wordsagainststrangers/"
+							target="_blank">sign up</a
+						>
+					</p>
+				</span>
+				<span class="reg">
+					<p>want to be the next stranger?</p>
+					<a
+						role="button"
+						href="https://www.getrevue.co/profile/wordsagainststrangers/"
+						target="_blank">sign up</a
+					>
+				</span>
 			</div>
 		</div>
 	</div>
@@ -65,27 +75,28 @@
 	.details {
 		display: flex;
 		justify-content: space-evenly;
-		margin-bottom: 16px;
-		min-height: 240px;
+		min-height: 220px;
 	}
 
 	.cta {
+		max-width: 25rem;
+		margin: 0 auto;
 		border-top: 1px solid var(--color-fg);
 		display: flex;
 		justify-content: space-between;
-		padding: 16px 2px;
+		padding: 8px 2px;
 	}
 
 	.play button {
-		font-size: var(--88px);
-		width: 2.75em;
+		font-size: var(--32px);
+		width: 3.25em;
 	}
 
 	.other {
 		display: flex;
 		flex-direction: column;
-		align-items: flex-end;
 		justify-content: space-between;
+		align-items: flex-end;
 	}
 
 	.other button,
@@ -93,15 +104,63 @@
 		font-size: var(--14px);
 	}
 
-	.signup {
-		display: flex;
-		flex-direction: column;
-		align-items: flex-end;
+	.rules {
+		/* width: 50%; */
+	}
+
+	.signup .reg {
+		display: none;
+	}
+
+	.signup .reg p {
+		text-align: right;
+		padding-left: 16px;
+		margin-bottom: 4px;
 	}
 
 	.signup p {
 		font-size: var(--14px);
-		text-align: right;
-		margin: 8px 0;
+		text-align: left;
+	}
+
+	@media (min-width: 360px) {
+		.details {
+			margin-bottom: 16px;
+		}
+
+		.play button {
+			font-size: var(--48px);
+			width: 3em;
+		}
+	}
+
+	@media (min-width: 480px) {
+		.signup .alt {
+			display: none;
+		}
+
+		.signup .reg {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: flex-end;
+		}
+	}
+
+	@media (min-width: 640px) {
+		.play button {
+			font-size: var(--88px);
+			width: 3em;
+		}
+	}
+
+	@media (min-height: 600px) {
+		.cta {
+			padding: 16px 2px;
+		}
+
+		.details {
+			min-height: 240px;
+		}
 	}
 </style>

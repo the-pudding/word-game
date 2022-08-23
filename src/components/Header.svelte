@@ -60,7 +60,7 @@
 	}
 
 	:global(.about svg) {
-		vertical-align: top;
+		vertical-align: bottom;
 	}
 
 	.brand {
@@ -71,6 +71,7 @@
 		position: absolute;
 		top: 2px;
 		right: 16px;
+		display: none;
 	}
 
 	a.wordmark {
@@ -87,5 +88,11 @@
 
 	:global(.wordmark svg path) {
 		fill: currentColor;
+	}
+
+	@media (min-width: 640px) {
+		.brand {
+			display: flex;
+		}
 	}
 </style>

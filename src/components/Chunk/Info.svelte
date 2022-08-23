@@ -88,7 +88,6 @@
 		margin-top: 6px;
 		transform: rotate(4deg);
 		z-index: 19;
-		/* animation: hinge 1s 2s alternate-reverse infinite; */
 	}
 
 	/* from */
@@ -105,6 +104,10 @@
 	}
 
 	/* {bio} */
+	.bio {
+		display: none;
+	}
+
 	.bio.bump {
 		margin-top: 12px;
 	}
@@ -194,25 +197,12 @@
 		z-index: 1;
 	}
 
-	.beat {
-		display: none;
-	}
-
 	.beat.force-display {
 		display: inline-block;
 	}
 
-	@keyframes hinge {
-		0% {
-			transform: rotate(4deg);
-		}
-
-		100% {
-			transform: rotate(-2deg);
-		}
-	}
 	@media only screen and (min-height: 600px) {
-		.beat {
+		.bio {
 			display: inline-block;
 		}
 	}
