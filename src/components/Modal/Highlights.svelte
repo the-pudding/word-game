@@ -22,11 +22,16 @@
 	};
 
 	$: count = format(",")($possibleAnswers.length);
-	$: wodWords = $guesses.wod[$round]
-		.filter((d) => d.valid && !d.guessedByUserLate)
+
+	$: currentRoundWod = $guesses.wod[$round];
+
+	$: wodWords = currentRoundWod
+		.filter((d) => d.valid)
 		.slice(0, MAX_WORDS)
 		.map((d) => d.text)
 		.join(" ");
+
+	$: blockCount = currentRoundWod.filter((d) => !d.valid).length;
 
 	$: allCommonWords = shuffle(
 		$possibleAnswers.filter((d) => +d.points === 1).filter(lemmasNotInPlayed)
@@ -37,13 +42,13 @@
 		.map((d) => d.word)
 		.join(" ");
 
-	$: commonText = $wod ? "you didn't get:" : "nobody got:";
+	$: commonText = $wod ? "you didn't get:" : "nobody got";
+	$: answersText = `there were <em>${count}</em> possible words.`;
+	$: blockSuffix = blockCount === 1 ? "" : "s";
+	$: blockText = ` you blocked ${$wodInfo?.name} ${blockCount} time${blockSuffix}.`;
 </script>
 
-<Possible
-	text="in round {$round +
-		1} there were <em>{count}</em> possible words that satisfied the clue."
-/>
+<Possible text="{answersText}{blockText}" />
 <div class="words-wrapper">
 	{#if wodWords.length}
 		<div class="words wod-words">

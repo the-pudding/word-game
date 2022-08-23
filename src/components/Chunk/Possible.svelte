@@ -4,7 +4,7 @@
 </script>
 
 <p id="chunk-possible">
-	<Chunk {text} className="combo-default" max="30" />
+	<Chunk {text} className="combo-default" max="44" />
 </p>
 
 <style>
@@ -13,9 +13,9 @@
 		margin: 0 auto;
 	}
 
-	/* in round x there were */
+	/* there were X thousand possible words. */
 	:global(#chunk-possible .chunk:nth-of-type(1)) {
-		transform: translate(-10%, 0) rotate(0deg);
+		transform: translate(-5%, 0) rotate(0deg);
 		z-index: 3;
 	}
 

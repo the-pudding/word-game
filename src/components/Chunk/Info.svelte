@@ -39,8 +39,10 @@
 				</span>
 			{/if}
 
-			<Chunk text="can you" className="combo-wod-light g {bumpBio}" />
-			<Chunk text={`beat ${pronounObject}?`} className="combo-wod-light h" />
+			<span class="beat" class:force-display={noBio || noLocation}>
+				<Chunk text="can you" className="combo-wod-light g {bumpBio}" />
+				<Chunk text={`beat ${pronounObject}?`} className="combo-wod-light h" />
+			</span>
 		{:else}
 			<span class="no-game">
 				<Chunk text={noGameText} max="12" className="combo-wod-light" />
@@ -192,12 +194,12 @@
 		z-index: 1;
 	}
 
-	:global(#chunk-info .g) {
+	.beat {
 		display: none;
 	}
 
-	:global(#chunk-info .h) {
-		display: none;
+	.beat.force-display {
+		display: inline-block;
 	}
 
 	@keyframes hinge {
@@ -210,11 +212,7 @@
 		}
 	}
 	@media only screen and (min-height: 600px) {
-		:global(#chunk-info .g) {
-			display: inline-block;
-		}
-
-		:global(#chunk-info .h) {
+		.beat {
 			display: inline-block;
 		}
 	}
