@@ -19,24 +19,28 @@
 			id: "name",
 			limit: 12,
 			text: "What is your name?",
-			detail: "e.g., Jane Doe or J. Doe or Jane"
+			detail: "e.g., <em>Jane Doe</em> or <em>J. Doe</em> or <em>Jane</em>",
+			required: true
 		},
 		{
 			id: "location",
 			limit: 12,
-			text: "Where are playing from?",
-			detail: ""
+			text: "Where are from/living?",
+			detail: "Optional",
+			required: false
 		},
 		{
 			id: "pronoun",
-			text: "What are your preferred pronouns?"
+			text: "What are your preferred pronouns?",
+			required: true
 		},
 		{
 			id: "plug",
 			limit: 48,
 			text: "What would you like to plug (about yourself, something, etc) at the end of the game?",
 			detail:
-				"'Follow me on Twitter @wordsagainststrangers' or 'Have a great day!'"
+				"e.g., <em>Follow me on Twitter @wordsagainststrangers</em> or <em>Have a great day!</em>",
+			required: false
 		}
 	];
 
@@ -110,10 +114,10 @@
 		<p>Error</p>
 	{:else}
 		<form on:submit|preventDefault={onSubmit}>
-			{#each defaultQuestions as { id, text, detail, type, limit }, i}
+			{#each defaultQuestions as { id, text, detail, type, limit, required }, i}
 				<div>
 					<label for="question-{id}">{text}</label>
-					<p>{detail}</p>
+					<p>{@html detail}</p>
 					{#if id === "pronoun"}
 						<fieldset id="question-{id}">
 							<input
@@ -143,7 +147,7 @@
 						</fieldset>
 					{:else}
 						<input
-							required={true}
+							{required}
 							bind:value={defaultQuestions[i].answer}
 							id="question-{id}"
 							placeholder={id}
@@ -160,7 +164,7 @@
 				<label for="question-bio">{randomQuestion}</label>
 
 				<input
-					required={true}
+					required={false}
 					bind:value={randomAnswer}
 					id="question-bio"
 					maxlength="100"
