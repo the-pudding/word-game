@@ -3,11 +3,11 @@
 	import { active, inModal } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 600 * MS;
+	const target = 6 * MS;
 
 	$: update($active);
 	$: inverse = target - $elapsed;
-	$: width = `${(inverse / target) * 100}%`;
+	$: width = `${Math.max(0, inverse / target) * 100}%`;
 	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
 	$: if (secondsLeft <= 0) {
 		$active = false;
@@ -28,7 +28,9 @@
 	<div class="margin">
 		<span class="progress combo-mark" style:width />
 	</div>
-	<!-- <p><strong>{secondsLeft}</strong></p> -->
+	{#if !$inModal}
+		<p><strong>{secondsLeft}</strong></p>
+	{/if}
 </div>
 
 <style>
@@ -58,5 +60,14 @@
 		display: block;
 		width: 100%;
 		height: 100%;
+	}
+
+	p {
+		position: absolute;
+		top: 50%;
+		right: 8px;
+		transform: translate(0, -50%);
+		font-size: var(--14px);
+		color: var(--color-mark-fg-dark);
 	}
 </style>

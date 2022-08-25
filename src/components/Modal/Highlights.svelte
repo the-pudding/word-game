@@ -50,6 +50,11 @@
 
 <Possible text="{answersText}{blockText}" />
 <div class="words-wrapper">
+	<div class="words common-words">
+		<CommonWordsInfo lines={["common", "words that", `${commonText}`]} />
+		<CommonWordsList text={commonWords} />
+	</div>
+
 	{#if wodWords.length}
 		<div class="words wod-words">
 			<WodWordsInfo
@@ -58,11 +63,6 @@
 			<WodWordsList text={wodWords} />
 		</div>
 	{/if}
-
-	<div class="words common-words">
-		<CommonWordsInfo lines={["common", "words that", `${commonText}`]} />
-		<CommonWordsList text={commonWords} />
-	</div>
 </div>
 
 <style>

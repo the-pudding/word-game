@@ -9,8 +9,7 @@
 <div id="play-clue" class:in-modal={$inModal}>
 	<ul>
 		{#each chunks as chunk, i}
-			<!-- {@const suffix = i < chunks.length - 1 ? " +" : ""} -->
-			<li>{chunk}</li>
+			<li>{@html chunk}</li>
 		{/each}
 	</ul>
 </div>
@@ -31,6 +30,7 @@
 		justify-content: center;
 		padding: 0;
 	}
+
 	li {
 		margin: 0;
 		list-style-type: none;
@@ -39,5 +39,10 @@
 		padding: 4px;
 		line-height: 1;
 		border: 1px solid var(--color-fg);
+	}
+
+	:global(#play-clue span) {
+		font-weight: var(--bold);
+		font-style: italic;
 	}
 </style>

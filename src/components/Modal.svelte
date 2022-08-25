@@ -1,5 +1,12 @@
 <script>
-	import { inModal, round, gameState, wod, gameId } from "$stores/misc.js";
+	import {
+		ROUNDS,
+		inModal,
+		round,
+		gameState,
+		wod,
+		gameId
+	} from "$stores/misc.js";
 	import Recap from "$components/Modal/Recap.svelte";
 	import Pregame from "$components/Modal/Pregame.svelte";
 	import PregameWOD from "$components/Modal/PregameWOD.svelte";
@@ -45,7 +52,8 @@
 
 {#if $gameState === "mid"}
 	<div class="mid">
-		<button on:click={onPlay}> next round </button>
+		<button on:click={onPlay}>next round</button>
+		<p>round {$round + 2} of {ROUNDS}</p>
 	</div>
 {/if}
 
@@ -57,6 +65,11 @@
 
 	button {
 		font-size: var(--36px);
-		width: 7.5em;
+	}
+
+	p {
+		margin-top: 8px;
+		font-size: var(--14px);
+		color: var(--color-bg-light-text);
 	}
 </style>
