@@ -60,7 +60,7 @@
 	--color-mark-fg-dark: var(--color-red-900);
 	--color-mark-border: var(--color-red-500);
 	
-	--color-bg-light-text: var(--color-tan-600);
+	--color-fg-light: var(--color-tan-600);
 
 	--bold: 800;
 }

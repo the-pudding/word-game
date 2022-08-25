@@ -134,7 +134,7 @@
 		}
 	}
 
-	@media (min-width: 480px) {
+	@media (min-width: 640px) {
 		.signup .alt {
 			display: none;
 		}
@@ -145,9 +145,7 @@
 			align-items: flex-end;
 			justify-content: flex-end;
 		}
-	}
 
-	@media (min-width: 640px) {
 		.play button {
 			font-size: var(--88px);
 			width: 3em;

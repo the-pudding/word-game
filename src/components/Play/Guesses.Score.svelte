@@ -51,7 +51,7 @@
 		/* text-transform: uppercase; */
 		font-size: var(--18px);
 		font-weight: var(--bold);
-		color: var(--color-bg-light-text);
+		color: var(--color-fg-light);
 	}
 
 	.wod .name {

@@ -70,6 +70,6 @@
 	p {
 		margin-top: 8px;
 		font-size: var(--14px);
-		color: var(--color-bg-light-text);
+		color: var(--color-fg-light);
 	}
 </style>

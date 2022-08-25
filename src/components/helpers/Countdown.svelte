@@ -27,7 +27,7 @@
 		top: 33%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		color: var(--color-bg-light-text);
+		color: var(--color-fg-light);
 		line-height: 1;
 	}
 </style>
