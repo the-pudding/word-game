@@ -64,7 +64,7 @@
 	}
 
 	.name.flip {
-		/* transform: rotate(-90deg) translate(calc(-100% - 24px), 0); */
+		transform: rotate(-90deg) translate(calc(-100% - 24px), 0);
 	}
 
 	.wod .name.flip {
