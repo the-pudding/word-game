@@ -39,10 +39,17 @@
 		Math.max(0, ulHeightDiff + userScoreY)
 	);
 	$: above = wodScoreY === containerHeight;
+	$: userFlipName = userScoreY >= containerHeight / 2;
+	$: wodFlipName = wodScoreY >= containerHeight / 2;
 </script>
 
 <div id="play-guesses" bind:clientHeight={containerHeight}>
-	<Score name="you" points={$totalScore.user} y={userScoreY} />
+	<Score
+		name="you"
+		points={$totalScore.user}
+		y={userScoreY}
+		flipName={userFlipName}
+	/>
 	<List guesses={userGuesses} --offsetY={offsetY} {liHeight} {startOffset} />
 	{#if !$wod}
 		<List guesses={wodGuesses} --offsetY={offsetY} wod={true} {liHeight} />
@@ -51,6 +58,7 @@
 			points={$totalScore.wod}
 			y={wodScoreY}
 			{above}
+			flipName={wodFlipName}
 		/>
 	{/if}
 </div>

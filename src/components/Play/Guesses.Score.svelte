@@ -4,6 +4,7 @@
 	export let name;
 	export let y = 0;
 	export let above;
+	export let flipName;
 
 	const gutterWidth = 36;
 
@@ -29,8 +30,8 @@
 		class:hasArrowBelow
 	>
 		<span class="points">{points}</span>
+		<p class="name" class:flip={flipName}>{name}</p>
 	</div>
-	<p class="name">{name}</p>
 </div>
 
 <style>
@@ -44,18 +45,29 @@
 
 	.name {
 		position: absolute;
-		top: 50%;
+		top: 4px;
+		left: 50%;
+		padding-left: 24px;
 		transform-origin: 0 50%;
-		transform: rotate(-90deg) translate(-50%, calc(100% - 4px));
-		text-align: center;
-		/* text-transform: uppercase; */
+		transform: rotate(-90deg);
+		/* transform: scale(-1) rotate(-90deg); */
 		font-size: var(--18px);
 		font-weight: var(--bold);
 		color: var(--color-fg-light);
+		transition: transform 500ms;
 	}
 
 	.wod .name {
-		transform: rotate(90deg) translate(-50%, calc(-100% + 4px));
+		padding-right: 24px;
+		transform-origin: 100% 50%;
+		transform: translate(-100%, 0) rotate(90deg);
+	}
+	.name.flip {
+		transform: rotate(90deg);
+	}
+
+	.wod .name.flip {
+		transform: translate(-100%, 0) rotate(-90deg);
 	}
 
 	.pill {

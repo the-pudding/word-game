@@ -3,7 +3,7 @@
 	import { active, inModal } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 60 * MS;
+	const target = 600 * MS;
 
 	$: update($active);
 	$: inverse = target - $elapsed;
