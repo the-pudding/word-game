@@ -104,31 +104,37 @@ main {
 h1 {
 	font-size: var(--48px, 48px);
 	margin: 0;
+	font-weight: var(--bold);
 }
 
 h2 {
 	font-size: var(--36px, 36px);
 	margin: 0;
+	font-weight: var(--bold);
 }
 
 h3 {
 	font-size: var(--28px, 28px);
 	margin: 0;
+	font-weight: var(--bold);
 }
 
 h4 {
 	font-size: var(--24px, 24px);
 	margin: 0;
+	font-weight: var(--bold);
 }
 
 h5 {
 	font-size: var(--22px, 22px);
 	margin: 0;
+	font-weight: var(--bold);
 }
 
 h6 {
 	font-size: var(--20px, 20px);
 	margin: 0;
+	font-weight: var(--bold);
 }
 
 p {

@@ -16,7 +16,6 @@
 		flex-direction: column;
 		align-items: center;
 		margin: 32px auto 16px auto;
-		font-weight: var(--bold);
 	}
 
 	:global(#chunk-recap-title .chunk:nth-of-type(1)) {

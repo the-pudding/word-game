@@ -11,12 +11,12 @@
 		<h3><span class="chunk combo-user">how to play</span></h3>
 		<ul>
 			<li>
-				<h4><span class="chunk combo-wod">goal</span></h4>
-				score more points than the stranger in four, one-minute rounds.
+				<h4 class="a"><span class="chunk combo-wod">goal</span></h4>
+				<p>score more points than the stranger in four, one-minute rounds.</p>
 			</li>
 			<li>
-				<h4><span class="chunk combo-wod">gameplay</span></h4>
-				enter as many words as possible that satisfy a clue.
+				<h4 class="b"><span class="chunk combo-wod">gameplay</span></h4>
+				<p>enter as many words as possible that satisfy a clue.</p>
 				<details>
 					<summary>more details</summary>
 					<ul class="inner">
@@ -41,12 +41,14 @@
 				</details>
 			</li>
 			<li>
-				<h4><span class="chunk combo-wod">other rules</span></h4>
-				no proper nouns, hyphenated words, or varations (e.g., plurals) of a played
-				word.
+				<h4 class="c"><span class="chunk combo-wod">other rules</span></h4>
+				<p>
+					no proper nouns, hyphenated words, or varations (e.g., plurals) of a
+					played word.
+				</p>
 			</li>
 		</ul>
-		<p><button on:click={close}>CLOSE</button></p>
+		<p class="close"><button on:click={close}>close</button></p>
 	</div>
 </section>
 
@@ -56,6 +58,7 @@
 		z-index: var(--z-overlay);
 		background: var(--color-bg);
 		padding: 0 8px;
+		overflow-y: auto;
 	}
 
 	.visible {
@@ -64,10 +67,11 @@
 
 	h3 {
 		margin: 16px auto;
+		transform: rotate(1deg);
 	}
 
 	h4 {
-		margin: 8px 0;
+		margin: 16px 0 8px 0;
 	}
 
 	.chunk {
@@ -94,17 +98,17 @@
 	}
 
 	p {
+		/* margin: 16px auto; */
+		line-height: 1.4;
+	}
+
+	p.close {
 		margin-top: 32px;
 		padding-top: 16px;
-		line-height: 1.4;
 		border-top: 1px solid currentColor;
 	}
 
 	button {
 		font-size: var(--32px);
-	}
-
-	section {
-		overflow-y: auto;
 	}
 </style>
