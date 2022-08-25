@@ -56,7 +56,7 @@
 		font-size: var(--18px);
 		font-weight: var(--bold);
 		color: var(--color-fg-light);
-		transition: transform 2500ms;
+		transition: transform 500ms;
 		z-index: 0;
 	}
 
