@@ -67,15 +67,15 @@
 
 <style>
 	.wrapper {
-		display: flex;
-		flex-direction: column;
+		/* display: flex;
+		flex-direction: column; */
 		height: 100%;
 	}
 
 	.details {
 		display: flex;
 		justify-content: space-evenly;
-		min-height: 220px;
+		min-height: 200px;
 	}
 
 	.cta {
@@ -158,9 +158,8 @@
 		.cta {
 			padding: 16px 2px;
 		}
-
 		.details {
-			min-height: 240px;
+			min-height: 265px;
 		}
 	}
 </style>

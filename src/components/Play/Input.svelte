@@ -31,7 +31,6 @@
 		inputEl.focus();
 	};
 
-	$: width = `${value.length * 20}}px`;
 	$: disabled = !$active;
 	$: if ($active) focus();
 </script>
@@ -48,7 +47,7 @@
 				placeholder="enter word"
 				{disabled}
 			/>
-			<button type="submit">&rarr;</button>
+			<button type="submit" aria-label="submit">&rarr;</button>
 		</div>
 	</form>
 </div>
@@ -58,6 +57,7 @@
 		margin: 4px 0 0 0;
 		user-select: none;
 	}
+
 	#play-input.in-modal {
 		opacity: 0.1;
 	}
@@ -103,6 +103,7 @@
 		font-weight: var(--bold);
 		user-select: none;
 		color: var(--color-user-fg);
+		width: calc(100% - 48px);
 	}
 
 	input:focus {
