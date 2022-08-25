@@ -22,15 +22,16 @@
 	class:in-modal={$inModal}
 >
 	<div
-		class="pill combo-mark"
+		class="pill"
 		style:bottom
 		class:triple
 		class:above
 		class:below
 		class:hasArrowBelow
 	>
-		<span class="points">{points}</span>
 		<p class="name" class:flip={flipName}>{name}</p>
+		<span class="circle combo-mark" />
+		<span class="points combo-mark">{points}</span>
 	</div>
 </div>
 
@@ -50,24 +51,24 @@
 		padding-left: 24px;
 		transform-origin: 0 50%;
 		transform: rotate(-90deg);
-		/* transform: scale(-1) rotate(-90deg); */
 		font-size: var(--18px);
 		font-weight: var(--bold);
 		color: var(--color-fg-light);
-		transition: transform 500ms;
+		transition: transform 2500ms;
+		z-index: 0;
 	}
 
 	.wod .name {
 		padding-right: 24px;
-		transform-origin: 100% 50%;
-		transform: translate(-100%, 0) rotate(90deg);
+		transform: rotate(90deg) translate(-100%, 0);
 	}
+
 	.name.flip {
-		transform: rotate(90deg);
+		/* transform: rotate(-90deg) translate(calc(-100% - 24px), 0); */
 	}
 
 	.wod .name.flip {
-		transform: translate(-100%, 0) rotate(-90deg);
+		transform: rotate(90deg) translate(0, 0);
 	}
 
 	.pill {
@@ -78,8 +79,6 @@
 		width: calc(var(--gutter-width) - 8px);
 		height: calc(var(--gutter-width) - 8px);
 		white-space: nowrap;
-		border-radius: calc(var(--gutter-width) - 8px);
-		text-transform: uppercase;
 		font-size: var(--14px);
 		font-weight: var(--bold);
 		padding: 0;
@@ -88,7 +87,21 @@
 		justify-content: center;
 		align-items: center;
 		transition: bottom 500ms var(--delay) ease-in-out;
-		z-index: 1;
+	}
+
+	.circle {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border-radius: calc(var(--gutter-width) - 8px);
+		display: block;
+	}
+
+	.points {
+		position: relative;
+		display: inline-block;
 	}
 
 	.pill.below {
