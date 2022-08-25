@@ -50,7 +50,7 @@
 	<WodBot />
 {/if}
 
-{#if readyToPlay}
+{#if readyToPlay && $gameState !== "post"}
 	<section id="play">
 		<Play {clues} {answers} />
 	</section>

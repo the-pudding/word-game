@@ -5,6 +5,7 @@
 	export let y = 0;
 	export let above;
 	export let flipName;
+	export let review;
 
 	const gutterWidth = 36;
 
@@ -20,6 +21,7 @@
 	class:wod
 	style="--delay: {$wordDuration}ms; --gutter-width: {gutterWidth}px;"
 	class:in-modal={$inModal}
+	class:review
 >
 	<div
 		class="pill"
@@ -156,11 +158,8 @@
 		line-height: 1;
 	}
 
-	.in-modal .pill {
-		opacity: 0.5;
-	}
-
-	.in-modal .name {
+	.in-modal:not(.review) .pill,
+	.in-modal:not(.review) .name {
 		opacity: 0.5;
 	}
 </style>

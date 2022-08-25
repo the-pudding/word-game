@@ -11,6 +11,7 @@
 	import Pregame from "$components/Modal/Pregame.svelte";
 	import PregameWOD from "$components/Modal/PregameWOD.svelte";
 	import PostgameWOD from "$components/Modal/PostgameWOD.svelte";
+	import PostgameTower from "$components/Modal/PostgameTower.svelte";
 	import Feedback from "$components/Modal/Feedback.svelte";
 	import { update } from "$utils/supabase.js";
 
@@ -44,9 +45,12 @@
 {#if $gameState !== "pre"}
 	<Recap />
 {/if}
+
 {#if $gameState === "post"}
 	{#if $wod}
 		<PostgameWOD />
+	{:else}
+		<PostgameTower />
 	{/if}
 {/if}
 

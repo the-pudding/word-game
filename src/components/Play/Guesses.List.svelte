@@ -5,11 +5,21 @@
 	export let wod = false;
 	export let liHeight;
 	export let startOffset;
+	export let review;
 </script>
 
-<ul class:wod class:in-modal={$inModal}>
+<ul class:wod class:in-modal={$inModal} class:review>
 	{#each guesses as { valid, text, revealWod, points } (text)}
-		<Item {wod} {valid} {text} {revealWod} {points} {liHeight} {startOffset} />
+		<Item
+			{wod}
+			{valid}
+			{text}
+			{revealWod}
+			{points}
+			{liHeight}
+			{startOffset}
+			{review}
+		/>
 	{/each}
 </ul>
 
@@ -27,6 +37,10 @@
 
 	.in-modal {
 		opacity: 0.2;
+	}
+
+	.in-modal.review {
+		opacity: 1;
 	}
 
 	.wod {

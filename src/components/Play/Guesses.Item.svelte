@@ -9,6 +9,7 @@
 	export let points;
 	export let liHeight;
 	export let startOffset;
+	export let review;
 
 	const timer = tweened(0, { duration: $wordDuration });
 
@@ -28,6 +29,7 @@
 		easing: quartIn
 	}}
 	class:wod
+	class:review
 	class={className}
 	style={`--height: ${height}px`}
 >
@@ -60,6 +62,10 @@
 
 	.wod span {
 		visibility: hidden;
+	}
+
+	.wod.review span {
+		visibility: visible;
 	}
 
 	@media screen and (min-width: 40rem) {

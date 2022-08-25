@@ -10,6 +10,7 @@
 	import Highlights from "$components/Modal/Highlights.svelte";
 	import Title from "$components/Chunk/RecapTitle.svelte";
 	import Plug from "$components/Chunk/RecapPlug.svelte";
+	import Goodbye from "$components/Chunk/RecapGoodbye.svelte";
 
 	let title;
 
@@ -51,6 +52,12 @@
 	{/if}
 
 	<Highlights />
+
+	{#if $gameState === "post" && !$wod}
+		<Goodbye
+			text="thanks for playing. come back tomorrow for a new stranger!"
+		/>
+	{/if}
 </div>
 
 <style>

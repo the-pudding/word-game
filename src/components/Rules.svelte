@@ -21,20 +21,22 @@
 					<summary>more details</summary>
 					<ul class="inner">
 						<li>
-							<h5>sample clue</h5>
-							:
-							<em class="clue"
-								>starts with <h5>A</h5></em
-							>
-							answers: <em>apple</em>, <em>awesome</em>, <em>activate</em>, etc.
+							<h5><span class="chunk combo-default">sample clue</span></h5>
+							<p>clue: <em class="clue">starts with <strong>a</strong></em></p>
+							<p>
+								answers: <em>apple</em>, <em>awesome</em>, <em>activate</em>,
+								etc.
+							</p>
 						</li>
 						<li>
-							<h5>blocking</h5>
+							<h5><span class="chunk combo-default">blocking</span></h5>
 							whoever gets a word first gets points. If the stranger enters the word
 							before you, you get no points, and vice versa.
 						</li>
 						<li>
-							<h5>obscure = more points</h5>
+							<h5>
+								<span class="chunk combo-default">obscure = more points</span>
+							</h5>
 							you get more points for less commonly used words.
 						</li>
 					</ul>
@@ -74,6 +76,10 @@
 		margin: 16px 0 8px 0;
 	}
 
+	h5 {
+		margin: 16px 0 8px 0;
+	}
+
 	.chunk {
 		padding: 0 4px;
 	}
@@ -110,5 +116,9 @@
 
 	button {
 		font-size: var(--32px);
+	}
+
+	summary {
+		cursor: pointer;
 	}
 </style>
