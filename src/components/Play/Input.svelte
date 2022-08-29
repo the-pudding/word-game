@@ -102,7 +102,7 @@
 		line-height: 1;
 		font-weight: var(--bold);
 		color: var(--color-user-fg);
-		width: calc(100% - 48px);
+		width: 100%;
 	}
 
 	input:focus {
@@ -110,6 +110,7 @@
 	}
 
 	button {
+		display: none;
 		position: absolute;
 		top: 50%;
 		right: 8px;
@@ -119,6 +120,14 @@
 	@media (hover: hover) and (pointer: fine) {
 		div {
 			display: block;
+		}
+
+		button {
+			display: block;
+		}
+
+		input {
+			width: calc(100% - 48px);
 		}
 	}
 </style>

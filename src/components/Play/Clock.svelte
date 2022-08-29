@@ -5,23 +5,17 @@
 	const MS = 1000;
 	const target = 60 * MS;
 
-	$: update($active);
+	$: if ($inModal && !$active) timer.stop();
+	$: if (!$inModal && !$active) timer.reset();
+	$: if ($active) timer.start();
+	// TODO inverse won't updaet
 	$: inverse = target - $elapsed;
 	$: width = `${Math.max(0, inverse / target) * 100}%`;
-	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
+	$: secondsLeft = Math.ceil(inverse / MS);
 	$: if (secondsLeft <= 0) {
 		$active = false;
 		$inModal = true;
 	}
-
-	const update = (isActive) => {
-		if (isActive) {
-			timer.reset();
-			timer.start();
-		} else {
-			timer.stop();
-		}
-	};
 </script>
 
 <div id="play-clock" class:in-modal={$inModal}>
