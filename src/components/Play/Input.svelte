@@ -101,7 +101,6 @@
 		position: relative;
 		line-height: 1;
 		font-weight: var(--bold);
-		user-select: none;
 		color: var(--color-user-fg);
 		width: calc(100% - 48px);
 	}

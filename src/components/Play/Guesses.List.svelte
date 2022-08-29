@@ -10,16 +10,7 @@
 
 <ul class:wod class:in-modal={$inModal} class:review>
 	{#each guesses as { valid, text, revealWod, points } (text)}
-		<Item
-			{wod}
-			{valid}
-			{text}
-			{revealWod}
-			{points}
-			{liHeight}
-			{startOffset}
-			{review}
-		/>
+		<Item {wod} {text} {points} {liHeight} {startOffset} {review} />
 	{/each}
 </ul>
 
