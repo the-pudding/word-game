@@ -1,7 +1,14 @@
 <script>
 	import List from "$components/Play/Guesses.List.svelte";
 	import Score from "$components/Play/Guesses.Score.svelte";
-	import { guesses, round, wod, wodInfo, totalScore } from "$stores/misc.js";
+	import {
+		guesses,
+		round,
+		wod,
+		wodInfo,
+		totalScore,
+		guessesHeight
+	} from "$stores/misc.js";
 	import mq from "$stores/mq.js";
 
 	export let review = false;
@@ -10,8 +17,6 @@
 	const displayFilter = (d) => d.reason === undefined;
 	const threshold = review ? 1 : 0.75;
 	const borderH = 2;
-
-	let containerHeight = 0;
 
 	$: liHeight = $mq["40rem"] ? 32 : 24;
 
@@ -25,7 +30,7 @@
 	$: ulHeightWod = $totalScore.wod * liHeight - borderOffsetWod; // total stack height
 	$: ulHeightDiff = ulHeightWod - ulHeight;
 
-	$: thresholdHeight = containerHeight * threshold;
+	$: thresholdHeight = $guessesHeight * threshold;
 
 	$: distAboveThreshold = ulHeight - thresholdHeight; // how far from our threshold we are (pos or neg)
 	$: distAboveThresholdClamped = Math.max(0, distAboveThreshold);
@@ -33,20 +38,20 @@
 	$: offsetY = `${distAboveThresholdClamped}px`;
 
 	$: startOffset =
-		(containerHeight - thresholdHeight + Math.min(0, distAboveThreshold) * -1) *
+		($guessesHeight - thresholdHeight + Math.min(0, distAboveThreshold) * -1) *
 		-1;
 
 	$: userScoreY = distAboveThresholdClamped > 0 ? thresholdHeight : ulHeight;
 	$: wodScoreY = Math.min(
-		containerHeight,
+		$guessesHeight,
 		Math.max(0, ulHeightDiff + userScoreY)
 	);
-	$: above = wodScoreY === containerHeight;
-	$: userFlipName = userScoreY >= containerHeight / 2;
-	$: wodFlipName = wodScoreY >= containerHeight / 2;
+	$: above = wodScoreY === $guessesHeight;
+	$: userFlipName = userScoreY >= $guessesHeight / 2;
+	$: wodFlipName = wodScoreY >= $guessesHeight / 2;
 </script>
 
-<div class="play-guesses" bind:clientHeight={containerHeight} class:review>
+<div class="play-guesses" bind:clientHeight={$guessesHeight} class:review>
 	<Score
 		name="you"
 		points={$totalScore.user}

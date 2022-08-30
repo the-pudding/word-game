@@ -17,6 +17,10 @@ export const active = writable(false);
 export const round = writable(-1);
 export const wordDuration = readable(1000);
 
+export const inCountdown = derived([inModal, active], ([$inModal, $active], set) => {
+	set(!$inModal && !$active);
+});
+
 export const gameState = derived(
 	[round, inModal],
 	([$round, $inModal], set) => {
@@ -68,3 +72,5 @@ export const overlay = writable(undefined);
 export const wod = writable(undefined);
 export const wodId = writable(undefined);
 export const wodInfo = writable(undefined);
+
+export const guessesHeight = writable(0);

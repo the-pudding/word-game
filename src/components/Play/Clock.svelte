@@ -1,12 +1,12 @@
 <script>
 	import { timer, elapsed } from "$stores/timer.js";
-	import { active, inModal } from "$stores/misc.js";
+	import { active, inModal, inCountdown } from "$stores/misc.js";
 
 	const MS = 1000;
 	const target = 6 * MS;
 
 	$: if ($inModal && !$active) timer.stop();
-	$: if (!$inModal && !$active) timer.reset();
+	$: if ($inCountdown) timer.reset();
 	$: if ($active) timer.start();
 	$: width = `${Math.max(0, (target - $elapsed) / target) * 100}%`;
 	$: secondsLeft = Math.ceil((target - $elapsed) / MS);

@@ -2,8 +2,9 @@
 	import { onMount } from "svelte";
 	import { tweened } from "svelte/motion";
 	import { createEventDispatcher } from "svelte";
+	import { guessesHeight } from "$stores/misc.js";
 
-	export let start = 3;
+	export let start = 5;
 	export let text = "";
 
 	const dispatch = createEventDispatcher();
@@ -13,18 +14,36 @@
 
 	$: display = $countdown < 0 ? text : Math.floor($countdown) + 1;
 
+	$: height = `${$guessesHeight}px`;
+
 	onMount(() => {
 		countdown.set(end).then(() => dispatch("end"));
 	});
 </script>
 
-<p class="countdown">{display}</p>
+<div class="countdown">
+	<div class="inner" style:height>
+		<p>{display}</p>
+	</div>
+</div>
 
 <style>
 	.countdown {
+		background: red;
+		position: relative;
+	}
+
+	.inner {
+		position: absolute;
+		top: 4px;
+		left: 0;
+		width: 100%;
+	}
+
+	p {
 		font-size: var(--64px);
 		position: absolute;
-		top: 33%;
+		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
 		color: var(--color-fg-light);
