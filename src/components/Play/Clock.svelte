@@ -5,13 +5,6 @@
 	const MS = 1000;
 	const target = 6 * MS;
 
-	// const update = () => {
-	// 	if ($inModal && !$active) timer.stop();
-	// 	if (!$inModal && !$active) timer.reset();
-	// 	if ($active) timer.start();
-	// };
-
-	// $: update($inModal, $active);
 	$: if ($inModal && !$active) timer.stop();
 	$: if (!$inModal && !$active) timer.reset();
 	$: if ($active) timer.start();
