@@ -3,16 +3,21 @@
 	import { active, inModal } from "$stores/misc.js";
 
 	const MS = 1000;
-	const target = 60 * MS;
+	const target = 6 * MS;
 
+	// const update = () => {
+	// 	if ($inModal && !$active) timer.stop();
+	// 	if (!$inModal && !$active) timer.reset();
+	// 	if ($active) timer.start();
+	// };
+
+	// $: update($inModal, $active);
 	$: if ($inModal && !$active) timer.stop();
 	$: if (!$inModal && !$active) timer.reset();
 	$: if ($active) timer.start();
-	// TODO inverse won't updaet
-	$: inverse = target - $elapsed;
-	$: width = `${Math.max(0, inverse / target) * 100}%`;
-	$: secondsLeft = Math.ceil(inverse / MS);
-	$: if (secondsLeft <= 0) {
+	$: width = `${Math.max(0, (target - $elapsed) / target) * 100}%`;
+	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
+	$: if ($elapsed >= target) {
 		$active = false;
 		$inModal = true;
 	}

@@ -3,7 +3,7 @@
 	export let points;
 	export let name;
 	export let y = 0;
-	export let above;
+	export let above = false;
 	export let flipName;
 	export let review;
 

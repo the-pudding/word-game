@@ -4,7 +4,7 @@
 	export let guesses;
 	export let wod = false;
 	export let liHeight;
-	export let startOffset;
+	export let startOffset = 0;
 	export let review;
 </script>
 

@@ -28,6 +28,7 @@
 <div id="play-keyboard" class:in-modal={$inModal}>
 	<Keyboard
 		on:keydown={onKeydown}
+		custom={false}
 		layout="wordle"
 		--height="42px"
 		--margin="4px"
