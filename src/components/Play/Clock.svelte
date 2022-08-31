@@ -1,9 +1,14 @@
 <script>
 	import { timer, elapsed } from "$stores/timer.js";
 	import { active, inModal, inCountdown } from "$stores/misc.js";
+	import { createEventDispatcher } from "svelte";
 
 	const MS = 1000;
-	const target = 60 * MS;
+	const WARNING_THRESHOLD = 5.1;
+	const target = 10 * MS;
+	const dispatch = createEventDispatcher();
+
+	let warning = false;
 
 	$: if ($inModal && !$active) timer.stop();
 	$: if ($inCountdown) timer.reset();
@@ -14,6 +19,8 @@
 		$active = false;
 		$inModal = true;
 	}
+	$: warning = (target - $elapsed) / MS <= WARNING_THRESHOLD;
+	$: if (warning) dispatch("beforeend");
 </script>
 
 <div id="play-clock" class:in-modal={$inModal}>

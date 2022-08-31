@@ -8,6 +8,8 @@
 	export let start = 5;
 	export let text = "";
 
+	let complete;
+
 	const dispatch = createEventDispatcher();
 	const end = text ? -1 : 0;
 	const duration = start * 1000;
@@ -20,14 +22,21 @@
 	$: height = `${$guessesHeight}px`;
 
 	onMount(() => {
-		countdown.set(end).then(() => dispatch("end"));
+		complete = false;
+		countdown.set(end).then(() => {
+			complete = true;
+			dispatch("end");
+		});
 	});
 </script>
 
 <div class="countdown">
 	<div class="inner" style:height>
 		{#key display}
-			<p in:fly={{ duration: 250, y: 32 }} out:fly={{ duration: 250, y: -32 }}>
+			<p
+				in:fly={{ duration: 250, y: 32 }}
+				out:fly={{ duration: complete ? 0 : 250, y: -32 }}
+			>
 				{display}
 			</p>
 		{/key}
@@ -53,7 +62,8 @@
 		top: 50%;
 		left: 50%;
 		transform: translate(-50%, -50%);
-		color: var(--color-fg-light);
+		color: var(--color, currentColor);
 		line-height: 1;
+		opacity: 0.75;
 	}
 </style>

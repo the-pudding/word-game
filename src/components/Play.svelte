@@ -20,7 +20,8 @@
 	export let clues;
 	export let answers;
 
-	let showCountdown = false;
+	let showStartCountdown = false;
+	let showEndCountdown = false;
 	let keyboardValue = "";
 	let input;
 	let release = false;
@@ -100,7 +101,7 @@
 	};
 
 	const roundChange = () => {
-		showCountdown = true;
+		showStartCountdown = true;
 		release = false;
 		if (input) input.reset();
 	};
@@ -113,23 +114,31 @@
 
 	const startRound = () => {
 		$active = true;
-		showCountdown = false;
-	};
-
-	const releaseClue = () => {
-		release = true;
+		showStartCountdown = false;
+		showEndCountdown = false;
 	};
 </script>
 
 <div>
 	<Clue clue={currentClue} {release} />
 	<Input on:submit={onSubmit} value={keyboardValue} bind:this={input} />
-	{#if showCountdown}
-		<Countdown text="begin!" on:end={startRound} on:beforeend={releaseClue} />
+	{#if showStartCountdown}
+		<Countdown
+			--color="var(--color-fg-light)"
+			text="begin!"
+			on:end={startRound}
+			on:beforeend={() => (release = true)}
+		/>
+	{/if}
+	{#if showEndCountdown}
+		<Countdown
+			--color="var(--color-mark-bg)"
+			on:end={() => (showEndCountdown = false)}
+		/>
 	{/if}
 	<Invalid />
 	<Guesses />
-	<Clock />
+	<Clock on:beforeend={() => (showEndCountdown = true)} />
 	<InputKeyboard on:submit={onSubmit} bind:value={keyboardValue} />
 </div>
 
