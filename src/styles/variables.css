@@ -1,6 +1,6 @@
 /**
  * Do not edit directly
- * Generated on Fri, 19 Aug 2022 17:48:25 GMT
+ * Generated on Wed, 31 Aug 2022 17:21:33 GMT
  */
 
 :root {
@@ -13,9 +13,9 @@
   --category-gray: #BBBBBB;
   --color-black: #000000;
   --color-white: #ffffff;
-  --color-tan: #f3eee5;
-  --color-tan-dark: #9e9991;
-  --color-tan-darker: #504c45;
+  --color-white-100: #efefef;
+  --color-white-500: #a9a9a9;
+  --color-white-900: #6a6a6a;
   --color-yellow-100: #f8e34d;
   --color-yellow-200: #dfcc45;
   --color-yellow-300: #c6b63e;

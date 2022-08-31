@@ -39,6 +39,10 @@
 	--color-input-fg: var(--color-tan-1000);
 	--color-placeholder: var(--color-tan-500);
 
+	--color-white-bg: var(--color-white-100);
+	--color-white-fg: var(--color-white-900);
+	--color-white-border: var(--color-white-500);
+
 	--color-default-bg: var(--color-tan-200);
 	--color-default-fg: var(--color-tan-800);
 	--color-default-border: var(--color-tan-400);
@@ -163,6 +167,12 @@ strong {
 	font-weight: var(--bold);
 }
 
+.combo-white {
+	background-color: var(--color-white-bg);
+	color: var(--color-white-fg);
+}
+
+
 .combo-default {
 	background-color: var(--color-default-bg);
 	color: var(--color-default-fg);
@@ -186,6 +196,10 @@ strong {
 .combo-mark {
 	background-color: var(--color-mark-bg);
 	color: var(--color-mark-fg);
+}
+
+.chunk.combo-white {
+	border: 2px solid var(--color-white-border);
 }
 
 .chunk.combo-default {

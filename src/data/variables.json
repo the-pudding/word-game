@@ -11,9 +11,9 @@
   "color": {
     "black": "#000000",
     "white": "#ffffff",
-    "tan": "#F3EEE5",
-    "tan-dark": "#9e9991",
-    "tan-darker": "#504c45",
+    "white-100": "#efefef",
+    "white-500": "#a9a9a9",
+    "white-900": "#6a6a6a",
     "yellow-100": "#f8e34d",
     "yellow-200": "#dfcc45",
     "yellow-300": "#c6b63e",

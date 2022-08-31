@@ -6,14 +6,14 @@
 		"white": {
 			"value": "#ffffff"
 		},
-		"tan": {
-			"value": "#F3EEE5"
+		"white-100": {
+			"value": "#efefef"
 		},
-		"tan-dark": {
-			"value": "#9e9991"
+		"white-500": {
+			"value": "#a9a9a9"
 		},
-		"tan-darker": {
-			"value": "#504c45"
+		"white-900": {
+			"value": "#6a6a6a"
 		},
 		"yellow-100": {
 			"value": "#f8e34d"

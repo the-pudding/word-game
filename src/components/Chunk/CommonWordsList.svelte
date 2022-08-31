@@ -4,7 +4,7 @@
 </script>
 
 <p id="chunk-common-words-list">
-	<Chunk {text} max="1" className="combo-wod" />
+	<Chunk {text} max="1" className="combo-white" />
 </p>
 
 <style>
