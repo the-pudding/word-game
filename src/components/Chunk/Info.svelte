@@ -6,7 +6,6 @@
 
 	// const noGameText = "there is no active game right now. check back later!";
 	const noGameText = "there is no active game right now. launching sep. 23!";
-	const loadingText = "loading today's game...";
 
 	$: pronounObject = $wodInfo ? $wodInfo.pronoun.split("/")[1] : undefined;
 	$: noLocation = !$wodInfo?.location;
@@ -49,8 +48,14 @@
 			</span>
 		{/if}
 	{:else}
-		<span class="loading">
-			<Chunk text={loadingText} max="12" className="combo-wod-light" />
+		<span class="loading loading-a">
+			<Chunk text="loading today's" max="12" className="combo-wod-light" />
+		</span>
+		<span class="loading loading-b">
+			<Chunk text="game" max="1" className="combo-wod-light" />
+			<Chunk text="." max="1" className="combo-wod-light" />
+			<Chunk text="." max="1" className="combo-wod-light" />
+			<Chunk text="." max="1" className="combo-wod-light" />
 		</span>
 	{/if}
 </p>
@@ -159,19 +164,47 @@
 	}
 
 	/* loading */
-	:global(#chunk-info .loading .chunk:nth-of-type(1)) {
+	:global(#chunk-info .loading-a .chunk:nth-of-type(1)) {
 		transform: translate(0%, 0);
 		z-index: 8;
 	}
 
-	:global(#chunk-info .loading .chunk:nth-of-type(2)) {
+	:global(#chunk-info .loading-a .chunk:nth-of-type(2)) {
 		transform: translate(-10%, -2px);
 		z-index: 7;
 	}
 
-	:global(#chunk-info .loading .chunk:nth-of-type(3)) {
-		transform: translate(10%, -4px);
+	:global(#chunk-info .loading-b) {
+		flex-direction: row;
+		margin-top: 4px;
+		transform: translate(10%, 0);
+		/* justify-content: center; */
+	}
+
+	:global(#chunk-info .loading-b .chunk:nth-of-type(1)) {
+		transform: translate(0, 0);
 		z-index: 6;
+	}
+
+	:global(#chunk-info .loading-b .chunk:nth-of-type(2)) {
+		--x: -2px;
+		transform: translate(-2px, 0);
+		z-index: 6;
+		animation: wave 0.6s 0s ease-in-out infinite alternate-reverse;
+	}
+
+	:global(#chunk-info .loading-b .chunk:nth-of-type(3)) {
+		--x: -4px;
+		transform: translate(-4px, 0);
+		z-index: 6;
+		animation: wave 0.6s 0.2s ease-in-out infinite alternate-reverse;
+	}
+
+	:global(#chunk-info .loading-b .chunk:nth-of-type(4)) {
+		--x: -6px;
+		transform: translate(-6px, 0);
+		z-index: 6;
+		animation: wave 0.6s 0.4s ease-in-out infinite alternate-reverse;
 	}
 
 	/* no game */
@@ -204,6 +237,16 @@
 	@media only screen and (min-height: 600px) {
 		.bio {
 			display: inline-block;
+		}
+	}
+
+	@keyframes wave {
+		0% {
+			transform: translate(var(--x), 0);
+		}
+
+		100% {
+			transform: translate(var(--x), -4px);
 		}
 	}
 </style>
