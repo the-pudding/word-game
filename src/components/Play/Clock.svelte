@@ -4,8 +4,8 @@
 	import { createEventDispatcher } from "svelte";
 
 	const MS = 1000;
+	const target = 60 * MS;
 	const WARNING_THRESHOLD = 5.1;
-	const target = 10 * MS;
 	const dispatch = createEventDispatcher();
 
 	let warning = false;
