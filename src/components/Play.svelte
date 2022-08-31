@@ -23,6 +23,7 @@
 	let showCountdown = false;
 	let keyboardValue = "";
 	let input;
+	let release = false;
 
 	const lookupLemmas = (text) => {
 		const match = roundData.find((d) => d.word === text);
@@ -100,6 +101,7 @@
 
 	const roundChange = () => {
 		showCountdown = true;
+		release = false;
 		if (input) input.reset();
 	};
 
@@ -113,13 +115,17 @@
 		$active = true;
 		showCountdown = false;
 	};
+
+	const releaseClue = () => {
+		release = true;
+	};
 </script>
 
 <div>
-	<Clue clue={currentClue} />
+	<Clue clue={currentClue} {release} />
 	<Input on:submit={onSubmit} value={keyboardValue} bind:this={input} />
 	{#if showCountdown}
-		<Countdown text="begin!" on:end={startRound} />
+		<Countdown text="begin!" on:end={startRound} on:beforeend={releaseClue} />
 	{/if}
 	<Invalid />
 	<Guesses />

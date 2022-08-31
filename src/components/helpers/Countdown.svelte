@@ -13,8 +13,9 @@
 	const duration = start * 1000;
 	const countdown = tweened(start, { duration });
 
-	$: display = $countdown < 0 ? text : Math.floor($countdown) + 1;
-	// $:
+	$: showingText = $countdown < 0;
+	$: display = showingText ? text : Math.floor($countdown) + 1;
+	$: if (showingText) dispatch("beforeend");
 
 	$: height = `${$guessesHeight}px`;
 

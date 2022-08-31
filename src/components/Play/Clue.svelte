@@ -4,6 +4,8 @@
 	import { inModal, active, guessesHeight, round } from "$stores/misc.js";
 
 	export let clue;
+	export let release;
+
 	const margin = 8;
 	const ghosts = range(3).map((d) => ({ small: null, large: null }));
 	let widths;
@@ -26,8 +28,8 @@
 </script>
 
 <div id="play-clue" class:in-modal={$inModal} style={top}>
-	{#if !$active}
-		<p out:fade>
+	{#if !release}
+		<p out:fade={{ duration: 100 }}>
 			<span class="chunk combo-user">round {$round + 1} clue</span>
 		</p>
 	{/if}
@@ -42,8 +44,8 @@
 			</li>
 
 			<li
-				class:active={$active}
-				style:margin={`0 ${$active ? margin : widths[i]}px`}
+				class:active={release}
+				style:margin={`0 ${release ? margin : widths[i]}px`}
 			>
 				{@html chunk}
 			</li>
@@ -98,7 +100,7 @@
 
 	.active {
 		transform: translate(0, 0) scale(1);
-		transition: all 1s ease-in-out;
+		transition: all 600ms ease-out;
 	}
 
 	:global(#play-clue li span) {
