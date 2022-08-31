@@ -1,6 +1,7 @@
 <script>
 	import { onMount } from "svelte";
 	import { tweened } from "svelte/motion";
+	import { fly } from "svelte/transition";
 	import { createEventDispatcher } from "svelte";
 	import { guessesHeight } from "$stores/misc.js";
 
@@ -23,7 +24,11 @@
 
 <div class="countdown">
 	<div class="inner" style:height>
-		<p>{display}</p>
+		{#key display}
+			<p in:fly={{ duration: 250, y: 32 }} out:fly={{ duration: 250, y: -32 }}>
+				{display}
+			</p>
+		{/key}
 	</div>
 </div>
 
