@@ -38,6 +38,7 @@
 		<div class="other">
 			<div class="rules">
 				<button
+					class="combo-mark"
 					on:click={() => {
 						$overlay = "rules";
 					}}>rules</button
@@ -56,6 +57,7 @@
 					<p>want to be the next stranger?</p>
 					<a
 						role="button"
+						class="combo-mark"
 						href="https://www.getrevue.co/profile/wordsagainststrangers/"
 						target="_blank">sign up</a
 					>
@@ -101,7 +103,10 @@
 
 	.other button,
 	[role="button"] {
-		font-size: var(--14px);
+		font-size: var(--20px);
+		background-color: var(--color-mark-bg);
+		color: var(--color-mark-fg);
+		padding: 4px 8px;
 	}
 
 	.rules {

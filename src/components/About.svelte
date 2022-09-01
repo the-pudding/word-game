@@ -9,9 +9,17 @@
 	};
 </script>
 
-<section on:click={close} class:visible={$overlay === "about"}>
+<section class:visible={$overlay === "about"}>
 	<div>
 		<h3><span class="chunk combo-user">about the game</span></h3>
+		<p>
+			<button
+				class="rules combo-mark"
+				on:click={() => {
+					$overlay = "rules";
+				}}>read the rules</button
+			>
+		</p>
 		<p>
 			{@html byline}
 		</p>
@@ -22,7 +30,7 @@
 		<p>
 			{@html other}
 		</p>
-		<p class="close"><button on:click={close}>close</button></p>
+		<p class="close"><button class="close" on:click={close}>close</button></p>
 	</div>
 </section>
 
@@ -44,6 +52,10 @@
 		transform: rotate(-2deg);
 	}
 
+	p:first-of-type {
+		margin-top: 32px;
+	}
+
 	.chunk {
 		padding: 0 4px;
 	}
@@ -58,7 +70,12 @@
 		padding-top: 16px;
 	}
 
-	button {
+	button.rules {
+		background-color: var(--color-mark-bg);
+		color: var(--color-mark-fg);
+	}
+
+	button.close {
 		font-size: var(--32px);
 	}
 </style>
