@@ -103,7 +103,6 @@
 	const roundChange = () => {
 		showStartCountdown = true;
 		release = false;
-		if (input) input.reset();
 	};
 
 	$: currentClue = clues[$round];
@@ -111,6 +110,7 @@
 	$: $possibleAnswers = roundData;
 	$: validWords = roundData.map((d) => d.word);
 	$: $round, roundChange();
+	$: if (!$active && input) input.reset();
 
 	const startRound = () => {
 		$active = true;

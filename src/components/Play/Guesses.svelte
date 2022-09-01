@@ -72,6 +72,7 @@
 			--offsetY={offsetY}
 			wod={true}
 			{liHeight}
+			startOffset={liHeight * -1}
 			{review}
 		/>
 		<Score
