@@ -1,5 +1,5 @@
 <script>
-	import { inModal } from "$stores/misc.js";
+	import { active } from "$stores/misc.js";
 	import Item from "$components/Play/Guesses.Item.svelte";
 	export let guesses;
 	export let wod = false;
@@ -8,7 +8,7 @@
 	export let review;
 </script>
 
-<ul class:wod class:in-modal={$inModal} class:review>
+<ul class:wod class:active={$active} class:review>
 	{#each guesses as { valid, text, revealWod, points } (text)}
 		<Item {wod} {text} {points} {liHeight} {startOffset} {review} />
 	{/each}
@@ -21,16 +21,17 @@
 		flex-direction: column-reverse;
 		justify-content: flex-start;
 		align-items: flex-start;
-		transition: transform 0.5s ease-out;
+		transition: transform 0.5s ease-out, opacity 0.2s;
 		transform: translate(0, var(--offsetY));
 		padding: 0;
-	}
-
-	.in-modal {
 		opacity: 0.2;
 	}
 
-	.in-modal.review {
+	.active {
+		opacity: 1;
+	}
+
+	.review {
 		opacity: 1;
 	}
 
