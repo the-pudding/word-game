@@ -4,7 +4,7 @@
 	import { createEventDispatcher } from "svelte";
 
 	const MS = 1000;
-	const target = 60 * MS;
+	const target = 6 * MS;
 	const WARNING_THRESHOLD = 5.1;
 	const dispatch = createEventDispatcher();
 
@@ -16,6 +16,7 @@
 	$: width = `${Math.max(0, (target - $elapsed) / target) * 100}%`;
 	$: secondsLeft = Math.ceil((target - $elapsed) / MS);
 	$: if ($elapsed >= target) {
+		dispatch("end");
 		$active = false;
 		$inModal = true;
 	}

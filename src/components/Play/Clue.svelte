@@ -24,7 +24,6 @@
 	$: ghosts, updateMargin();
 	$: chunks = clue.split("|");
 	$: top = `--top: ${$guessesHeight / 2}px;`;
-	$: console.log(widths);
 </script>
 
 <div id="play-clue" class:in-modal={$inModal} style={top}>

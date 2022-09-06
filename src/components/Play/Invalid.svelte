@@ -11,7 +11,7 @@
 		"is too short",
 		"contains non-letters",
 		"is not in the word list",
-		"was already entered"
+		"(or a variation) was already entered"
 	];
 
 	$: recent = $guesses.user[$round][$guesses.user[$round].length - 1];

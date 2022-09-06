@@ -11,11 +11,14 @@
 		lemmasPlayed,
 		round,
 		possibleAnswers,
-		active
+		active,
+		gameId,
+		totalScore
 	} from "$stores/misc.js";
 	import lemmaExists from "$utils/lemmaExists.js";
 
 	import { elapsed } from "$stores/timer.js";
+	import { insert } from "$utils/supabase.js";
 
 	export let clues;
 	export let answers;
@@ -73,14 +76,6 @@
 		return +points;
 	};
 
-	const checkRevealWod = (lemmas) => {
-		$guesses.wod[$round].forEach((guess) => {
-			const corpus = guess.lemmas.split("|");
-			const exists = lemmaExists({ lemmas, corpus });
-			if (exists) guess.revealWod = true;
-		});
-	};
-
 	const onSubmit = async ({ detail }) => {
 		const text = detail;
 		const lemmas = lookupLemmas(text);
@@ -97,12 +92,26 @@
 			reason
 		};
 		$guesses.user[$round] = [...$guesses.user[$round], guess];
-		checkRevealWod(lemmas);
+
+		const data = { game_id: $gameId, round: $round, text };
+		insert({ table: "wordgame_user-answers", data });
 	};
 
 	const roundChange = () => {
 		showStartCountdown = true;
 		release = false;
+	};
+
+	const startRound = () => {
+		$active = true;
+		showStartCountdown = false;
+		showEndCountdown = false;
+	};
+
+	const onRoundEnd = () => {
+		const margin = $totalScore.user - $totalScore.wod;
+		const data = { game_id: $gameId, round: $round, margin };
+		insert({ table: "wordgame_user-results", data });
 	};
 
 	$: currentClue = clues[$round];
@@ -111,12 +120,6 @@
 	$: validWords = roundData.map((d) => d.word);
 	$: $round, roundChange();
 	$: if (!$active && input) input.reset();
-
-	const startRound = () => {
-		$active = true;
-		showStartCountdown = false;
-		showEndCountdown = false;
-	};
 </script>
 
 <div>
@@ -138,7 +141,7 @@
 	{/if}
 	<Invalid />
 	<Guesses />
-	<Clock on:beforeend={() => (showEndCountdown = true)} />
+	<Clock on:beforeend={() => (showEndCountdown = true)} on:end={onRoundEnd} />
 	<InputKeyboard on:submit={onSubmit} bind:value={keyboardValue} />
 </div>
 

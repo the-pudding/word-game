@@ -9,7 +9,7 @@
 </script>
 
 <ul class:wod class:active={$active} class:review>
-	{#each guesses as { valid, text, revealWod, points } (text)}
+	{#each guesses as { valid, text, points } (text)}
 		<Item {wod} {text} {points} {liHeight} {startOffset} {review} />
 	{/each}
 </ul>
