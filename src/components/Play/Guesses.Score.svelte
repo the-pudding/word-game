@@ -10,9 +10,10 @@
 	const gutterWidth = 36;
 
 	$: wod = name !== "you";
-	$: below = wod ? y <= gutterWidth : y <= 0;
+	// $: below = wod ? y <= gutterWidth : y <= 0;
+	$: below = y <= gutterWidth;
 	$: hasArrowBelow = wod && below && points > 1;
-	$: bottom = `${wod && below ? 0 : y}px`;
+	$: bottom = `${below ? 0 : y}px`;
 	$: triple = points > 99;
 </script>
 
