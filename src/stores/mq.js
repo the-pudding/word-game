@@ -9,6 +9,9 @@ const queries = {
 	"60rem": "(min-width: 60rem)",
 	"70rem": "(min-width: 70rem)",
 	"80rem": "(min-width: 80rem)",
+	"640px": "(min-width: 640px)",
+	"640pxh": "(min-height: 640px)",
+	"720pxh": "(min-height: 720px)",
 	"reducedMotion": "(prefers-reduced-motion: reduce)"
 };
 

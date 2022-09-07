@@ -18,7 +18,7 @@
 	const threshold = review ? 1 : 0.75;
 	const borderH = 2;
 
-	$: liHeight = $mq["40rem"] ? 32 : 24;
+	$: liHeight = $mq["720pxh"] ? 36 : $mq["720pxh"] ? 32 : 24;
 
 	$: userGuesses = [].concat(...$guesses.user).filter(displayFilter);
 	$: wodGuesses = [].concat(...$guesses.wod).filter(displayFilter);
