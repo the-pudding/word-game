@@ -2,7 +2,7 @@
 	import { overlay } from "$stores/misc.js";
 	import { getContext } from "svelte";
 
-	const { byline, source, other } = getContext("copy");
+	const { info, byline, source, other } = getContext("copy");
 
 	const close = () => {
 		$overlay = undefined;
@@ -19,6 +19,9 @@
 					$overlay = "rules";
 				}}>read the rules</button
 			>
+		</p>
+		<p>
+			{@html info}
 		</p>
 		<p>
 			{@html byline}
