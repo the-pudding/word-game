@@ -1,6 +1,6 @@
 <script>
 	import { onMount, getContext, createEventDispatcher } from "svelte";
-	import { overlay, gameId, wodInfo } from "$stores/misc.js";
+	import { overlay, gameId, gameNumber, wodInfo } from "$stores/misc.js";
 	import loadWodInfo from "$utils/loadWodInfo.js";
 	import Title from "$components/Chunk/Title.svelte";
 	import Description from "$components/Chunk/Description.svelte";
@@ -17,7 +17,7 @@
 	const load = async () => {
 		const [data] = await loadWodInfo($gameId);
 		$wodInfo = data;
-		number = ($wodInfo?.gameIndex || 0) + 1;
+		number = $gameNumber || 1;
 	};
 
 	$: if ($gameId) load();

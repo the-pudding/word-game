@@ -12,6 +12,7 @@ const sumRound = (roundGuesses) =>
 	);
 
 export const gameId = writable();
+export const gameNumber = writable();
 export const inModal = writable(false);
 export const active = writable(false);
 export const round = writable(-1);

@@ -5,6 +5,7 @@
 	import Modal from "$components/Modal.svelte";
 	import {
 		gameId,
+		gameNumber,
 		gameState,
 		inModal,
 		wod,
@@ -19,7 +20,7 @@
 	let answers;
 	let loaded;
 
-	const getId = async () => {
+	const getGame = async () => {
 		if ($wod) return $wodId;
 
 		const timestamp = Date.now();
@@ -27,8 +28,7 @@
 		const { updated, games } = await loadJson(url);
 		console.log("updated:", updated);
 		const match = games.find((d) => d.live);
-		if (match) return match.id;
-		return undefined;
+		return match || {};
 	};
 
 	$: readyToPlay = loaded && clues && answers && $round >= 0;
@@ -36,7 +36,9 @@
 	$: modalVisible = $inModal || ["pre", "post"].includes($gameState);
 
 	onMount(async () => {
-		$gameId = await getId();
+		const { id, gameIndex } = await getGame();
+		$gameId = id;
+		$gameNumber = gameIndex;
 		if ($gameId) {
 			const clueData = await loadClues($gameId);
 			clues = clueData.map((d) => d.clue);
