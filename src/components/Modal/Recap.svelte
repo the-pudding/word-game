@@ -11,6 +11,7 @@
 	import Title from "$components/Chunk/RecapTitle.svelte";
 	import Plug from "$components/Chunk/RecapPlug.svelte";
 	import Goodbye from "$components/Chunk/RecapGoodbye.svelte";
+	import { Confetti } from "svelte-confetti";
 
 	let title;
 
@@ -40,15 +41,30 @@
 	$: tied = $totalScore.user === $totalScore.wod;
 	$: winner = wodLead ? "wod" : "user";
 	$: $gameState, $inModal, updateTitle();
+	$: showPlug =
+		$gameState === "post" && !$wod && winner === "wod" && $wodInfo.plug;
+	$: showConfetti = $gameState === "post" && !$wod && winner === "user";
+	$: console.log({ showConfetti });
 </script>
 
-<div>
+<div class="recap">
 	{#if !$wod}
 		<Title lines={title} {winner} />
 	{/if}
 
-	{#if $gameState === "post" && !$wod && winner === "wod" && $wodInfo.plug}
+	{#if showPlug}
 		<Plug text={$wodInfo?.plug} {winner} />
+	{:else if showConfetti}
+		<div class="confetti">
+			<Confetti
+				x={[-5, 5]}
+				y={[0, 0.1]}
+				delay={[500, 2000]}
+				duration="5000"
+				amount="400"
+				fallDistance="100vh"
+			/>
+		</div>
 	{/if}
 
 	<Highlights />
@@ -61,7 +77,18 @@
 </div>
 
 <style>
-	div {
+	.recap {
 		text-align: center;
+	}
+	.confetti {
+		position: fixed;
+		top: -50px;
+		left: 0;
+		height: 100vh;
+		width: 100%;
+		display: flex;
+		justify-content: center;
+		overflow: hidden;
+		pointer-events: none;
 	}
 </style>

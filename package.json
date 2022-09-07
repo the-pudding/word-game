@@ -40,5 +40,8 @@
 		"node": ">= 16.13.0"
 	},
 	"browserslist": "> 0.5%, last 4 versions, not ie <= 11, not ie_mob <= 11",
-	"subdirectory": "games/words-against-strangers"
+	"subdirectory": "games/words-against-strangers",
+	"dependencies": {
+		"svelte-confetti": "^1.2.0"
+	}
 }
