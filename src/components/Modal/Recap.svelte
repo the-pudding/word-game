@@ -44,7 +44,6 @@
 	$: showPlug =
 		$gameState === "post" && !$wod && winner === "wod" && $wodInfo.plug;
 	$: showConfetti = $gameState === "post" && !$wod && winner === "user";
-	$: console.log({ showConfetti });
 </script>
 
 <div class="recap">
