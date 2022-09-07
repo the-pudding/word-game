@@ -90,7 +90,7 @@
 		fill: currentColor;
 	}
 
-	@media (min-width: 640px) {
+	@media (min-width: 720px) {
 		.brand {
 			display: flex;
 		}

@@ -8,6 +8,8 @@
 
 	export let loaded;
 
+	let number = 1;
+
 	const { title, description } = getContext("copy");
 
 	const dispatch = createEventDispatcher();
@@ -15,13 +17,14 @@
 	const load = async () => {
 		const [data] = await loadWodInfo($gameId);
 		$wodInfo = data;
+		number = ($wodInfo?.gameIndex || 0) + 1;
 	};
 
 	$: if ($gameId) load();
 </script>
 
 <div class="wrapper">
-	<Title text={title} />
+	<Title text={title} {number} />
 
 	<div class="details">
 		<Description text={description} />

@@ -1,11 +1,13 @@
 <script>
 	import Chunk from "$components/helpers/Chunk.svelte";
 	export let text;
+	export let number = 1;
 </script>
 
 <h2 id="chunk-title">
 	<Chunk text="welcome to" max="10" className="combo-user" />
 	<Chunk {text} max="1" className="combo-user" />
+	<Chunk text="#{number}" max="4" className="combo-wod" />
 </h2>
 
 <style>
@@ -18,7 +20,7 @@
 
 	/* welcome to */
 	:global(#chunk-title .chunk:nth-of-type(1)) {
-		font-size: 0.5em;
+		font-size: var(--16px);
 		transform: translate(-70%, 0) rotate(-5deg);
 		z-index: 4;
 	}
@@ -42,5 +44,12 @@
 		font-weight: var(--bold);
 		transform: translate(10%, -35%) rotate(1deg);
 		z-index: 1;
+	}
+
+	/* #X */
+	:global(#chunk-title .chunk:nth-of-type(5)) {
+		font-size: var(--16px);
+		transform: translate(120px, -540%) rotate(3deg);
+		z-index: 0;
 	}
 </style>
