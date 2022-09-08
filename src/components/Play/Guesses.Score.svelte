@@ -12,7 +12,6 @@
 	$: wod = name !== "you";
 	$: below = y <= gutterWidth;
 	$: hasArrowBelow = wod && below && points > 1;
-	$: hasArrowBelow = true;
 	$: bottom = `${below ? 0 : y}px`;
 	$: above = false;
 	$: triple = points > 99;
