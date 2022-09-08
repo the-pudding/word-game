@@ -234,7 +234,7 @@
 		display: inline-block;
 	}
 
-	@media only screen and (min-height: 600px) {
+	@media (min-height: 640px) {
 		.bio {
 			display: inline-block;
 		}

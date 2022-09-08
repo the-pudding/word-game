@@ -64,10 +64,4 @@
 		transform: translate(50%, -5px) rotate(-8deg);
 		z-index: 1;
 	}
-
-	@media only screen and (min-width: 640px) {
-		p {
-			/* width:  */
-		}
-	}
 </style>

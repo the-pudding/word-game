@@ -165,7 +165,7 @@
 		opacity: 0.5;
 	}
 
-	@media only screen and (min-height: 720px) {
+	@media (min-height: 720px) {
 		.wod .pill.above {
 			transform: translate(0, 2.625rem);
 		}

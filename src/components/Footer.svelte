@@ -144,14 +144,14 @@
 		margin-left: 0.5em;
 	}
 
-	@media only screen and (min-width: 30em) {
+	@media (min-width: 30em) {
 		.story {
 			width: 50%;
 			padding: 0 1em;
 		}
 	}
 
-	@media only screen and (min-width: 50em) {
+	@media (min-width: 50em) {
 		.story {
 			width: 25%;
 			padding: 0 1em;

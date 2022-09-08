@@ -156,7 +156,7 @@
 		}
 	}
 
-	@media (min-height: 600px) {
+	@media (min-height: 640px) {
 		.cta {
 			padding: 16px 2px;
 		}
