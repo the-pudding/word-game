@@ -9,7 +9,7 @@
 
 <style>
 	p {
-		width: 300px;
+		width: 18.75rem;
 		margin: 0 auto;
 	}
 

@@ -68,17 +68,17 @@
 		visibility: visible;
 	}
 
-	@media screen and (min-width: 640px) and (min-height: 600px) {
+	@media screen and (min-width: 640px) and (min-height: 720px) {
 		li {
 			font-size: var(--20px);
-			padding: 0 8px;
+			padding: 0 10px;
 		}
 	}
 
-	@media screen and (min-width: 640px) and (min-height: 720px) {
+	@media screen and (min-width: 960px) and (min-height: 800px) {
 		li {
 			font-size: var(--24px);
-			padding: 0 8px;
+			padding: 0 16px;
 		}
 	}
 </style>

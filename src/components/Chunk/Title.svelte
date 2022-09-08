@@ -49,7 +49,7 @@
 	/* #X */
 	:global(#chunk-title .chunk:nth-of-type(5)) {
 		font-size: var(--16px);
-		transform: translate(120px, -540%) rotate(3deg);
+		transform: translate(6.75rem, -500%) rotate(3deg);
 		z-index: 0;
 	}
 </style>

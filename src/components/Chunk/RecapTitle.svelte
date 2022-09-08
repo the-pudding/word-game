@@ -28,4 +28,10 @@
 		margin-top: 8px;
 		z-index: 1;
 	}
+
+	@media (min-height: 720px) {
+		h3 {
+			margin-bottom: 32px;
+		}
+	}
 </style>

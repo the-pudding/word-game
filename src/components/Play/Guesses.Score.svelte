@@ -10,10 +10,11 @@
 	const gutterWidth = 36;
 
 	$: wod = name !== "you";
-	// $: below = wod ? y <= gutterWidth : y <= 0;
 	$: below = y <= gutterWidth;
 	$: hasArrowBelow = wod && below && points > 1;
+	$: hasArrowBelow = true;
 	$: bottom = `${below ? 0 : y}px`;
+	$: above = false;
 	$: triple = points > 99;
 </script>
 
@@ -105,6 +106,7 @@
 	.points {
 		position: relative;
 		display: inline-block;
+		font-size: 0.85em;
 	}
 
 	.pill.below {
@@ -122,11 +124,11 @@
 	}
 
 	.wod .pill.above {
-		transform: translate(0, 170%);
+		transform: translate(0, 2.75rem);
 	}
 
 	.wod .pill.hasArrowBelow {
-		transform: translate(0, -75%);
+		transform: translate(0, -1rem);
 	}
 
 	.wod .pill.above:before {
@@ -137,7 +139,7 @@
 		position: absolute;
 		top: 0;
 		left: 50%;
-		transform: translate(-50%, -100%);
+		transform: translate(-50%, -1.75rem);
 		color: var(--color-mark-bg);
 	}
 
@@ -149,7 +151,7 @@
 		position: absolute;
 		top: 0;
 		left: 50%;
-		transform: translate(-50%, 75%);
+		transform: translate(-50%, 1.125rem);
 		color: var(--color-mark-bg);
 	}
 
@@ -162,5 +164,15 @@
 	.in-modal:not(.review) .pill,
 	.in-modal:not(.review) .name {
 		opacity: 0.5;
+	}
+
+	@media only screen and (min-height: 720px) {
+		.wod .pill.above {
+			transform: translate(0, 2.625rem);
+		}
+
+		.wod .pill.hasArrowBelow:after {
+			transform: translate(-50%, 1rem);
+		}
 	}
 </style>

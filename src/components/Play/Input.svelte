@@ -127,7 +127,7 @@
 		}
 
 		input {
-			width: calc(100% - 48px);
+			width: calc(100% - var(--48px));
 		}
 	}
 </style>

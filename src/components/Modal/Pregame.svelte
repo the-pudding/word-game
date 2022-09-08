@@ -24,11 +24,13 @@
 </script>
 
 <div class="wrapper">
-	<Title text={title} {number} />
+	<div class="intro">
+		<Title text={title} {number} />
 
-	<div class="details">
-		<Description text={description} />
-		<Info {loaded} />
+		<div class="details">
+			<Description text={description} />
+			<Info {loaded} />
+		</div>
 	</div>
 
 	<div class="cta">
@@ -71,12 +73,6 @@
 </div>
 
 <style>
-	.wrapper {
-		/* display: flex;
-		flex-direction: column;
-		height: 100%; */
-	}
-
 	.details {
 		display: flex;
 		justify-content: space-evenly;

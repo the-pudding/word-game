@@ -67,14 +67,19 @@
 
 <style>
 	.words-wrapper {
-		/* width: 300px; */
 		margin: 16px auto;
 		display: flex;
 		justify-content: space-evenly;
 	}
 
 	.words {
-		width: 150px;
+		width: 9.375rem;
 		padding: 0 16px;
+	}
+
+	@media (min-height: 720px) {
+		.words-wrapper {
+			margin: 32px auto 64px auto;
+		}
 	}
 </style>
