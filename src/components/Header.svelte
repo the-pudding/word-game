@@ -8,6 +8,7 @@
 <header>
 	<div class="about">
 		<button
+			aria-label="about"
 			on:click={() => {
 				$overlay = "about";
 			}}><Icon name="help-circle" /></button
