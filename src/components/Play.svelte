@@ -104,6 +104,7 @@
 
 	const startRound = () => {
 		$active = true;
+		keyboardValue = "";
 		showStartCountdown = false;
 		showEndCountdown = false;
 	};
