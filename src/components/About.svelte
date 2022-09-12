@@ -1,15 +1,16 @@
 <script>
 	import { overlay } from "$stores/misc.js";
 	import { getContext } from "svelte";
-
+	import focusTrap from "$actions/focusTrap.js";
 	const { info, byline, source, other } = getContext("copy");
 
 	const close = () => {
 		$overlay = undefined;
 	};
+	$: disable = $overlay !== "about";
 </script>
 
-<section class:visible={$overlay === "about"}>
+<section class:visible={$overlay === "about"} use:focusTrap={{ disable }}>
 	<div>
 		<h3><span class="chunk combo-user">about the game</span></h3>
 		<p>

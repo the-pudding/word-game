@@ -35,6 +35,10 @@ export default function focusTrap(node, params) {
 	const setup = (p) => {
 		if (active && p && p.disable) remove();
 		else if (!active && !p || (p && !p.disable)) add();
+
+		if (active && !p || (p && !p.disable)) {
+			setTimeout(() => firstFocusable.focus(), 17);
+		}
 	};
 
 	const query = elements.join(", ");

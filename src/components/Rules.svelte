@@ -1,12 +1,14 @@
 <script>
 	import { overlay } from "$stores/misc.js";
+	import focusTrap from "$actions/focusTrap.js";
 
 	const close = () => {
 		$overlay = undefined;
 	};
+	$: disable = $overlay !== "rules";
 </script>
 
-<section class:visible={$overlay === "rules"}>
+<section class:visible={$overlay === "rules"} use:focusTrap={{ disable }}>
 	<div>
 		<h3><span class="chunk combo-user">how to play</span></h3>
 		<ul>
