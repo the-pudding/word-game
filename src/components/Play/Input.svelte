@@ -2,6 +2,7 @@
 	import { onMount, tick } from "svelte";
 	import { createEventDispatcher } from "svelte";
 	import { active, inModal } from "$stores/misc.js";
+	import mq from "$stores/mq.js";
 	const dispatch = createEventDispatcher();
 
 	export let value = "";
@@ -32,7 +33,7 @@
 	};
 
 	$: disabled = !$active;
-	$: if ($active) focus();
+	$: if ($active && $mq.desktop) focus();
 </script>
 
 <div id="play-input" class:in-modal={$inModal}>

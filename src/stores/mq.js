@@ -13,7 +13,8 @@ const queries = {
 	"640pxh": "(min-height: 640px)",
 	"720pxh": "(min-height: 720px)",
 	"800pxh": "(min-height: 800px)",
-	"reducedMotion": "(prefers-reduced-motion: reduce)"
+	"reducedMotion": "(prefers-reduced-motion: reduce)",
+	"desktop": "(hover: hover) and (pointer: fine)"
 };
 
 function calculateMedia(mqls) {
