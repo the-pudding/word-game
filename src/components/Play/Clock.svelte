@@ -42,6 +42,8 @@
 		height: 2rem;
 		border: 1px solid var(--color-fg);
 		background-color: var(--color-bg-binary);
+		user-select: none;
+		pointer-events: none;
 	}
 
 	#play-clock.in-modal {

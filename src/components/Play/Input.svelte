@@ -61,6 +61,7 @@
 
 	#play-input.in-modal {
 		opacity: 0.1;
+		pointer-events: none;
 	}
 
 	form {

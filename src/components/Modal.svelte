@@ -18,6 +18,7 @@
 	export let loaded;
 
 	let wodReady;
+	let buttonNext;
 
 	const onPlay = async () => {
 		if ($wod && $gameState === "pre") {
@@ -32,6 +33,7 @@
 	};
 
 	$: hideButton = $wod && $gameState === "pre" && !wodReady;
+	$: if ($gameState === "mid" && $inModal) buttonNext.focus();
 </script>
 
 {#if $gameState === "pre"}
@@ -56,7 +58,7 @@
 
 {#if $gameState === "mid"}
 	<div class="mid">
-		<button on:click={onPlay}>next round</button>
+		<button bind:this={buttonNext} on:click={onPlay}>next round</button>
 		<p>round {$round + 2} of {ROUNDS}</p>
 	</div>
 {/if}

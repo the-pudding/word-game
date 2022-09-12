@@ -93,6 +93,8 @@
 		justify-content: center;
 		overflow: hidden;
 		flex: 1;
+		user-select: none;
+		pointer-events: none;
 	}
 
 	.review {

@@ -45,8 +45,9 @@
 
 <style>
 	.countdown {
-		background: red;
 		position: relative;
+		user-select: none;
+		pointer-events: none;
 	}
 
 	.inner {

@@ -46,6 +46,8 @@
 
 	.in-modal {
 		opacity: 0.1;
+		user-select: none;
+		pointer-events: none;
 	}
 
 	@media (hover: hover) and (pointer: fine) {
