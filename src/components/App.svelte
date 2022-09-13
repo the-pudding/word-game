@@ -1,22 +1,15 @@
 <script>
-	import { onMount } from "svelte";
+	import { browser } from "$app/env";
+	import viewport from "$stores/viewport.js";
 	import Game from "$components/Game.svelte";
 	import Rules from "$components/Rules.svelte";
 	import About from "$components/About.svelte";
 
-	let vh;
-
-	const onResize = () => {
-		vh = `${window.innerHeight * 0.01}px`;
-	};
-
-	onMount(() => {
-		window.addEventListener("resize", onResize);
-		onResize();
-	});
+	$: vh = `${$viewport.height * 0.01}px`;
+	$: if (browser) document.documentElement.style.setProperty("--vh", vh);
 </script>
 
-<article style="--vh={vh};">
+<article>
 	<Game />
 	<Rules />
 	<About />
