@@ -12,7 +12,7 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		margin-bottom: 32px;
+		margin-bottom: 16px;
 	}
 
 	:global(#chunk-recap-goodbye .chunk:nth-of-type(1)) {

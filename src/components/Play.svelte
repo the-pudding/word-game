@@ -13,7 +13,9 @@
 		possibleAnswers,
 		active,
 		gameId,
-		totalScore
+		totalScore,
+		gameState,
+		wordDuration
 	} from "$stores/misc.js";
 	import lemmaExists from "$utils/lemmaExists.js";
 
@@ -121,6 +123,7 @@
 	$: validWords = roundData.map((d) => d.word);
 	$: $round, roundChange();
 	$: if (!$active && input) input.reset();
+	$: if ($gameState === "post") $wordDuration = 0;
 </script>
 
 <div>

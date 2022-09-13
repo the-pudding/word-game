@@ -72,6 +72,12 @@
 		<Goodbye
 			text="thanks for playing. come back tomorrow for a new stranger!"
 		/>
+		<p>or</p>
+		<a
+			role="button"
+			href="https://www.getrevue.co/profile/wordsagainststrangers/"
+			target="_blank">Sign up to be the stranger</a
+		>
 	{/if}
 </div>
 
@@ -79,6 +85,7 @@
 	.recap {
 		text-align: center;
 	}
+
 	.confetti {
 		position: fixed;
 		top: -50px;
@@ -89,5 +96,9 @@
 		justify-content: center;
 		overflow: hidden;
 		pointer-events: none;
+	}
+
+	p {
+		margin: 16px auto;
 	}
 </style>
