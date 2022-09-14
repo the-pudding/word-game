@@ -1,5 +1,5 @@
 <script>
-	import { guesses, round } from "$stores/misc.js";
+	import { guesses, round, inModal } from "$stores/misc.js";
 
 	const duration = 2500;
 	let timeout;
@@ -29,11 +29,13 @@
 	};
 </script>
 
-<div id="play-invalid">
+<div id="play-invalid" class:in-modal={$inModal}>
 	{#if visible}
 		<p>
-			<strong>{recent.text}</strong>
-			{reasons[recent.reason]}
+			{#if recent}
+				<strong>{recent?.text}</strong>
+				{reasons[recent?.reason]}
+			{/if}
 		</p>
 	{/if}
 </div>
@@ -45,6 +47,10 @@
 		padding-top: 8px;
 		user-select: none;
 		pointer-events: none;
+	}
+
+	.in-modal {
+		opacity: 0.1;
 	}
 
 	p {
