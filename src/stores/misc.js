@@ -16,11 +16,14 @@ export const gameNumber = writable();
 export const inModal = writable(false);
 export const active = writable(false);
 export const round = writable(-1);
-export const wordDuration = readable(1000);
+export const wordDuration = writable(1000);
 
-export const inCountdown = derived([inModal, active], ([$inModal, $active], set) => {
-	set(!$inModal && !$active);
-});
+export const inCountdown = derived(
+	[inModal, active],
+	([$inModal, $active], set) => {
+		set(!$inModal && !$active);
+	}
+);
 
 export const gameState = derived(
 	[round, inModal],

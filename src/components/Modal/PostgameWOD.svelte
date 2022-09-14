@@ -6,8 +6,8 @@
 	let success;
 
 	$: message = success
-		? "Game successfully submitted!"
-		: "There was an error submitting your game. Please contact the admin: russell@pudding.cool.";
+		? "Game successfully submitted. You'll receive an email if your game is approved."
+		: "There was an error submitting your game. Please contact the admin: words.against.strangers@pudding.cool.";
 
 	onMount(async () => {
 		try {

@@ -21,7 +21,7 @@
 	let loaded;
 
 	const getGame = async () => {
-		if ($wod) return $wodId;
+		if ($wod) return { id: $wodId };
 
 		const timestamp = Date.now();
 		const url = `https://pudding.cool/games/words-against-strangers-data/games.json?version=${timestamp}`;

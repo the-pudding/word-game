@@ -22,6 +22,7 @@
 
 	const onPlay = async () => {
 		if ($wod && $gameState === "pre") {
+			console.log($gameId);
 			await update({
 				table: "wordgame_games",
 				column: "wod_started",
