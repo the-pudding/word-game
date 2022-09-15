@@ -94,7 +94,7 @@
 		line-height: 1;
 		border: 1px solid var(--color-fg);
 		font-size: var(--16px);
-		transform: translate(0, var(--top)) scale(1.5);
+		transform: translate(0, var(--top)) scale(1);
 	}
 
 	.active {
@@ -105,5 +105,11 @@
 	:global(#play-clue li span) {
 		font-weight: var(--bold);
 		font-style: italic;
+	}
+
+	@media (min-width: 640px) {
+		li {
+			transform: translate(0, var(--top)) scale(1.5);
+		}
 	}
 </style>
