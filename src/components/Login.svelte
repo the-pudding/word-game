@@ -4,8 +4,8 @@
 
 	export let authorized;
 
-	let email = "";
-	let password = "";
+	let email = "puddingviz@gmail.com";
+	let password = "n0s0oc";
 	let error;
 
 	const contact = "please contact words.against.strangers@pudding.cool";
@@ -60,6 +60,7 @@
 <style>
 	section {
 		padding: 1rem;
+		padding-top: 96px;
 	}
 
 	div {
@@ -69,6 +70,7 @@
 	label,
 	input {
 		display: block;
+		width: 100%;
 	}
 
 	input {

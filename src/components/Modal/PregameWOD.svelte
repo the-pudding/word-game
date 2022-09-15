@@ -18,28 +18,28 @@
 		{
 			id: "name",
 			limit: 12,
-			text: "What is your name?",
-			detail: "e.g., <em>Jane Doe</em> or <em>J. Doe</em> or <em>Jane</em>",
+			text: "what is your name?",
+			detail: "examples: <em>jane doe</em>, <em>j. doe</em>, <em>jane</em>",
 			required: true
 		},
 		{
 			id: "location",
 			limit: 12,
-			text: "Where are from/living?",
-			detail: "Optional",
+			text: "where are from/living?",
+			detail: "<em>optional</em>",
 			required: false
 		},
 		{
 			id: "pronoun",
-			text: "What are your preferred pronouns?",
+			text: "what are your preferred pronouns?",
 			required: true
 		},
 		{
 			id: "plug",
 			limit: 48,
-			text: "What would you like to plug (about yourself, something, etc) at the end of the game?",
+			text: "what would you like to plug (about yourself, something, etc.) at the end of the game?",
 			detail:
-				"e.g., <em>Follow me on Twitter @wordsagainststrangers</em> or <em>Have a great day!</em>",
+				"examples: <em>follow me on twitter @wordsagainststrangers</em>, <em>have a great day!</em>",
 			required: false
 		}
 	];
@@ -99,15 +99,15 @@
 	});
 </script>
 
-<h2>welcome, stranger!</h2>
-<p>let's play a word game.</p>
+<div class="intro">
+	<h2>welcome, stranger!</h2>
+</div>
 
 {#if !wodReady}
+	<p>let's play a word game. before we start, please tell us about yourself.</p>
 	<p>
-		tell us about yourself. <strong
-			>note: anything you submit below may appear for the rest of the internet
-			to see. we may lightly edit answers for brevity.</strong
-		>
+		<mark class="combo-mark">note:</mark> anything you submit below may appear for
+		the rest of the internet to see. we may lightly edit answers for brevity.
 	</p>
 
 	{#if error}
@@ -116,8 +116,8 @@
 		<form on:submit|preventDefault={onSubmit}>
 			{#each defaultQuestions as { id, text, detail, type, limit, required }, i}
 				<div>
-					<label for="question-{id}">{text}</label>
-					<p>{@html detail}</p>
+					<label class="combo-wod" for="question-{id}">{text}</label>
+					{#if detail}<p class="detail">{@html detail}</p>{/if}
 					{#if id === "pronoun"}
 						<fieldset id="question-{id}">
 							<input
@@ -158,10 +158,7 @@
 			{/each}
 
 			<div>
-				<button type="button" on:click={getRandomQuestion}
-					>give me a different question</button
-				>
-				<label for="question-bio">{randomQuestion}</label>
+				<label class="combo-wod" for="question-bio">{randomQuestion}</label>
 
 				<input
 					required={false}
@@ -170,6 +167,10 @@
 					maxlength="100"
 					placeholder="answer here"
 				/>
+
+				<button class="random" type="button" on:click={getRandomQuestion}
+					>give me a different question</button
+				>
 			</div>
 
 			<button type="submit">Submit</button>
@@ -192,10 +193,37 @@
 {/if}
 
 <style>
-	h2 {
-		font-size: 2em;
-		text-align: center;
-		max-width: 23em;
-		margin: 1rem auto;
+	.intro {
+		margin-top: 32px;
+	}
+
+	h2,
+	p {
+		margin: 16px auto;
+		line-height: 1.4;
+	}
+
+	label {
+		display: block;
+		padding: 8px;
+		margin-bottom: 16px;
+	}
+
+	p.detail {
+		color: var(--color-default-fg);
+		font-weight: 400;
+		margin-top: 0;
+	}
+
+	form div {
+		margin-bottom: 48px;
+	}
+
+	form {
+		padding-bottom: 64px;
+	}
+
+	.random {
+		margin-left: 16px;
 	}
 </style>
