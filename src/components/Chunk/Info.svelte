@@ -109,7 +109,8 @@
 	}
 
 	/* {bio} */
-	.bio {
+	.bio,
+	.beat {
 		display: none;
 	}
 
@@ -236,6 +237,12 @@
 
 	@media (min-height: 640px) {
 		.bio {
+			display: inline-block;
+		}
+	}
+
+	@media (min-height: 720px) {
+		.beat {
 			display: inline-block;
 		}
 	}
