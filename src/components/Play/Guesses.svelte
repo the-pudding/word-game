@@ -90,7 +90,6 @@
 <style>
 	div {
 		display: flex;
-		justify-content: center;
 		overflow: hidden;
 		flex: 1;
 		user-select: none;

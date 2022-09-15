@@ -99,107 +99,115 @@
 	});
 </script>
 
-<div class="intro">
-	<h2>welcome, stranger!</h2>
-</div>
+<div class="outer">
+	<div class="intro">
+		<h2>{wodReady ? "let's play!" : "welcome, stranger!"}</h2>
+	</div>
 
-{#if !loaded}
-	<p>loading...</p>
-{:else if loaded && !wodReady}
-	<p>let's play a word game. before we start, please tell us about yourself.</p>
-	<p>
-		<mark class="combo-mark">note:</mark> anything you submit below may appear for
-		the rest of the internet to see. we may lightly edit answers for brevity.
-	</p>
+	{#if !loaded}
+		<p>loading...</p>
+	{:else if loaded && !wodReady}
+		<p>
+			let's play a word game. before we start, please tell us about yourself.
+		</p>
+		<p>
+			<mark class="combo-mark">note:</mark> anything you submit below may appear
+			for the rest of the internet to see. we may lightly edit answers for brevity.
+		</p>
 
-	{#if error}
-		<p>Error</p>
-	{:else}
-		<form on:submit|preventDefault={onSubmit}>
-			{#each defaultQuestions as { id, text, detail, type, limit, required }, i}
+		{#if error}
+			<p>Error</p>
+		{:else}
+			<form on:submit|preventDefault={onSubmit}>
+				{#each defaultQuestions as { id, text, detail, type, limit, required }, i}
+					<div>
+						<label class="combo-wod" for="question-{id}">{text}</label>
+						{#if detail}<p class="detail">{@html detail}</p>{/if}
+						{#if id === "pronoun"}
+							<fieldset id="question-{id}">
+								<input
+									id="pronoun-1"
+									type="radio"
+									name="pronoun"
+									value="they/them"
+									required
+									bind:group={defaultQuestions[i].answer}
+								/>
+								<label for="pronoun-1">they/them</label>
+								<input
+									id="pronoun-2"
+									type="radio"
+									name="pronoun"
+									value="she/her"
+									required
+									bind:group={defaultQuestions[i].answer}
+								/>
+								<label for="pronoun-2">she/her</label>
+								<input
+									id="pronoun-3"
+									type="radio"
+									name="pronoun"
+									value="he/him"
+									required
+									bind:group={defaultQuestions[i].answer}
+								/>
+								<label for="pronoun-3">he/him</label>
+							</fieldset>
+						{:else}
+							<input
+								{required}
+								bind:value={defaultQuestions[i].answer}
+								id="question-{id}"
+								placeholder={id}
+								maxlength={limit}
+							/>
+						{/if}
+					</div>
+				{/each}
+
 				<div>
-					<label class="combo-wod" for="question-{id}">{text}</label>
-					{#if detail}<p class="detail">{@html detail}</p>{/if}
-					{#if id === "pronoun"}
-						<fieldset id="question-{id}">
-							<input
-								id="pronoun-1"
-								type="radio"
-								name="pronoun"
-								value="they/them"
-								required
-								bind:group={defaultQuestions[i].answer}
-							/>
-							<label for="pronoun-1">they/them</label>
-							<input
-								id="pronoun-2"
-								type="radio"
-								name="pronoun"
-								value="she/her"
-								required
-								bind:group={defaultQuestions[i].answer}
-							/>
-							<label for="pronoun-2">she/her</label>
-							<input
-								id="pronoun-3"
-								type="radio"
-								name="pronoun"
-								value="he/him"
-								required
-								bind:group={defaultQuestions[i].answer}
-							/>
-							<label for="pronoun-3">he/him</label>
-						</fieldset>
-					{:else}
+					<label class="combo-wod" for="question-bio">{randomQuestion}</label>
+					<p>
+						<button class="random" type="button" on:click={getRandomQuestion}
+							>give me a different question</button
+						>
+					</p>
+					<p>
 						<input
-							{required}
-							bind:value={defaultQuestions[i].answer}
-							id="question-{id}"
-							placeholder={id}
-							maxlength={limit}
+							required={false}
+							bind:value={randomAnswer}
+							id="question-bio"
+							maxlength="100"
+							placeholder="answer here"
 						/>
-					{/if}
+					</p>
 				</div>
-			{/each}
 
-			<div>
-				<label class="combo-wod" for="question-bio">{randomQuestion}</label>
-				<p>
-					<button class="random" type="button" on:click={getRandomQuestion}
-						>give me a different question</button
-					>
-				</p>
-				<p>
-					<input
-						required={false}
-						bind:value={randomAnswer}
-						id="question-bio"
-						maxlength="100"
-						placeholder="answer here"
-					/>
-				</p>
+				<button type="submit">Submit</button>
+			</form>
+		{/if}
+	{:else if loaded && !hideButton}
+		<div class="cta">
+			<div class="rules">
+				<button
+					on:click={() => {
+						$overlay = "rules";
+					}}>How to Play</button
+				>
 			</div>
 
-			<button type="submit">Submit</button>
-		</form>
+			<div class="play">
+				<button on:click={() => dispatch("play")}>play</button>
+			</div>
+		</div>
 	{/if}
-{:else if loaded && !hideButton}
-	<div class="cta">
-		<div class="rules">
-			<button
-				on:click={() => {
-					$overlay = "rules";
-				}}>How to Play</button
-			>
-		</div>
-
-		<div class="play">
-			<button on:click={() => dispatch("play")}>play</button>
-		</div>
-	</div>
-{/if}
+</div>
 
 <style>
+	.outer {
+		padding: 0 8px;
+	}
+
 	.intro {
 		margin-top: 32px;
 	}
@@ -222,7 +230,8 @@
 		margin-top: 0;
 	}
 
-	form div {
+	form div,
+	.cta div {
 		margin-bottom: 48px;
 	}
 
@@ -236,5 +245,9 @@
 
 	input[type="radio"] {
 		width: auto;
+	}
+
+	.play {
+		font-size: var(--48px);
 	}
 </style>
