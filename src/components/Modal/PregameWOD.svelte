@@ -19,14 +19,14 @@
 			id: "name",
 			limit: 12,
 			text: "what is your name?",
-			detail: "examples: <em>jane doe</em>, <em>j. doe</em>, <em>jane</em>",
+			detail: "examples: <em>jane doe</em> OR <em>j. doe</em> OR <em>jane</em>",
 			required: true
 		},
 		{
 			id: "location",
 			limit: 12,
 			text: "where are from/living?",
-			detail: "<em>optional</em>",
+			detail: "optional",
 			required: false
 		},
 		{
@@ -39,7 +39,7 @@
 			limit: 48,
 			text: "what would you like to plug (about yourself, something, etc.) at the end of the game?",
 			detail:
-				"examples: <em>follow me on twitter @wordsagainststrangers</em>, <em>have a great day!</em>",
+				"examples: <em>follow me on twitter @wordsagainststrangers</em> OR <em>I hope you have a great day!</em> OR <em>Let's go [sports team]!!",
 			required: false
 		}
 	];
@@ -159,15 +159,15 @@
 
 			<div>
 				<label class="combo-wod" for="question-bio">{randomQuestion}</label>
-
-				<input
-					required={false}
-					bind:value={randomAnswer}
-					id="question-bio"
-					maxlength="100"
-					placeholder="answer here"
-				/>
-
+				<p>
+					<input
+						required={false}
+						bind:value={randomAnswer}
+						id="question-bio"
+						maxlength="100"
+						placeholder="answer here"
+					/>
+				</p>
 				<button class="random" type="button" on:click={getRandomQuestion}
 					>give me a different question</button
 				>
@@ -204,9 +204,9 @@
 	}
 
 	label {
-		display: block;
+		display: inline-block;
 		padding: 8px;
-		margin-bottom: 16px;
+		margin-bottom: 8px;
 	}
 
 	p.detail {
@@ -221,9 +221,5 @@
 
 	form {
 		padding-bottom: 64px;
-	}
-
-	.random {
-		margin-left: 16px;
 	}
 </style>
