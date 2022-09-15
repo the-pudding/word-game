@@ -14,7 +14,7 @@
 	};
 
 	const onKeydown = (e) => {
-		if ($mq.desktop) return;
+		if ($mq.desktop || !$active) return;
 
 		const key = e.key || e.detail;
 		hide = !!e.key;
