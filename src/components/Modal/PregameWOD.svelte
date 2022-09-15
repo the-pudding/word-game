@@ -127,6 +127,7 @@
 								type="radio"
 								name="pronoun"
 								value="they/them"
+								required
 								bind:group={defaultQuestions[i].answer}
 							/>
 							<label for="pronoun-1">they/them</label>
@@ -135,6 +136,7 @@
 								type="radio"
 								name="pronoun"
 								value="she/her"
+								required
 								bind:group={defaultQuestions[i].answer}
 							/>
 							<label for="pronoun-2">she/her</label>
@@ -143,6 +145,7 @@
 								type="radio"
 								name="pronoun"
 								value="he/him"
+								required
 								bind:group={defaultQuestions[i].answer}
 							/>
 							<label for="pronoun-3">he/him</label>
@@ -162,6 +165,11 @@
 			<div>
 				<label class="combo-wod" for="question-bio">{randomQuestion}</label>
 				<p>
+					<button class="random" type="button" on:click={getRandomQuestion}
+						>give me a different question</button
+					>
+				</p>
+				<p>
 					<input
 						required={false}
 						bind:value={randomAnswer}
@@ -170,9 +178,6 @@
 						placeholder="answer here"
 					/>
 				</p>
-				<button class="random" type="button" on:click={getRandomQuestion}
-					>give me a different question</button
-				>
 			</div>
 
 			<button type="submit">Submit</button>
@@ -223,5 +228,13 @@
 
 	form {
 		padding-bottom: 64px;
+	}
+
+	input {
+		width: 100%;
+	}
+
+	input[type="radio"] {
+		width: auto;
 	}
 </style>
