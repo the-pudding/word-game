@@ -8,7 +8,7 @@
 
 	export let loaded;
 
-	let number = 1;
+	let number;
 
 	const { title, description } = getContext("copy");
 

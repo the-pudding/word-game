@@ -1,13 +1,13 @@
 <script>
 	import Chunk from "$components/helpers/Chunk.svelte";
 	export let text;
-	export let number = 1;
+	export let number;
 </script>
 
 <h2 id="chunk-title">
 	<Chunk text="welcome to" max="10" className="combo-user" />
 	<Chunk {text} max="1" className="combo-user" />
-	<Chunk text="#{number}" max="4" className="combo-wod" />
+	{#if number}<Chunk text="#{number}" max="4" className="combo-wod" />{/if}
 </h2>
 
 <style>
