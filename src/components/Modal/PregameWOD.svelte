@@ -103,7 +103,9 @@
 	<h2>welcome, stranger!</h2>
 </div>
 
-{#if !wodReady}
+{#if !loaded}
+	<p>loading...</p>
+{:else if loaded && !wodReady}
 	<p>let's play a word game. before we start, please tell us about yourself.</p>
 	<p>
 		<mark class="combo-mark">note:</mark> anything you submit below may appear for
