@@ -13,10 +13,7 @@
 	const { title, description, url, keywords } = copy;
 	setContext("copy", copy);
 
-	if (browser && dev) {
-		$wodId = $page.url.search.split("id=")[1];
-		console.log($wodId);
-	}
+	if (browser && dev) $wodId = $page.url.search.split("id=")[1];
 </script>
 
 <Meta {title} {description} {url} {keywords} />

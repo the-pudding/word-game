@@ -6,7 +6,9 @@
 		round,
 		lemmasPlayed,
 		wod,
-		wodInfo
+		wodInfo,
+		inModal,
+		active
 	} from "$stores/misc.js";
 	import Possible from "$components/Chunk/Possible.svelte";
 	import WodWordsInfo from "$components/Chunk/WodWordsInfo.svelte";
@@ -14,6 +16,7 @@
 	import CommonWordsInfo from "$components/Chunk/CommonWordsInfo.svelte";
 	import CommonWordsList from "$components/Chunk/CommonWordsList.svelte";
 
+	let allCommonWords = [];
 	const MAX_WORDS = 3;
 
 	const lemmasNotInPlayed = ({ word, lemmas }) => {
@@ -33,15 +36,15 @@
 
 	$: blockCount = currentRoundWod.filter((d) => !d.valid).length;
 
-	$: allCommonWords = shuffle(
-		$possibleAnswers.filter((d) => +d.points === 1).filter(lemmasNotInPlayed)
-	);
-
 	$: commonWords = allCommonWords
 		.slice(0, MAX_WORDS)
 		.map((d) => d.word)
 		.join(" ");
 
+	$: if ($inModal && !$active)
+		allCommonWords = shuffle(
+			$possibleAnswers.filter((d) => +d.points === 1).filter(lemmasNotInPlayed)
+		);
 	$: commonText = $wod ? "you didn't get:" : "nobody got";
 	$: answersText = `there were <em>${count}</em> possible words.`;
 	$: blockText =
