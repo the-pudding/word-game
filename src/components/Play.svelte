@@ -15,7 +15,8 @@
 		gameId,
 		totalScore,
 		gameState,
-		wordDuration
+		wordDuration,
+		wod
 	} from "$stores/misc.js";
 	import lemmaExists from "$utils/lemmaExists.js";
 
@@ -95,8 +96,10 @@
 		};
 		$guesses.user[$round] = [...$guesses.user[$round], guess];
 
-		const data = { game_id: $gameId, round: $round, text };
-		insert({ table: "wordgame_user-answers", data });
+		if (!$wod) {
+			const data = { game_id: $gameId, round: $round, text };
+			insert({ table: "wordgame_user-answers", data });
+		}
 	};
 
 	const roundChange = () => {
@@ -112,9 +115,11 @@
 	};
 
 	const onRoundEnd = () => {
-		const margin = $totalScore.user - $totalScore.wod;
-		const data = { game_id: $gameId, round: $round, margin };
-		insert({ table: "wordgame_user-results", data });
+		if (!$wod) {
+			const margin = $totalScore.user - $totalScore.wod;
+			const data = { game_id: $gameId, round: $round, margin };
+			insert({ table: "wordgame_user-results", data });
+		}
 	};
 
 	$: currentClue = clues[$round];
