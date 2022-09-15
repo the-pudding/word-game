@@ -1,10 +1,12 @@
 <script>
-	import { inModal } from "$stores/misc.js";
 	import Keyboard from "svelte-keyboard";
 	import { createEventDispatcher } from "svelte";
+	import { inModal, active } from "$stores/misc.js";
+	import mq from "$stores/mq.js";
 	const dispatch = createEventDispatcher();
 
 	export let value = "";
+	let hide;
 
 	const submit = () => {
 		if (value) dispatch("submit", value);
@@ -12,10 +14,14 @@
 	};
 
 	const onKeydown = (e) => {
-		if (e.detail === "Enter") submit();
-		else if (e.detail === "Backspace")
-			value = value.substring(0, value.length - 1);
-		else value = `${value}${e.detail}`;
+		if ($mq.desktop) return;
+
+		const key = e.key || e.detail;
+		hide = !!e.key;
+
+		if (key === "Enter") submit();
+		else if (key === "Backspace") value = value.substring(0, value.length - 1);
+		else value = `${value}${key}`;
 	};
 
 	const onInput = (e) => {
@@ -25,7 +31,9 @@
 	};
 </script>
 
-<div id="play-keyboard" class:in-modal={$inModal}>
+<svelte:window on:keydown={onKeydown} />
+
+<div id="play-keyboard" class:in-modal={$inModal} class:hide>
 	<Keyboard
 		on:keydown={onKeydown}
 		custom={false}
@@ -42,6 +50,10 @@
 <style>
 	div {
 		display: block;
+	}
+
+	div.hide {
+		display: none;
 	}
 
 	.in-modal {
