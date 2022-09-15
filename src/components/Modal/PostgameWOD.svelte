@@ -6,8 +6,8 @@
 	let success;
 
 	$: message = success
-		? "Game successfully submitted. You'll receive an email if your game is approved."
-		: "There was an error submitting your game. Please contact the admin: words.against.strangers@pudding.cool.";
+		? "game successfully submitted. you'll receive an email if your game is approved."
+		: "there was an error submitting your game. please contact the admin: words.against.strangers@pudding.cool.";
 
 	onMount(async () => {
 		try {
@@ -40,10 +40,17 @@
 	});
 </script>
 
-<h2>Thanks for playing!</h2>
+<h3>thanks for playing!</h3>
 
 {#if success === undefined}
 	<p>Submitting responses...</p>
 {:else}
 	<p>{message}</p>
 {/if}
+
+<style>
+	h3,
+	p {
+		text-align: center;
+	}
+</style>

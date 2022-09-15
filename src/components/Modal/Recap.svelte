@@ -48,7 +48,7 @@
 
 <div class="recap">
 	{#if $wod}
-		<Title lines={["End of round"]} {winner} />
+		<Title lines={[`end of round ${$round + 1}`]} {winner} />
 	{:else}
 		<Title lines={title} {winner} />
 	{/if}
