@@ -13,8 +13,8 @@
 	$: below = y <= gutterWidth;
 	$: hasArrowBelow = wod && below && points > 1;
 	$: bottom = `${below ? 0 : y}px`;
-	$: above = false;
 	$: triple = points > 99;
+	$: console.log(above);
 </script>
 
 <div
@@ -50,7 +50,7 @@
 	.name {
 		position: absolute;
 		top: 4px;
-		left: calc(50% - 4px);
+		left: 50%;
 		padding-left: 24px;
 		transform-origin: 0 50%;
 		transform: rotate(-90deg);
@@ -64,7 +64,6 @@
 	.wod .name {
 		padding-right: 24px;
 		transform: rotate(90deg) translate(-100%, 0);
-		left: calc(50% + 4px);
 	}
 
 	.name.flip {
@@ -139,7 +138,7 @@
 		position: absolute;
 		top: 0;
 		left: 50%;
-		transform: translate(-50%, -1.5rem);
+		transform: translate(-50%, -1.75rem);
 		color: var(--color-mark-bg);
 	}
 
@@ -166,13 +165,33 @@
 		opacity: 0.5;
 	}
 
-	@media (min-height: 720px) {
+	@media (min-width: 640px) and (min-height: 720px) {
+		.name {
+			left: calc(50% - 2px);
+		}
+		.wod .name {
+			left: calc(50% + 2px);
+		}
+
 		.wod .pill.above {
 			transform: translate(0, 2.625rem);
 		}
 
 		.wod .pill.hasArrowBelow:after {
 			transform: translate(-50%, 1rem);
+		}
+
+		.wod .pill.above:before {
+			transform: translate(-50%, -1.8rem);
+		}
+	}
+
+	@media (min-width: 960px) and (min-height: 800px) {
+		.name {
+			left: calc(50% - 4px);
+		}
+		.wod .name {
+			left: calc(50% + 4px);
 		}
 	}
 </style>

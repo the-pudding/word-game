@@ -39,7 +39,7 @@
 							<h5>
 								<span class="chunk combo-default">obscure = more points</span>
 							</h5>
-							you get more points for less commonly used words.
+							you get 2x points for less commonly used words.
 						</li>
 					</ul>
 				</details>

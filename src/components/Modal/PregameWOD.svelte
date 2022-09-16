@@ -31,7 +31,7 @@
 		},
 		{
 			id: "pronoun",
-			text: "what are your preferred pronouns?",
+			text: "what pronouns do you use?",
 			required: true
 		},
 		{
