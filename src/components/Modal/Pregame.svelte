@@ -139,6 +139,10 @@
 	}
 
 	@media (min-width: 640px) {
+		.details {
+			min-height: 240px;
+		}
+
 		.signup .alt {
 			display: none;
 		}
@@ -156,7 +160,7 @@
 		}
 	}
 
-	@media (min-height: 640px) {
+	@media (min-height: 720px) {
 		.cta {
 			padding: 16px 2px;
 		}

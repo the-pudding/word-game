@@ -231,6 +231,10 @@
 		z-index: 1;
 	}
 
+	.beat {
+		display: inline-flex;
+	}
+
 	.beat.force-display {
 		display: inline-flex;
 	}
@@ -239,9 +243,13 @@
 		.bio {
 			display: inline-flex;
 		}
+
+		.beat {
+			display: none;
+		}
 	}
 
-	@media (min-height: 720px) {
+	@media (min-height: 760px) {
 		.beat {
 			display: inline-flex;
 		}
