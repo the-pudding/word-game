@@ -58,12 +58,23 @@
 	{:else if showConfetti}
 		<div class="confetti">
 			<Confetti
-				x={[-5, 5]}
-				y={[0, 0.1]}
-				delay={[500, 2000]}
-				duration="5000"
-				amount="400"
+				x={[-3, 3]}
+				y={[0, 0]}
+				delay={[0, 3000]}
+				duration="3000"
+				amount="500"
 				fallDistance="100vh"
+				colorArray={[
+					"#f8e34d",
+					"#dfcc45",
+					"#c6b63e",
+					"#76a5d1",
+					"#6a95bc",
+					"#5e84a7",
+					"#f1553b",
+					"#d94d35",
+					"#c1442f"
+				]}
 			/>
 		</div>
 	{/if}
@@ -89,13 +100,14 @@
 	}
 
 	.confetti {
-		position: fixed;
-		top: -50px;
-		left: 0;
-		height: 100vh;
-		width: 100%;
+		position: absolute;
 		display: flex;
 		justify-content: center;
+		top: calc(var(--header-height) * -1 - 32px);
+		left: 50%;
+		transform: translate(-50%, 0);
+		height: 100vh;
+		width: 100%;
 		overflow: hidden;
 		pointer-events: none;
 	}

@@ -60,9 +60,7 @@
 
 	{#if wodWords.length}
 		<div class="words wod-words">
-			<WodWordsInfo
-				lines={["some words", `${$wodInfo.name} got`, "that you didn't"]}
-			/>
+			<WodWordsInfo lines={["some words", `${$wodInfo.name}`, "played"]} />
 			<WodWordsList text={wodWords} />
 		</div>
 	{/if}

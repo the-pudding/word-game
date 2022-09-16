@@ -50,7 +50,7 @@
 	.name {
 		position: absolute;
 		top: 4px;
-		left: 50%;
+		left: calc(50% - 4px);
 		padding-left: 24px;
 		transform-origin: 0 50%;
 		transform: rotate(-90deg);
@@ -64,6 +64,7 @@
 	.wod .name {
 		padding-right: 24px;
 		transform: rotate(90deg) translate(-100%, 0);
+		left: calc(50% + 4px);
 	}
 
 	.name.flip {
@@ -138,7 +139,7 @@
 		position: absolute;
 		top: 0;
 		left: 50%;
-		transform: translate(-50%, -1.75rem);
+		transform: translate(-50%, -1.5rem);
 		color: var(--color-mark-bg);
 	}
 
