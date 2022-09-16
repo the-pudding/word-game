@@ -14,7 +14,6 @@
 	$: hasArrowBelow = wod && below && points > 1;
 	$: bottom = `${below ? 0 : y}px`;
 	$: triple = points > 99;
-	$: console.log(above);
 </script>
 
 <div
