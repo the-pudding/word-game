@@ -121,8 +121,13 @@
 			<form on:submit|preventDefault={onSubmit}>
 				{#each defaultQuestions as { id, text, detail, type, limit, required }, i}
 					<div>
-						<label class="combo-wod" for="question-{id}">{text}</label>
-						{#if detail}<p class="detail">{@html detail}</p>{/if}
+						<label class="combo-wod" for="question-{id}"
+							>{text}
+							{#if limit} ({limit} char. limit){/if}</label
+						>
+						{#if detail}<p class="detail">
+								{@html detail}
+							</p>{/if}
 						{#if id === "pronoun"}
 							<fieldset id="question-{id}">
 								<input
@@ -160,13 +165,16 @@
 								id="question-{id}"
 								placeholder={id}
 								maxlength={limit}
+								data-limit={limit}
 							/>
 						{/if}
 					</div>
 				{/each}
 
 				<div>
-					<label class="combo-wod" for="question-bio">{randomQuestion}</label>
+					<label class="combo-wod" for="question-bio"
+						>{randomQuestion} (100 char. limit)</label
+					>
 					<p>
 						<button class="random" type="button" on:click={getRandomQuestion}
 							>give me a different question</button
@@ -241,6 +249,7 @@
 
 	input {
 		width: 100%;
+		position: relative;
 	}
 
 	input[type="radio"] {
