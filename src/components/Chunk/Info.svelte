@@ -232,18 +232,18 @@
 	}
 
 	.beat.force-display {
-		display: inline-block;
+		display: inline-flex;
 	}
 
 	@media (min-height: 640px) {
 		.bio {
-			display: inline-block;
+			display: inline-flex;
 		}
 	}
 
 	@media (min-height: 720px) {
 		.beat {
-			display: inline-block;
+			display: inline-flex;
 		}
 	}
 
