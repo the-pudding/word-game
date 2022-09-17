@@ -4,6 +4,7 @@
 	import { page } from "$app/stores";
 	import Meta from "$components/Meta.svelte";
 	import App from "$components/App.svelte";
+	import Prelaunch from "$components/Prelaunch.svelte";
 	import version from "$utils/version.js";
 	import copy from "$data/copy.json";
 	import { wodId } from "$stores/misc.js";
@@ -18,3 +19,4 @@
 
 <Meta {title} {description} {url} {keywords} />
 <App />
+<!-- <Prelaunch /> -->
