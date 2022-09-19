@@ -11,7 +11,7 @@
 
 	$: wod = name !== "you";
 	$: below = y <= gutterWidth;
-	$: hasArrowBelow = wod && below && points > 1;
+	$: hasArrowBelow = wod && below && points > 1 && !review;
 	$: bottom = `${below ? 0 : y}px`;
 	$: triple = points > 99;
 </script>

@@ -46,7 +46,7 @@
 		$guessesHeight,
 		Math.max(0, ulHeightDiff + userScoreY)
 	);
-	$: above = wodScoreY === $guessesHeight;
+	$: above = wodScoreY === $guessesHeight && !review;
 	$: userFlipName = userScoreY >= $guessesHeight / 2;
 	$: wodFlipName = wodScoreY >= $guessesHeight / 2;
 </script>
