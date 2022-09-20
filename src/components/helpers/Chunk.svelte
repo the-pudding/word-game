@@ -26,5 +26,6 @@
 		position: relative;
 		padding: 0.06em 0.12em 0.12em 0.12em;
 		line-height: 1;
+		white-space: nowrap;
 	}
 </style>
