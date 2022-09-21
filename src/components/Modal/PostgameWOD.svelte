@@ -4,6 +4,7 @@
 	import { guesses, wodId } from "$stores/misc.js";
 
 	let success;
+	let error;
 
 	$: message = success
 		? "game successfully submitted. you'll receive an email if your game is approved."
@@ -36,6 +37,7 @@
 			}
 		} catch (err) {
 			success = false;
+			error = err?.message;
 		}
 	});
 </script>
@@ -44,6 +46,11 @@
 
 {#if success === undefined}
 	<p>Submitting responses...</p>
+{:else if success === false}
+	<p>
+		Oops there was an error ({error}). Please let us know,
+		words.against.strangers@pudding.cool.
+	</p>
 {:else}
 	<p>{message}</p>
 {/if}
