@@ -18,5 +18,5 @@
 </script>
 
 <Meta {title} {description} {url} {keywords} />
-<!-- <App /> -->
-<Prelaunch />
+<App />
+<!-- <Prelaunch /> -->
