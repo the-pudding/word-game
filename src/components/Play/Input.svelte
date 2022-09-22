@@ -47,6 +47,7 @@
 				maxlength="15"
 				placeholder="enter word"
 				{disabled}
+				inputmode="none"
 			/>
 			<button type="submit" aria-label="submit">&rarr;</button>
 		</div>

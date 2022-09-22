@@ -1,4 +1,5 @@
 <script>
+	import { dev } from "$app/env";
 	import Guesses from "$components/Play/Guesses.svelte";
 	import Input from "$components/Play/Input.svelte";
 	import InputKeyboard from "$components/Play/InputKeyboard.svelte";
@@ -98,7 +99,7 @@
 		};
 		$guesses.user[$round] = [...$guesses.user[$round], guess];
 
-		if (!$wod) {
+		if (!$wod && !dev) {
 			const data = { game_id: $gameId, round: $round, text };
 			insert({ table: "wordgame_user-answers", data });
 		}
@@ -129,13 +130,13 @@
 	};
 
 	const onRoundEnd = () => {
-		if (!$wod) {
+		if (!$wod && !dev) {
 			const margin = $totalScore.user - $totalScore.wod;
 			const records = getRecords();
 			const replay = isReplay(records);
 			const data = { game_id: $gameId, round: $round, margin, replay };
 			insert({ table: "wordgame_user-results", data });
-			if ($round === $ROUNDS - 1) {
+			if ($round === ROUNDS - 1) {
 				if (!replay) {
 					records.push({ gameId: $gameId, gameNumber: $gameNumber, margin });
 					const str = JSON.stringify(records);
