@@ -10,9 +10,11 @@
 		guesses,
 		lemmasPlayed,
 		round,
+		ROUNDS,
 		possibleAnswers,
 		active,
 		gameId,
+		gameNumber,
 		totalScore,
 		gameState,
 		wordDuration,
@@ -114,11 +116,32 @@
 		showEndCountdown = false;
 	};
 
+	const getRecords = () => {
+		const records = JSON.parse(
+			localStorage.getItem("pudding_words_against_strangers") || "[]"
+		);
+		return records;
+	};
+
+	const isReplay = (records) => {
+		const played = !!records.find((d) => d.gameId === $gameId);
+		return played;
+	};
+
 	const onRoundEnd = () => {
 		if (!$wod) {
 			const margin = $totalScore.user - $totalScore.wod;
-			const data = { game_id: $gameId, round: $round, margin };
+			const records = getRecords();
+			const replay = isReplay(records);
+			const data = { game_id: $gameId, round: $round, margin, replay };
 			insert({ table: "wordgame_user-results", data });
+			if ($round === $ROUNDS - 1) {
+				if (!replay) {
+					records.push({ gameId: $gameId, gameNumber: $gameNumber, margin });
+					const str = JSON.stringify(records);
+					localStorage.setItem("pudding_words_against_strangers", str);
+				}
+			}
 		}
 	};
 
