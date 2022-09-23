@@ -123,7 +123,7 @@
 		return records;
 	};
 
-	const isReplay = () => {
+	const isReplay = (records = []) => {
 		const played = !!records.find((d) => d.gameId === $gameId);
 		return played;
 	};
