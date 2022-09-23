@@ -1,10 +1,13 @@
 <script>
 	import Chunk from "$components/helpers/Chunk.svelte";
+	import { wodInfo } from "$stores/misc.js";
 	export let text;
+
+	$: plug = $wodInfo?.name ? `${$wodInfo?.name} says:` : "shameless plug:";
 </script>
 
 <p id="chunk-recap-plug">
-	<Chunk className="combo-user" text="shameless plug:" />
+	<Chunk className="combo-user" text={plug} />
 	<Chunk {text} max="28" className="combo-wod" />
 </p>
 

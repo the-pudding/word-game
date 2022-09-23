@@ -123,7 +123,7 @@
 		return records;
 	};
 
-	const isReplay = (records) => {
+	const isReplay = (records = []) => {
 		const played = !!records.find((d) => d.gameId === $gameId);
 		return played;
 	};
@@ -138,8 +138,7 @@
 			if ($round === ROUNDS - 1) {
 				if (!replay) {
 					records.push({ gameId: $gameId, gameNumber: $gameNumber, margin });
-					const str = JSON.stringify(records);
-					storage.set("pudding_words_against_strangers", str);
+					storage.set("pudding_words_against_strangers", records);
 				}
 			}
 		}
