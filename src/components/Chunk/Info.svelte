@@ -30,11 +30,7 @@
 
 			{#if $wodInfo?.bio}
 				<span class="bio" class:bump={noLocation}>
-					<Chunk
-						text="{$wodInfo?.bio}{$wodInfo?.bio ? '.' : ''}"
-						max="12"
-						className="combo-wod-light f"
-					/>
+					<Chunk text={$wodInfo?.bio} max="12" className="combo-wod-light f" />
 				</span>
 			{/if}
 
