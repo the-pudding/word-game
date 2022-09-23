@@ -123,12 +123,13 @@
 		return records;
 	};
 
-	const isReplay = (records = []) => {
+	const isReplay = () => {
 		const played = !!records.find((d) => d.gameId === $gameId);
 		return played;
 	};
 
 	const onRoundEnd = () => {
+		console.log(getRecords());
 		if (!$wod && !dev) {
 			const margin = $totalScore.user - $totalScore.wod;
 			const records = getRecords();
