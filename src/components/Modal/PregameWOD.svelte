@@ -56,35 +56,35 @@
 	};
 
 	const onSubmit = async () => {
-		if (!dev) {
-			try {
-				const row = { game_id: $wodId };
-				const allQuestions = [
-					...defaultQuestions,
-					{ id: "bio", answer: formattedRandomAnswer }
-				];
-				allQuestions.forEach(({ id, answer }) => {
-					row[id] = answer;
-				});
+		if (dev) return;
+		try {
+			const row = { game_id: $wodId };
+			const allQuestions = [
+				...defaultQuestions,
+				{ id: "bio", answer: formattedRandomAnswer }
+			];
+			allQuestions.forEach(({ id, answer }) => {
+				row[id] = answer;
+			});
 
-				const data = [row];
+			const data = [row];
 
-				await insert({ table: "wordgame_wod-info", data });
-				await update({
-					table: "wordgame_games",
-					column: "wod_info",
-					value: true,
-					gameId: $wodId
-				});
-				wodReady = true;
-			} catch (err) {
-				// TODO visual message
-				console.log(err);
-			}
+			await insert({ table: "wordgame_wod-info", data });
+			await update({
+				table: "wordgame_games",
+				column: "wod_info",
+				value: true,
+				gameId: $wodId
+			});
+			wodReady = true;
+		} catch (err) {
+			// TODO visual message
+			console.log(err);
 		}
 	};
 
 	$: formattedRandomAnswer = `Q: ${randomQuestion}\nA: ${randomAnswer}`;
+
 	onMount(async () => {
 		try {
 			const hasInfo = await getGameColumn({

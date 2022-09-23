@@ -25,6 +25,7 @@
 
 	import { elapsed } from "$stores/timer.js";
 	import { insert } from "$utils/supabase.js";
+	import storage from "$utils/localStorage.js";
 
 	export let clues;
 	export let answers;
@@ -118,9 +119,7 @@
 	};
 
 	const getRecords = () => {
-		const records = JSON.parse(
-			localStorage.getItem("pudding_words_against_strangers") || "[]"
-		);
+		const records = storage.get("pudding_words_against_strangers") || [];
 		return records;
 	};
 
@@ -140,7 +139,7 @@
 				if (!replay) {
 					records.push({ gameId: $gameId, gameNumber: $gameNumber, margin });
 					const str = JSON.stringify(records);
-					localStorage.setItem("pudding_words_against_strangers", str);
+					storage.set("pudding_words_against_strangers", str);
 				}
 			}
 		}
