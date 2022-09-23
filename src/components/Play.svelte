@@ -129,7 +129,6 @@
 	};
 
 	const onRoundEnd = () => {
-		console.log(getRecords());
 		if (!$wod && !dev) {
 			const margin = $totalScore.user - $totalScore.wod;
 			const records = getRecords();
