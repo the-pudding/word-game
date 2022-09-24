@@ -35,6 +35,7 @@
 	let keyboardValue = "";
 	let input;
 	let release = false;
+	let tracked = [];
 
 	const lookupLemmas = (text) => {
 		const match = roundData.find((d) => d.word === text);
@@ -134,7 +135,12 @@
 			const records = getRecords();
 			const replay = isReplay(records);
 			const data = { game_id: $gameId, round: $round, margin, replay };
-			insert({ table: "wordgame_user-results", data });
+
+			if (!tracked[$round]) {
+				insert({ table: "wordgame_user-results", data });
+				tracked[$round] = true;
+			}
+
 			if ($round === ROUNDS - 1) {
 				if (!replay) {
 					records.push({ gameId: $gameId, gameNumber: $gameNumber, margin });
