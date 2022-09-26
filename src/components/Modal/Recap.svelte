@@ -8,6 +8,7 @@
 		inModal
 	} from "$stores/misc.js";
 	import Highlights from "$components/Modal/Highlights.svelte";
+	import History from "$components/Modal/History.svelte";
 	import Title from "$components/Chunk/RecapTitle.svelte";
 	import Plug from "$components/Chunk/RecapPlug.svelte";
 	import Goodbye from "$components/Chunk/RecapGoodbye.svelte";
@@ -82,6 +83,7 @@
 	<Highlights />
 
 	{#if $gameState === "post" && !$wod}
+		<History />
 		<Goodbye
 			text="thanks for playing. come back tomorrow for a new stranger!"
 		/>
