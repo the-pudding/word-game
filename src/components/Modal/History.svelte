@@ -64,7 +64,7 @@
 	</p>
 
 	{#if games}
-		<p>your percentile vs. the internet</p>
+		<p>your percentile vs. the internet:</p>
 		<figure>
 			<div class="chart">
 				{#each games as game, i}
