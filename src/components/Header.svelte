@@ -13,6 +13,13 @@
 				$overlay = "about";
 			}}><Icon name="help-circle" /></button
 		>
+
+		<button
+			aria-label="stats"
+			on:click={() => {
+				$overlay = "stats";
+			}}><Icon name="bar-chart-2" /></button
+		>
 	</div>
 
 	<h1>{copy.title}</h1>

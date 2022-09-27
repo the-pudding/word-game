@@ -72,6 +72,7 @@
 	h3 {
 		margin: 16px auto;
 		transform: rotate(1deg);
+		text-align: center;
 	}
 
 	h4 {
@@ -114,6 +115,7 @@
 		margin-top: 32px;
 		padding-top: 16px;
 		border-top: 1px solid currentColor;
+		text-align: center;
 	}
 
 	button {

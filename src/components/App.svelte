@@ -4,6 +4,7 @@
 	import Game from "$components/Game.svelte";
 	import Rules from "$components/Rules.svelte";
 	import About from "$components/About.svelte";
+	import Stats from "$components/Stats.svelte";
 
 	$: vh = `${$viewport.height * 0.01}px`;
 	$: if (browser) document.documentElement.style.setProperty("--vh", vh);
@@ -13,6 +14,7 @@
 	<Game />
 	<Rules />
 	<About />
+	<Stats />
 </article>
 
 <style>

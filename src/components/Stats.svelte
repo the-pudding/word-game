@@ -1,39 +1,18 @@
 <script>
-	import { overlay } from "$stores/misc.js";
 	import { getContext } from "svelte";
-	import focusTrap from "$actions/focusTrap.js";
-	const { info, byline, source, other } = getContext("copy");
+	import { overlay } from "$stores/misc.js";
+	import History from "$components/modal/History.svelte";
 
 	const close = () => {
 		$overlay = undefined;
 	};
-	$: disable = $overlay !== "about";
+	$: disable = $overlay !== "stats";
 </script>
 
-<section class:visible={$overlay === "about"} use:focusTrap={{ disable }}>
+<section class:visible={$overlay === "stats"}>
 	<div>
-		<h3><span class="chunk combo-user">about the game</span></h3>
-		<p>
-			<button
-				class="rules combo-mark"
-				on:click={() => {
-					$overlay = "rules";
-				}}>read the rules</button
-			>
-		</p>
-		<p>
-			{@html info}
-		</p>
-		<p>
-			{@html byline}
-		</p>
-		<p>
-			{@html source}
-		</p>
-
-		<p>
-			{@html other}
-		</p>
+		<h3><span class="chunk combo-user">your stats</span></h3>
+		<History />
 		<p class="close"><button class="close" on:click={close}>close</button></p>
 	</div>
 </section>
@@ -59,7 +38,6 @@
 
 	p:first-of-type {
 		margin-top: 32px;
-		text-align: center;
 	}
 
 	.chunk {
@@ -84,5 +62,9 @@
 
 	button.close {
 		font-size: var(--32px);
+	}
+
+	:global(section div .stats p) {
+		text-align: center;
 	}
 </style>
