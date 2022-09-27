@@ -83,16 +83,14 @@
 	<Highlights />
 
 	{#if $gameState === "post" && !$wod}
+		<p class="signup">
+			<a
+				role="button"
+				href="https://www.getrevue.co/profile/wordsagainststrangers/"
+				target="_blank">Sign up to be the next stranger</a
+			>
+		</p>
 		<History />
-		<Goodbye
-			text="thanks for playing. come back tomorrow for a new stranger!"
-		/>
-		<p>or</p>
-		<a
-			role="button"
-			href="https://www.getrevue.co/profile/wordsagainststrangers/"
-			target="_blank">Sign up to be the stranger</a
-		>
 	{/if}
 </div>
 
@@ -116,5 +114,9 @@
 
 	p {
 		margin: 16px auto;
+	}
+
+	p.signup {
+		margin: 32px auto 48px auto;
 	}
 </style>

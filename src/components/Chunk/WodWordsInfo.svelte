@@ -10,6 +10,11 @@
 </p>
 
 <style>
+	p {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
 	/* some words */
 	:global(#chunk-wod-words-info .chunk:nth-of-type(1)) {
 		transform: translate(0, 0) rotate(0deg);

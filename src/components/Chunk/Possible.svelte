@@ -4,7 +4,7 @@
 </script>
 
 <p id="chunk-possible">
-	<Chunk {text} className="combo-default" max="44" />
+	{@html text}
 </p>
 
 <style>
