@@ -3,7 +3,6 @@
 	import { onMount } from "svelte";
 	import storage from "$utils/localStorage.js";
 	import Chunk from "$components/helpers/Chunk.svelte";
-	import Percentile from "$components/modal/Percentile.svelte";
 	import loadCsv from "$utils/loadCsv.js";
 	let games;
 	let wins;
