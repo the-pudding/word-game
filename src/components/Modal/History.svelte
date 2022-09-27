@@ -4,6 +4,7 @@
 	import storage from "$utils/localStorage.js";
 	import Chunk from "$components/helpers/Chunk.svelte";
 	import loadCsv from "$utils/loadCsv.js";
+	import { gameNumber } from "$stores/misc.js";
 	let games;
 	let wins;
 	let ties;
@@ -35,49 +36,66 @@
 			percent: getPercent(d, margins)
 		}));
 
-		const maxGameNumber = max(data, (d) => d.gameNumber);
+		wins = data.filter((d) => d.margin > 0).length;
+		ties = data.filter((d) => d.margin === 0).length;
+		losses = data.filter((d) => d.margin < 0).length;
 
-		games = range(100).map((d) => {
-			const match = data.find((v) => v.gameNumber === d + 1);
+		const prevGames = data.filter((d) => d.gameNumber !== $gameNumber);
+		const maxGameNumber = max(prevGames, (d) => d.gameNumber);
+
+		games = range(1, 101).map((d) => {
+			const match = prevGames.find((v) => v.gameNumber === d);
 			return (
 				match || {
-					skip: d + 1 < maxGameNumber
+					skip: d < maxGameNumber
 				}
 			);
 		});
-		wins = games.filter((d) => d.margin > 0).length;
-		ties = games.filter((d) => d.margin === 0).length;
-		losses = games.filter((d) => d.margin < 0).length;
 	});
 </script>
 
-<p>your record:</p>
+<div class="stats">
+	<p>your record:</p>
 
-<p id="chunk-record">
-	<Chunk text="wins: {wins}" className="combo-user" />
-	<Chunk text="ties: {ties}" className="combo-default" />
-	<Chunk text="losses: {losses}" className="combo-wod" />
-</p>
+	<p id="chunk-record">
+		<Chunk text="wins: {wins}" className="combo-user" />
+		<Chunk text="ties: {ties}" className="combo-default" />
+		<Chunk text="losses: {losses}" className="combo-wod" />
+	</p>
 
-{#if games}
-	<p>your percentile vs. the internet</p>
-	<figure>
-		{#each games as { gameNumber, percent, margin, skip }}
-			{@const suffix = margin < 0 ? "wod" : margin > 0 ? "user" : "default"}
-			<div class:skip>
-				{#if gameNumber}
-					<span class="bg {suffix}" style:opacity={percent} />
-					<span class="percent {suffix}">{Math.round(percent * 100)}</span>
-				{:else if skip}
-					<span class="bg" style:opacity="0" />
-					<span class="percent">X</span>
-				{/if}
+	{#if games}
+		<p>your percentile vs. the internet</p>
+		<figure>
+			<div class="chart">
+				{#each games as game, i}
+					{@const percent = game.percent}
+					{@const margin = game.margin}
+					{@const skip = game.skip}
+					{@const number = game.gameNumber}
+					{@const today = i + 1 === $gameNumber}
+					<div class="game" class:skip data-today={today} data-number={number}>
+						{#if number}
+							<span class="bg" style:opacity={percent} />
+							<span class="percent">{Math.round(percent * 100)}</span>
+						{:else if skip}
+							<span class="bg" style:opacity="0" />
+							<span class="percent">X</span>
+						{:else if today}
+							<span class="bg" style:opacity="0" />
+							<span class="percent">?</span>
+						{/if}
+					</div>
+				{/each}
 			</div>
-		{/each}
-	</figure>
-{/if}
+			<figcaption>note: today's percentile will appear tomorrow.</figcaption>
+		</figure>
+	{/if}
+</div>
 
 <style>
+	.stats {
+		min-height: 480px;
+	}
 	p {
 		margin: 16px auto;
 	}
@@ -105,13 +123,16 @@
 	}
 
 	figure {
-		display: flex;
-		flex-wrap: wrap;
 		width: 300px;
 		margin: 0 auto;
 	}
 
-	figure div {
+	.chart {
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	.game {
 		width: 28px;
 		height: 28px;
 		margin: 1px;
@@ -119,7 +140,7 @@
 		border: 2px solid var(--color-default-border);
 	}
 
-	figure div.skip {
+	.game.skip {
 		opacity: 0.5;
 	}
 
@@ -144,8 +165,14 @@
 		transform: translate(0, 6px);
 	}
 
+	figcaption {
+		font-size: 12px;
+		color: var(--color-fg-light);
+		margin-top: 8px;
+	}
+
 	@media (min-width: 360px) {
-		figure div:first-of-type:before {
+		.game:first-of-type:before {
 			content: "#1";
 			display: block;
 			position: absolute;
@@ -156,7 +183,7 @@
 			color: var(--color-fg-light);
 		}
 
-		figure div:last-of-type:before {
+		.game:last-of-type:before {
 			content: "#100";
 			display: block;
 			position: absolute;
