@@ -26,9 +26,11 @@
 	$: title =
 		value === "internet"
 			? "percentile compared to everyone"
-			: "margin of <span class='combo-user chunk'>wins</span> and <span class='combo-wod chunk'>losses</span> to strangers";
+			: "margin of <span class='combo-user chunk'>wins</span> and <span class='combo-wod chunk'>losses</span> vs. strangers";
 	$: figcaption =
-		value === "internet" ? "note: today's result will appear tomorrow." : " ";
+		value === "internet"
+			? "note: today's result will appear tomorrow."
+			: "&nbsp;";
 	onMount(async () => {
 		const url = `https://pudding.cool/games/words-against-strangers-data/user-results-unique-concat/all.csv?version=${Date.now()}`;
 		const raw = await loadCsv(url);
@@ -73,7 +75,7 @@
 			<ButtonSet
 				bind:value
 				legend="you vs. the"
-				options={[{ value: "internet" }, { value: "strangers" }]}
+				options={[{ value: "strangers" }, { value: "internet" }]}
 			/>
 		</div>
 		<p class="title">{@html title}</p>
@@ -92,7 +94,7 @@
 						value === "internet" ? Math.round(percent * 100) : Math.abs(margin)}
 					{@const opacity = value === "internet" ? percent : 1}
 					<div class="game {value}" class:skip class:win class:tie class:loss>
-						{#if today}
+						{#if today && value === "internet"}
 							<span class="bg" style:opacity="0" />
 							<span class="text">✭</span>
 						{:else if number}
@@ -105,7 +107,7 @@
 					</div>
 				{/each}
 			</div>
-			<figcaption>{figcaption}</figcaption>
+			<figcaption>{@html figcaption}</figcaption>
 		</figure>
 	{/if}
 </div>
