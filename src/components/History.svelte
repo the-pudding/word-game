@@ -6,11 +6,12 @@
 	import Chunk from "$components/helpers/Chunk.svelte";
 	import loadCsv from "$utils/loadCsv.js";
 	import { gameNumber, gameNumberRecent } from "$stores/misc.js";
-	let games;
 	let wins;
 	let ties;
 	let losses;
 	let value;
+	let data;
+	let games;
 
 	const getPercent = (game, margins) => {
 		const { gameId, gameNumber, margin } = game;
@@ -31,6 +32,16 @@
 		value === "internet"
 			? "note: today's result will appear tomorrow."
 			: "&nbsp;";
+	$: if (data) {
+		games = range(1, 101).map((d) => {
+			const match = data.find((v) => v.gameNumber === d) || {};
+			match.today = d === $gameNumberRecent;
+			if (!match.gameNumber) {
+				match.skip = d < $gameNumberRecent;
+			}
+			return match;
+		});
+	}
 	onMount(async () => {
 		const url = `https://pudding.cool/games/words-against-strangers-data/user-results-unique-concat/all.csv?version=${Date.now()}`;
 		const raw = await loadCsv(url);
@@ -41,7 +52,7 @@
 		}));
 
 		const stored = storage.get("pudding_words_against_strangers") || [];
-		const data = stored.map((d) => ({
+		data = stored.map((d) => ({
 			...d,
 			percent: getPercent(d, margins)
 		}));
@@ -49,15 +60,6 @@
 		wins = data.filter((d) => d.margin > 0).length;
 		ties = data.filter((d) => d.margin === 0).length;
 		losses = data.filter((d) => d.margin < 0).length;
-
-		games = range(1, 101).map((d) => {
-			const match = data.find((v) => v.gameNumber === d) || {};
-			match.today = d === $gameNumberRecent;
-			if (!match.gameNumber) {
-				match.skip = d < $gameNumberRecent;
-			}
-			return match;
-		});
 	});
 </script>
 
@@ -93,7 +95,15 @@
 					{@const text =
 						value === "internet" ? Math.round(percent * 100) : Math.abs(margin)}
 					{@const opacity = value === "internet" ? percent : 1}
-					<div class="game {value}" class:skip class:win class:tie class:loss>
+					<div
+						class="game {value}"
+						class:skip
+						class:win
+						class:tie
+						class:loss
+						data-today={today}
+						data-value={value}
+					>
 						{#if today && value === "internet"}
 							<span class="bg" style:opacity="0" />
 							<span class="text">✭</span>
