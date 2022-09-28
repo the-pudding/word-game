@@ -1,6 +1,6 @@
 <script>
 	import { active } from "$stores/misc.js";
-	import Item from "$components/Play/Guesses.Item.svelte";
+	import Item from "$components/play/Guesses.Item.svelte";
 	export let guesses;
 	export let wod = false;
 	export let liHeight;

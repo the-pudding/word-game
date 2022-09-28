@@ -1,7 +1,7 @@
 <script>
 	export let options = [];
 	export let legend = "";
-	export let legendPosition = "top";
+	export let legendPosition = "left";
 	export let labelClass = "";
 	export let disabled = false;
 	export let value = options.length ? options[0].value : "";
@@ -80,50 +80,45 @@
 		appearance: none;
 		user-select: none;
 		line-height: 1;
-		margin: 0;
+		margin-right: 8px;
 		padding: 0.5em;
 		border-radius: 0;
-		border: 2px solid var(--color-gray-900);
+		border: 2px solid var(--color-bg-binary);
 		outline: none;
 		cursor: pointer;
 		font-family: inherit;
-		font-size: 1em;
+		font-size: var(--12px);
 		display: inline-block;
 	}
 
-	.option + .option label {
-		border-left-width: 0;
-	}
-
 	.option:first-of-type label {
-		border-radius: 4px 0 0 4px;
+		border-radius: var(--border-radius);
 	}
 
 	.option:last-of-type label {
-		border-radius: 0 4px 4px 0;
-	}
-
-	.option + .option > label {
-		border-left-width: 0;
+		border-radius: var(--border-radius);
 	}
 
 	input[type="radio"] + label {
-		background: var(--color-white);
-		color: var(--color-gray-900);
+		background: var(--color-fg-binary);
+		color: var(--color-bg-binary);
+		opacity: 0.5;
 	}
 
 	input[type="radio"]:checked + label,
 	input[type="radio"]:checked:hover + label {
-		background: var(--color-gray-900);
-		color: var(--color-white);
+		background: var(--color-fg-binary);
+		color: var(--color-bg-binary);
+		opacity: 1;
 	}
 
 	input[type="radio"]:hover + label {
-		background: var(--color-gray-100);
+		opacity: 1;
 	}
 
 	input[type="radio"]:focus + label {
-		box-shadow: 0 0 4px 0 var(--color-focus);
+		outline: 2px solid var(--color-focus);
+		outline-offset: 2px;
 	}
 
 	input[type="radio"]:disabled + label {

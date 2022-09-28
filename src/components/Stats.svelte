@@ -1,7 +1,7 @@
 <script>
 	import { getContext } from "svelte";
 	import { overlay } from "$stores/misc.js";
-	import History from "$components/modal/History.svelte";
+	import History from "$components/History.svelte";
 
 	const close = () => {
 		$overlay = undefined;

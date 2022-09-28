@@ -1,4 +1,5 @@
 <script>
+	import { Confetti } from "svelte-confetti";
 	import {
 		gameState,
 		totalScore,
@@ -7,12 +8,11 @@
 		wodInfo,
 		inModal
 	} from "$stores/misc.js";
-	import Highlights from "$components/Modal/Highlights.svelte";
-	import History from "$components/Modal/History.svelte";
-	import Title from "$components/Chunk/RecapTitle.svelte";
-	import Plug from "$components/Chunk/RecapPlug.svelte";
-	import Goodbye from "$components/Chunk/RecapGoodbye.svelte";
-	import { Confetti } from "svelte-confetti";
+	import History from "$components/History.svelte";
+	import Highlights from "$components/modal/Highlights.svelte";
+	import Title from "$components/chunk/RecapTitle.svelte";
+	import Plug from "$components/chunk/RecapPlug.svelte";
+	import Goodbye from "$components/chunk/RecapGoodbye.svelte";
 
 	let title;
 

@@ -166,7 +166,7 @@ section {
 	transform: translate(-50%, 0);
 }
 
-button, a[role="button"] {
+button, a[role="button"], .button-set input[type="radio"] + label {
 	border: 2px solid var(--color-bg-binary);
 	box-shadow: 0 0 0 2px var(--color-button-bg);
 	font-weight: var(--bold);

@@ -6,6 +6,7 @@
 	import {
 		gameId,
 		gameNumber,
+		gameNumberRecent,
 		gameState,
 		inModal,
 		wod,
@@ -20,13 +21,16 @@
 	let answers;
 	let loaded;
 
-	const getGame = async () => {
-		if ($wodId) return { id: $wodId };
-
+	const getAllGames = async () => {
 		const timestamp = Date.now();
 		const url = `https://pudding.cool/games/words-against-strangers-data/games.json?version=${timestamp}`;
 		const { updated, games } = await loadJson(url);
 		console.log("updated:", updated);
+		return games;
+	};
+
+	const getGame = (games) => {
+		if ($wodId) return { id: $wodId };
 		const match = games.find((d) => d.live);
 		return match || {};
 	};
@@ -36,9 +40,12 @@
 	$: modalVisible = $inModal || ["pre", "post"].includes($gameState);
 
 	onMount(async () => {
-		const { id, gameIndex } = await getGame();
+		const games = await getAllGames();
+		const { id, gameIndex } = getGame(games);
 		$gameId = id;
 		$gameNumber = gameIndex;
+		$gameNumberRecent = games[0].gameIndex;
+
 		if ($gameId) {
 			const clueData = await loadClues($gameId);
 			clues = clueData.map((d) => d.clue);

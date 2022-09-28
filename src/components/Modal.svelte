@@ -7,12 +7,12 @@
 		wod,
 		gameId
 	} from "$stores/misc.js";
-	import Recap from "$components/Modal/Recap.svelte";
-	import Pregame from "$components/Modal/Pregame.svelte";
-	import PregameWOD from "$components/Modal/PregameWOD.svelte";
-	import PostgameWOD from "$components/Modal/PostgameWOD.svelte";
-	import PostgameTower from "$components/Modal/PostgameTower.svelte";
-	import Feedback from "$components/Modal/Feedback.svelte";
+	import Recap from "$components/modal/Recap.svelte";
+	import Pregame from "$components/modal/Pregame.svelte";
+	import PregameWOD from "$components/modal/PregameWOD.svelte";
+	import PostgameWOD from "$components/modal/PostgameWOD.svelte";
+	import PostgameTower from "$components/modal/PostgameTower.svelte";
+	import Feedback from "$components/modal/Feedback.svelte";
 	import { update } from "$utils/supabase.js";
 
 	export let loaded;

@@ -10,11 +10,11 @@
 		inModal,
 		active
 	} from "$stores/misc.js";
-	import Possible from "$components/Chunk/Possible.svelte";
-	import WodWordsInfo from "$components/Chunk/WodWordsInfo.svelte";
-	import WodWordsList from "$components/Chunk/WodWordsList.svelte";
-	import CommonWordsInfo from "$components/Chunk/CommonWordsInfo.svelte";
-	import CommonWordsList from "$components/Chunk/CommonWordsList.svelte";
+	import Possible from "$components/chunk/Possible.svelte";
+	import WodWordsInfo from "$components/chunk/WodWordsInfo.svelte";
+	import WodWordsList from "$components/chunk/WodWordsList.svelte";
+	import CommonWordsInfo from "$components/chunk/CommonWordsInfo.svelte";
+	import CommonWordsList from "$components/chunk/CommonWordsList.svelte";
 
 	let allCommonWords = [];
 	const MAX_WORDS = 3;

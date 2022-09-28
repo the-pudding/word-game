@@ -1,6 +1,6 @@
 <script>
-	import List from "$components/Play/Guesses.List.svelte";
-	import Score from "$components/Play/Guesses.Score.svelte";
+	import List from "$components/play/Guesses.List.svelte";
+	import Score from "$components/play/Guesses.Score.svelte";
 	import {
 		guesses,
 		round,

@@ -1,14 +1,16 @@
 <script>
 	import { ascending, sum, range, max } from "d3";
 	import { onMount } from "svelte";
+	import ButtonSet from "$components/helpers/ButtonSet.svelte";
 	import storage from "$utils/localStorage.js";
 	import Chunk from "$components/helpers/Chunk.svelte";
 	import loadCsv from "$utils/loadCsv.js";
-	import { gameNumber } from "$stores/misc.js";
+	import { gameNumber, gameNumberRecent } from "$stores/misc.js";
 	let games;
 	let wins;
 	let ties;
 	let losses;
+	let value;
 
 	const getPercent = (game, margins) => {
 		const { gameId, gameNumber, margin } = game;
@@ -21,6 +23,10 @@
 		return percent;
 	};
 
+	$: title =
+		value === "internet"
+			? "percentile compared to everyone"
+			: "margin of <span class='combo-user chunk'>wins</span> and <span class='combo-wod chunk'>losses</span> to strangers";
 	onMount(async () => {
 		const url = `https://pudding.cool/games/words-against-strangers-data/user-results-unique-concat/all.csv?version=${Date.now()}`;
 		const raw = await loadCsv(url);
@@ -40,14 +46,12 @@
 		ties = data.filter((d) => d.margin === 0).length;
 		losses = data.filter((d) => d.margin < 0).length;
 
-		const prevGames = data.filter((d) => d.gameNumber !== $gameNumber);
-		const maxGameNumber = max(prevGames, (d) => d.gameNumber);
-
 		games = range(1, 101).map((d) => {
-			const match = prevGames.find((v) => v.gameNumber === d);
+			const match = data.find((v) => v.gameNumber === d);
 			return (
 				match || {
-					skip: d < maxGameNumber
+					skip: d < $gameNumberRecent,
+					today: d === $gameNumberRecent
 				}
 			);
 		});
@@ -64,30 +68,43 @@
 	</p>
 
 	{#if games}
-		<p>your percentile vs. the internet:</p>
+		<div class="options">
+			<ButtonSet
+				bind:value
+				legend="you vs. the"
+				options={[{ value: "internet" }, { value: "strangers" }]}
+			/>
+		</div>
+		<p class="title">{@html title}</p>
 		<figure>
 			<div class="chart">
 				{#each games as game, i}
-					{@const percent = game.percent}
+					{@const percent = game.percent || 0}
 					{@const margin = game.margin}
 					{@const skip = game.skip}
 					{@const number = game.gameNumber}
-					{@const today = i + 1 === $gameNumber}
-					<div class="game" class:skip data-today={today} data-number={number}>
-						{#if number}
-							<span class="bg" style:opacity={percent} />
-							<span class="percent">{Math.round(percent * 100)}</span>
+					{@const today = game.today}
+					{@const win = margin > 0}
+					{@const tie = margin === 0}
+					{@const loss = margin < 0}
+					{@const text =
+						value === "internet" ? Math.round(percent * 100) : Math.abs(margin)}
+					{@const opacity = value === "internet" ? percent : 1}
+					<div class="game {value}" class:skip class:win class:tie class:loss>
+						{#if today}
+							<span class="bg" style:opacity="0" />
+							<span class="text">?</span>
+						{:else if number}
+							<span class="bg" style:opacity />
+							<span class="text">{text}</span>
 						{:else if skip}
 							<span class="bg" style:opacity="0" />
-							<span class="percent">X</span>
-						{:else if today}
-							<span class="bg" style:opacity="0" />
-							<span class="percent">?</span>
+							<span class="text">X</span>
 						{/if}
 					</div>
 				{/each}
 			</div>
-			<figcaption>note: today's percentile will appear tomorrow.</figcaption>
+			<figcaption>note: today's result will appear tomorrow.</figcaption>
 		</figure>
 	{/if}
 </div>
@@ -130,6 +147,7 @@
 	.chart {
 		display: flex;
 		flex-wrap: wrap;
+		user-select: none;
 	}
 
 	.game {
@@ -138,6 +156,14 @@
 		margin: 1px;
 		position: relative;
 		border: 2px solid var(--color-default-border);
+	}
+
+	.game.strangers.win {
+		border: 2px solid var(--color-user-border);
+	}
+
+	.game.strangers.loss {
+		border: 2px solid var(--color-wod-border);
 	}
 
 	.game.skip {
@@ -154,7 +180,19 @@
 		background: var(--color-mark-bg);
 	}
 
-	.percent {
+	.strangers.win .bg {
+		background: var(--color-user-bg);
+	}
+
+	.strangers.loss .bg {
+		background: var(--color-wod-bg);
+	}
+
+	.strangers.tie .bg {
+		background: var(--color-default-bg);
+	}
+
+	.text {
 		font-size: 12px;
 		font-weight: bold;
 		text-align: center;
@@ -165,10 +203,39 @@
 		transform: translate(0, 6px);
 	}
 
+	.strangers.win .text {
+		color: var(--color-user-fg);
+	}
+
+	.strangers.loss .text {
+		color: var(--color-wod-fg);
+	}
+
+	.strangers.tie .text {
+		color: var(--color-default-fg);
+	}
+
 	figcaption {
 		font-size: 12px;
 		color: var(--color-fg-light);
 		margin-top: 8px;
+		text-align: center;
+	}
+
+	.options {
+		text-align: center;
+		margin-bottom: 16px;
+	}
+
+	.title {
+		font-size: var(--12px);
+		color: var(--color-fg-light);
+		text-align: center;
+		margin-bottom: 8px;
+	}
+
+	:global(.stats .title span) {
+		padding: 0 2px;
 	}
 
 	@media (min-width: 360px) {

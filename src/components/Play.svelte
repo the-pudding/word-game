@@ -1,11 +1,11 @@
 <script>
 	import { dev } from "$app/env";
-	import Guesses from "$components/Play/Guesses.svelte";
-	import Input from "$components/Play/Input.svelte";
-	import InputKeyboard from "$components/Play/InputKeyboard.svelte";
-	import Clock from "$components/Play/Clock.svelte";
-	import Clue from "$components/Play/Clue.svelte";
-	import Invalid from "$components/Play/Invalid.svelte";
+	import Guesses from "$components/play/Guesses.svelte";
+	import Input from "$components/play/Input.svelte";
+	import InputKeyboard from "$components/play/InputKeyboard.svelte";
+	import Clock from "$components/play/Clock.svelte";
+	import Clue from "$components/play/Clue.svelte";
+	import Invalid from "$components/play/Invalid.svelte";
 	import Countdown from "$components/helpers/Countdown.svelte";
 	import {
 		guesses,
