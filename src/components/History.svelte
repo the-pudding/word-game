@@ -27,6 +27,8 @@
 		value === "internet"
 			? "percentile compared to everyone"
 			: "margin of <span class='combo-user chunk'>wins</span> and <span class='combo-wod chunk'>losses</span> to strangers";
+	$: figcaption =
+		value === "internet" ? "note: today's result will appear tomorrow." : " ";
 	onMount(async () => {
 		const url = `https://pudding.cool/games/words-against-strangers-data/user-results-unique-concat/all.csv?version=${Date.now()}`;
 		const raw = await loadCsv(url);
@@ -47,13 +49,12 @@
 		losses = data.filter((d) => d.margin < 0).length;
 
 		games = range(1, 101).map((d) => {
-			const match = data.find((v) => v.gameNumber === d);
-			return (
-				match || {
-					skip: d < $gameNumberRecent,
-					today: d === $gameNumberRecent
-				}
-			);
+			const match = data.find((v) => v.gameNumber === d) || {};
+			match.today = d === $gameNumberRecent;
+			if (!match.gameNumber) {
+				match.skip = d < $gameNumberRecent;
+			}
+			return match;
 		});
 	});
 </script>
@@ -93,7 +94,7 @@
 					<div class="game {value}" class:skip class:win class:tie class:loss>
 						{#if today}
 							<span class="bg" style:opacity="0" />
-							<span class="text">?</span>
+							<span class="text">✭</span>
 						{:else if number}
 							<span class="bg" style:opacity />
 							<span class="text">{text}</span>
@@ -104,7 +105,7 @@
 					</div>
 				{/each}
 			</div>
-			<figcaption>note: today's result will appear tomorrow.</figcaption>
+			<figcaption>{figcaption}</figcaption>
 		</figure>
 	{/if}
 </div>
@@ -113,8 +114,10 @@
 	.history {
 		min-height: 480px;
 	}
+
 	p {
 		margin: 16px auto;
+		text-align: center;
 	}
 
 	#chunk-record {
