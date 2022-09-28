@@ -58,7 +58,7 @@
 	});
 </script>
 
-<div class="stats">
+<div class="history">
 	<p>your record:</p>
 
 	<p id="chunk-record">
@@ -110,7 +110,7 @@
 </div>
 
 <style>
-	.stats {
+	.history {
 		min-height: 480px;
 	}
 	p {
@@ -234,7 +234,7 @@
 		margin-bottom: 8px;
 	}
 
-	:global(.stats .title span) {
+	:global(.history .title span) {
 		padding: 0 2px;
 	}
 
