@@ -19,6 +19,7 @@
 
 	let wodReady;
 	let buttonNext;
+	let disabled;
 
 	const onPlay = async () => {
 		if ($wod && $gameState === "pre") {
@@ -33,7 +34,12 @@
 	};
 
 	$: hideButton = $wod && $gameState === "pre" && !wodReady;
-	$: if ($gameState === "mid" && $inModal) buttonNext.focus();
+	$: if ($gameState === "mid" && $inModal) {
+		disabled = true;
+		setTimeout(() => {
+			disabled = false;
+		}, 500);
+	}
 </script>
 
 {#if $gameState === "pre"}
@@ -58,7 +64,9 @@
 
 {#if $gameState === "mid"}
 	<div class="mid">
-		<button bind:this={buttonNext} on:click={onPlay}>next round</button>
+		<button {disabled} bind:this={buttonNext} on:click={onPlay}
+			>next round</button
+		>
 		<p>round {$round + 2} of {ROUNDS}</p>
 	</div>
 {/if}
