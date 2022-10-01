@@ -47,8 +47,11 @@
 		);
 	$: commonText = $wod ? "you didn't get:" : "nobody got";
 	$: answersText = `there were <em>${count}</em> possible words.`;
+	$: suffix = blockCount === 1 ? "" : "s";
 	$: blockText =
-		blockCount > 0 ? ` you blocked ${$wodInfo?.name} ${blockCount} times.` : "";
+		blockCount > 0
+			? `<br>you blocked ${$wodInfo?.name} ${blockCount} time${suffix}.`
+			: "";
 </script>
 
 <Possible text="{answersText}{blockText}" />
