@@ -1,4 +1,5 @@
 <script>
+	import { tick } from "svelte";
 	import { range } from "d3";
 	import { fade } from "svelte/transition";
 	import { inModal, active, guessesHeight, round } from "$stores/misc.js";
@@ -8,9 +9,10 @@
 
 	const margin = 8;
 	const ghosts = range(3).map((d) => ({ small: null, large: null }));
-	let widths;
+	let widths = [];
 
-	const updateMargin = () => {
+	const updateMargin = async () => {
+		await tick();
 		widths = ghosts.map(({ small, large }) => {
 			if (!small) return;
 			const diff =
@@ -21,9 +23,9 @@
 		});
 	};
 
-	$: ghosts, updateMargin();
 	$: chunks = clue.split("|");
 	$: top = `--top: ${$guessesHeight / 2}px;`;
+	$: updateMargin(clue);
 </script>
 
 <div id="play-clue" class:in-modal={$inModal} style={top}>
