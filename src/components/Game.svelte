@@ -11,7 +11,9 @@
 		inModal,
 		wod,
 		wodId,
-		round
+		round,
+		allGames,
+		overrideId
 	} from "$stores/misc.js";
 	import loadClues from "$utils/loadClues.js";
 	import loadAnswers from "$utils/loadAnswers.js";
@@ -29,9 +31,12 @@
 		return games;
 	};
 
-	const getGame = (games) => {
+	const getGame = ({ games, id }) => {
 		if ($wodId) return { id: $wodId };
-		const match = games.find((d) => d.live);
+		const match = games.find((d) => {
+			if (id) return d.id === id;
+			return d.live;
+		});
 		return match || {};
 	};
 
@@ -40,11 +45,12 @@
 	$: modalVisible = $inModal || ["pre", "post"].includes($gameState);
 
 	onMount(async () => {
-		const games = await getAllGames();
-		const { id, gameIndex } = getGame(games);
+		window.history.replaceState({}, "", "/");
+		$allGames = await getAllGames();
+		const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
 		$gameId = id;
 		$gameNumber = gameIndex;
-		$gameNumberRecent = games[0].gameIndex;
+		$gameNumberRecent = $allGames[0].gameIndex;
 
 		if ($gameId) {
 			const clueData = await loadClues($gameId);

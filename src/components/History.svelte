@@ -5,12 +5,18 @@
 	import storage from "$utils/localStorage.js";
 	import Chunk from "$components/helpers/Chunk.svelte";
 	import loadCsv from "$utils/loadCsv.js";
-	import { gameNumber, gameNumberRecent } from "$stores/misc.js";
+	import {
+		gameNumber,
+		gameNumberRecent,
+		overrideId,
+		allGames,
+		overlay
+	} from "$stores/misc.js";
 	let wins;
 	let ties;
 	let losses;
 	let value;
-	let data;
+	let localData;
 	let games;
 
 	const getPercent = (game, margins) => {
@@ -32,16 +38,26 @@
 		value === "internet"
 			? "note: today's result will appear tomorrow."
 			: "&nbsp;";
-	$: if (data) {
+	$: if (localData) {
 		games = range(1, 101).map((d) => {
-			const match = data.find((v) => v.gameNumber === d) || {};
+			const id = $allGames.find((v) => v.gameIndex === d)?.id;
+			const match = localData.find((v) => v.gameNumber === d) || {};
 			match.today = d === $gameNumberRecent;
 			if (!match.gameNumber) {
 				match.skip = d < $gameNumberRecent;
 			}
-			return match;
+			return {
+				...match,
+
+				id
+			};
 		});
 	}
+
+	const onClick = (id) => {
+		window.location.href = `${window.location.href}?override=${id}`;
+	};
+
 	onMount(async () => {
 		const url = `https://pudding.cool/games/words-against-strangers-data/user-results-unique-concat/all.csv?version=${Date.now()}`;
 		const raw = await loadCsv(url);
@@ -52,14 +68,14 @@
 		}));
 
 		const stored = storage.get("pudding_words_against_strangers") || [];
-		data = stored.map((d) => ({
+		localData = stored.map((d) => ({
 			...d,
 			percent: getPercent(d, margins)
 		}));
 
-		wins = data.filter((d) => d.margin > 0).length;
-		ties = data.filter((d) => d.margin === 0).length;
-		losses = data.filter((d) => d.margin < 0).length;
+		wins = localData.filter((d) => d.margin > 0).length;
+		ties = localData.filter((d) => d.margin === 0).length;
+		losses = localData.filter((d) => d.margin < 0).length;
 	});
 </script>
 
@@ -89,13 +105,16 @@
 					{@const skip = game.skip}
 					{@const number = game.gameNumber}
 					{@const today = game.today}
+					{@const id = game.id}
 					{@const win = margin > 0}
 					{@const tie = margin === 0}
 					{@const loss = margin < 0}
 					{@const text =
 						value === "internet" ? Math.round(percent * 100) : Math.abs(margin)}
 					{@const opacity = value === "internet" ? percent : 1}
-					<div
+
+					<button
+						disabled={!id}
 						class="game {value}"
 						class:skip
 						class:win
@@ -103,6 +122,7 @@
 						class:loss
 						data-today={today}
 						data-value={value}
+						on:click={() => onClick(id)}
 					>
 						{#if today && value === "internet"}
 							<span class="bg" style:opacity="0" />
@@ -114,10 +134,14 @@
 							<span class="bg" style:opacity="0" />
 							<span class="text">X</span>
 						{/if}
-					</div>
+					</button>
 				{/each}
 			</div>
-			<figcaption>{@html figcaption}</figcaption>
+			<figcaption>
+				<span>click any previous game to go back and play!</span>
+				<br />
+				{@html figcaption}
+			</figcaption>
 		</figure>
 	{/if}
 </div>
@@ -165,12 +189,21 @@
 		user-select: none;
 	}
 
-	.game {
+	button.game {
 		width: 28px;
 		height: 28px;
 		margin: 1px;
 		position: relative;
 		border: 2px solid var(--color-default-border);
+		box-shadow: none;
+		border-radius: 0;
+		background: transparent;
+		padding: 0;
+		line-height: 1;
+	}
+
+	button.game.skip:hover {
+		background: var(--color-mark-bg);
 	}
 
 	.game.strangers.win {
@@ -181,7 +214,7 @@
 		border: 2px solid var(--color-wod-border);
 	}
 
-	.game.skip {
+	.game.skip .text {
 		opacity: 0.5;
 	}
 
@@ -215,7 +248,6 @@
 		color: var(--color-mark-fg);
 		line-height: 1;
 		display: block;
-		transform: translate(0, 6px);
 	}
 
 	.strangers.win .text {
@@ -263,6 +295,7 @@
 			font-size: 12px;
 			transform: translate(-100%, -50%);
 			color: var(--color-fg-light);
+			opacity: 1;
 		}
 
 		.game:last-of-type:before {
@@ -274,6 +307,11 @@
 			font-size: 12px;
 			transform: translate(100%, -50%);
 			color: var(--color-fg-light);
+			opacity: 1;
 		}
+	}
+
+	figcaption span {
+		color: var(--color-mark-fg);
 	}
 </style>
