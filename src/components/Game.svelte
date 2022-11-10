@@ -46,6 +46,8 @@
 
 	onMount(async () => {
 		window.history.replaceState({}, "", "/games/words-against-strangers");
+		console.log("override id", $overrideId);
+
 		$allGames = await getAllGames();
 		const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
 		$gameId = id;
