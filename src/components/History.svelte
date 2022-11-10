@@ -55,8 +55,7 @@
 	}
 
 	const onClick = (id) => {
-		console.log({ id });
-		window.location.href = `${window.location.href}?override=${id}`;
+		window.location.replace(`${window.location.href}?override=${id}`);
 	};
 
 	onMount(async () => {
