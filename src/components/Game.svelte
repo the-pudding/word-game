@@ -45,7 +45,7 @@
 	$: modalVisible = $inModal || ["pre", "post"].includes($gameState);
 
 	onMount(async () => {
-		window.history.replaceState({}, "", "/");
+		window.history.replaceState({}, "", "/games/words-against-strangers");
 		$allGames = await getAllGames();
 		const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
 		$gameId = id;
