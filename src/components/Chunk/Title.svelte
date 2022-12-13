@@ -7,7 +7,9 @@
 <h2 id="chunk-title">
 	<Chunk text="welcome to" max="10" className="combo-user" />
 	<Chunk {text} max="1" className="combo-user" />
-	{#if number}<Chunk text="#{number}" max="4" className="combo-wod" />{/if}
+	{#if number}
+		<Chunk text="#{number}" max="4" className="combo-wod" wearsHat={true} />
+	{/if}
 </h2>
 
 <style>

@@ -46,7 +46,6 @@
 
 	onMount(async () => {
 		window.history.replaceState({}, "", `${window.location.pathname}`);
-		console.log("override id", $overrideId);
 
 		$allGames = await getAllGames();
 		const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
