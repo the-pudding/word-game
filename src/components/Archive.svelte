@@ -22,8 +22,9 @@
 			{#each $allGames as { id, gameIndex, name, location }}
 				<li class="game">
 					<button on:click={() => onClick(id)}
-						>#{gameIndex} {name} {location ? `from ${location}` : ""}</button
+						>{name} <span>#{gameIndex}</span></button
 					>
+					<span class="location">{location ? `from ${location}` : ""}</span>
 				</li>
 			{/each}
 		</ul>
@@ -72,21 +73,37 @@
 	ul {
 		padding: 0;
 		margin-top: 16px;
+		/* display: flex; */
+		/* flex-wrap: wrap; */
 	}
 
 	ul.inner {
 		padding-left: 16px;
 	}
 
-	li {
+	.game {
 		line-height: 1.4;
 		list-style: none;
-		margin-bottom: 8px;
+		margin-bottom: 16px;
+		/* margin-right: 8px; */
+	}
+
+	.game button {
+		color: var(--color-white-100);
+	}
+
+	.game button span {
+		color: var(--color-white-500);
+	}
+
+	.game .location {
+		margin-left: 8px;
 	}
 
 	p {
 		/* margin: 16px auto; */
 		line-height: 1.4;
+		text-align: center;
 	}
 
 	p.close {

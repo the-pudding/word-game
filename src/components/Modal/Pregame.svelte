@@ -42,9 +42,7 @@
 
 	<div class="cta" class:ended class:loaded>
 		<div class="play">
-			<button on:click={onPlayClick} disabled={!loaded}>
-				{!ended ? "play" : "play archive"}
-			</button>
+			<button on:click={onPlayClick} disabled={!loaded}> play </button>
 		</div>
 
 		<div class="other">
@@ -140,7 +138,6 @@
 	}
 
 	.ended .play button {
-		width: 100%;
 		margin-bottom: 16px;
 	}
 
@@ -156,10 +153,6 @@
 		.play button {
 			font-size: var(--48px);
 			width: 3em;
-		}
-
-		.ended .play button {
-			font-size: var(--32px);
 		}
 	}
 
@@ -185,7 +178,7 @@
 		}
 
 		.ended .play button {
-			font-size: var(--48px);
+			font-size: var(--64px);
 		}
 	}
 
@@ -195,6 +188,9 @@
 		}
 		.details {
 			min-height: 265px;
+		}
+		.ended .details {
+			min-height: 240px;
 		}
 	}
 </style>
