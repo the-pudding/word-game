@@ -20,6 +20,11 @@
 		number = $gameNumber || 1;
 	};
 
+	const onPlayClick = () => {
+		if ($gameId) dispatch("play");
+		else $overlay = "archive";
+	};
+
 	$: if ($gameId) load();
 </script>
 
@@ -33,10 +38,10 @@
 		</div>
 	</div>
 
-	<div class="cta">
+	<div class="cta" class:ended={!$gameId}>
 		<div class="play">
-			<button on:click={() => dispatch("play")} disabled={!loaded}>
-				play
+			<button on:click={onPlayClick} disabled={!loaded}>
+				{$gameId ? "play" : "play archive"}
 			</button>
 		</div>
 
@@ -127,6 +132,20 @@
 		text-align: left;
 	}
 
+	.ended.cta {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.ended .play button {
+		width: 100%;
+		margin-bottom: 16px;
+	}
+
+	.ended .signup {
+		display: none;
+	}
+
 	@media (min-width: 360px) {
 		.details {
 			margin-bottom: 16px;
@@ -135,6 +154,10 @@
 		.play button {
 			font-size: var(--48px);
 			width: 3em;
+		}
+
+		.ended .play button {
+			font-size: var(--32px);
 		}
 	}
 
@@ -157,6 +180,10 @@
 		.play button {
 			font-size: var(--88px);
 			width: 3em;
+		}
+
+		.ended .play button {
+			font-size: var(--48px);
 		}
 	}
 

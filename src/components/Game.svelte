@@ -18,15 +18,34 @@
 	import loadClues from "$utils/loadClues.js";
 	import loadAnswers from "$utils/loadAnswers.js";
 	import loadJson from "$utils/loadJson.js";
+	import loadCsv from "$utils/loadCsv.js";
+	import { ascending } from "d3";
 
 	let clues;
 	let answers;
 	let loaded;
 
+	const getAllWods = async () => {
+		const timestamp = Date.now();
+		const url = `https://pudding.cool/games/words-against-strangers-data/wods.csv?version=${timestamp}`;
+		const wods = await loadCsv(url);
+		return wods;
+	};
+
 	const getAllGames = async () => {
+		const wods = await getAllWods();
 		const timestamp = Date.now();
 		const url = `https://pudding.cool/games/words-against-strangers-data/games.json?version=${timestamp}`;
 		const { updated, games } = await loadJson(url);
+		// add wod
+		games.forEach((d) => {
+			const { name, location } = wods.find((w) => w.game_id === d.id);
+			d.name = name;
+			d.location = location;
+		});
+
+		games.sort((a, b) => ascending(a.gameIndex, b.gameIndex));
+
 		console.log("updated:", updated);
 		return games;
 	};
@@ -40,6 +59,12 @@
 		return match || {};
 	};
 
+	const checkFinished = () => {
+		const match = !!$allGames.find((d) => d.live);
+		// return !match;
+		return true;
+	};
+
 	$: readyToPlay = loaded && clues && answers && $round >= 0;
 	$: playVisible = $gameState === "mid" && !$inModal;
 	$: modalVisible = $inModal || ["pre", "post"].includes($gameState);
@@ -48,16 +73,24 @@
 		window.history.replaceState({}, "", `${window.location.pathname}`);
 
 		$allGames = await getAllGames();
-		const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
-		$gameId = id;
-		$gameNumber = gameIndex;
-		$gameNumberRecent = $allGames[0].gameIndex;
 
-		if ($gameId) {
-			const clueData = await loadClues($gameId);
-			clues = clueData.map((d) => d.clue);
-			answers = await loadAnswers(clueData.map((d) => d.clueId));
+		const finished = checkFinished();
+
+		if (finished) {
+			console.log("finished");
+		} else {
+			const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
+			$gameId = id;
+			$gameNumber = gameIndex;
+			$gameNumberRecent = $allGames[0].gameIndex;
+
+			if ($gameId) {
+				const clueData = await loadClues($gameId);
+				clues = clueData.map((d) => d.clue);
+				answers = await loadAnswers(clueData.map((d) => d.clueId));
+			}
 		}
+
 		loaded = true;
 	});
 </script>

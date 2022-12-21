@@ -4,8 +4,8 @@
 
 	export let loaded;
 
-	// const noGameText = "there is no active game right now. check back later!";
-	const noGameText = "there is no active game right now. launching sep. 23!";
+	const noGameText =
+		"the run of 100 daily games has finished! play the archive below.";
 
 	$: pronounObject = $wodInfo ? $wodInfo.pronoun.split("/")[1] : undefined;
 	$: noLocation = !$wodInfo?.location;
@@ -45,10 +45,10 @@
 		{/if}
 	{:else}
 		<span class="loading loading-a">
-			<Chunk text="loading today's" max="12" className="combo-wod-light" />
+			<Chunk text="loading game" max="12" className="combo-wod-light" />
 		</span>
 		<span class="loading loading-b">
-			<Chunk text="game" max="1" className="combo-wod-light" />
+			<Chunk text="data" max="1" className="combo-wod-light" />
 			<Chunk text="." max="1" className="combo-wod-light" />
 			<Chunk text="." max="1" className="combo-wod-light" />
 			<Chunk text="." max="1" className="combo-wod-light" />
@@ -207,23 +207,32 @@
 	/* no game */
 	:global(#chunk-info .no-game .chunk:nth-of-type(1)) {
 		transform: translate(-15%, 0);
-		z-index: 5;
+		z-index: 7;
 	}
 	:global(#chunk-info .no-game .chunk:nth-of-type(2)) {
 		transform: translate(0, -2px);
-		z-index: 4;
+		z-index: 6;
 	}
 	:global(#chunk-info .no-game .chunk:nth-of-type(3)) {
 		transform: translate(-15%, -4px);
-		margin-bottom: 8px;
-		z-index: 3;
+		z-index: 5;
 	}
 	:global(#chunk-info .no-game .chunk:nth-of-type(4)) {
 		transform: translate(0, -6px);
-		z-index: 2;
+		margin-bottom: 8px;
+		z-index: 4;
 	}
 	:global(#chunk-info .no-game .chunk:nth-of-type(5)) {
-		transform: translate(-20%, -6px) rotate(8deg);
+		transform: translate(-20%, -6px);
+		z-index: 3;
+	}
+	:global(#chunk-info .no-game .chunk:nth-of-type(6)) {
+		transform: translate(0%, -8px);
+		z-index: 2;
+	}
+
+	:global(#chunk-info .no-game .chunk:nth-of-type(7)) {
+		transform: translate(-15%, -10px);
 		z-index: 1;
 	}
 
