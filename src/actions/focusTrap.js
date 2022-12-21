@@ -1,7 +1,15 @@
 // params = { disable: false }
 
 export default function focusTrap(node, params) {
-	const elements = ["a", "button", "input", "textarea", "select", "details", "[tabindex]:not([tabindex='-1'])"];
+	const elements = [
+		"a",
+		"button",
+		"input",
+		"textarea",
+		"select",
+		"details",
+		"[tabindex]:not([tabindex='-1'])"
+	];
 	let firstFocusable;
 	let lastFocusable;
 	let active;
@@ -34,9 +42,9 @@ export default function focusTrap(node, params) {
 
 	const setup = (p) => {
 		if (active && p && p.disable) remove();
-		else if (!active && !p || (p && !p.disable)) add();
+		else if ((!active && !p) || (p && !p.disable)) add();
 
-		if (active && !p || (p && !p.disable)) {
+		if ((active && !p) || (p && !p.disable)) {
 			setTimeout(() => firstFocusable.focus(), 17);
 		}
 	};
@@ -44,8 +52,8 @@ export default function focusTrap(node, params) {
 	const query = elements.join(", ");
 	const focusableElements = [...node.querySelectorAll(query)];
 
-	firstFocusable = focusableElements.shift();
-	lastFocusable = focusableElements.pop();
+	firstFocusable = focusableElements[0];
+	lastFocusable = focusableElements[focusableElements.length - 1];
 
 	setup(params);
 

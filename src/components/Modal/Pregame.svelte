@@ -9,6 +9,7 @@
 	export let loaded;
 
 	let number;
+	let ended;
 
 	const { title, description } = getContext("copy");
 
@@ -20,7 +21,13 @@
 		number = $gameNumber || 1;
 	};
 
+	const onPlayClick = () => {
+		if ($gameId) dispatch("play");
+		else $overlay = "archive";
+	};
+
 	$: if ($gameId) load();
+	$: if (loaded) ended = !$gameId;
 </script>
 
 <div class="wrapper">
@@ -33,11 +40,9 @@
 		</div>
 	</div>
 
-	<div class="cta">
+	<div class="cta" class:ended class:loaded>
 		<div class="play">
-			<button on:click={() => dispatch("play")} disabled={!loaded}>
-				play
-			</button>
+			<button on:click={onPlayClick} disabled={!loaded}> play </button>
 		</div>
 
 		<div class="other">
@@ -127,6 +132,19 @@
 		text-align: left;
 	}
 
+	.ended.cta {
+		flex-direction: column;
+		align-items: center;
+	}
+
+	.ended .play button {
+		margin-bottom: 16px;
+	}
+
+	.ended .signup {
+		display: none;
+	}
+
 	@media (min-width: 360px) {
 		.details {
 			margin-bottom: 16px;
@@ -158,6 +176,10 @@
 			font-size: var(--88px);
 			width: 3em;
 		}
+
+		.ended .play button {
+			font-size: var(--64px);
+		}
 	}
 
 	@media (min-height: 720px) {
@@ -166,6 +188,9 @@
 		}
 		.details {
 			min-height: 265px;
+		}
+		.ended .details {
+			min-height: 240px;
 		}
 	}
 </style>

@@ -78,7 +78,6 @@
 			});
 			wodReady = true;
 		} catch (err) {
-			// TODO visual message
 			console.log(err);
 		}
 	};
