@@ -59,7 +59,7 @@
 		return match || {};
 	};
 
-	const checkFinished = () => {
+	const checkEnded = () => {
 		const match = !!$allGames.find((d) => d.live);
 		// return !match;
 		return true;
@@ -74,11 +74,9 @@
 
 		$allGames = await getAllGames();
 
-		const finished = checkFinished();
+		const ended = checkEnded();
 
-		if (finished) {
-			console.log("finished");
-		} else {
+		if (!ended) {
 			const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
 			$gameId = id;
 			$gameNumber = gameIndex;

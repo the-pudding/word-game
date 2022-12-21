@@ -9,6 +9,7 @@
 	export let loaded;
 
 	let number;
+	let ended;
 
 	const { title, description } = getContext("copy");
 
@@ -26,6 +27,7 @@
 	};
 
 	$: if ($gameId) load();
+	$: if (loaded) ended = !$gameId;
 </script>
 
 <div class="wrapper">
@@ -38,10 +40,10 @@
 		</div>
 	</div>
 
-	<div class="cta" class:ended={!$gameId}>
+	<div class="cta" class:ended class:loaded>
 		<div class="play">
 			<button on:click={onPlayClick} disabled={!loaded}>
-				{$gameId ? "play" : "play archive"}
+				{!ended ? "play" : "play archive"}
 			</button>
 		</div>
 
