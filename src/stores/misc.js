@@ -11,6 +11,7 @@ const sumRound = (roundGuesses) =>
 		(d) => d.points
 	);
 
+export const ended = writable();
 export const allGames = writable();
 export const overrideId = writable();
 export const gameId = writable();

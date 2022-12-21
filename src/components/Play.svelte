@@ -8,6 +8,7 @@
 	import Invalid from "$components/play/Invalid.svelte";
 	import Countdown from "$components/helpers/Countdown.svelte";
 	import {
+		ended,
 		guesses,
 		lemmasPlayed,
 		round,
@@ -101,7 +102,7 @@
 		};
 		$guesses.user[$round] = [...$guesses.user[$round], guess];
 
-		if (!$wod && !dev) {
+		if (!$wod && !dev && !$ended) {
 			const data = { game_id: $gameId, round: $round, text };
 			insert({ table: "wordgame_user-answers", data });
 		}
@@ -137,7 +138,7 @@
 			const data = { game_id: $gameId, round: $round, margin, replay };
 
 			if (!tracked[$round]) {
-				insert({ table: "wordgame_user-results", data });
+				if (!$ended) insert({ table: "wordgame_user-results", data });
 				tracked[$round] = true;
 			}
 

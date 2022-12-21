@@ -4,6 +4,7 @@
 	import Play from "$components/Play.svelte";
 	import Modal from "$components/Modal.svelte";
 	import {
+		ended,
 		gameId,
 		gameNumber,
 		gameNumberRecent,
@@ -61,8 +62,8 @@
 
 	const checkEnded = () => {
 		const match = !!$allGames.find((d) => d.live);
-		// return !match;
-		return true;
+		// return true;
+		return !match;
 	};
 
 	$: readyToPlay = loaded && clues && answers && $round >= 0;
@@ -74,9 +75,9 @@
 
 		$allGames = await getAllGames();
 
-		const ended = checkEnded();
+		$ended = checkEnded();
 
-		if (!ended) {
+		if (!$ended || $overrideId) {
 			const { id, gameIndex } = getGame({ games: $allGames, id: $overrideId });
 			$gameId = id;
 			$gameNumber = gameIndex;
