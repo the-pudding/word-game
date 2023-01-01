@@ -102,10 +102,10 @@
 		};
 		$guesses.user[$round] = [...$guesses.user[$round], guess];
 
-		if (!$wod && !dev && !$ended) {
-			const data = { game_id: $gameId, round: $round, text };
-			insert({ table: "wordgame_user-answers", data });
-		}
+		// if (!$wod && !dev && !$ended) {
+		// 	const data = { game_id: $gameId, round: $round, text };
+		// 	insert({ table: "wordgame_user-answers", data });
+		// }
 	};
 
 	const roundChange = () => {
