@@ -62,7 +62,6 @@
 
 	const checkEnded = () => {
 		const match = !!$allGames.find((d) => d.live);
-		// return true;
 		return !match;
 	};
 
@@ -74,6 +73,7 @@
 		window.history.replaceState({}, "", `${window.location.pathname}`);
 
 		$allGames = await getAllGames();
+		console.log($allGames);
 
 		$ended = checkEnded();
 

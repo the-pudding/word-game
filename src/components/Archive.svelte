@@ -19,8 +19,9 @@
 		<p>select a game below to play.</p>
 
 		<ul>
-			{#each $allGames as { id, gameIndex, name, location }}
+			{#each $allGames as { id, gameIndex, name, location, difficulty }}
 				<li class="game">
+					<span class="difficulty {difficulty}">{difficulty}</span>
 					<button on:click={() => onClick(id)}
 						>{name} <span>#{gameIndex}</span></button
 					>
@@ -98,6 +99,30 @@
 
 	.game .location {
 		margin-left: 8px;
+	}
+
+	.game .difficulty {
+		display: inline-block;
+		margin-right: 8px;
+		width: 5em;
+		font-size: var(--12px);
+		text-align: center;
+		padding: 4px;
+	}
+
+	:global(.game .difficulty.easy) {
+		background: var(--color-wod-bg);
+		color: var(--color-wod-fg);
+	}
+
+	:global(.game .difficulty.medium) {
+		background: var(--color-user-bg);
+		color: var(--color-user-fg);
+	}
+
+	:global(.game .difficulty.hard) {
+		background: var(--color-mark-bg);
+		color: var(--color-mark-fg);
 	}
 
 	p {
