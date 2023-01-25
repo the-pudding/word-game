@@ -8,9 +8,11 @@
 
 <main id="content">
 	{#if showBanner}
-		<a href="https://youtu.be/LO72Mc4yS00" target="_blank"
-			>🎥 watch the tournament of champions live 🎥</a
-		>
+		<div>
+			🎥 <a href="https://youtu.be/LO72Mc4yS00" target="_blank"
+				>watch the tournament of champions</a
+			> live, thursday at 4pm est 🎥
+		</div>
 	{/if}
 
 	<Header />
@@ -18,22 +20,21 @@
 </main>
 
 <style>
-	a {
-		height: 4em;
+	div {
 		background: var(--color-mark-bg);
 		color: var(--color-mark-fg);
-		border: none;
 		margin-bottom: -4px;
 		margin-left: 4px;
 		margin-right: 4px;
-		display: flex;
-		align-items: center;
-		justify-content: center;
 		text-align: center;
-		padding: 0 1em;
+		padding: 8px;
 		transition: all 100ms ease-in;
 	}
-	a:hover {
-		background: var(--color-tan-200);
+
+	a {
+		padding: 0 6px;
+		text-decoration: underline;
+		border: none;
+		line-height: 1.4;
 	}
 </style>
