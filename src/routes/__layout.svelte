@@ -19,7 +19,7 @@
 
 <style>
 	a {
-		height: 2em;
+		height: 4em;
 		background: var(--color-mark-bg);
 		color: var(--color-mark-fg);
 		border: none;
@@ -29,5 +29,11 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
+		text-align: center;
+		padding: 0 1em;
+		transition: all 100ms ease-in;
+	}
+	a:hover {
+		background: var(--color-tan-200);
 	}
 </style>
