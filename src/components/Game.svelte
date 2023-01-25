@@ -73,7 +73,7 @@
 		window.history.replaceState({}, "", `${window.location.pathname}`);
 
 		$allGames = await getAllGames();
-		console.log($allGames);
+		// console.log($allGames);
 
 		$ended = checkEnded();
 
