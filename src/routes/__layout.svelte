@@ -3,24 +3,24 @@
 	import Header from "$components/Header.svelte";
 	import { gameState } from "$stores/misc.js";
 
-	$: showBanner = $gameState === "pre";
+	// $: showBanner = $gameState === "pre";
 </script>
 
 <main id="content">
-	{#if showBanner}
+	<!-- {#if showBanner}
 		<div>
 			🎥 <a href="https://youtu.be/LO72Mc4yS00" target="_blank"
 				>watch the tournament of champions</a
 			> live, thursday at 4pm est 🎥
 		</div>
-	{/if}
+	{/if} -->
 
 	<Header />
 	<slot />
 </main>
 
 <style>
-	div {
+	/* div {
 		background: var(--color-mark-bg);
 		color: var(--color-mark-fg);
 		margin-bottom: -4px;
@@ -36,5 +36,5 @@
 		text-decoration: underline;
 		border: none;
 		line-height: 1.4;
-	}
+	} */
 </style>
